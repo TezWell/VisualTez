@@ -2,7 +2,7 @@ import React, { MutableRefObject } from 'react';
 import Blockly from 'blockly/core';
 import locale from 'blockly/msg/en';
 
-import useAppContext from '../../context/hooks/useAppContext';
+import useEditor from 'src/context/hooks/useEditor';
 
 Blockly.setLocale(locale);
 
@@ -15,7 +15,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
     const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
     const toolbox = React.useRef<HTMLDivElement>(null);
-    const { editorXml, setEditorXml } = useAppContext();
+    const { state, changeXML } = useEditor();
 
     const onChange = React.useCallback(
         (event: any) => {
@@ -30,11 +30,11 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
             ) {
                 if (workspaceRef.current) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current));
-                    setEditorXml(xml);
+                    changeXML(xml);
                 }
             }
         },
-        [setEditorXml, workspaceRef],
+        [changeXML, workspaceRef],
     );
 
     React.useEffect(() => {
@@ -44,7 +44,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
                 ...props,
             });
             const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
-            Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(editorXml || baseXML), workspaceRef.current);
+            Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(state.currentXML || baseXML), workspaceRef.current);
             workspaceRef.current.addChangeListener(onChange);
             loaded.current = true;
         }

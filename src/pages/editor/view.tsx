@@ -2,15 +2,15 @@ import React from 'react';
 
 import SmartML from '@tezwell/smartts-sdk/smartml';
 
-import BlocklySmartML from '../generators/SmartML';
-import { Block, Category } from '../components/blockly';
-import DarkTheme from '../themes/dark';
+import BlocklySmartML from 'src/generators/SmartML';
+import { Block, Category } from 'src/components/blockly';
+import DarkTheme from 'src/pages/editor/Blockly/themes/dark';
 
 import BlocklyContainer from './Blockly';
-import VARIABLES from '../blocks/enums/variables';
-import CodeBlock from '../components/CodeBlock';
+import VARIABLES from 'src/blocks/enums/variables';
+import CodeBlock from 'src/components/CodeBlock';
 
-const Editor: React.FC = () => {
+const EditorView: React.FC = () => {
     const workspaceRef = React.useRef<any>();
     const [code, setCode] = React.useState<string>();
 
@@ -23,12 +23,7 @@ const Editor: React.FC = () => {
     }, []);
 
     return (
-        <div className="relative flex flex-col h-screen">
-            <div className="flex h-10 justify-center items-center ">
-                <h1 className="text-2xl text-center align-middle text-white">
-                    <span className="text-red-500 mr-2">Proof of Concept</span>
-                </h1>
-            </div>
+        <div className="relative flex flex-col h-full">
             <div className="flex-grow border-t border-white-500 h-90">
                 <div className="grid grid-cols-3 h-full w-full">
                     <div className="col-span-2">
@@ -120,4 +115,4 @@ const Editor: React.FC = () => {
     );
 };
 
-export default Editor;
+export default EditorView;
