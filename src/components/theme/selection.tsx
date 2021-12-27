@@ -1,6 +1,6 @@
 import React from 'react';
-
-import { SunIcon, MoonIcon } from '@heroicons/react/outline';
+import { Switch } from '@headlessui/react';
+import { SunIcon, MoonIcon } from '@heroicons/react/solid';
 
 import useTheme from 'src/context/hooks/useTheme';
 import { ThemeKind } from 'src/context/Theme';
@@ -9,18 +9,24 @@ const ThemeSelection = () => {
     const { theme, changeTheme } = useTheme();
 
     return (
-        <button
-            type="button"
-            className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-            onClick={() => changeTheme(theme === ThemeKind.Dark ? ThemeKind.Light : ThemeKind.Dark)}
+        <Switch
+            checked={theme === ThemeKind.Dark}
+            onChange={() => changeTheme(theme === ThemeKind.Dark ? ThemeKind.Light : ThemeKind.Dark)}
+            className={'relative border pt-2 pb-2 text-black dark:text-white inline-flex items-center rounded-full'}
         >
             <span className="sr-only">Theme Selection</span>
             {theme === ThemeKind.Dark ? (
-                <MoonIcon className="block h-6 w-6 " aria-hidden="true" />
+                <>
+                    <SunIcon className="block h-5 w-5 ml-2 font-extrabold" aria-hidden="true" />
+                    <p className="ml-1 mr-3 font-extrabold">Light</p>
+                </>
             ) : (
-                <SunIcon className="block h-6 w-6 " aria-hidden="true" />
+                <>
+                    <MoonIcon className="block h-5 w-5 ml-2 font-extrabold" aria-hidden="true" />
+                    <p className="ml-1 mr-3 font-extrabold">Dark</p>
+                </>
             )}
-        </button>
+        </Switch>
     );
 };
 

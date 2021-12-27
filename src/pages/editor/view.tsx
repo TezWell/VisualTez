@@ -87,7 +87,7 @@ const EditorView: React.FC = () => {
                     </div>
                     <div className="col-span-1 flex flex-col">
                         <div className="flex basis-1/4 items-center justify-center ">
-                            <h1 className="text-2xl text-center align-middle text-white">Output</h1>
+                            <h1 className="text-2xl text-center align-middle">Output</h1>
                         </div>
                         <div className="flex  basis-1/2 items-center justify-center overflow-y-auto">
                             {code && <CodeBlock language="json" showLineNumbers text={code} />}
