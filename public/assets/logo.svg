@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="96.25 136.907 599.99999 260"
+   width="600"
+   height="260"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="block.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7">
+    <rect
+       x="-114.18355"
+       y="-63.393501"
+       width="770.49281"
+       height="348.13004"
+       id="rect43309" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="11.993005"
+     inkscape:cx="74.668527"
+     inkscape:cy="-5.0029164"
+     inkscape:window-width="1920"
+     inkscape:window-height="947"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3"
+     scale-x="1" />
+  <rect
+     style="fill:#000000;stroke:none;stroke-width:6.03687;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+     id="rect17797"
+     width="208.68217"
+     height="260.491"
+     x="96.964531"
+     y="136.67963" />
+  <rect
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:6.01229;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+     id="rect30"
+     width="285.88492"
+     height="254.35553"
+     x="407.09811"
+     y="139.93973" />
+  <path
+     stroke="null"
+     id="svg_3"
+     fill="#db5e49"
+     d="m 418.882,307.65055 v 89.44679 H 196.273 c -18.442,0 -33.391,-15.76466 -33.391,-34.435 l -0.35361,-191.87712 c -0.2112,-14.93565 15.55456,-34.04674 30.11172,-34.04558 58.62653,0.23299 117.32768,0.006 176.02898,0.0823 16.5868,0.0214 33.17362,0.0675 49.75876,0.15456 l 0.14992,29.83619 0.30423,60.54757 33.478,-2.11904 c 24.078,-1.52371 44.435,17.83713 44.435,42.26419 0,24.42606 -20.356,43.78791 -44.435,42.26419"
+     sodipodi:nodetypes="ccscccsccccsc"
+     style="fill:#000000;stroke:none;stroke-width:6.03695;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:85.3333px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none"
+     x="126.3498"
+     y="299.72876"
+     id="text1960"><tspan
+       sodipodi:role="line"
+       id="tspan1958"
+       x="126.3498"
+       y="299.72876"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:85.3333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff">Visual</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:85.3333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="512.99353"
+     y="301.52829"
+     id="text2226"><tspan
+       sodipodi:role="line"
+       id="tspan2224"
+       x="512.99353"
+       y="301.52829"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:85.3333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold'">TEZ</tspan></text>
+  <text
+     xml:space="preserve"
+     transform="translate(96.25,136.907)"
+     id="text43307"
+     style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;white-space:pre;shape-inside:url(#rect43309)" />
+</svg>

@@ -52,6 +52,12 @@ module.exports = {
                 type: 'javascript/auto',
             });
 
+            // Use raw loader when importing ".md" files
+            config.module.rules.push({
+                test: /\.md$/,
+                type: 'asset/source',
+            });
+
             return config;
         },
         plugins: {

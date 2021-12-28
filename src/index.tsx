@@ -10,7 +10,7 @@ import Theme from './context/Theme';
 render(
     <React.StrictMode>
         <Theme.Provider>
-            <div className="h-full bg-white dark:bg-black text-black dark:text-white">
+            <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
                 <Router />
             </div>
         </Theme.Provider>
