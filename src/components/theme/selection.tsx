@@ -6,16 +6,16 @@ import useTheme from 'src/context/hooks/useTheme';
 import { ThemeKind } from 'src/context/Theme';
 
 const ThemeSelection = () => {
-    const { theme, changeTheme } = useTheme();
+    const { isDark, changeTheme } = useTheme();
 
     return (
         <Switch
-            checked={theme === ThemeKind.Dark}
-            onChange={() => changeTheme(theme === ThemeKind.Dark ? ThemeKind.Light : ThemeKind.Dark)}
+            checked={isDark}
+            onChange={() => changeTheme(isDark ? ThemeKind.Light : ThemeKind.Dark)}
             className={'relative border pt-2 pb-2 text-black dark:text-white inline-flex items-center rounded-full'}
         >
             <span className="sr-only">Theme Selection</span>
-            {theme === ThemeKind.Dark ? (
+            {isDark ? (
                 <>
                     <SunIcon className="block h-5 w-5 ml-2 font-extrabold" aria-hidden="true" />
                     <p className="ml-1 mr-3 font-extrabold">Light</p>

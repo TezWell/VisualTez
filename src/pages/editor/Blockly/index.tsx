@@ -4,6 +4,9 @@ import locale from 'blockly/msg/en';
 
 import useEditor from 'src/context/hooks/useEditor';
 
+import './overrides';
+import './blockly.css';
+
 Blockly.setLocale(locale);
 
 interface BlocklyContainerProps {
@@ -36,6 +39,12 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
         },
         [changeXML, workspaceRef],
     );
+
+    React.useEffect(() => {
+        if (loaded.current && workspaceRef.current) {
+            workspaceRef.current.setTheme(props.theme);
+        }
+    }, [props.theme]);
 
     React.useEffect(() => {
         if (!loaded.current && blocklyDiv.current && toolbox.current) {

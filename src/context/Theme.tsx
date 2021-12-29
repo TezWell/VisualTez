@@ -9,12 +9,12 @@ export enum ThemeKind {
 }
 
 export interface IThemeContext {
-    theme: ThemeKind;
+    isDark: boolean;
     changeTheme: (theme: ThemeKind) => void;
 }
 
 const contextStub: IThemeContext = {
-    theme: ThemeKind.Dark,
+    isDark: true,
     changeTheme: () => {
         // stub
     },
@@ -65,7 +65,7 @@ const Provider: React.FC = (props) => {
     return (
         <Context.Provider
             value={{
-                theme,
+                isDark: theme === ThemeKind.Dark,
                 changeTheme,
             }}
         >
