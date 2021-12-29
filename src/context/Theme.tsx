@@ -28,9 +28,8 @@ const THEME_STORAGE_KEY = `${settings.storage_prefix}/theme`;
  * @returns {ThemeKind} Selected theme
  */
 const fetchTheme = (): ThemeKind =>
-    globalThis.localStorage.getItem(THEME_STORAGE_KEY) || window.matchMedia(`(prefers-color-scheme: ${ThemeKind.Dark})`)
-        ? ThemeKind.Dark
-        : ThemeKind.Light;
+    (globalThis.localStorage.getItem(THEME_STORAGE_KEY) as ThemeKind | undefined) ||
+    (window.matchMedia(`(prefers-color-scheme: ${ThemeKind.Dark})`) ? ThemeKind.Dark : ThemeKind.Light);
 
 /**
  * @description Save the selected theme in the browser local storage or remove
