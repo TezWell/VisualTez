@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import ThemeSelection from 'src/components/theme/selection';
-import { getBaseURL } from 'src/utils/path';
+import { resolvePath } from 'src/utils/path';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface NavigationProps {}
@@ -12,8 +12,8 @@ const Navigation: React.FC<NavigationProps> = () => {
         <nav id="header" className="w-full">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
                 <div className="pl-4 flex items-center">
-                    <Link to={getBaseURL()}>
-                        <img className="h-16" src={`${getBaseURL()}/assets/logo.svg`} />
+                    <Link to="/">
+                        <img className="h-16" src={resolvePath('/assets/logo.svg')} />
                     </Link>
                 </div>
                 <div
@@ -22,10 +22,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                 >
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li>
-                            <NavLink
-                                className="inline-block py-2 px-4 font-bold no-underline"
-                                to={`${getBaseURL()}/editor`}
-                            >
+                            <NavLink className="inline-block py-2 px-4 font-bold no-underline" to="/editor">
                                 Editor
                             </NavLink>
                         </li>

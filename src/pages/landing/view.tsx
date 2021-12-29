@@ -1,5 +1,6 @@
 import React from 'react';
 import RouterButton from 'src/components/common/RouterButton';
+import { resolvePath } from 'src/utils/path';
 
 const Landing: React.FC = () => (
     <div className="pt-20 pb-20">
@@ -18,7 +19,7 @@ const Landing: React.FC = () => (
                 </RouterButton>
             </div>
             <div className="flex justify-center h-full w-full md:w-2/5 py-6 text-center">
-                <img className="h-full w-full" src="assets/sample.svg" />
+                <img className="h-full w-full" src={resolvePath('/assets/sample.svg')} />
             </div>
         </div>
     </div>
