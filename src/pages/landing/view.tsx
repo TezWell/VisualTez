@@ -5,11 +5,11 @@ import { resolvePath } from 'src/utils/path';
 const Landing: React.FC = () => (
     <div className="pt-20 pb-20">
         <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center justify-evenly">
-            <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
+            <div className="flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left">
                 <p className="uppercase tracking-loose w-full">About the Project</p>
-                <h1 className="my-4 text-5xl font-bold leading-tight">VisualTez</h1>
+                <h1 className="my-4 text-5xl font-bold leading-tight w-full">VisualTez</h1>
                 <p className="leading-normal text-2xl mb-8">
-                    is a visual programming tool for writing smart contracts in the Tezos blockchain.
+                    A visual programming tool for writing smart contracts in the Tezos blockchain.
                 </p>
                 <RouterButton
                     to="/editor"
