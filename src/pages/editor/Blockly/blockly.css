@@ -1,6 +1,8 @@
-.blocklyToolboxDiv, .blocklySvg {
-    border-right-width: 2px;
+.blocklyMainBackground {
+    stroke-width: unset;
+    stroke: unset;
 }
+
 /* Adds padding around the group of categories and separators. */
 .blocklyToolboxContents {
     padding: .5em;

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Blockly from 'blockly';
 import SmartML from '@tezwell/smartts-sdk/smartml';
 
 import BlocklySmartML from 'src/generators/SmartML';
@@ -12,10 +12,31 @@ import VARIABLES from 'src/blocks/enums/variables';
 import CodeBlock from 'src/components/CodeBlock';
 import useTheme from 'src/context/hooks/useTheme';
 
-const EditorView: React.FC = () => {
-    const workspaceRef = React.useRef<any>();
+import { Section } from 'src/components/section-divider';
+import { Sections } from 'src/components/section-divider';
+
+import debounce from 'src/utils/debounce';
+import useEditor from 'src/context/hooks/useEditor';
+
+// Debouncer
+const onDebouncer = debounce(10);
+
+interface EditorViewProps {
+    workspaceRef: React.MutableRefObject<any>;
+}
+
+const EditorView: React.FC<EditorViewProps> = ({ workspaceRef }) => {
     const [code, setCode] = React.useState<string>();
     const { isDark } = useTheme();
+    const { state, updateDivider } = useEditor();
+
+    const saveSectionSizes = React.useCallback(
+        (sizes: { editorSize: string; outputSize: string }) => {
+            updateDivider(sizes.editorSize, sizes.outputSize);
+            Blockly.svgResize(workspaceRef.current);
+        },
+        [updateDivider, workspaceRef],
+    );
 
     const generateCode = React.useCallback(() => {
         if (workspaceRef.current) {
@@ -23,14 +44,19 @@ const EditorView: React.FC = () => {
             const michelson = SmartML.compileContract(code);
             setCode(JSON.stringify(michelson, null, 4));
         }
-    }, []);
+    }, [workspaceRef]);
 
     return (
         <>
             <div className="h-16" />
             <hr className="border border-black dark:border-white" />
-            <div className="flex flex-1">
-                <div className="flex-1">
+            <Sections
+                split="vertical"
+                onChange={([editorSize, outputSize]: string[]) =>
+                    onDebouncer(saveSectionSizes, { editorSize, outputSize })
+                }
+            >
+                <Section minSize={'40%'} size={state.divider?.left || '70%'} className="relative">
                     <BlocklyContainer
                         workspaceRef={workspaceRef}
                         trashcan={false}
@@ -86,32 +112,34 @@ const EditorView: React.FC = () => {
                             <Block type="assert_block" />
                         </Category>
                     </BlocklyContainer>
-                </div>
-                <div className="flex flex-col" style={{ width: 500 }}>
-                    <div className="flex basis-1/4 items-center justify-center">
-                        <h1 className="text-2xl text-center align-middle">Output</h1>
+                </Section>
+                <Section minSize={'20%'} size={state.divider?.right || '30%'}>
+                    <div className="flex flex-col" style={{ width: 500 }}>
+                        <div className="flex basis-1/4 items-center justify-center">
+                            <h1 className="text-2xl text-center align-middle">Output</h1>
+                        </div>
+                        <div className="flex basis-1/2 items-center justify-center overflow-y-auto">
+                            {code && <CodeBlock language="json" showLineNumbers text={code} />}
+                        </div>
+                        <div className="flex basis-1/4 items-center justify-evenly">
+                            <button
+                                onClick={generateCode}
+                                type="button"
+                                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Compile
+                            </button>
+                            <button
+                                onClick={() => setCode('')}
+                                type="button"
+                                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            >
+                                Clear
+                            </button>
+                        </div>
                     </div>
-                    <div className="flex basis-1/2 items-center justify-center overflow-y-auto">
-                        {code && <CodeBlock language="json" showLineNumbers text={code} />}
-                    </div>
-                    <div className="flex basis-1/4 items-center justify-evenly">
-                        <button
-                            onClick={generateCode}
-                            type="button"
-                            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Compile
-                        </button>
-                        <button
-                            onClick={() => setCode('')}
-                            type="button"
-                            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                        >
-                            Clear
-                        </button>
-                    </div>
-                </div>
-            </div>
+                </Section>
+            </Sections>
         </>
     );
 };

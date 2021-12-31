@@ -4,18 +4,27 @@ import settings from 'src/settings.json';
 
 interface IEditorStorage {
     currentXML: string;
+    divider?: {
+        left: string;
+        right: string;
+    };
 }
 
 export interface IEditorContext {
     state: IEditorStorage;
-    changeXML: (xml: string) => void;
+    updateXML: (xml: string) => void;
+    updateDivider: (left: string, right: string) => void;
 }
 
 const contextStub: IEditorContext = {
     state: {
         currentXML: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
     },
-    changeXML: () => {
+    updateXML: () => {
+        // stub
+    },
+    updateDivider: () => {
+        console.log('dsada');
         // stub
     },
 };
@@ -46,21 +55,30 @@ const Provider: React.FC = (props) => {
         saveEditorState(state);
     }, [state]);
 
-    const changeXML = React.useCallback(
-        (xml: string) => {
-            updateState({
-                ...state,
-                currentXML: xml,
-            });
-        },
-        [state],
-    );
+    const updateXML = React.useCallback((xml: string) => {
+        updateState((state) => ({
+            ...state,
+            currentXML: xml,
+        }));
+    }, []);
+
+    const updateDivider = React.useCallback((left: string, right: string) => {
+        console.error('dsadas');
+        updateState((state) => ({
+            ...state,
+            divider: {
+                left,
+                right,
+            },
+        }));
+    }, []);
 
     return (
         <Context.Provider
             value={{
                 state,
-                changeXML,
+                updateXML,
+                updateDivider,
             }}
         >
             {props.children}

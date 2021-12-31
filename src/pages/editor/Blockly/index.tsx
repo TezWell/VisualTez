@@ -18,7 +18,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
     const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
     const toolbox = React.useRef<HTMLDivElement>(null);
-    const { state, changeXML } = useEditor();
+    const { state, updateXML } = useEditor();
 
     const onChange = React.useCallback(
         (event: any) => {
@@ -33,18 +33,18 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
             ) {
                 if (workspaceRef.current) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current));
-                    changeXML(xml);
+                    updateXML(xml);
                 }
             }
         },
-        [changeXML, workspaceRef],
+        [updateXML, workspaceRef],
     );
 
     React.useEffect(() => {
         if (loaded.current && workspaceRef.current) {
             workspaceRef.current.setTheme(props.theme);
         }
-    }, [props.theme]);
+    }, [props.theme, workspaceRef]);
 
     React.useEffect(() => {
         if (!loaded.current && blocklyDiv.current && toolbox.current) {
@@ -64,7 +64,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
 
     return (
         <React.Fragment>
-            <div ref={blocklyDiv} className="h-full w-full" style={{ width: '100%', height: '100%' }} />
+            <div ref={blocklyDiv} className="h-full w-full absolute" />
             <div is="blockly" style={{ display: 'none' }} id="toolbox" ref={toolbox}>
                 {children}
             </div>
