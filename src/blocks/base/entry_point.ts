@@ -34,6 +34,6 @@ SmartML[EntryPointBlock.type] = function (block: any) {
 SmartML.blocks[EntryPointBlock.type] = {
     toStatement: (block: any) => {
         const name = block.getFieldValue('entry_point_name');
-        return new EntryPoint(name).body(() => SmartML.statementToCode(block, 'entry_point_code')).toString();
+        return new EntryPoint(name).code(() => SmartML.statementToCode(block, 'entry_point_code')).toString();
     },
 };

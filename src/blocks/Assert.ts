@@ -1,5 +1,5 @@
 import Blockly from 'blockly/core';
-import { Verify } from '@tezwell/smartts-sdk/core/command';
+import { Require } from '@tezwell/smartts-sdk/core/command';
 
 import SmartML from '../generators/SmartML';
 
@@ -31,6 +31,6 @@ SmartML.blocks[AssertBlock.type] = {
     toStatement: (block: any) => {
         const failWithMsg = SmartML.toValue(block, 'error_message');
         const condition = SmartML.toValue(block, 'assert_condition');
-        return Verify(condition, failWithMsg);
+        return Require(condition, failWithMsg);
     },
 };

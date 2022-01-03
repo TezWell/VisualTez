@@ -1,6 +1,6 @@
 import Blockly from 'blockly/core';
 import { TNat } from '@tezwell/smartts-sdk/core/type';
-import { Level } from '@tezwell/smartts-sdk/core';
+import { GetLevel } from '@tezwell/smartts-sdk/core';
 import SmartML from '../../generators/SmartML';
 
 const BlockLevel = {
@@ -21,5 +21,5 @@ Blockly.Blocks[BlockLevel.type] = {
 };
 SmartML.blocks[BlockLevel.type] = {
     toType: () => TNat,
-    toValue: () => Level(),
+    toValue: () => GetLevel(),
 };

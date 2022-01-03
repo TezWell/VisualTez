@@ -1,6 +1,6 @@
 import Blockly from 'blockly/core';
 import { TAddress } from '@tezwell/smartts-sdk/core/type';
-import { Sender } from '@tezwell/smartts-sdk/core';
+import { GetSender } from '@tezwell/smartts-sdk/core';
 import SmartML from '../../generators/SmartML';
 
 const OperationSender = {
@@ -21,5 +21,5 @@ Blockly.Blocks[OperationSender.type] = {
 };
 SmartML.blocks[OperationSender.type] = {
     toType: () => TAddress,
-    toValue: () => Sender(),
+    toValue: () => GetSender(),
 };

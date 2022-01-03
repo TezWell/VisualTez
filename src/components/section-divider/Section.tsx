@@ -27,10 +27,11 @@ const getSectionCSS = ({
 interface SectionProps extends SectionLayoutProps {
     index?: number;
     className?: string;
+    show?: boolean;
     sectionRef?: (el: HTMLElement, index: number) => void;
 }
 
-const Section: React.FC<SectionProps> = ({ children, className, sectionRef, index = 0, ...props }) => {
+const Section: React.FC<SectionProps> = ({ children, className, sectionRef, index = 0, show = true, ...props }) => {
     const css = getSectionCSS(props);
 
     const setRef = React.useCallback(
@@ -39,6 +40,10 @@ const Section: React.FC<SectionProps> = ({ children, className, sectionRef, inde
         },
         [index, sectionRef],
     );
+
+    if (!show) {
+        return null;
+    }
 
     return (
         <div className={className} style={css} ref={setRef}>

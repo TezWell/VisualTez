@@ -10,10 +10,13 @@ interface IEditorStorage {
     };
 }
 
+export type DrawerOptions = 'compilation' | 'settings';
 export interface IEditorContext {
     state: IEditorStorage;
     updateXML: (xml: string) => void;
     updateDivider: (left: string, right: string) => void;
+    drawer: DrawerOptions | null;
+    updateDrawer: (drawer?: DrawerOptions) => void;
 }
 
 const contextStub: IEditorContext = {
@@ -24,7 +27,10 @@ const contextStub: IEditorContext = {
         // stub
     },
     updateDivider: () => {
-        console.log('dsada');
+        // stub
+    },
+    drawer: null,
+    updateDrawer: () => {
         // stub
     },
 };
@@ -50,6 +56,7 @@ const saveEditorState = (state: IEditorStorage): void => {
 
 const Provider: React.FC = (props) => {
     const [state, updateState] = React.useState<IEditorStorage>(fetchEditorState());
+    const [drawer, setDrawer] = React.useState<DrawerOptions | null>(null);
 
     React.useEffect(() => {
         saveEditorState(state);
@@ -63,7 +70,6 @@ const Provider: React.FC = (props) => {
     }, []);
 
     const updateDivider = React.useCallback((left: string, right: string) => {
-        console.error('dsadas');
         updateState((state) => ({
             ...state,
             divider: {
@@ -73,12 +79,19 @@ const Provider: React.FC = (props) => {
         }));
     }, []);
 
+    const updateDrawer = React.useCallback(
+        (newDrawer?: DrawerOptions) => setDrawer((old) => (!newDrawer || old === newDrawer ? null : newDrawer)),
+        [],
+    );
+
     return (
         <Context.Provider
             value={{
                 state,
                 updateXML,
                 updateDivider,
+                drawer,
+                updateDrawer,
             }}
         >
             {props.children}

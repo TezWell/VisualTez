@@ -178,7 +178,13 @@ const Sections: React.FC<SectionsProps> = ({ split = 'vertical', children, class
         <Wrapper {...{ className, innerRef: ref, split }}>
             {React.Children.toArray(children)
                 .filter(Guards.notNull)
+                .filter((el): el is { props: { show?: boolean } } => typeof el === 'object' && 'props' in el)
                 .reduce<React.ReactElement[]>((acc, child, index) => {
+                    // Ignore section
+                    if (typeof child.props.show !== 'undefined' && !child.props.show) {
+                        return acc;
+                    }
+
                     const sectionProps = {
                         key: `Section-${index}`,
                         index,
