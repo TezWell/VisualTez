@@ -11,7 +11,7 @@ interface MarkdownLayoutProps {
 const MarkdownLayout: React.FC<MarkdownLayoutProps> = ({ markdown }) => {
     return (
         <ReactMarkdown
-            className="prose dark:prose-invert prose-2xl container mx-auto pt-24 pb-24"
+            className="prose dark:prose-invert md:prose-2xl container mx-auto pt-24 pb-24 pl-5 pr-5"
             rehypePlugins={[rehypeRaw]}
             remarkPlugins={[remarkGfm, remarkHtml]}
         >
