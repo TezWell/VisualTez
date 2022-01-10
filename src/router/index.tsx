@@ -2,9 +2,12 @@ import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import Page from 'src/components/Page';
-import NotFound from 'src/pages/404/view';
-import Editor from 'src/pages/editor';
 import Landing from 'src/pages/landing/view';
+import NotFound from 'src/pages/404';
+import Editor from 'src/pages/editor';
+import Deploy from 'src/pages/deploy';
+
+import EditorContext from 'src/context/Editor';
 
 import MarkdownLayout from 'src/components/MarkdownLayout';
 import PrivacyMarkdown from 'src/pages/markdown/privacy.md';
@@ -12,6 +15,7 @@ import ContactMarkdown from 'src/pages/markdown/contact.md';
 import TermsMarkdown from 'src/pages/markdown/terms.md';
 
 import { getBaseURL } from 'src/utils/path';
+import AdaptableViewport from 'src/components/common/AdaptableViewport';
 
 const Router = () => (
     <BrowserRouter basename={getBaseURL()}>
@@ -27,8 +31,20 @@ const Router = () => (
             <Route
                 path="/editor"
                 element={
+                    <AdaptableViewport minSize={768}>
+                        <Page withNavigation>
+                            <EditorContext.Provider>
+                                <Editor />
+                            </EditorContext.Provider>
+                        </Page>
+                    </AdaptableViewport>
+                }
+            />
+            <Route
+                path="/deploy"
+                element={
                     <Page withNavigation>
-                        <Editor />
+                        <Deploy />
                     </Page>
                 }
             />
