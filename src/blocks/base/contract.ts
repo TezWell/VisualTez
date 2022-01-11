@@ -18,7 +18,7 @@ const buildContractBlock = (contractName: string) => ({
         },
     ],
     message1: 'Initial Storage %1',
-    args1: [{ type: 'input_value', name: 'initial_storage' }],
+    args1: [{ type: 'input_value', name: 'initial_storage', check: ['Literal'] }],
     message2: 'Entry points %1',
     args2: [{ type: 'input_statement', name: 'entry_points' }],
     colour: 200,

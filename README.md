@@ -4,6 +4,12 @@
 
 [Basic Demo](https://tezwell.github.io/VisualTez-demo)
 
+
+
+<center>
+<img src="public/assets/sample.svg" height="200px">
+</center>
+
 | Project repos |
 |:-:|
 | [SmartTS SDK  ](https://github.com/RomarQ/smartts-sdk) |
