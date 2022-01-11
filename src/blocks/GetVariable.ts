@@ -1,7 +1,8 @@
-import Blockly from 'blockly/core';
+import Blockly from 'blockly';
+import BlockKind from './enums/BlockKind';
 
 const GetVariableBlock = {
-    type: 'get_variable_block',
+    type: BlockKind.get_variable_block,
     message0: 'Get %1',
     args0: [
         {
@@ -15,7 +16,6 @@ const GetVariableBlock = {
 
 Blockly.Blocks[GetVariableBlock.type] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(GetVariableBlock);
+        this.jsonInit(GetVariableBlock);
     },
 };

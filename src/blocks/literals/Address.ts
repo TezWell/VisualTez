@@ -1,10 +1,16 @@
-import Blockly from 'blockly/core';
-import { TAddress } from '@tezwell/smartts-sdk/core/type';
-import { Address } from '@tezwell/smartts-sdk/core/literal';
-import SmartML from '../../generators/SmartML';
+import type { Block } from 'blockly';
+import Blockly from 'blockly';
+
+import * as MichelsonCore from '@tezwell/michelson-sdk/core';
+import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
+import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
+import SmartML from '../generators/SmartML';
+import BlockKind from '../enums/BlockKind';
+import { IExpressionKind } from '@tezwell/smartts-sdk/typings/expression';
+import Michelson from '../generators/Michelson';
 
 const AddressBlock = {
-    type: 'address_block',
+    type: BlockKind.address_literal,
     message0: 'Address %1',
     args0: [
         {
@@ -16,20 +22,27 @@ const AddressBlock = {
     output: 'Address',
     colour: 20,
 };
-Blockly.Blocks[AddressBlock.type] = {
+Blockly.Blocks[BlockKind.address_literal] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(AddressBlock);
-        self.setPreviousStatement(false);
-        self.setNextStatement(false);
+        this.jsonInit(AddressBlock);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
 
-SmartML.blocks[AddressBlock.type] = {
+SmartML.addBlock(BlockKind.address_literal, {
     toType: () => {
-        return TAddress;
+        return SmartTSTypes.TAddress;
     },
-    toValue: (block: any) => {
-        return Address(block.getFieldValue('address_value'));
+    toValue: (block: Block) => {
+        return SmartTSLiterals.Address(block.getFieldValue('address_value'));
     },
-};
+});
+Michelson.addBlock(BlockKind.address_literal, {
+    toType: () => {
+        return MichelsonCore.TAddress;
+    },
+    toMichelson: (block: Block) => {
+        return MichelsonCore.Address(block.getFieldValue('address_value'));
+    },
+});

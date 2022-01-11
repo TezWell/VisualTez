@@ -1,10 +1,12 @@
-import Blockly from 'blockly/core';
+import type { Block } from 'blockly';
+import Blockly from 'blockly';
 import { SetValue } from '@tezwell/smartts-sdk/core/command';
 
-import SmartML from '../generators/SmartML';
+import SmartML from './generators/SmartML';
+import BlockKind from './enums/BlockKind';
 
 const SetVariableBlock = {
-    type: 'set_variable_block',
+    type: BlockKind.set_variable_block,
     message0: 'Set %1 to %2',
     args0: [
         {
@@ -24,15 +26,14 @@ const SetVariableBlock = {
 
 Blockly.Blocks[SetVariableBlock.type] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(SetVariableBlock);
+        this.jsonInit(SetVariableBlock);
     },
 };
 
-SmartML.blocks[SetVariableBlock.type] = {
-    toStatement: (block: any) => {
+SmartML.addBlock(SetVariableBlock.type, {
+    toStatement: (block: Block) => {
         const variable = SmartML.toValue(block, 'variable');
         const value = SmartML.toValue(block, 'value');
         return SetValue(variable, value);
     },
-};
+});

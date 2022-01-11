@@ -1,26 +1,37 @@
 import React from 'react';
+import type { Workspace, WorkspaceSvg } from 'blockly';
+
+import EditorView from './view';
+import { extractBlocks, compileBlock } from 'src/blocks';
+import useEditor from 'src/context/hooks/useEditor';
+import ErrorModal from 'src/components/common/ErrorModal';
 import SmartML from '@tezwell/smartts-sdk/smartml';
 
-import BlocklySmartML from 'src/generators/SmartML';
-import Editor from 'src/context/Editor';
-import EditorView from './view';
-
 const EditorContainer = () => {
-    const workspaceRef = React.useRef<any>();
-    const [code, setCode] = React.useState<string>();
+    const workspaceRef = React.useRef<WorkspaceSvg>();
+    const { error, updateError, updateCompilations } = useEditor();
 
     const compile = React.useCallback(() => {
         if (workspaceRef.current) {
-            const code = BlocklySmartML.workspaceToCode(workspaceRef.current);
-            const michelson = SmartML.compileContract(code);
-            setCode(JSON.stringify(michelson, null, 4));
+            try {
+                const blocks = extractBlocks(workspaceRef.current as Workspace);
+                updateCompilations(blocks.map(compileBlock));
+                console.debug(blocks.map(compileBlock));
+                console.debug(SmartML.compileContract((compileBlock(blocks[0]).result as any).code));
+            } catch (e: any) {
+                console.debug(e);
+                updateError(e.message);
+            }
         }
-    }, [workspaceRef]);
+    }, [updateCompilations, updateError]);
 
     return (
-        <Editor.Provider>
-            <EditorView workspaceRef={workspaceRef} compilationResults={code} compile={compile} />
-        </Editor.Provider>
+        <>
+            <EditorView workspaceRef={workspaceRef} compile={compile} />
+            <ErrorModal title="Editor Error" open={!!error} onClose={() => updateError()}>
+                {error}
+            </ErrorModal>
+        </>
     );
 };
 

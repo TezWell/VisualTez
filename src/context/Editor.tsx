@@ -1,5 +1,8 @@
 import React, { createContext } from 'react';
 
+import { Compilation } from 'src/blocks';
+import BlockDatabase from 'src/blocks/core/database';
+
 import settings from 'src/settings.json';
 
 interface IEditorStorage {
@@ -17,6 +20,11 @@ export interface IEditorContext {
     updateDivider: (left: string, right: string) => void;
     drawer: DrawerOptions | null;
     updateDrawer: (drawer?: DrawerOptions) => void;
+    error?: string;
+    updateError: (msg?: string) => void;
+
+    compilations: Compilation[];
+    updateCompilations: (compilations: Compilation[]) => void;
 }
 
 const contextStub: IEditorContext = {
@@ -31,6 +39,13 @@ const contextStub: IEditorContext = {
     },
     drawer: null,
     updateDrawer: () => {
+        // stub
+    },
+    updateError: () => {
+        // stub
+    },
+    compilations: [],
+    updateCompilations: () => {
         // stub
     },
 };
@@ -57,6 +72,12 @@ const saveEditorState = (state: IEditorStorage): void => {
 const Provider: React.FC = (props) => {
     const [state, updateState] = React.useState<IEditorStorage>(fetchEditorState());
     const [drawer, setDrawer] = React.useState<DrawerOptions | null>(null);
+    const [error, setError] = React.useState<string>();
+    const [compilations, setCompilations] = React.useState<Compilation[]>([]);
+
+    React.useEffect(() => {
+        BlockDatabase.clear();
+    }, []);
 
     React.useEffect(() => {
         saveEditorState(state);
@@ -79,10 +100,11 @@ const Provider: React.FC = (props) => {
         }));
     }, []);
 
-    const updateDrawer = React.useCallback(
-        (newDrawer?: DrawerOptions) => setDrawer((old) => (!newDrawer || old === newDrawer ? null : newDrawer)),
-        [],
-    );
+    const updateDrawer = React.useCallback((newDrawer?: DrawerOptions) => setDrawer(!newDrawer ? null : newDrawer), []);
+
+    const updateError = React.useCallback((msg?: string) => setError(msg), []);
+
+    const updateCompilations = React.useCallback((compilations: Compilation[]) => setCompilations(compilations), []);
 
     return (
         <Context.Provider
@@ -92,6 +114,10 @@ const Provider: React.FC = (props) => {
                 updateDivider,
                 drawer,
                 updateDrawer,
+                error,
+                updateError,
+                compilations,
+                updateCompilations,
             }}
         >
             {props.children}

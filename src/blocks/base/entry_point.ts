@@ -1,10 +1,12 @@
-import Blockly from 'blockly/core';
+import type { Block } from 'blockly';
+import Blockly from 'blockly';
 import { EntryPoint } from '@tezwell/smartts-sdk/core';
 
-import SmartML from '../../generators/SmartML';
+import SmartML from 'src/blocks/generators/SmartML';
+import BlockKind from '../enums/BlockKind';
 
 const EntryPointBlock = {
-    type: 'entry_point_block',
+    type: BlockKind.entry_point_block,
     message0: 'Entry point %1',
     args0: [
         {
@@ -22,18 +24,18 @@ const EntryPointBlock = {
 
 Blockly.Blocks[EntryPointBlock.type] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(EntryPointBlock);
+        this.jsonInit(EntryPointBlock);
     },
-};
-// @TODO support fragments
-SmartML[EntryPointBlock.type] = function (block: any) {
-    return '';
 };
 
-SmartML.blocks[EntryPointBlock.type] = {
-    toStatement: (block: any) => {
+// @TODO support fragments
+// SmartML[EntryPointBlock.type] = function (block: any) {
+//     return '';
+// };
+
+SmartML.addBlock(EntryPointBlock.type, {
+    toStatement: (block: Block) => {
         const name = block.getFieldValue('entry_point_name');
-        return new EntryPoint(name).code(() => SmartML.statementToCode(block, 'entry_point_code')).toString();
+        return new EntryPoint(name).code(() => SmartML.toStatement(block, 'entry_point_code')).toString();
     },
-};
+});

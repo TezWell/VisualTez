@@ -22,12 +22,12 @@ const Divider: React.FC<DividerProps> = ({ split = 'vertical', index, onMouseDow
     return split === 'vertical' ? (
         <div
             {...dividerProps}
-            className="shadow-red-400 shadow-2xl bg-current hover:bg-amber-400 z-10 box-border hover:transition-all duration-200 ease-in-out w-1 cursor-col-resize select-none"
+            className="bg-current hover:bg-amber-400 hover:transition-all duration-200 ease-in-out w-1 cursor-col-resize select-none"
         />
     ) : (
         <div
             {...dividerProps}
-            className="shadow-red-400 shadow-2xl bg-current hover:bg-amber-400 z-10 box-border hover:transition-all duration-200 ease-in-out w-full h-1 cursor-row-resize select-none"
+            className="bg-current hover:bg-amber-400 hover:transition-all duration-200 ease-in-out w-full h-1 cursor-row-resize select-none"
         />
     );
 };

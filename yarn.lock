@@ -1544,7 +1544,7 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@tailwindcss/forms@^0.4.0":
+"@tailwindcss/forms@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.4.0.tgz#a46715e347a32d216a3973eb67473bd29ae3798e"
   integrity sha512-DeaQBx6EgEeuZPQACvC+mKneJsD8am1uiJugjgQK1+/Vt+Ai0GpFBC2T2fqnUad71WgOxyrZPE6BG1VaI6YqfQ==
@@ -1605,10 +1605,15 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@tezwell/smartts-sdk@0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@tezwell/smartts-sdk/-/smartts-sdk-0.1.7.tgz#0a8e5038974c86ef73e91468426f6f61f5f7ec31"
-  integrity sha512-Pa7UPD7bxa9lqas9p1x4+KRwItAYnVlcRr3fHERdlx6OgT2+Q7p4fh6yUOmUxMmUC5vYWtUDcsFIM6s9H+77kQ==
+"@tezwell/michelson-sdk@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@tezwell/michelson-sdk/-/michelson-sdk-0.0.3.tgz#efec5a09abd98be245fac834d1bbf399e401a342"
+  integrity sha512-FiPi2hbqQn/y0MezR6x0g1Q04TUsYfUTSQdo2uvyTiS1ic6qVkLRpDNLwHi70z99gC3YzwBVhIA3Es0K5JPC+g==
+
+"@tezwell/smartts-sdk@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@tezwell/smartts-sdk/-/smartts-sdk-0.1.11.tgz#e7034ea90687e21c8580796373f53178da61ace9"
+  integrity sha512-P6xC9T3mDWXPcvO/DxnwlVcdbuvS3HF07SHT1NUhcMva86lwSY0Usfy7l2Ya15/Kg+figDWEdzIGm1l7QDdprA==
 
 "@tezwell/tezos-bls12-381@1.2.2":
   version "1.2.2"

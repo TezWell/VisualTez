@@ -1,15 +1,10 @@
 import React from 'react';
 
-import { Dialog, Transition } from '@headlessui/react';
 import { CogIcon, PlayIcon } from '@heroicons/react/outline';
-import Blockly from 'blockly';
 
 import useEditor from 'src/context/hooks/useEditor';
-import debounce from 'src/utils/debounce';
 import { DrawerOptions } from 'src/context/Editor';
 
-// Debouncer
-const onDebouncer = debounce(10);
 interface ToolsBarProps {
     compile: () => void;
     resizeWorkspace: () => void;
@@ -24,7 +19,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                 compile();
         }
         updateDrawer(drawer);
-        onDebouncer(resizeWorkspace);
+        setTimeout(resizeWorkspace, 100);
     };
 
     return (
@@ -32,17 +27,19 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
             <div className="flex-1 flex flex-col items-center justify-start">
                 <button
                     onClick={() => onMenuSelection('compilation')}
-                    className="mx-auto w-20 h-20 flex flex-col items-center justify-center"
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
                 >
-                    <PlayIcon className="block w-8 h-8 hover:w-9 hover:h-9 hover:text-yellow-500" /> Compile
+                    <PlayIcon className="block" />
+                    <p>Compile</p>
                 </button>
             </div>
-            <div className="items-start justify-center ">
+            <div className="h-20 flex flex-col items-center justify-start">
                 <button
                     onClick={() => onMenuSelection('settings')}
-                    className="mx-auto w-20 h-20 flex flex-col items-center justify-center"
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
                 >
-                    <CogIcon className="block w-8 h-8 hover:w-9 hover:h-9 hover:text-yellow-500" /> Settings
+                    <CogIcon className="block" />
+                    <p>Settings</p>
                 </button>
             </div>
         </div>

@@ -1,10 +1,15 @@
-import { TNat } from '@tezwell/smartts-sdk/core/type';
-import { Nat } from '@tezwell/smartts-sdk/core/literal';
-import Blockly from 'blockly/core';
-import SmartML from '../../generators/SmartML';
+import type { Block } from 'blockly';
+import Blockly from 'blockly';
+
+import * as MichelsonCore from '@tezwell/michelson-sdk/core';
+import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
+import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
+import SmartML from '../generators/SmartML';
+import BlockKind from '../enums/BlockKind';
+import Michelson from '../generators/Michelson';
 
 const NatBlock = {
-    type: 'nat_block',
+    type: BlockKind.nat_literal,
     message0: 'Nat %1',
     args0: [
         {
@@ -17,18 +22,27 @@ const NatBlock = {
     colour: 10,
 };
 
-Blockly.Blocks[NatBlock.type] = {
+Blockly.Blocks[BlockKind.nat_literal] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(NatBlock);
-        self.setPreviousStatement(false);
-        self.setNextStatement(false);
+        this.jsonInit(NatBlock);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
 
-SmartML.blocks[NatBlock.type] = {
-    toType: () => TNat,
-    toValue: (block: any) => {
-        return Nat(Number(block.getFieldValue('nat_value')));
+SmartML.addBlock(BlockKind.nat_literal, {
+    toType: () => {
+        return SmartTSTypes.TNat;
     },
-};
+    toValue: (block: Block) => {
+        return SmartTSLiterals.Nat(block.getFieldValue('nat_value'));
+    },
+});
+Michelson.addBlock(BlockKind.nat_literal, {
+    toType: () => {
+        return MichelsonCore.Type.TNat;
+    },
+    toMichelson: (block: Block) => {
+        return MichelsonCore.Nat(block.getFieldValue('nat_value'));
+    },
+});

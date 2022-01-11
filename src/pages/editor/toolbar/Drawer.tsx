@@ -1,32 +1,27 @@
 import React from 'react';
 import { Transition } from '@headlessui/react';
 import useEditor from 'src/context/hooks/useEditor';
-import CodeBlock from 'src/components/CodeBlock';
-
-const DrawerTitle = ({ title }: { title: string }) => (
-    <h1 className="text-xl text-center align-middle font-mono border pt-1 pb-1 rounded-full">{title}</h1>
-);
+import CompilationDrawer from './CompilationDrawer';
+import DoubleArrowRightIcon from 'src/components/common/icons/DoubleArrowRight';
+import DrawerTitle from './DrawerTitle';
 
 interface DrawerProps {
     compilationResults?: string;
+    resizeWorkspace: () => void;
 }
 
-const Drawer: React.FC<DrawerProps> = ({ compilationResults }) => {
-    const { drawer } = useEditor();
+const Drawer: React.FC<DrawerProps> = ({ compilationResults, resizeWorkspace }) => {
+    const { drawer, updateDrawer } = useEditor();
+
+    const onClose = () => {
+        updateDrawer();
+        setTimeout(resizeWorkspace, 100);
+    };
 
     const content = React.useMemo(() => {
         switch (drawer) {
             case 'compilation':
-                return (
-                    <div className="flex flex-col w-full h-full">
-                        <DrawerTitle title="Compilation" />
-                        <div className="flex items-center justify-center mt-10">
-                            {compilationResults && (
-                                <CodeBlock language="json" showLineNumbers text={compilationResults} />
-                            )}
-                        </div>
-                    </div>
-                );
+                return <CompilationDrawer compilationResults={compilationResults} />;
             case 'settings':
                 return (
                     <div className="flex flex-col w-full h-full">
@@ -39,7 +34,7 @@ const Drawer: React.FC<DrawerProps> = ({ compilationResults }) => {
 
     return (
         <Transition.Root show={!!drawer} as={React.Fragment}>
-            <div className="relative h-full w-full">
+            <div className="relative h-full w-full flex flex-col justify-between">
                 <Transition.Child
                     as={React.Fragment}
                     enter="transform transition ease-in-out duration-1000"
@@ -51,6 +46,9 @@ const Drawer: React.FC<DrawerProps> = ({ compilationResults }) => {
                 >
                     <div className="flex flex-col items-center p-5 bg-white dark:bg-black">{content}</div>
                 </Transition.Child>
+                <button onClick={onClose} className="border-t-2 p-2 hover:text-yellow-500">
+                    <DoubleArrowRightIcon width={32} height={32} />
+                </button>
             </div>
         </Transition.Root>
     );

@@ -1,11 +1,12 @@
-import Blockly from 'blockly/core';
+import Blockly from 'blockly';
+
 import { ContractStorage } from '@tezwell/smartts-sdk/core/expression';
 
-import VARIABLES from '../enums/variables';
-import SmartML from '../../generators/SmartML';
+import SmartML from '../generators/SmartML';
+import BlockKind from '../enums/BlockKind';
 
-const VARIABLE_GETTER_Storage = {
-    type: `variable_getter_${VARIABLES.contract_storage}`,
+const GetContractStorageBlock = {
+    type: BlockKind.get_contract_storage,
     message0: '%1',
     args0: [
         {
@@ -20,15 +21,14 @@ const VARIABLE_GETTER_Storage = {
     colour: 250,
 };
 
-Blockly.Blocks[VARIABLE_GETTER_Storage.type] = {
+Blockly.Blocks[GetContractStorageBlock.type] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(VARIABLE_GETTER_Storage);
-        self.setPreviousStatement(false);
-        self.setNextStatement(false);
+        this.jsonInit(GetContractStorageBlock);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
 
-SmartML.blocks[VARIABLE_GETTER_Storage.type] = {
+SmartML.addBlock(GetContractStorageBlock.type, {
     toValue: () => ContractStorage(),
-};
+});

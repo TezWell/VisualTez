@@ -1,10 +1,12 @@
-import Blockly from 'blockly/core';
+import type { Block } from 'blockly';
+import Blockly from 'blockly';
 import { Require } from '@tezwell/smartts-sdk/core/command';
 
-import SmartML from '../generators/SmartML';
+import SmartML from 'src/blocks/generators/SmartML';
+import BlockKind from './enums/BlockKind';
 
 const AssertBlock = {
-    type: 'assert_block',
+    type: BlockKind.assert_block,
     message0: 'Require %1',
     args0: [
         {
@@ -22,15 +24,14 @@ const AssertBlock = {
 
 Blockly.Blocks[AssertBlock.type] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(AssertBlock);
+        this.jsonInit(AssertBlock);
     },
 };
 
-SmartML.blocks[AssertBlock.type] = {
-    toStatement: (block: any) => {
+SmartML.addBlock(AssertBlock.type, {
+    toStatement: (block: Block) => {
         const failWithMsg = SmartML.toValue(block, 'error_message');
         const condition = SmartML.toValue(block, 'assert_condition');
         return Require(condition, failWithMsg);
     },
-};
+});

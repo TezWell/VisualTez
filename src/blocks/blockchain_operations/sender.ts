@@ -1,25 +1,27 @@
-import Blockly from 'blockly/core';
+import Blockly from 'blockly';
+
 import { TAddress } from '@tezwell/smartts-sdk/core/type';
 import { GetSender } from '@tezwell/smartts-sdk/core';
-import SmartML from '../../generators/SmartML';
+import SmartML from 'src/blocks/generators/SmartML';
+import BlockKind from '../enums/BlockKind';
 
-const OperationSender = {
-    type: 'operation_sender_block',
+const GetSenderBlock = {
+    type: BlockKind.get_sender_block,
     message0: 'Get Sender',
     tooltip: 'Returns the address of the operation sender.',
     output: 'Address',
     colour: 1,
 };
 
-Blockly.Blocks[OperationSender.type] = {
+Blockly.Blocks[GetSenderBlock.type] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(OperationSender);
-        self.setPreviousStatement(false);
-        self.setNextStatement(false);
+        this.jsonInit(GetSenderBlock);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
-SmartML.blocks[OperationSender.type] = {
+
+SmartML.addBlock(GetSenderBlock.type, {
     toType: () => TAddress,
     toValue: () => GetSender(),
-};
+});

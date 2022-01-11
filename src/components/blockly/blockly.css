@@ -20,3 +20,11 @@
 .blocklyTreeLabel {
     font-weight: bold;
 }
+
+.blocklyToolboxDiv {
+    border-right: 1px solid;
+}
+
+.blocklyCommentTextarea {
+    background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}

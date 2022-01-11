@@ -1,3 +1,6 @@
+import type { Block } from 'blockly';
+import Blockly from 'blockly';
+
 import {
     Equal,
     NotEqual,
@@ -6,11 +9,11 @@ import {
     LessThanOrEqual,
     GreaterThanOrEqual,
 } from '@tezwell/smartts-sdk/core/expression';
-import Blockly from 'blockly';
-import SmartML from '../../generators/SmartML';
+import BlockKind from '../enums/BlockKind';
+import SmartML from '../generators/SmartML';
 
 const CompareBlock = {
-    type: 'logic_compare',
+    type: BlockKind.compare_block,
     message0: '%1 %2 %3',
     args0: [
         {
@@ -43,15 +46,14 @@ const CompareBlock = {
 
 Blockly.Blocks[CompareBlock.type] = {
     init: function () {
-        const self = this as any;
-        self.jsonInit(CompareBlock);
-        self.setPreviousStatement(false);
-        self.setNextStatement(false);
+        this.jsonInit(CompareBlock);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
 
-SmartML.blocks[CompareBlock.type] = {
-    toValue: (block: any) => {
+SmartML.addBlock(CompareBlock.type, {
+    toValue: (block: Block) => {
         const left = SmartML.toValue(block, 'A');
         const right = SmartML.toValue(block, 'B');
         const operator = block.getFieldValue('OP');
@@ -71,4 +73,4 @@ SmartML.blocks[CompareBlock.type] = {
         }
         throw new Error(`Unexpected comparison operator ${operator}.`);
     },
-};
+});

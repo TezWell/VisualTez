@@ -1,14 +1,10 @@
 import React from 'react';
+import type { WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 
 import { Block, Category } from 'src/components/blockly';
-import DarkTheme from 'src/pages/editor/Blockly/themes/dark';
-import LightTheme from 'src/pages/editor/Blockly/themes/light';
-
-import BlocklyContainer from './Blockly';
-import VARIABLES from 'src/blocks/enums/variables';
-import CodeBlock from 'src/components/CodeBlock';
-import useTheme from 'src/context/hooks/useTheme';
+import BlocklyEditor from 'src/components/blockly/Editor';
+import BlockKind from 'src/blocks/enums/BlockKind';
 
 import { Section } from 'src/components/section-divider';
 import { Sections } from 'src/components/section-divider';
@@ -22,17 +18,18 @@ import Drawer from './toolbar/Drawer';
 const onDebouncer = debounce(10);
 
 interface EditorViewProps {
-    workspaceRef: React.MutableRefObject<any>;
-    compilationResults?: string;
+    workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
     compile: () => void;
 }
 
-const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, compilationResults }) => {
-    const { isDark } = useTheme();
+const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
     const { state, updateDivider, drawer } = useEditor();
 
     const resizeWorkspace = React.useCallback(() => {
-        Blockly.svgResize(workspaceRef.current);
+        if (workspaceRef.current) {
+            Blockly.svgResize(workspaceRef.current);
+            workspaceRef.current.scrollCenter();
+        }
     }, [workspaceRef]);
 
     const saveSectionSizes = React.useCallback(
@@ -53,10 +50,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, compilat
                     }
                 >
                     <Section minSize={'40%'} size={(drawer && state.divider?.left) || '100%'} className="relative">
-                        <BlocklyContainer
+                        <BlocklyEditor
                             workspaceRef={workspaceRef}
                             trashcan={false}
-                            theme={isDark ? DarkTheme : LightTheme}
                             move={{
                                 scrollbars: true,
                                 drag: true,
@@ -83,31 +79,36 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, compilat
                                 <Block type="contract_block" />
                                 <Block type="entry_point_block" />
                             </Category>
+                            <Category name="Types" categorystyle="literal_category">
+                                <Block type={BlockKind.string_type} />
+                            </Category>
                             <Category name="Literals" categorystyle="literal_category">
-                                <Block type="string_block" />
-                                <Block type="nat_block" />
-                                <Block type="int_block" />
-                                <Block type="address_block" />
-                                <Block type="boolean_block" />
+                                <Block type={BlockKind.string_literal} />
+                                <Block type={BlockKind.some_literal} />
+                                <Block type={BlockKind.none_literal} />
+                                <Block type={BlockKind.nat_literal} />
+                                <Block type={BlockKind.int_literal} />
+                                <Block type={BlockKind.address_literal} />
+                                <Block type={BlockKind.boolean_literal} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
                                 <Block type="head_level_block" />
                                 <Block type="operation_sender_block" />
                             </Category>
                             <Category name="Variables & Operations" categorystyle="variables_category">
-                                <Block type={`variable_getter_${VARIABLES.contract_storage}`} />
+                                <Block type={BlockKind.get_contract_storage} />
                                 <Block type="set_variable_block" />
                                 <Block type="get_variable_block" />
                             </Category>
                             <Category name="Logic" categorystyle="logic_category">
                                 <Category name="Boolean" categorystyle="logic_category">
-                                    <Block type="logic_compare"></Block>
+                                    <Block type={BlockKind.compare_block}></Block>
                                 </Category>
                             </Category>
                             <Category name="Assertion" categorystyle="assertion_category">
                                 <Block type="assert_block" />
                             </Category>
-                        </BlocklyContainer>
+                        </BlocklyEditor>
                     </Section>
                     <Section
                         show={!!drawer}
@@ -115,17 +116,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, compilat
                         size={state.divider?.right || '30%'}
                         className="overflow-auto"
                     >
-                        {/* <div className="flex flex-col" style={{ width: 500 }}>
-                            <div className="flex basis-1/4 items-center justify-center">
-                                <h1 className="text-2xl text-center align-middle">Output</h1>
-                            </div>
-                            <div className="flex basis-1/2 items-center justify-center overflow-y-auto">
-                                {compilationResults && (
-                                    <CodeBlock language="json" showLineNumbers text={compilationResults} />
-                                )}
-                            </div>
-                        </div> */}
-                        <Drawer compilationResults={compilationResults} />
+                        <Drawer resizeWorkspace={resizeWorkspace} />
                     </Section>
                 </Sections>
             </div>
