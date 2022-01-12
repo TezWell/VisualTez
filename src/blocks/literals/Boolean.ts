@@ -22,7 +22,7 @@ const BooleanBlock = {
             check: 'Boolean',
         },
     ],
-    output: 'Boolean',
+    output: ['Literal', 'Boolean'],
     colour: 40,
 };
 

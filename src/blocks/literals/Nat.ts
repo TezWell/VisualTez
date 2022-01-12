@@ -18,7 +18,7 @@ const NatBlock = {
             check: 'Number',
         },
     ],
-    output: 'Number',
+    output: ['Literal', 'Number'],
     colour: 10,
 };
 

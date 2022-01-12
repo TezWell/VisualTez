@@ -6,7 +6,6 @@ import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
 import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
-import { IExpressionKind } from '@tezwell/smartts-sdk/typings/expression';
 import Michelson from '../generators/Michelson';
 
 const AddressBlock = {
@@ -19,7 +18,7 @@ const AddressBlock = {
             check: 'String',
         },
     ],
-    output: 'Address',
+    output: ['Literal', 'Address'],
     colour: 20,
 };
 Blockly.Blocks[BlockKind.address_literal] = {

@@ -18,7 +18,7 @@ const IntBlock = {
             check: 'Number',
         },
     ],
-    output: 'Number',
+    output: ['Literal', 'Number'],
     colour: 10,
 };
 Blockly.Blocks[BlockKind.int_literal] = {

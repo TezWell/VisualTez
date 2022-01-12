@@ -75,9 +75,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
                             }}
                             renderer="zelos"
                         >
-                            <Category name="Base" categorystyle="class_category">
-                                <Block type="contract_block" />
-                                <Block type="entry_point_block" />
+                            <Category name="Contract Base" categorystyle="class_category">
+                                <Block type={BlockKind.contract_block} />
+                                <Block type={BlockKind.entry_point_block} />
                             </Category>
                             <Category name="Types" categorystyle="literal_category">
                                 <Block type={BlockKind.string_type} />

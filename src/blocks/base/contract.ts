@@ -21,6 +21,8 @@ const buildContractBlock = (contractName: string) => ({
     args1: [{ type: 'input_value', name: 'initial_storage', check: ['Literal'] }],
     message2: 'Entry points %1',
     args2: [{ type: 'input_statement', name: 'entry_points' }],
+    message3: 'Views %1',
+    args3: [{ type: 'input_statement', name: 'views' }],
     colour: 200,
 });
 

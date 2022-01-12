@@ -17,7 +17,14 @@ class Generator extends Blockly.Generator {
         this.blocks.set(type, block);
     }
 
-    toType(block: Block, name: string) {
+    /**
+     * @description Translate block to a michelson type.
+     *
+     * @param {Block} block The parent block to generate code for.
+     * @param {Block} name The child block name.
+     * @return {Michelson_LiteralUnion}
+     */
+    toType(block: Block, name: string): Michelson_Type {
         const targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
             const blockName = block.type
@@ -40,7 +47,14 @@ class Generator extends Blockly.Generator {
         throw TypeError(`The target block ${targetBlock.type} does not have a type generator.`);
     }
 
-    toMichelson(block: Block, name: string) {
+    /**
+     * @description Translate block to a michelson value.
+     *
+     * @param {Block} block The parent block to generate code for.
+     * @param {Block} name The child block name.
+     * @return {Michelson_LiteralUnion}
+     */
+    toMichelson(block: Block, name: string): Michelson_LiteralUnion {
         const targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
             const blockName = block.type
@@ -64,31 +78,64 @@ class Generator extends Blockly.Generator {
     }
 
     /**
-     * Generate code for the specified block (and attached blocks).
-     * The generator must be initialized before calling this function.
+     * @description Generate code for the specified block (and attached blocks).
+     *
      * @param {Block} block The block to generate code for.
-     * @param {boolean=} opt_thisOnly True to generate code for only this statement.
-     * @return {string|!Array} For statement blocks, the generated code.
-     *     For value blocks, an array containing the generated code and an
-     *     operator order value.  Returns '' if block is null.
+     * @return {Michelson_LiteralUnion}
      */
-    translate(block: Block | null): Michelson_LiteralUnion {
+    translateValue(block: Block | null): Michelson_LiteralUnion {
         if (this.isInitialized === false) {
             console.warn('Generator init was not called before blockToCode was called.');
         }
         if (!block) {
-            throw Error('@TODO');
+            throw Error('Unexpected null block when translating to Michelson value.');
         }
         if (!block.isEnabled()) {
             // Skip past this block if it is disabled.
-            return this.translate(block.getNextBlock());
+            return this.translateValue(block.getNextBlock());
         }
         if (block.isInsertionMarker()) {
             // Skip past insertion markers.
-            return this.translate(block.getChildren(false)[0]);
+            return this.translateValue(block.getChildren(false)[0]);
         }
 
         const func = this.blocks.get(block.type as BlockKind)?.toMichelson;
+        if (typeof func !== 'function') {
+            throw Error(
+                'Language "' +
+                    this.name_ +
+                    '" does not know how to generate ' +
+                    'code for block type "' +
+                    block.type +
+                    '".',
+            );
+        }
+        return func.call(block, block);
+    }
+
+    /**
+     * @description Generate code for the specified block (and attached blocks).
+     *
+     * @param {Block} block The block to generate code for.
+     * @return {Michelson_LiteralUnion}
+     */
+    translateType(block: Block | null): Michelson_Type {
+        if (this.isInitialized === false) {
+            console.warn('Generator init was not called before blockToCode was called.');
+        }
+        if (!block) {
+            throw Error('Unexpected null block when translating to Michelson type.');
+        }
+        if (!block.isEnabled()) {
+            // Skip past this block if it is disabled.
+            return this.translateType(block.getNextBlock());
+        }
+        if (block.isInsertionMarker()) {
+            // Skip past insertion markers.
+            return this.translateType(block.getChildren(false)[0]);
+        }
+
+        const func = this.blocks.get(block.type as BlockKind)?.toType;
         if (typeof func !== 'function') {
             throw Error(
                 'Language "' +
