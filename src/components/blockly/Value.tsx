@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ValueProps {
-    type: string;
+    name: string;
 }
 
 export const Value: React.FC<ValueProps> = ({ children, ...props }) => {

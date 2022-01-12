@@ -1,7 +1,9 @@
 export enum BlockKind {
     // Types
     string_type = 'string_type',
+    unit_type = 'unit_type',
     // Literals
+    unit_literal = 'unit_literal',
     number_literal = 'number_literal',
     string_literal = 'string_literal',
     some_literal = 'some_literal',

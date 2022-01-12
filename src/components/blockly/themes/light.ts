@@ -8,8 +8,11 @@ const LightTheme = Blockly.Theme.defineTheme('light', {
         class_category: {
             colour: '#fcba03',
         },
+        type_category: {
+            colour: '#5B7F30',
+        },
         literal_category: {
-            colour: '#CDB6E9',
+            colour: '#D18A55',
         },
         blockchain_category: {
             colour: '#C5EAFF',

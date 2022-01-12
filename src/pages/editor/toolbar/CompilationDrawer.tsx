@@ -42,12 +42,14 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
             }
             actions={[
                 <Button
+                    key="deploy"
                     disabled
                     className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 disabled:bg-yellow-500 disabled:border-yellow-700 p-2"
                 >
                     Deploy (In Progress)
                 </Button>,
                 <Button
+                    key="close"
                     onClick={props.onClose}
                     className="bg-gray-400 hover:bg-gray-300 border-gray-700 hover:border-gray-600 p-2"
                 >

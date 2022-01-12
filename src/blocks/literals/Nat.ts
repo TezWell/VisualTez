@@ -13,7 +13,7 @@ const NatBlock = {
     message0: 'Nat %1',
     args0: [
         {
-            type: 'field_input',
+            type: 'field_number',
             name: 'nat_value',
             check: 'Number',
         },

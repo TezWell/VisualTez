@@ -3,6 +3,8 @@ import React from 'react';
 interface BlockProps {
     type: string;
     disabled?: boolean;
+    inputs?: any;
+    fields?: any;
 }
 
 export const Block: React.FC<BlockProps> = ({ children, ...props }) => {

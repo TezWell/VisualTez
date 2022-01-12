@@ -18,7 +18,7 @@
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
     "@tezwell/michelson-sdk": "0.0.3",
-    "@tezwell/smartts-sdk": "0.1.11",
+    "@tezwell/smartts-sdk": "0.1.13",
     "@tezwell/tezos-bls12-381": "1.2.2",
     "@types/jest": "27.0.3",
     "@types/libsodium-wrappers-sumo": "0.7.5",

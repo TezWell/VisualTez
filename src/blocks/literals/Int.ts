@@ -13,7 +13,7 @@ const IntBlock = {
     message0: 'Int %1',
     args0: [
         {
-            type: 'field_input',
+            type: 'field_number',
             name: 'int_value',
             check: 'Number',
         },

@@ -50,13 +50,12 @@ export const compileBlock = (block: Block): Compilation | null => {
         case BlockKind.entry_point_block:
             return null;
         case BlockKind.contract_block:
-            console.error(block);
             const storageBlock = block.getInputTargetBlock('initial_storage');
             const code = SmartML.blockToCode(block) as string;
             return {
                 kind: CompilationKind.Contract,
                 result: {
-                    name: block.getFieldValue('contract_name'),
+                    name: block.getFieldValue('NAME'),
                     storage: Michelson.translateValue(storageBlock),
                     code: JSON.stringify(SmartMLSDK.compileContract(code), null, 4),
                 },

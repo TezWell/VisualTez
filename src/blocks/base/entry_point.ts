@@ -1,41 +1,33 @@
-import type { Block } from 'blockly';
+import { Block, FieldTextInput, Procedures } from 'blockly';
 import Blockly from 'blockly';
 import { EntryPoint } from '@tezwell/smartts-sdk/core';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 
-const EntryPointBlock = {
-    type: BlockKind.entry_point_block,
-    message0: 'Entry point %1',
-    args0: [
-        {
-            type: 'field_input',
-            name: 'entry_point_name',
-            text: 'Name',
-        },
-    ],
-    message1: 'Code %1',
-    args1: [{ type: 'input_statement', name: 'entry_point_code' }],
-    colour: 140,
-    previousStatement: null,
-    nextStatement: null,
-};
-
-Blockly.Blocks[EntryPointBlock.type] = {
+Blockly.Blocks[BlockKind.entry_point_block] = {
+    ...Blockly.Blocks['procedures_defnoreturn'],
     init: function () {
-        this.jsonInit(EntryPointBlock);
+        const initName = Procedures.findLegalName('entrypoint', this);
+        const nameField = new FieldTextInput(initName, Procedures.rename);
+        nameField.setSpellcheck(false);
+        this.appendDummyInput().appendField('Entrypoint').appendField(nameField, 'NAME').appendField('', 'PARAMS');
+        this.appendValueInput('input_type').setCheck(['Type']).appendField('Input Type');
+        this.setStyle('procedure_blocks');
+        this.setTooltip('A block that represents an entry point.');
+        this.arguments_ = [];
+        this.argumentVarModels_ = [];
+        this.setStatements_(true);
+        this.setColour(140);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.statementConnection_ = null;
     },
 };
 
-// @TODO support fragments
-// SmartML[EntryPointBlock.type] = function (block: any) {
-//     return '';
-// };
-
-SmartML.addBlock(EntryPointBlock.type, {
+SmartML.addBlock(BlockKind.entry_point_block, {
     toStatement: (block: Block) => {
-        const name = block.getFieldValue('entry_point_name');
+        const name = block.getFieldValue('NAME');
         return new EntryPoint(name).code(() => SmartML.toStatement(block, 'entry_point_code')).toString();
     },
 });

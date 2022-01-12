@@ -2,7 +2,7 @@ import React from 'react';
 import type { WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 
-import { Block, Category } from 'src/components/blockly';
+import { Block, Category, Value } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
 import BlockKind from 'src/blocks/enums/BlockKind';
 
@@ -76,13 +76,21 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
                             renderer="zelos"
                         >
                             <Category name="Contract Base" categorystyle="class_category">
-                                <Block type={BlockKind.contract_block} />
-                                <Block type={BlockKind.entry_point_block} />
-                            </Category>
-                            <Category name="Types" categorystyle="literal_category">
-                                <Block type={BlockKind.string_type} />
+                                <Block type={BlockKind.contract_block}>
+                                    {/* Default input type */}
+                                    <Value name="initial_storage">
+                                        <Block type={BlockKind.unit_literal} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.entry_point_block}>
+                                    {/* Default input type */}
+                                    <Value name="input_type">
+                                        <Block type={BlockKind.unit_type} />
+                                    </Value>
+                                </Block>
                             </Category>
                             <Category name="Literals" categorystyle="literal_category">
+                                <Block type={BlockKind.unit_literal} />
                                 <Block type={BlockKind.string_literal} />
                                 <Block type={BlockKind.some_literal} />
                                 <Block type={BlockKind.none_literal} />
@@ -90,6 +98,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
                                 <Block type={BlockKind.int_literal} />
                                 <Block type={BlockKind.address_literal} />
                                 <Block type={BlockKind.boolean_literal} />
+                            </Category>
+                            <Category name="Types" categorystyle="type_category">
+                                <Block type={BlockKind.string_type} />
+                                <Block type={BlockKind.unit_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
                                 <Block type="head_level_block" />
