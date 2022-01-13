@@ -23,7 +23,6 @@ Blockly.Blocks[BlockKind.contract_block] = {
         this.appendDummyInput().appendField('Contract').appendField(nameField, 'NAME').appendField('', 'PARAMS');
         this.appendValueInput('initial_storage').setCheck(['Literal']).appendField('Initial Storage');
         this.appendStatementInput('entry_points').setCheck(['EntryPoint']).appendField('Entry points');
-        this.setStyle('procedure_blocks');
         this.setTooltip('A block that represents a contract');
         this.arguments_ = [];
         this.argumentVarModels_ = [];
@@ -33,7 +32,6 @@ Blockly.Blocks[BlockKind.contract_block] = {
 
 SmartML[BlockKind.contract_block] = function (block: Block) {
     const storageValue = SmartML.toValue(block, 'initial_storage');
-    console.error(storageValue);
     return new Contract({
         storage: storageValue as any,
         entries: SmartML.toStatement(block, 'entry_points') as any,

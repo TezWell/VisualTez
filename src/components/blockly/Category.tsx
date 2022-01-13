@@ -4,6 +4,7 @@ interface CategoryProps {
     name: string;
     categorystyle?: string;
     custom?: string;
+    type?: string;
 }
 
 export const Category: React.FC<CategoryProps> = ({ children, ...props }) => {

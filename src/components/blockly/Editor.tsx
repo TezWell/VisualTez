@@ -36,10 +36,17 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
         minScale: number;
         scaleSpeed: number;
     };
+    onLoad?: () => void;
     renderer?: 'zelos';
 }
 
-const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspaceRef, noToolbox = false, ...props }) => {
+const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
+    children,
+    workspaceRef,
+    noToolbox = false,
+    onLoad,
+    ...props
+}) => {
     const { isDark } = useTheme();
     const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
@@ -48,7 +55,6 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
 
     const onChange = React.useCallback(
         (event: any) => {
-            console.error(event.type);
             if (
                 [
                     Blockly.Events.BLOCK_CHANGE,
@@ -86,6 +92,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({ children, workspace
             );
             workspaceRef.current.addChangeListener(onChange);
             workspaceRef.current.scrollCenter();
+            onLoad?.();
             loaded.current = true;
         }
         return () => {

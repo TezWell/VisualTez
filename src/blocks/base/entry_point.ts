@@ -13,15 +13,13 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
         nameField.setSpellcheck(false);
         this.appendDummyInput().appendField('Entrypoint').appendField(nameField, 'NAME').appendField('', 'PARAMS');
         this.appendValueInput('input_type').setCheck(['Type']).appendField('Input Type');
-        this.setStyle('procedure_blocks');
+        this.appendStatementInput('entry_point_code').setCheck(['Statement']).appendField('Code');
         this.setTooltip('A block that represents an entry point.');
         this.arguments_ = [];
         this.argumentVarModels_ = [];
-        this.setStatements_(true);
         this.setColour(140);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.statementConnection_ = null;
     },
 };
 

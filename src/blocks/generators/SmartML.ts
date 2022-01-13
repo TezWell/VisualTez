@@ -53,7 +53,6 @@ class Generator extends Blockly.Generator {
                 .split('_')
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
                 .join(' ');
-
             throw TypeError(`Could not find "${targetBlockName}" in "${blockName}".`);
         }
 
@@ -107,8 +106,7 @@ class Generator extends Blockly.Generator {
         this.init(workspace);
         const blocks = workspace.getTopBlocks(true);
         for (let i = 0, block; (block = blocks[i]); i++) {
-            if (block.type !== 'contract_block') {
-                console.error(block.type);
+            if (block.type !== BlockKind.contract_block) {
                 continue;
             }
             let line = this.blockToCode(block);

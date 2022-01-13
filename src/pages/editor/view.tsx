@@ -13,6 +13,7 @@ import debounce from 'src/utils/debounce';
 import useEditor from 'src/context/hooks/useEditor';
 import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
+import { initiateDefaultVariables } from 'src/blocks/utils/variables';
 
 // Debouncer
 const onDebouncer = debounce(10);
@@ -73,6 +74,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
                                 minScale: 0.25,
                                 scaleSpeed: 1.1,
                             }}
+                            onLoad={initiateDefaultVariables}
                             renderer="zelos"
                         >
                             <Category name="Contract Base" categorystyle="class_category">
@@ -107,11 +109,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
                                 <Block type="head_level_block" />
                                 <Block type="operation_sender_block" />
                             </Category>
-                            <Category name="Variables & Operations" categorystyle="variables_category">
-                                <Block type={BlockKind.get_contract_storage} />
-                                <Block type="set_variable_block" />
-                                <Block type="get_variable_block" />
-                            </Category>
+                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
                             <Category name="Logic" categorystyle="logic_category">
                                 <Category name="Boolean" categorystyle="logic_category">
                                     <Block type={BlockKind.compare_block}></Block>

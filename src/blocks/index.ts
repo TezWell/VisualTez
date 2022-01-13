@@ -3,8 +3,7 @@ import './literals';
 import './types';
 import './Assert';
 //
-import './SetVariable';
-import './GetVariable';
+import './VariableBlocks';
 //
 import './comparison';
 import './blockchain_operations';
@@ -61,13 +60,12 @@ export const compileBlock = (block: Block): Compilation | null => {
                 },
             };
         case BlockKind.string_type:
-            console.error(block);
+        case BlockKind.unit_type:
             return {
                 kind: CompilationKind.Type,
                 result: Michelson.translateType(block),
             };
         default:
-            console.error(block.type);
             return {
                 kind: CompilationKind.Value,
                 result: Michelson.translateValue(block),

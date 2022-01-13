@@ -14,7 +14,6 @@ const DeployParameters = () => {
 
     const onNetworkChange = React.useCallback(
         (e) => {
-            console.error(e.target.name, e.target.value);
             changeNetwork(e.target.value);
         },
         [changeNetwork],

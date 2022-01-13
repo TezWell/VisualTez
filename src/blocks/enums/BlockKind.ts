@@ -1,4 +1,6 @@
 export enum BlockKind {
+    // Variable
+    variable = 'variable',
     // Types
     string_type = 'string_type',
     unit_type = 'unit_type',
@@ -19,7 +21,7 @@ export enum BlockKind {
     get_level_block = 'get_level_block',
     get_sender_block = 'get_sender_block',
     // Statements
-    set_variable_block = 'set_variable_block',
+    set_variable_block = 'variables_set',
     assert_block = 'assert_block',
     //
     entry_point_block = 'entry_point_block',
