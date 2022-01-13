@@ -13,6 +13,7 @@ const UnitLiteralBlock = {
     message0: 'Unit',
     output: ['Literal', 'Unit'],
     colour: 20,
+    tooltip: 'Unit Literal',
 };
 Blockly.Blocks[BlockKind.unit_literal] = {
     init: function () {

@@ -1,34 +1,34 @@
 import Blockly from 'blockly';
 
-import { TString } from '@tezwell/smartts-sdk/core/type';
+import { TBool } from '@tezwell/smartts-sdk/core/type';
 import * as MichelsonCore from '@tezwell/michelson-sdk/core';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
 
-const StringBlock = {
-    type: BlockKind.string_type,
-    message0: 'Type: String',
+const BooleanBlock = {
+    type: BlockKind.boolean_type,
+    message0: 'Type: Boolean',
     output: 'Type',
-    colour: 11,
+    colour: 50,
 };
 
-Blockly.Blocks[BlockKind.string_type] = {
+Blockly.Blocks[BlockKind.boolean_type] = {
     init: function () {
-        this.jsonInit(StringBlock);
+        this.jsonInit(BooleanBlock);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
 };
 
-SmartML.addBlock(BlockKind.string_type, {
+SmartML.addBlock(BlockKind.boolean_type, {
     toType: () => {
-        return TString;
+        return TBool;
     },
 });
 
-Michelson.addBlock(BlockKind.string_type, {
+Michelson.addBlock(BlockKind.boolean_type, {
     toType: () => {
-        return MichelsonCore.Type.TString;
+        return MichelsonCore.Type.TBool;
     },
 });

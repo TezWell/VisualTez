@@ -23,7 +23,7 @@ const StringBlock = {
     style: 'text_blocks',
     helpUrl: '%{BKY_TEXT_TEXT_HELPURL}',
     tooltip: '%{BKY_TEXT_TEXT_TOOLTIP}',
-    extensions: ['string_quotes', 'parent_tooltip_when_inline'],
+    extensions: ['string_quotes'],
 };
 
 Blockly.Blocks[BlockKind.string_literal] = {

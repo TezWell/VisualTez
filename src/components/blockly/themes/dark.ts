@@ -15,10 +15,10 @@ const DarkTheme = Blockly.Theme.defineTheme('dark', {
             colour: '#D18A55',
         },
         blockchain_category: {
-            colour: '#C5EAFF',
+            colour: '#00C34F',
         },
         variables_category: {
-            colour: '#ccc',
+            colour: '#0075D3',
         },
         assertion_category: {
             colour: '#252526',

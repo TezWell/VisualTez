@@ -4,6 +4,7 @@ export enum BlockKind {
     // Types
     string_type = 'string_type',
     unit_type = 'unit_type',
+    boolean_type = 'boolean_type',
     // Literals
     unit_literal = 'unit_literal',
     number_literal = 'number_literal',
@@ -20,6 +21,7 @@ export enum BlockKind {
     compare_block = 'compare_block',
     get_level_block = 'get_level_block',
     get_sender_block = 'get_sender_block',
+    variables_get = 'variables_get',
     // Statements
     set_variable_block = 'variables_set',
     assert_block = 'assert_block',

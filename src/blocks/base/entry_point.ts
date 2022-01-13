@@ -26,6 +26,10 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
 SmartML.addBlock(BlockKind.entry_point_block, {
     toStatement: (block: Block) => {
         const name = block.getFieldValue('NAME');
-        return new EntryPoint(name).code(() => SmartML.toStatement(block, 'entry_point_code')).toString();
+        const type = SmartML.toType(block, 'input_type');
+        return new EntryPoint(name)
+            .inputType(type)
+            .code(() => SmartML.toStatement(block, 'entry_point_code'))
+            .toString();
     },
 });
