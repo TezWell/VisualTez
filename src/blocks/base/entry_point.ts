@@ -18,6 +18,7 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
         this.arguments_ = [];
         this.argumentVarModels_ = [];
         this.setColour(140);
+        this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     },
@@ -27,9 +28,6 @@ SmartML.addBlock(BlockKind.entry_point_block, {
     toStatement: (block: Block) => {
         const name = block.getFieldValue('NAME');
         const type = SmartML.toType(block, 'input_type');
-        return new EntryPoint(name)
-            .inputType(type)
-            .code(() => SmartML.toStatement(block, 'entry_point_code'))
-            .toString();
+        return new EntryPoint(name).inputType(type).code(() => SmartML.toStatement(block, 'entry_point_code'));
     },
 });

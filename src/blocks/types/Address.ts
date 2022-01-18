@@ -1,34 +1,34 @@
 import Blockly from 'blockly';
 
-import { TUnit } from '@tezwell/smartts-sdk/core/type';
+import { TAddress } from '@tezwell/smartts-sdk/core/type';
 import MichelsonTypes from '@tezwell/michelson-sdk/core/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
 
-const UnitTypeBlock = {
-    type: BlockKind.unit_type,
-    message0: 'Type: Unit',
+const AddressBlock = {
+    type: BlockKind.address_type,
+    message0: 'Type: Address',
     output: 'Type',
-    colour: 48,
+    colour: 20,
 };
 
-Blockly.Blocks[BlockKind.unit_type] = {
+Blockly.Blocks[BlockKind.address_type] = {
     init: function () {
-        this.jsonInit(UnitTypeBlock);
+        this.jsonInit(AddressBlock);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
 };
 
-SmartML.addBlock(BlockKind.unit_type, {
+SmartML.addBlock(BlockKind.address_type, {
     toType: () => {
-        return TUnit;
+        return TAddress;
     },
 });
 
-Michelson.addBlock(BlockKind.unit_type, {
+Michelson.addBlock(BlockKind.address_type, {
     toType: () => {
-        return MichelsonTypes.TUnit;
+        return MichelsonTypes.TAddress;
     },
 });

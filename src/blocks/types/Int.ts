@@ -1,34 +1,34 @@
 import Blockly from 'blockly';
 
-import { TUnit } from '@tezwell/smartts-sdk/core/type';
+import { TInt } from '@tezwell/smartts-sdk/core/type';
 import MichelsonTypes from '@tezwell/michelson-sdk/core/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
 
-const UnitTypeBlock = {
-    type: BlockKind.unit_type,
-    message0: 'Type: Unit',
+const IntTypeBlock = {
+    type: BlockKind.int_type,
+    message0: 'Type: Int',
     output: 'Type',
-    colour: 48,
+    colour: 320,
 };
 
-Blockly.Blocks[BlockKind.unit_type] = {
+Blockly.Blocks[BlockKind.int_type] = {
     init: function () {
-        this.jsonInit(UnitTypeBlock);
+        this.jsonInit(IntTypeBlock);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
 };
 
-SmartML.addBlock(BlockKind.unit_type, {
+SmartML.addBlock(BlockKind.int_type, {
     toType: () => {
-        return TUnit;
+        return TInt;
     },
 });
 
-Michelson.addBlock(BlockKind.unit_type, {
+Michelson.addBlock(BlockKind.int_type, {
     toType: () => {
-        return MichelsonTypes.TUnit;
+        return MichelsonTypes.TInt;
     },
 });

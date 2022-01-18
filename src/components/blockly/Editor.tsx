@@ -37,6 +37,7 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
         scaleSpeed: number;
     };
     onLoad?: () => void;
+    onError?: (error: string) => void;
     renderer?: 'zelos';
 }
 
@@ -45,6 +46,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
     workspaceRef,
     noToolbox = false,
     onLoad,
+    onError,
     ...props
 }) => {
     const { isDark } = useTheme();
@@ -80,20 +82,25 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
 
     React.useEffect(() => {
         if (!loaded.current && blocklyDiv.current && toolbox.current) {
-            workspaceRef.current = Blockly.inject(blocklyDiv.current, {
-                toolbox: noToolbox ? undefined : toolbox.current,
-                theme: isDark ? DarkTheme : LightTheme,
-                ...props,
-            });
-            const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
-            Blockly.Xml.domToWorkspace(
-                Blockly.Xml.textToDom(state.currentXML || baseXML),
-                workspaceRef.current as Workspace,
-            );
-            workspaceRef.current.addChangeListener(onChange);
-            workspaceRef.current.scrollCenter();
-            onLoad?.();
-            loaded.current = true;
+            try {
+                workspaceRef.current = Blockly.inject(blocklyDiv.current, {
+                    toolbox: noToolbox ? undefined : toolbox.current,
+                    theme: isDark ? DarkTheme : LightTheme,
+                    ...props,
+                });
+                const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
+                Blockly.Xml.domToWorkspace(
+                    Blockly.Xml.textToDom(state.currentXML || baseXML),
+                    workspaceRef.current as Workspace,
+                );
+                workspaceRef.current.addChangeListener(onChange);
+                workspaceRef.current.scrollCenter();
+                onLoad?.();
+                loaded.current = true;
+            } catch (e: any) {
+                console.debug(e);
+                onError?.(e.message);
+            }
         }
         return () => {
             workspaceRef.current?.removeChangeListener(onChange);

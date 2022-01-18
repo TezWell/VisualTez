@@ -14,6 +14,7 @@ import useEditor from 'src/context/hooks/useEditor';
 import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
 import { initiateDefaultVariables } from 'src/blocks/utils/variables';
+import Separator from 'src/components/blockly/Separator';
 
 // Debouncer
 const onDebouncer = debounce(10);
@@ -21,9 +22,10 @@ const onDebouncer = debounce(10);
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
     compile: () => void;
+    onError: (error: string) => void;
 }
 
-const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
+const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
     const { state, updateDivider, drawer } = useEditor();
 
     const resizeWorkspace = React.useCallback(() => {
@@ -75,6 +77,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
                                 scaleSpeed: 1.1,
                             }}
                             onLoad={initiateDefaultVariables}
+                            onError={onError}
                             renderer="zelos"
                         >
                             <Category name="Contract Base" categorystyle="class_category">
@@ -100,23 +103,42 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile }) => {
                                 <Block type={BlockKind.int_literal} />
                                 <Block type={BlockKind.address_literal} />
                                 <Block type={BlockKind.boolean_literal} />
+                                <Separator gap={40} />
+                                <Block type={BlockKind.record_literal} />
+                                <Block type={BlockKind.record_field} />
+                                <Separator gap={40} />
                             </Category>
                             <Category name="Types" categorystyle="type_category">
                                 <Block type={BlockKind.string_type} />
                                 <Block type={BlockKind.unit_type} />
+                                <Block type={BlockKind.boolean_type} />
+                                <Block type={BlockKind.address_type} />
+                                <Block type={BlockKind.option_type} />
+                                <Block type={BlockKind.nat_type} />
+                                <Block type={BlockKind.int_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
                                 <Block type="head_level_block" />
                                 <Block type="operation_sender_block" />
                             </Category>
-                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
+                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
+                                <Block type={BlockKind.param_access} />
+                            </Category>
                             <Category name="Logic" categorystyle="logic_category">
                                 <Category name="Boolean" categorystyle="logic_category">
-                                    <Block type={BlockKind.compare_block}></Block>
+                                    <Block type={BlockKind.compare_block} />
                                 </Category>
                             </Category>
+                            <Category name="Math" categorystyle="logic_category">
+                                <Block type={BlockKind.math_block} />
+                            </Category>
                             <Category name="Assertion" categorystyle="assertion_category">
-                                <Block type="assert_block" />
+                                <Block type="assert_block">
+                                    {/* Default error message */}
+                                    <Value name="error_message">
+                                        <Block type={BlockKind.unit_literal} />
+                                    </Value>
+                                </Block>
                             </Category>
                         </BlocklyEditor>
                     </Section>

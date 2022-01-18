@@ -23,6 +23,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
     const storageJSON = React.useMemo(() => {
         try {
             if (compilation) {
+                console.error(compilation);
                 return JSON.stringify(compilation.result.storage.toJSON(), null, 2);
             }
         } catch (e: any) {

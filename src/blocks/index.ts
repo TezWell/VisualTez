@@ -4,14 +4,17 @@ import './types';
 import './Assert';
 //
 import './VariableBlocks';
+import './ParamAccess';
 //
 import './comparison';
+import './math';
 import './blockchain_operations';
 
-import { Michelson_LiteralUnion, Michelson_Type } from '@tezwell/michelson-sdk/core';
+import type { Michelson_LiteralUnion } from '@tezwell/michelson-sdk/core';
+import type { IType } from '@tezwell/michelson-sdk/typings/type';
 import SmartMLSDK from '@tezwell/smartts-sdk/smartml';
-
 import type { Block, Workspace } from 'blockly';
+
 import BlockKind from './enums/BlockKind';
 import SmartML from './generators/SmartML';
 import Michelson from './generators/Michelson';
@@ -37,7 +40,7 @@ export type Compilation =
       }
     | {
           kind: CompilationKind.Type;
-          result: Michelson_Type;
+          result: IType;
       };
 
 export const isContractCompilation = (c: Compilation): c is ContactCompilation => c.kind === CompilationKind.Contract;

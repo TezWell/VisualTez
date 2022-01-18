@@ -23,7 +23,7 @@ const BooleanBlock = {
         },
     ],
     output: ['Literal', 'Boolean'],
-    colour: 40,
+    colour: 209,
 };
 
 Blockly.Blocks[BlockKind.boolean_literal] = {

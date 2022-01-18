@@ -1,10 +1,11 @@
 import Blockly, { Block, FieldTextInput } from 'blockly';
 
-import { Contract } from '@tezwell/smartts-sdk/core';
+import { Contract, EntryPoint } from '@tezwell/smartts-sdk/core';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
+import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
 
 Blockly.Blocks[BlockKind.contract_block] = {
     rename: function (oldName: string) {
@@ -22,18 +23,19 @@ Blockly.Blocks[BlockKind.contract_block] = {
         nameField.setSpellcheck(false);
         this.appendDummyInput().appendField('Contract').appendField(nameField, 'NAME').appendField('', 'PARAMS');
         this.appendValueInput('initial_storage').setCheck(['Literal']).appendField('Initial Storage');
-        this.appendStatementInput('entry_points').setCheck(['EntryPoint']).appendField('Entry points');
+        this.appendStatementInput('entry_points').setCheck('EntryPoint').setAlign(3).appendField('Entry points');
         this.setTooltip('A block that represents a contract');
-        this.arguments_ = [];
-        this.argumentVarModels_ = [];
         this.setColour(200);
     },
 };
 
 SmartML[BlockKind.contract_block] = function (block: Block) {
-    const storageValue = SmartML.toValue(block, 'initial_storage');
-    return new Contract({
-        storage: storageValue as any,
-        entries: SmartML.toStatement(block, 'entry_points') as any,
-    }).toString();
+    const storageType = SmartML.toType(block, 'initial_storage');
+    const storageValue = SmartML.toValue(block, 'initial_storage') as ILiteral;
+    const contract = new Contract().setStorageType(storageType).setStorage(storageValue);
+
+    SmartML.toStatement(block, 'entry_points').forEach((st) => contract.addEntrypoint(st as EntryPoint));
+
+    console.debug(contract.toString());
+    return contract.toString();
 };

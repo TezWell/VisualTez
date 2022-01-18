@@ -10,6 +10,7 @@ interface IBlock {
     toType?: (block: Block) => IType;
     toValue?: (block: Block) => IExpressionKind;
     toStatement?: (block: Block) => IToString;
+    toFieldBlock?: (block: Block) => [string, Block];
 }
 
 class Generator extends Blockly.Generator {
@@ -72,7 +73,7 @@ class Generator extends Blockly.Generator {
 
         const localBlock = this.blocks.get(targetBlock.type as BlockKind);
         if (!localBlock?.toStatement) {
-            throw TypeError(`The target block ${block.type} does not have a statement generator.`);
+            throw TypeError(`The target block ${targetBlock.type} does not have a statement generator.`);
         }
 
         const statements = [localBlock.toStatement(targetBlock)];
@@ -85,10 +86,33 @@ class Generator extends Blockly.Generator {
         return statements;
     }
 
-    statementToCode(block: Block, name: string): string {
-        const targetBlock = block.getInputTargetBlock(name);
+    toFieldBlocks(block: Block, name: string): [string, Block][] {
+        const targetBlock = name ? block.getInputTargetBlock(name) : block;
+        if (!targetBlock) {
+            const blockName = block.type
+                .split('_')
+                .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
+                .join(' ');
+            const targetBlockName = name
+                .split('_')
+                .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
+                .join(' ');
+            throw TypeError(`Could not find "${targetBlockName}" in "${blockName}".`);
+        }
 
-        return '@TODO';
+        const localBlock = this.blocks.get(targetBlock.type as BlockKind);
+        if (!localBlock?.toFieldBlock) {
+            throw TypeError(`The target block ${targetBlock.type} does not have a field generator.`);
+        }
+
+        const statements = [localBlock.toFieldBlock(targetBlock)];
+
+        let nextBlock: Block | null = targetBlock;
+        while ((nextBlock = nextBlock.getNextBlock())) {
+            statements.concat(localBlock.toFieldBlock(nextBlock));
+        }
+
+        return statements;
     }
 
     /**

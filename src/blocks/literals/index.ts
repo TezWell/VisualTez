@@ -6,3 +6,4 @@ import './Address';
 import './Boolean';
 import './Some';
 import './None';
+import './Record';

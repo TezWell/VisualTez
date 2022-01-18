@@ -29,7 +29,7 @@ const EditorContainer = () => {
 
     return (
         <>
-            <EditorView workspaceRef={workspaceRef} compile={compile} />
+            <EditorView workspaceRef={workspaceRef} compile={compile} onError={updateError} />
             <ErrorModal title="Editor Error" open={!!error} onClose={() => updateError()}>
                 {error}
             </ErrorModal>
