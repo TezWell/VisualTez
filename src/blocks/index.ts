@@ -50,6 +50,8 @@ export const extractBlocks = (workspace: Workspace) => workspace.getTopBlocks(tr
 export const compileBlock = (block: Block): Compilation | null => {
     switch (block.type) {
         case BlockKind.entry_point_block:
+        case BlockKind.set_variable_block:
+        case BlockKind.assert_block:
             return null;
         case BlockKind.contract_block:
             const storageBlock = block.getInputTargetBlock('initial_storage');

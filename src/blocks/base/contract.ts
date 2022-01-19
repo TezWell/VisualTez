@@ -34,7 +34,7 @@ SmartML[BlockKind.contract_block] = function (block: Block) {
     const storageValue = SmartML.toValue(block, 'initial_storage') as ILiteral;
     const contract = new Contract().setStorageType(storageType).setStorage(storageValue);
 
-    SmartML.toStatement(block, 'entry_points').forEach((st) => contract.addEntrypoint(st as EntryPoint));
+    SmartML.toStatements(block, 'entry_points').forEach((st) => contract.addEntrypoint(st as EntryPoint));
 
     console.debug(contract.toString());
     return contract.toString();

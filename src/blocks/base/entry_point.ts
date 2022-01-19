@@ -28,6 +28,6 @@ SmartML.addBlock(BlockKind.entry_point_block, {
     toStatement: (block: Block) => {
         const name = block.getFieldValue('NAME');
         const type = SmartML.toType(block, 'input_type');
-        return new EntryPoint(name).inputType(type).code(() => SmartML.toStatement(block, 'entry_point_code'));
+        return new EntryPoint(name).inputType(type).code(() => SmartML.toStatements(block, 'entry_point_code'));
     },
 });

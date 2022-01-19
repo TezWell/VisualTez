@@ -65,23 +65,20 @@ class Generator extends Blockly.Generator {
         throw TypeError(`The target block ${targetBlock.type} does not have a value generator.`);
     }
 
-    toStatement(block: Block, name: string): IToString[] {
-        const targetBlock = name ? block.getInputTargetBlock(name) : block;
+    toStatements(block: Block, name: string) {
+        let targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
-            return [];
+            throw new Error(`Could not find any statement with name "${name}" on block ${block.type}`);
         }
 
-        const localBlock = this.blocks.get(targetBlock.type as BlockKind);
-        if (!localBlock?.toStatement) {
-            throw TypeError(`The target block ${targetBlock.type} does not have a statement generator.`);
-        }
-
-        const statements = [localBlock.toStatement(targetBlock)];
-
-        let nextBlock: Block | null;
-        while ((nextBlock = targetBlock.getNextBlock())) {
-            statements.concat(localBlock.toStatement(nextBlock));
-        }
+        const statements = [];
+        do {
+            const localBlock = this.blocks.get(targetBlock.type as BlockKind);
+            if (!localBlock?.toStatement) {
+                throw TypeError(`The target block ${targetBlock.type} does not have a statement generator.`);
+            }
+            statements.push(localBlock.toStatement(targetBlock));
+        } while ((targetBlock = targetBlock.getNextBlock()));
 
         return statements;
     }
