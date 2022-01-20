@@ -1,5 +1,5 @@
 import React from 'react';
-import type { WorkspaceSvg } from 'blockly';
+import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 
 import { Block, Category, Value } from 'src/components/blockly';
@@ -26,7 +26,7 @@ interface EditorViewProps {
 }
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { state, updateDivider, drawer } = useEditor();
+    const { state, updateXML, updateDivider, drawer } = useEditor();
 
     const resizeWorkspace = React.useCallback(() => {
         if (workspaceRef.current) {
@@ -43,6 +43,25 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
         [updateDivider, resizeWorkspace],
     );
 
+    const onChange = React.useCallback(
+        (event: any) => {
+            if (
+                [
+                    Blockly.Events.BLOCK_CHANGE,
+                    Blockly.Events.MOVE,
+                    Blockly.Events.DELETE,
+                    Blockly.Events.CREATE,
+                ].includes(event.type)
+            ) {
+                if (workspaceRef.current) {
+                    const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
+                    updateXML(xml);
+                }
+            }
+        },
+        [updateXML, workspaceRef],
+    );
+
     return (
         <div className="flex flex-row flex-1">
             <div className="flex-1">
@@ -54,6 +73,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                 >
                     <Section minSize={'40%'} size={(drawer && state.divider?.left) || '100%'} className="relative">
                         <BlocklyEditor
+                            currentXML={state.currentXML}
                             workspaceRef={workspaceRef}
                             trashcan={false}
                             move={{
@@ -78,6 +98,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             }}
                             onLoad={initiateDefaultVariables}
                             onError={onError}
+                            onChange={onChange}
                             renderer="zelos"
                         >
                             <Category name="Contract Base" categorystyle="class_category">
@@ -118,8 +139,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.int_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
-                                <Block type="head_level_block" />
-                                <Block type="operation_sender_block" />
+                                <Block type={BlockKind.get_level_block} />
+                                <Block type={BlockKind.get_sender_block} />
                             </Category>
                             <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
                                 <Block type={BlockKind.param_access} />

@@ -13,7 +13,7 @@ const BlockLevel = {
     colour: 1,
 };
 
-Blockly.Blocks[BlockLevel.type] = {
+Blockly.Blocks[BlockKind.get_level_block] = {
     init: function () {
         this.jsonInit(BlockLevel);
         this.setPreviousStatement(false);
@@ -21,7 +21,7 @@ Blockly.Blocks[BlockLevel.type] = {
     },
 };
 
-SmartML.addBlock(BlockLevel.type, {
+SmartML.addBlock(BlockKind.get_level_block, {
     toType: () => TNat,
     toValue: () => GetLevel(),
 });

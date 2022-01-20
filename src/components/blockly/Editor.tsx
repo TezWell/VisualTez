@@ -3,7 +3,6 @@ import React from 'react';
 import type { Workspace } from 'blockly';
 import Blockly from 'blockly';
 
-import useEditor from 'src/context/hooks/useEditor';
 import DarkTheme from './themes/dark';
 import LightTheme from './themes/light';
 
@@ -36,8 +35,10 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
         minScale: number;
         scaleSpeed: number;
     };
+    currentXML?: string;
     onLoad?: () => void;
     onError?: (error: string) => void;
+    onChange?: (event: any) => void;
     renderer?: 'zelos';
 }
 
@@ -45,34 +46,16 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
     children,
     workspaceRef,
     noToolbox = false,
+    currentXML,
     onLoad,
     onError,
+    onChange,
     ...props
 }) => {
     const { isDark } = useTheme();
     const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
     const toolbox = React.useRef<HTMLDivElement>(null);
-    const { state, updateXML } = useEditor();
-
-    const onChange = React.useCallback(
-        (event: any) => {
-            if (
-                [
-                    Blockly.Events.BLOCK_CHANGE,
-                    Blockly.Events.MOVE,
-                    Blockly.Events.DELETE,
-                    Blockly.Events.CREATE,
-                ].includes(event.type)
-            ) {
-                if (workspaceRef.current) {
-                    const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
-                    updateXML(xml);
-                }
-            }
-        },
-        [updateXML, workspaceRef],
-    );
 
     React.useEffect(() => {
         if (loaded.current && workspaceRef.current) {
@@ -90,10 +73,10 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
                 });
                 const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
                 Blockly.Xml.domToWorkspace(
-                    Blockly.Xml.textToDom(state.currentXML || baseXML),
+                    Blockly.Xml.textToDom(currentXML || baseXML),
                     workspaceRef.current as Workspace,
                 );
-                workspaceRef.current.addChangeListener(onChange);
+                onChange && workspaceRef.current.addChangeListener(onChange);
                 workspaceRef.current.scrollCenter();
                 onLoad?.();
                 loaded.current = true;
@@ -103,7 +86,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
             }
         }
         return () => {
-            workspaceRef.current?.removeChangeListener(onChange);
+            onChange && workspaceRef.current?.removeChangeListener(onChange);
         };
     }, []);
 

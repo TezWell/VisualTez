@@ -13,7 +13,7 @@ const GetSenderBlock = {
     colour: 1,
 };
 
-Blockly.Blocks[GetSenderBlock.type] = {
+Blockly.Blocks[BlockKind.get_sender_block] = {
     init: function () {
         this.jsonInit(GetSenderBlock);
         this.setPreviousStatement(false);
@@ -21,7 +21,7 @@ Blockly.Blocks[GetSenderBlock.type] = {
     },
 };
 
-SmartML.addBlock(GetSenderBlock.type, {
+SmartML.addBlock(BlockKind.get_sender_block, {
     toType: () => TAddress,
     toValue: () => GetSender(),
 });

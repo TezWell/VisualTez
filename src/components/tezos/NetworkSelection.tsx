@@ -31,7 +31,7 @@ const NetworkSelection = () => {
                     className="focus:ring-indigo-500 focus:border-indigo-500 rounded-md sm:text-sm border-gray-300 dark:text-black"
                 >
                     {Object.keys(NetworkKind).map((network) => (
-                        <option>{network}</option>
+                        <option key={network}>{network}</option>
                     ))}
                 </select>
                 <div className="relative h-10 border ml-3 mr-3 border-black dark:border-white" />
