@@ -10,11 +10,11 @@ import './comparison';
 import './math';
 import './blockchain_operations';
 
+import Blockly from 'blockly';
+import type { Block, Workspace } from 'blockly';
 import type { Michelson_LiteralUnion } from '@tezwell/michelson-sdk/core';
 import type { IType } from '@tezwell/michelson-sdk/typings/type';
 import SmartMLSDK from '@tezwell/smartts-sdk/smartml';
-import type { Block, Workspace } from 'blockly';
-import Blockly from 'blockly';
 
 import BlockKind from './enums/BlockKind';
 import SmartML from './generators/SmartML';

@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Workspace, WorkspaceSvg } from 'blockly';
-import SmartML from '@tezwell/smartts-sdk/smartml';
 
 import EditorView from './view';
 import { extractBlocks, compileBlock, Compilation } from 'src/blocks';

@@ -38,6 +38,7 @@
     "prettier": "2.5.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-helmet-async": "^1.2.2",
     "react-markdown": "7.1.2",
     "react-router-dom": "6.2.1",
     "react-scripts": "5.0.0",
@@ -58,6 +59,14 @@
     "eject": "react-scripts eject",
     "prettier:fix": "prettier --write 'src/**/*.{ts,tsx}'",
     "lint:fix": "eslint '*/**/*.{ts,tsx}' --quiet --fix"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "moduleNameMapper": {
+      "react-markdown": "<rootDir>/node_modules/react-markdown/react-markdown.min.js"
+    }
   },
   "eslintConfig": {
     "extends": [

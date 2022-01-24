@@ -1,15 +1,15 @@
 import React from 'react';
 
-import type { Workspace } from 'blockly';
+import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 
 import DarkTheme from './themes/dark';
 import LightTheme from './themes/light';
 
+import 'src/blocks';
 import './overrides';
 import './blockly.css';
 import useTheme from 'src/context/hooks/useTheme';
-import type { WorkspaceSvg } from 'blockly';
 
 interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;

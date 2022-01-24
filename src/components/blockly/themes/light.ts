@@ -1,6 +1,6 @@
 import Blockly from 'blockly/core';
 
-Blockly.registry.unregister('theme', 'light');
+// Blockly.registry.unregister('theme', 'light');
 
 const LightTheme = Blockly.Theme.defineTheme('light', {
     base: Blockly.Themes.Classic,

@@ -6,17 +6,17 @@ const NotFound = () => (
             <text
                 x="50%"
                 y="50%"
-                font-style="italic"
-                font-weight="bold"
-                font-stretch="normal"
-                font-size="192px"
-                font-family="sans-serif"
-                letter-spacing="0px"
+                fontStyle="italic"
+                fontWeight="bold"
+                fontStretch="normal"
+                fontSize="192px"
+                fontFamily="sans-serif"
+                letterSpacing="0px"
                 fill="currentColor"
-                fill-opacity="1"
+                fillOpacity="1"
                 stroke="none"
-                dominant-baseline="middle"
-                text-anchor="middle"
+                dominantBaseline="middle"
+                textAnchor="middle"
             >
                 404
             </text>
