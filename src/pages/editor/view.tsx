@@ -15,6 +15,7 @@ import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
 import { initiateDefaultVariables } from 'src/blocks/utils/variables';
 import Separator from 'src/components/blockly/Separator';
+import Label from 'src/components/blockly/Label';
 
 // Debouncer
 const onDebouncer = debounce(10);
@@ -117,14 +118,18 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                             <Category name="Literals" categorystyle="literal_category">
                                 <Block type={BlockKind.unit_literal} />
+                                <Separator gap={40} />
                                 <Block type={BlockKind.string_literal} />
+                                <Block type={BlockKind.address_literal} />
+                                <Separator gap={40} />
+                                <Block type={BlockKind.boolean_literal} />
+                                <Label text="-- Option --" web-class="defaultLabel" />
                                 <Block type={BlockKind.some_literal} />
                                 <Block type={BlockKind.none_literal} />
+                                <Label text="-- Number --" web-class="defaultLabel" />
                                 <Block type={BlockKind.nat_literal} />
                                 <Block type={BlockKind.int_literal} />
-                                <Block type={BlockKind.address_literal} />
-                                <Block type={BlockKind.boolean_literal} />
-                                <Separator gap={40} />
+                                <Label text="-- Record --" web-class="defaultLabel" />
                                 <Block type={BlockKind.record_literal} />
                                 <Block type={BlockKind.record_field} />
                                 <Separator gap={40} />

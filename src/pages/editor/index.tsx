@@ -18,8 +18,7 @@ const EditorContainer = () => {
                 const blocks = extractBlocks(workspaceRef.current as Workspace);
                 const compilations: Compilation[] = blocks.map(compileBlock).filter(notNull);
                 updateCompilations(compilations);
-                console.debug(blocks.map(compileBlock));
-                console.debug(SmartML.compileContract((compilations[0].result as any).code));
+                console.debug(compilations);
             } catch (e: any) {
                 console.debug(e);
                 updateError(e.message);

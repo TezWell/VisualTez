@@ -7,14 +7,17 @@ import './index.css';
 import Router from './router';
 import Theme from './context/Theme';
 import Tezos from './context/Tezos';
+import Deployment from './context/Deployment';
 
 render(
     <React.StrictMode>
         <Theme.Provider>
             <Tezos.Provider>
-                <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
-                    <Router />
-                </div>
+                <Deployment.Provider>
+                    <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
+                        <Router />
+                    </div>
+                </Deployment.Provider>
             </Tezos.Provider>
         </Theme.Provider>
     </React.StrictMode>,

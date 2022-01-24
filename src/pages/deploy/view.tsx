@@ -1,27 +1,29 @@
 import React from 'react';
+import type { WorkspaceSvg } from 'blockly';
 
 import BlocklyEditor from 'src/components/blockly/Editor';
+import Button from 'src/components/common/Button';
 import NetworkSelection from 'src/components/tezos/NetworkSelection';
 import DeployParameters from './DeployParameters';
 import InitialStorage from './InitialStorage';
 
 const DeployView = () => {
-    const workspaceRef = React.useRef<any>();
+    const workspaceRef = React.useRef<WorkspaceSvg>();
 
     return (
         <div className="flex flex-col flex-1 container m-auto p-5">
             <NetworkSelection />
             <div className="relative border-t m-3 border-black dark:border-white" />
-            <InitialStorage />
+            <InitialStorage workspaceRef={workspaceRef} />
             <div className="relative border-t m-3 border-black dark:border-white" />
             <DeployParameters />
-
-            <button
+            <div className="relative border-t m-3 border-black dark:border-white" />
+            <Button
                 type="button"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
             >
                 Deploy Contract
-            </button>
+            </Button>
         </div>
     );
 };

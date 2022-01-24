@@ -6,7 +6,9 @@ import CodeBlock from 'src/components/CodeBlock';
 import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
 import useEditor from 'src/context/hooks/useEditor';
+import useDeployment from 'src/context/hooks/useDeployment';
 import DrawerTitle from './DrawerTitle';
+import { useNavigate } from 'react-router-dom';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
@@ -99,8 +101,10 @@ interface CompilationDrawerProps {
 }
 
 const CompilationDrawer: React.FC<CompilationDrawerProps> = ({ compilationResults }) => {
+    const navigate = useNavigate();
     const [compilation, setCompilation] = React.useState<ContactCompilation>();
     const { compilations } = useEditor();
+    const { changeDeploymentState } = useDeployment();
 
     function closeModal() {
         setCompilation(undefined);
@@ -109,6 +113,17 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = ({ compilationResult
     function openModal(compilation: ContactCompilation) {
         setCompilation(compilation);
     }
+
+    const gotoDeployment = React.useCallback(
+        (compilation: ContactCompilation) => {
+            changeDeploymentState({
+                storageXML: compilation.result.storageXML,
+                code: compilation.result.code,
+            });
+            navigate('/deploy');
+        },
+        [changeDeploymentState, navigate],
+    );
 
     return (
         <div className="flex w-full flex-col flex-1 justify-stretch">
@@ -130,9 +145,9 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = ({ compilationResult
                             Show
                         </Button>
                         <Button
-                            disabled
                             fullWidth
-                            className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 disabled:bg-yellow-500 disabled:border-yellow-700 p-1"
+                            onClick={() => gotoDeployment(compilation)}
+                            className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-1"
                         >
                             Deploy (In Progress)
                         </Button>

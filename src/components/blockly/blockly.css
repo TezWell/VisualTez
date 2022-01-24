@@ -28,3 +28,8 @@
 .blocklyCommentTextarea {
     background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
+
+.defaultLabel > .blocklyFlyoutLabelText {
+    font-style: italic;
+    fill: green;
+}

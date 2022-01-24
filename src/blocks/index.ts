@@ -14,6 +14,7 @@ import type { Michelson_LiteralUnion } from '@tezwell/michelson-sdk/core';
 import type { IType } from '@tezwell/michelson-sdk/typings/type';
 import SmartMLSDK from '@tezwell/smartts-sdk/smartml';
 import type { Block, Workspace } from 'blockly';
+import Blockly from 'blockly';
 
 import BlockKind from './enums/BlockKind';
 import SmartML from './generators/SmartML';
@@ -29,6 +30,7 @@ export interface ContactCompilation {
     result: {
         name: string;
         storage: Michelson_LiteralUnion;
+        storageXML: string;
         code: string;
     };
 }
@@ -54,13 +56,24 @@ export const compileBlock = (block: Block): Compilation | null => {
         case BlockKind.assert_block:
             return null;
         case BlockKind.contract_block:
+            const name = block.getFieldValue('NAME');
+
             const storageBlock = block.getInputTargetBlock('initial_storage');
+            if (!storageBlock) {
+                throw new Error(`Contract (${name}) requires an initial storage.`);
+            }
+            // The xml will be used in the deployment page
+            const storageXML = Blockly.Xml.domToText(Blockly.Xml.blockToDom(storageBlock));
+
+            // Translate contract block to SmartML
             const code = SmartML.blockToCode(block) as string;
+
             return {
                 kind: CompilationKind.Contract,
                 result: {
                     name: block.getFieldValue('NAME'),
                     storage: Michelson.translateValue(storageBlock),
+                    storageXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageXML}</xml>`,
                     code: JSON.stringify(SmartMLSDK.compileContract(code), null, 4),
                 },
             };
