@@ -12,6 +12,7 @@ import TermsMarkdown from 'src/pages/markdown/terms.md';
 import MarkdownLayout from 'src/components/MarkdownLayout';
 
 import EditorPage from 'src/pages/editor';
+import Nodes from 'src/pages/nodes';
 const LandingPage = React.lazy(() => import('src/pages/landing/view'));
 const NotFoundPage = React.lazy(() => import('src/pages/404'));
 const DeployPage = React.lazy(() => import('src/pages/deploy'));
@@ -32,6 +33,7 @@ export const routes = [
     },
     // Editor Page
     {
+        disabled: process.env.NODE_ENV !== 'development',
         title: 'VisualTez - Editor',
         routeProps: {
             key: 'editor',
@@ -99,6 +101,19 @@ export const routes = [
             </Page>
         ),
     },
+    // Nodes Page
+    {
+        title: 'VisualTez - Nodes',
+        routeProps: {
+            key: 'nodes',
+            path: '/nodes',
+        },
+        component: (
+            <Page withNavigation withFooter>
+                <Nodes />
+            </Page>
+        ),
+    },
     // Not Found Page
     {
         title: 'VisualTez - 404',
@@ -116,19 +131,21 @@ export const routes = [
 
 const Routing = () => (
     <Routes>
-        {routes.map(({ title, routeProps, component }) => (
-            <Route
-                {...routeProps}
-                element={
-                    <>
-                        <Helmet>
-                            <title>{title}</title>
-                        </Helmet>
-                        {component}
-                    </>
-                }
-            />
-        ))}
+        {routes
+            .filter(({ disabled }) => !disabled)
+            .map(({ title, routeProps, component }) => (
+                <Route
+                    {...routeProps}
+                    element={
+                        <>
+                            <Helmet>
+                                <title>{title}</title>
+                            </Helmet>
+                            {component}
+                        </>
+                    }
+                />
+            ))}
     </Routes>
 );
 

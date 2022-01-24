@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { resolvePath } from 'src/utils/path';
-import DiscordIcon from '../common/icons/Discord';
-import EmailIcon from '../common/icons/Email';
-import GithubIcon from '../common/icons/Github';
-import TelegramIcon from '../common/icons/Telegram';
-import TwitterIcon from '../common/icons/Twitter';
+import DiscordIcon from 'src/components/common/icons/Discord';
+import EmailIcon from 'src/components/common/icons/Email';
+import GithubIcon from 'src/components/common/icons/Github';
+import TelegramIcon from 'src/components/common/icons/Telegram';
+import TwitterIcon from 'src/components/common/icons/Twitter';
+import GlobeIcon from 'src/components/common/icons/Globe';
 
 const Footer = () => (
     <footer className="bg-white dark:bg-black border-t border-black dark:border-white">
@@ -20,21 +22,6 @@ const Footer = () => (
                     <div className="flex-1 mb-6 md:mb-0">
                         <p className="uppercase text-gray-500 md:mb-6">Links</p>
                         <ul className="list-reset">
-                            {/* <li className="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <Link to="/faq" className="no-underline hover:underline hover:text-pink-500">
-                                    FAQ
-                                </Link>
-                            </li>
-                            <li className="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <Link to="/docs" className="no-underline hover:underline hover:text-pink-500">
-                                    Documentation
-                                </Link>
-                            </li>
-                            <li className="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <Link to="/about" className="no-underline hover:underline hover:text-pink-500">
-                                    About
-                                </Link>
-                            </li> */}
                             <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                                 <Link to="/contact" className="flex no-underline hover:text-yellow-500">
                                     <EmailIcon />
@@ -50,6 +37,12 @@ const Footer = () => (
                                     <GithubIcon />
                                     <p className="ml-2">Github</p>
                                 </a>
+                            </li>
+                            <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                                <Link to="/nodes" className="flex no-underline hover:text-yellow-500">
+                                    <GlobeIcon />
+                                    <p className="ml-2">Public Nodes</p>
+                                </Link>
                             </li>
                         </ul>
                     </div>

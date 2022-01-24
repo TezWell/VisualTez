@@ -9,6 +9,31 @@ import { resolvePath } from 'src/utils/path';
 interface NavigationProps {}
 
 const Navigation: React.FC<NavigationProps> = () => {
+    const devComponents = React.useMemo(() => {
+        if (process.env.NODE_ENV === 'development') {
+            return {
+                desktop: (
+                    <li>
+                        <NavLink className="inline-block py-2 px-4 font-bold no-underline" to="/editor">
+                            Editor
+                        </NavLink>
+                    </li>
+                ),
+                mobile: (
+                    <Menu.Item>
+                        <NavLink
+                            className="inline-block w-full rounded font-bold no-underline p-2 bg-gray-200 dark:bg-gray-800"
+                            to="/editor"
+                        >
+                            Editor
+                        </NavLink>
+                    </Menu.Item>
+                ),
+            };
+        }
+        return {};
+    }, []);
+
     return (
         <nav id="header" className="w-full">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between p-2">
@@ -39,14 +64,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                             leaveTo="transform opacity-0 scale-95"
                         >
                             <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <Menu.Item>
-                                    <NavLink
-                                        className="inline-block w-full rounded font-bold no-underline p-2 bg-gray-200 dark:bg-gray-800"
-                                        to="/editor"
-                                    >
-                                        Editor
-                                    </NavLink>
-                                </Menu.Item>
+                                {devComponents.mobile}
                             </Menu.Items>
                         </Transition>
                     </Menu>
@@ -60,11 +78,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                     id="nav-content"
                 >
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
-                        <li>
-                            <NavLink className="inline-block py-2 px-4 font-bold no-underline" to="/editor">
-                                Editor
-                            </NavLink>
-                        </li>
+                        {devComponents.desktop}
                         <li className="h-10 border ml-3 mr-3 border-black dark:border-white" />
                         <li className="flex justify-end items-center">
                             <ThemeSelection />
