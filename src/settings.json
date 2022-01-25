@@ -1,3 +1,10 @@
 {
-    "storage_prefix": "@VisualTez"
+    "storage_prefix": "@VisualTez",
+    "networks": [
+        "ithacanet"
+    ],
+    "node_monitor": {
+        "interval": 30000,
+        "max_delay": 180000
+    }
 }
