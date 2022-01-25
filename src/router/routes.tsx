@@ -11,8 +11,8 @@ import ContactMarkdown from 'src/pages/markdown/contact.md';
 import TermsMarkdown from 'src/pages/markdown/terms.md';
 import MarkdownLayout from 'src/components/MarkdownLayout';
 
-import EditorPage from 'src/pages/editor';
-import Nodes from 'src/pages/nodes';
+const EditorPage = React.lazy(() => import('src/pages/editor'));
+const NodesPage = React.lazy(() => import('src/pages/nodes'));
 const LandingPage = React.lazy(() => import('src/pages/landing/view'));
 const NotFoundPage = React.lazy(() => import('src/pages/404'));
 const DeployPage = React.lazy(() => import('src/pages/deploy'));
@@ -110,7 +110,7 @@ export const routes = [
         },
         component: (
             <Page withNavigation withFooter>
-                <Nodes />
+                <NodesPage />
             </Page>
         ),
     },
