@@ -1,8 +1,6 @@
 import React, { createContext } from 'react';
 
-import { Compilation } from 'src/blocks';
-import BlockDatabase from 'src/blocks/core/database';
-
+import type { Compilation } from 'src/blocks';
 import settings from 'src/settings.json';
 
 interface IEditorStorage {
@@ -74,10 +72,6 @@ const Provider: React.FC = (props) => {
     const [drawer, setDrawer] = React.useState<DrawerOptions | null>(null);
     const [error, setError] = React.useState<string>();
     const [compilations, setCompilations] = React.useState<Compilation[]>([]);
-
-    React.useEffect(() => {
-        BlockDatabase.clear();
-    }, []);
 
     React.useEffect(() => {
         saveEditorState(state);
