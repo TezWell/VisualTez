@@ -1624,10 +1624,10 @@
   resolved "https://registry.yarnpkg.com/@tezwell/michelson-sdk/-/michelson-sdk-0.0.6.tgz#a0eeb324b9b7b1c8970385518779e9be3c242f6b"
   integrity sha512-EWXOKuaud3tLsx7p3pbR9sPA42weVI0mAr0XmLF1LM1y6jTXogYX6glkJQgmxsU2mQI3C7Dp+Ka5c5t4yqLN5Q==
 
-"@tezwell/smartts-sdk@0.1.17":
-  version "0.1.17"
-  resolved "https://registry.yarnpkg.com/@tezwell/smartts-sdk/-/smartts-sdk-0.1.17.tgz#b499feac121d3b75b6e4739eb5d2252717a899cd"
-  integrity sha512-npj/qL+ogD+bl02xbXWpmDpUCDHPb/2CgBSThRH4xoVw8mV1KDytZ0uxopufEzIRKJxatLR5nDKZ/NfXxl/Kxw==
+"@tezwell/smartts-sdk@0.1.20":
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/@tezwell/smartts-sdk/-/smartts-sdk-0.1.20.tgz#5cf8da77e5a1122458e369096b7cd381bc5357a2"
+  integrity sha512-sPCV7dTD9CxF0/CFuOOehDgih9n2ti1fwJJmCn8Bf/g0BYqnCXeP5YNdBO/tqFmaEvxqakxPBGC0hpqTIQTOYg==
 
 "@tootallnate/once@1":
   version "1.1.2"
