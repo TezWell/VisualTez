@@ -1,7 +1,7 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import * as MichelsonCore from '@tezwell/michelson-sdk/core';
+import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
+import MichelsonType from '@tezwell/michelson-sdk/type';
 import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
 import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
 import SmartML from '../generators/SmartML';
@@ -28,6 +28,6 @@ SmartML.addBlock(BlockKind.unit_literal, {
     toValue: () => SmartTSLiterals.Unit(),
 });
 Michelson.addBlock(BlockKind.unit_literal, {
-    toType: () => MichelsonCore.TUnit,
-    toMichelson: () => MichelsonCore.Unit(),
+    toType: () => MichelsonType.TUnit(),
+    toMichelson: () => MichelsonLiteral.Unit(),
 });

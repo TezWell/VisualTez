@@ -1,5 +1,5 @@
-import type { Michelson_LiteralUnion } from '@tezwell/michelson-sdk/core/literal';
-import type { IType } from '@tezwell/michelson-sdk/typings/type';
+import type { IValue } from '@tezwell/michelson-sdk/typings';
+import type { IType } from '@tezwell/michelson-sdk/typings';
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
@@ -7,7 +7,7 @@ import BlockKind from '../enums/BlockKind';
 
 interface IBlock {
     toType?: (block: Block) => IType;
-    toMichelson?: (block: Block) => Michelson_LiteralUnion;
+    toMichelson?: (block: Block) => IValue;
 }
 
 class Generator extends Blockly.Generator {
@@ -54,7 +54,7 @@ class Generator extends Blockly.Generator {
      * @param {Block} name The child block name.
      * @return {Michelson_LiteralUnion}
      */
-    toMichelson(block: Block, name: string): Michelson_LiteralUnion {
+    toMichelson(block: Block, name: string): IValue {
         const targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
             const blockName = block.type
@@ -83,7 +83,7 @@ class Generator extends Blockly.Generator {
      * @param {Block} block The block to generate code for.
      * @return {Michelson_LiteralUnion}
      */
-    translateValue(block: Block | null): Michelson_LiteralUnion {
+    translateValue(block: Block | null): IValue {
         if (this.isInitialized === false) {
             console.warn('Generator init was not called before blockToCode was called.');
         }

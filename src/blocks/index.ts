@@ -12,8 +12,7 @@ import './blockchain_operations';
 
 import Blockly from 'blockly';
 import type { Block, Workspace } from 'blockly';
-import type { Michelson_LiteralUnion } from '@tezwell/michelson-sdk/core';
-import type { IType } from '@tezwell/michelson-sdk/typings/type';
+import type { IType, IValue } from '@tezwell/michelson-sdk/typings';
 import SmartMLSDK from '@tezwell/smartts-sdk/smartml';
 
 import BlockKind from './enums/BlockKind';
@@ -29,7 +28,7 @@ export interface ContactCompilation {
     kind: CompilationKind.Contract;
     result: {
         name: string;
-        storage: Michelson_LiteralUnion;
+        storage: IValue;
         storageXML: string;
         code: string;
     };
@@ -38,7 +37,7 @@ export type Compilation =
     | ContactCompilation
     | {
           kind: CompilationKind.Value;
-          result: Michelson_LiteralUnion;
+          result: IValue;
       }
     | {
           kind: CompilationKind.Type;

@@ -3,7 +3,8 @@ import Blockly from 'blockly';
 
 import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
 import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
-import * as MichelsonCore from '@tezwell/michelson-sdk/core';
+import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
+import MichelsonType from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
@@ -37,9 +38,9 @@ SmartML.addBlock(BlockKind.some_literal, {
 
 Michelson.addBlock(BlockKind.some_literal, {
     toType: (block: Block) => {
-        return MichelsonCore.TOption(Michelson.toType(block, 'option_value'));
+        return MichelsonType.TOption(Michelson.toType(block, 'option_value'));
     },
     toMichelson: (block: Block) => {
-        return MichelsonCore.Some(Michelson.toMichelson(block, 'option_value'));
+        return MichelsonLiteral.Some(Michelson.toMichelson(block, 'option_value'));
     },
 });

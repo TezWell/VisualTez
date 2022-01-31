@@ -1,11 +1,11 @@
 import Blockly, { Block, FieldTextInput } from 'blockly';
 
+import type { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
 import { Contract, EntryPoint } from '@tezwell/smartts-sdk/core';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
-import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
 
 Blockly.Blocks[BlockKind.contract_block] = {
     rename: function (oldName: string) {

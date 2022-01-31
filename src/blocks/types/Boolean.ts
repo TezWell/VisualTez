@@ -1,7 +1,7 @@
 import Blockly from 'blockly';
 
 import { TBool } from '@tezwell/smartts-sdk/core/type';
-import MichelsonTypes from '@tezwell/michelson-sdk/core/type';
+import MichelsonTypes from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -29,6 +29,6 @@ SmartML.addBlock(BlockKind.boolean_type, {
 
 Michelson.addBlock(BlockKind.boolean_type, {
     toType: () => {
-        return MichelsonTypes.TBool;
+        return MichelsonTypes.TBool();
     },
 });

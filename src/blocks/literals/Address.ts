@@ -1,7 +1,8 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import * as MichelsonCore from '@tezwell/michelson-sdk/core';
+import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
+import MichelsonType from '@tezwell/michelson-sdk/type';
 import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
 import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
 import SmartML from '../generators/SmartML';
@@ -39,9 +40,9 @@ SmartML.addBlock(BlockKind.address_literal, {
 });
 Michelson.addBlock(BlockKind.address_literal, {
     toType: () => {
-        return MichelsonCore.TAddress;
+        return MichelsonType.TAddress();
     },
     toMichelson: (block: Block) => {
-        return MichelsonCore.Address(block.getFieldValue('address_value'));
+        return MichelsonLiteral.Address(block.getFieldValue('address_value'));
     },
 });

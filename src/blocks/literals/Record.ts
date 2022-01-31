@@ -1,13 +1,15 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import SmartML from '../generators/SmartML';
-import BlockKind from '../enums/BlockKind';
 import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
-import Michelson from '../generators/Michelson';
 import { TRecord } from '@tezwell/smartts-sdk/core/type';
 import { Record } from '@tezwell/smartts-sdk/core/literal';
-import * as MichelsonSDK from '@tezwell/michelson-sdk/core';
+import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
+import MichelsonType from '@tezwell/michelson-sdk/type';
+
+import SmartML from '../generators/SmartML';
+import BlockKind from '../enums/BlockKind';
+import Michelson from '../generators/Michelson';
 
 Blockly.Blocks[BlockKind.record_literal] = {
     init: function () {
@@ -68,7 +70,7 @@ Michelson.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-        return MichelsonSDK.TRecord(
+        return MichelsonType.TRecord(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}),
         );
     },
@@ -83,7 +85,7 @@ Michelson.addBlock(BlockKind.record_literal, {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        return MichelsonSDK.Record(
+        return MichelsonLiteral.Record(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toMichelson(block, 'value') }), {}),
         );
     },
