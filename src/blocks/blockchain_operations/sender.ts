@@ -1,7 +1,7 @@
 import Blockly from 'blockly';
 
 import { TAddress } from '@tezwell/smartts-sdk/core/type';
-import { GetSender } from '@tezwell/smartts-sdk/core';
+import { GetSender } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 

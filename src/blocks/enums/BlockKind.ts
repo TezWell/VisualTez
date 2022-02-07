@@ -14,6 +14,7 @@ export enum BlockKind {
     unit_literal = 'unit_literal',
     number_literal = 'number_literal',
     string_literal = 'string_literal',
+    bytes_literal = 'bytes_literal',
     some_literal = 'some_literal',
     none_literal = 'none_literal',
     nat_literal = 'nat_literal',

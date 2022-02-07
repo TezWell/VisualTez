@@ -82,7 +82,7 @@ const Footer = () => (
                             </li>
                             <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                                 <a
-                                    href="https://twitter.com/hashtag/VisualTez"
+                                    href="https://twitter.com/VisualTez"
                                     target="_blank"
                                     className="flex hover:text-yellow-500"
                                 >

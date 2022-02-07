@@ -1,7 +1,7 @@
 import Blockly from 'blockly';
 
 import { TNat } from '@tezwell/smartts-sdk/core/type';
-import { GetLevel } from '@tezwell/smartts-sdk/core';
+import { GetLevel } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 

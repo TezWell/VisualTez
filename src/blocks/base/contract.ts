@@ -1,7 +1,7 @@
 import Blockly, { Block, FieldTextInput } from 'blockly';
 
 import type { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
-import { Contract, EntryPoint } from '@tezwell/smartts-sdk/core';
+import { Contract, EntryPoint } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';

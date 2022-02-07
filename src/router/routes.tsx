@@ -10,6 +10,7 @@ import PrivacyMarkdown from 'src/pages/markdown/privacy.md';
 import ContactMarkdown from 'src/pages/markdown/contact.md';
 import TermsMarkdown from 'src/pages/markdown/terms.md';
 import MarkdownLayout from 'src/components/MarkdownLayout';
+import { isDevelopment } from 'src/utils';
 
 const EditorPage = React.lazy(() => import('src/pages/editor'));
 const NodesPage = React.lazy(() => import('src/pages/nodes'));
@@ -33,7 +34,7 @@ export const routes = [
     },
     // Editor Page
     {
-        disabled: process.env.NODE_ENV !== 'development',
+        disabled: !isDevelopment(),
         title: 'VisualTez - Editor',
         routeProps: {
             key: 'editor',

@@ -1,6 +1,6 @@
 import { Block, FieldTextInput, Procedures } from 'blockly';
 import Blockly from 'blockly';
-import { EntryPoint } from '@tezwell/smartts-sdk/core';
+import { EntryPoint } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';

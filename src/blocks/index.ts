@@ -13,7 +13,7 @@ import './blockchain_operations';
 import Blockly from 'blockly';
 import type { Block, Workspace } from 'blockly';
 import type { IType, IValue } from '@tezwell/michelson-sdk/typings';
-import SmartMLSDK from '@tezwell/smartts-sdk/smartml';
+// import { CompilerAPI } from '@tezwell/smartts-sdk';
 
 import BlockKind from './enums/BlockKind';
 import SmartML from './generators/SmartML';
@@ -73,7 +73,7 @@ export const compileBlock = (block: Block): Compilation | null => {
                     name: block.getFieldValue('NAME'),
                     storage: Michelson.translateValue(storageBlock),
                     storageXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageXML}</xml>`,
-                    code: JSON.stringify(SmartMLSDK.compileContract(code), null, 4),
+                    code: 'JSON.stringify(CompilerAPI.default.compileContract(code), null, 4)',
                 },
             };
         case BlockKind.string_type:

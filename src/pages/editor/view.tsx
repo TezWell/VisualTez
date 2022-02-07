@@ -121,6 +121,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Separator gap={40} />
                                 <Block type={BlockKind.string_literal} />
                                 <Block type={BlockKind.address_literal} />
+                                <Block type={BlockKind.bytes_literal} />
                                 <Separator gap={40} />
                                 <Block type={BlockKind.boolean_literal} />
                                 <Label text="-- Option --" web-class="defaultLabel" />
