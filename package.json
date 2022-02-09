@@ -67,7 +67,10 @@
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "moduleNameMapper": {
-      "react-markdown": "<rootDir>/node_modules/react-markdown/react-markdown.min.js"
+      "react-markdown": "<rootDir>/node_modules/react-markdown/react-markdown.min.js",
+      "@tezwell/michelson-sdk/converter": "@tezwell/michelson-sdk/converter/index.cjs",
+      "@tezwell/michelson-sdk/literal": "@tezwell/michelson-sdk/literal.cjs",
+      "@tezwell/michelson-sdk/type": "@tezwell/michelson-sdk/type.cjs"
     }
   },
   "eslintConfig": {

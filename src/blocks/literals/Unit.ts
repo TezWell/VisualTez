@@ -1,9 +1,9 @@
 import Blockly from 'blockly';
 
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
 import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
 import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
+import MichelsonType from '@tezwell/michelson-sdk/type';
+import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
