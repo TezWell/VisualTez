@@ -30,7 +30,8 @@ const Nodes = () => {
 
                         return {
                             network,
-                            online: Date.now() - new Date(timestamp).getTime() < settings.node_monitor.max_delay,
+                            online: true,
+                            synchronizing: Date.now() - new Date(timestamp).getTime() > settings.node_monitor.max_delay,
                             timestamp,
                             level,
                             version,
@@ -40,8 +41,9 @@ const Nodes = () => {
                     .catch((e) => {
                         console.debug(e);
                         return {
-                            network: network.toUpperCase(),
+                            network: network,
                             online: false,
+                            synchronizing: false,
                         };
                     });
             }),

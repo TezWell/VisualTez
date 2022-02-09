@@ -18,10 +18,19 @@ export interface NodeStatus {
     level?: number;
     timestamp?: string;
     online: boolean;
+    synchronizing: boolean;
 }
 
-const ShowStatus = ({ online }: { online: boolean }) =>
-    online ? <p className="text-green-600">Online</p> : <p className="text-red-600">Offline</p>;
+const ShowStatus = ({ online, synchronizing }: { online: boolean; synchronizing: boolean }) =>
+    online ? (
+        synchronizing ? (
+            <p className="text-yellow-600">Synchronizing</p>
+        ) : (
+            <p className="text-green-600">Online</p>
+        )
+    ) : (
+        <p className="text-red-600">Offline</p>
+    );
 
 interface NodesViewProps {
     nodes: NodeStatus[];
@@ -30,7 +39,7 @@ interface NodesViewProps {
 const NodesView: React.FC<NodesViewProps> = ({ nodes }) => {
     return (
         <div className="flex-1 flex flex-row justify-center items-center p-2 flex-wrap">
-            {nodes.map(({ network, historyMode, online, level, version, timestamp }) => (
+            {nodes.map(({ network, historyMode, online, level, version, timestamp, synchronizing }) => (
                 <div
                     key={network}
                     className="basis-full md:basis-[40%] border-2 border-black dark:border-white rounded-lg p-2 m-1 shadow-xl "
@@ -46,14 +55,14 @@ const NodesView: React.FC<NodesViewProps> = ({ nodes }) => {
                                 <tr>
                                     <td className="text-base font-bold">Status</td>
                                     <td className={`text-base text-${online ? 'online' : 'offline'} font-bold`}>
-                                        <ShowStatus online={online} />
+                                        <ShowStatus online={online} synchronizing={synchronizing} />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td className="text-base font-bold">Node Version</td>
                                     <td>
-                                        {version?.version.major}.{version?.version.minor}
+                                        {version?.version?.major}.{version?.version?.minor}
                                     </td>
                                 </tr>
                                 <tr>
