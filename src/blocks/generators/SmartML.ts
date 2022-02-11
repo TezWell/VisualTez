@@ -4,11 +4,11 @@ import Blockly from 'blockly';
 import BlockKind from '../enums/BlockKind';
 import { IType } from '@tezwell/smartts-sdk/typings/type';
 import { IToString } from '@tezwell/smartts-sdk/typings/shared';
-import { IExpressionKind } from '@tezwell/smartts-sdk/typings/expression';
+import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 
 interface IBlock {
-    toType?: (block: Block) => IType;
-    toValue?: (block: Block) => IExpressionKind;
+    toType?: (block: Block) => IType<unknown>;
+    toValue?: (block: Block) => IExpression;
     toStatement?: (block: Block) => IToString;
     toFieldBlock?: (block: Block) => [string, Block];
 }

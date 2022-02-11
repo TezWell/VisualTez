@@ -1,7 +1,7 @@
 import Blockly from 'blockly';
 
-import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
+import SmartTSTypes from '@tezwell/smartts-sdk/type';
+import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
 import MichelsonType from '@tezwell/michelson-sdk/type';
 import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
 import SmartML from '../generators/SmartML';
@@ -24,7 +24,7 @@ Blockly.Blocks[BlockKind.unit_literal] = {
 };
 
 SmartML.addBlock(BlockKind.unit_literal, {
-    toType: () => SmartTSTypes.TUnit,
+    toType: () => SmartTSTypes.TUnit(),
     toValue: () => SmartTSLiterals.Unit(),
 });
 Michelson.addBlock(BlockKind.unit_literal, {

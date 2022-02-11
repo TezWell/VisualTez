@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-import { TString } from '@tezwell/smartts-sdk/core/type';
+import { TString } from '@tezwell/smartts-sdk/type';
 import MichelsonTypes from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -23,7 +23,7 @@ Blockly.Blocks[BlockKind.string_type] = {
 
 SmartML.addBlock(BlockKind.string_type, {
     toType: () => {
-        return TString;
+        return TString();
     },
 });
 

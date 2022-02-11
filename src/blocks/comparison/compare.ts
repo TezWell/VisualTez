@@ -8,7 +8,7 @@ import {
     GreaterThan,
     LessThanOrEqual,
     GreaterThanOrEqual,
-} from '@tezwell/smartts-sdk/core/expression';
+} from '@tezwell/smartts-sdk/expression';
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
 

@@ -31,7 +31,7 @@ Blockly.Blocks[BlockKind.contract_block] = {
 
 SmartML[BlockKind.contract_block] = function (block: Block) {
     const storageType = SmartML.toType(block, 'initial_storage');
-    const storageValue = SmartML.toValue(block, 'initial_storage') as ILiteral;
+    const storageValue = SmartML.toValue(block, 'initial_storage') as ILiteral<unknown>;
     const contract = new Contract().setStorageType(storageType).setStorage(storageValue);
 
     SmartML.toStatements(block, 'entry_points').forEach((st) => contract.addEntrypoint(st as EntryPoint));

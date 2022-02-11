@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-import { TUnit } from '@tezwell/smartts-sdk/core/type';
+import { TUnit } from '@tezwell/smartts-sdk/type';
 import MichelsonTypes from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -23,7 +23,7 @@ Blockly.Blocks[BlockKind.unit_type] = {
 
 SmartML.addBlock(BlockKind.unit_type, {
     toType: () => {
-        return TUnit;
+        return TUnit();
     },
 });
 

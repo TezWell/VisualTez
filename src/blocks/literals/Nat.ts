@@ -3,8 +3,8 @@ import Blockly from 'blockly';
 
 import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
 import MichelsonType from '@tezwell/michelson-sdk/type';
-import SmartTSTypes from '@tezwell/smartts-sdk/core/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/core/literal';
+import SmartTSTypes from '@tezwell/smartts-sdk/type';
+import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -33,7 +33,7 @@ Blockly.Blocks[BlockKind.nat_literal] = {
 
 SmartML.addBlock(BlockKind.nat_literal, {
     toType: () => {
-        return SmartTSTypes.TNat;
+        return SmartTSTypes.TNat();
     },
     toValue: (block: Block) => {
         return SmartTSLiterals.Nat(block.getFieldValue('nat_value'));

@@ -1,11 +1,11 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
-import { SetValue } from '@tezwell/smartts-sdk/core/command';
+import { SetValue } from '@tezwell/smartts-sdk/statement';
 
 import SmartML from './generators/SmartML';
 import BlockKind from './enums/BlockKind';
 import Variable from './enums/Variable';
-import { ContractStorage, Expression } from '@tezwell/smartts-sdk/core/expression';
+import { ContractStorage, MethodArgument } from '@tezwell/smartts-sdk/expression';
 
 // Remove Default "change block" from variables section
 Blockly.Blocks['math_change'] = undefined;
@@ -30,7 +30,7 @@ SmartML.addBlock(BlockKind.variables_get, {
             case Variable.contract_storage:
                 return ContractStorage();
             case Variable.entrypoint_arg:
-                return new Expression('params', '("" 0)');
+                return MethodArgument();
         }
         throw new Error('Could not compile (Set Variable) statement.');
     },

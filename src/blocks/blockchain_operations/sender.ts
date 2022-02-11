@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-import { TAddress } from '@tezwell/smartts-sdk/core/type';
+import { TAddress } from '@tezwell/smartts-sdk/type';
 import { GetSender } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -22,6 +22,6 @@ Blockly.Blocks[BlockKind.get_sender_block] = {
 };
 
 SmartML.addBlock(BlockKind.get_sender_block, {
-    toType: () => TAddress,
+    toType: () => TAddress(),
     toValue: () => GetSender(),
 });

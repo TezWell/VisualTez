@@ -1,9 +1,8 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
-import { TRecord } from '@tezwell/smartts-sdk/core/type';
-import { Record } from '@tezwell/smartts-sdk/core/literal';
+import { TRecord } from '@tezwell/smartts-sdk/type';
+import { Record } from '@tezwell/smartts-sdk/expression';
 import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
 import MichelsonType from '@tezwell/michelson-sdk/type';
 
@@ -44,7 +43,7 @@ SmartML.addBlock(BlockKind.record_literal, {
         } while ((targetBlock = targetBlock.getNextBlock()));
         return TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
     },
-    toValue: (block: Block): ILiteral => {
+    toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('record_fields');
         if (!targetBlock) {
             throw new Error('The record is empty.');

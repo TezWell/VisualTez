@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-import { TNat } from '@tezwell/smartts-sdk/core/type';
+import { TNat } from '@tezwell/smartts-sdk/type';
 import { GetLevel } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -22,6 +22,6 @@ Blockly.Blocks[BlockKind.get_level_block] = {
 };
 
 SmartML.addBlock(BlockKind.get_level_block, {
-    toType: () => TNat,
+    toType: () => TNat(),
     toValue: () => GetLevel(),
 });

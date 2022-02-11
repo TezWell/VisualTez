@@ -1,7 +1,7 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import { Add, Sub, Mul, Div } from '@tezwell/smartts-sdk/core/expression';
+import { Add, Sub, Mul, Div } from '@tezwell/smartts-sdk/expression';
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
 

@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-import { TInt } from '@tezwell/smartts-sdk/core/type';
+import { TInt } from '@tezwell/smartts-sdk/type';
 import MichelsonTypes from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -23,7 +23,7 @@ Blockly.Blocks[BlockKind.int_type] = {
 
 SmartML.addBlock(BlockKind.int_type, {
     toType: () => {
-        return TInt;
+        return TInt();
     },
 });
 

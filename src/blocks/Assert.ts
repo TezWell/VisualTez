@@ -1,6 +1,6 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
-import { Require } from '@tezwell/smartts-sdk/core/command';
+import { Require } from '@tezwell/smartts-sdk/statement';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from './enums/BlockKind';

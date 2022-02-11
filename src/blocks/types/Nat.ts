@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-import { TNat } from '@tezwell/smartts-sdk/core/type';
+import { TNat } from '@tezwell/smartts-sdk/type';
 import MichelsonTypes from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -23,7 +23,7 @@ Blockly.Blocks[BlockKind.nat_type] = {
 
 SmartML.addBlock(BlockKind.nat_type, {
     toType: () => {
-        return TNat;
+        return TNat();
     },
 });
 

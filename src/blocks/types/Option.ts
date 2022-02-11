@@ -1,6 +1,6 @@
 import Blockly, { Block } from 'blockly';
 
-import { TOption } from '@tezwell/smartts-sdk/core/type';
+import { TOption } from '@tezwell/smartts-sdk/type';
 import MichelsonTypes from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
