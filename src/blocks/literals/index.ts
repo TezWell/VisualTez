@@ -4,6 +4,7 @@ import './Int';
 import './String';
 import './Address';
 import './Boolean';
+import './Bytes';
 import './Some';
 import './None';
 import './Record';
