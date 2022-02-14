@@ -160,6 +160,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.set_type} />
                                 <Block type={BlockKind.option_type} />
                                 <Block type={BlockKind.map_type} />
+                                <Block type={BlockKind.big_map_type} />
+                                <Block type={BlockKind.pair_type} />
+                                <Block type={BlockKind.lambda_type} />
+                                <Block type={BlockKind.ticket_type} />
+                                <Block type={BlockKind.contract_type} />
+                                <Block type={BlockKind.sapling_state_type} />
+                                <Block type={BlockKind.sapling_transaction_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
                                 <Block type={BlockKind.get_level_block} />
