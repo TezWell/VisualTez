@@ -1,14 +1,14 @@
 import Blockly, { Block } from 'blockly';
 
-import { TOption as ST_TOption } from '@tezwell/smartts-sdk/type';
-import { TOption as M_TOption } from '@tezwell/michelson-sdk/type';
+import { TList as ST_TList } from '@tezwell/smartts-sdk/type';
+import { TList as M_TList } from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
 
-const OptionBlock = {
-    type: BlockKind.option_type,
-    message0: 'Type: Option of %1',
+const ListBlock = {
+    type: BlockKind.list_type,
+    message0: 'Type: List of %1',
     args0: [
         {
             type: 'input_value',
@@ -17,27 +17,27 @@ const OptionBlock = {
         },
     ],
     output: 'Type',
-    colour: 300,
+    colour: 330,
 };
 
-Blockly.Blocks[BlockKind.option_type] = {
+Blockly.Blocks[BlockKind.list_type] = {
     init: function () {
-        this.jsonInit(OptionBlock);
+        this.jsonInit(ListBlock);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
 };
 
-SmartML.addBlock(BlockKind.option_type, {
+SmartML.addBlock(BlockKind.list_type, {
     toType: (block: Block) => {
         const type = SmartML.toType(block, 'inner_type');
-        return ST_TOption(type);
+        return ST_TList(type);
     },
 });
 
-Michelson.addBlock(BlockKind.option_type, {
+Michelson.addBlock(BlockKind.list_type, {
     toType: (block: Block) => {
         const type = Michelson.toType(block, 'inner_type');
-        return M_TOption(type);
+        return M_TList(type);
     },
 });

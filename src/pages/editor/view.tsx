@@ -156,7 +156,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.operation_type} />
                                 <Block type={BlockKind.never_type} />
                                 <Label text="-- Container types --" web-class="defaultLabel" />
+                                <Block type={BlockKind.list_type} />
+                                <Block type={BlockKind.set_type} />
                                 <Block type={BlockKind.option_type} />
+                                <Block type={BlockKind.map_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
                                 <Block type={BlockKind.get_level_block} />
