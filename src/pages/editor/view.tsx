@@ -136,13 +136,27 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Separator gap={40} />
                             </Category>
                             <Category name="Types" categorystyle="type_category">
+                                <Label text="-- Singleton types --" web-class="defaultLabel" />
                                 <Block type={BlockKind.string_type} />
                                 <Block type={BlockKind.unit_type} />
                                 <Block type={BlockKind.boolean_type} />
                                 <Block type={BlockKind.address_type} />
-                                <Block type={BlockKind.option_type} />
                                 <Block type={BlockKind.nat_type} />
                                 <Block type={BlockKind.int_type} />
+                                <Block type={BlockKind.mutez_type} />
+                                <Block type={BlockKind.chain_id_type} />
+                                <Block type={BlockKind.timestamp_type} />
+                                <Block type={BlockKind.bytes_type} />
+                                <Block type={BlockKind.bls12_381_fr_type} />
+                                <Block type={BlockKind.bls12_381_g1_type} />
+                                <Block type={BlockKind.bls12_381_g2_type} />
+                                <Block type={BlockKind.key_type} />
+                                <Block type={BlockKind.key_hash_type} />
+                                <Block type={BlockKind.signature_type} />
+                                <Block type={BlockKind.operation_type} />
+                                <Block type={BlockKind.never_type} />
+                                <Label text="-- Container types --" web-class="defaultLabel" />
+                                <Block type={BlockKind.option_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
                                 <Block type={BlockKind.get_level_block} />
