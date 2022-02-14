@@ -1,15 +1,15 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import SmartTSTypes from '@tezwell/smartts-sdk/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
+import { None as M_None } from '@tezwell/michelson-sdk/literal';
+import { TOption as M_TOption } from '@tezwell/michelson-sdk/type';
+import { TOption as ST_TOption } from '@tezwell/smartts-sdk/type';
+import { None as ST_None } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
 
-const SomeBlock = {
+const NoneBlock = {
     type: BlockKind.none_literal,
     message0: 'None of type %1',
     args0: [{ type: 'input_value', name: 'inner_type', check: 'Type' }],
@@ -20,7 +20,7 @@ const SomeBlock = {
 
 Blockly.Blocks[BlockKind.none_literal] = {
     init: function () {
-        this.jsonInit(SomeBlock);
+        this.jsonInit(NoneBlock);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
@@ -28,18 +28,18 @@ Blockly.Blocks[BlockKind.none_literal] = {
 
 SmartML.addBlock(BlockKind.none_literal, {
     toType: (block: Block) => {
-        return SmartTSTypes.TOption(SmartML.toType(block, 'inner_type'));
+        return ST_TOption(SmartML.toType(block, 'inner_type'));
     },
-    toValue: (block: Block) => {
-        return SmartTSLiterals.None();
+    toValue: () => {
+        return ST_None();
     },
 });
 
 Michelson.addBlock(BlockKind.none_literal, {
     toType: (block: Block) => {
-        return MichelsonType.TOption(Michelson.toType(block, 'inner_type'));
+        return M_TOption(Michelson.toType(block, 'inner_type'));
     },
     toMichelson: () => {
-        return MichelsonLiteral.None();
+        return M_None();
     },
 });

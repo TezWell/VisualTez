@@ -1,13 +1,12 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import SmartTSTypes from '@tezwell/smartts-sdk/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
+import { Some as M_Some } from '@tezwell/michelson-sdk/literal';
+import { TOption as M_TOption } from '@tezwell/michelson-sdk/type';
+import { TOption as ST_TOption } from '@tezwell/smartts-sdk/type';
+import { Some as ST_Some } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
-import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
 import Michelson from '../generators/Michelson';
 
 const SomeBlock = {
@@ -29,18 +28,18 @@ Blockly.Blocks[BlockKind.some_literal] = {
 
 SmartML.addBlock(BlockKind.some_literal, {
     toType: (block: Block) => {
-        return SmartTSTypes.TOption(SmartML.toType(block, 'option_value'));
+        return ST_TOption(SmartML.toType(block, 'option_value'));
     },
     toValue: (block: Block) => {
-        return SmartTSLiterals.Some(SmartML.toValue(block, 'option_value'));
+        return ST_Some(SmartML.toValue(block, 'option_value'));
     },
 });
 
 Michelson.addBlock(BlockKind.some_literal, {
     toType: (block: Block) => {
-        return MichelsonType.TOption(Michelson.toType(block, 'option_value'));
+        return M_TOption(Michelson.toType(block, 'option_value'));
     },
     toMichelson: (block: Block) => {
-        return MichelsonLiteral.Some(Michelson.toMichelson(block, 'option_value'));
+        return M_Some(Michelson.toMichelson(block, 'option_value'));
     },
 });

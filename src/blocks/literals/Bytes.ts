@@ -1,10 +1,10 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
-import SmartTSTypes from '@tezwell/smartts-sdk/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
+import { Bytes as M_Bytes } from '@tezwell/michelson-sdk/literal';
+import { TBytes as M_TBytes } from '@tezwell/michelson-sdk/type';
+import { TBytes as ST_TBytes } from '@tezwell/smartts-sdk/type';
+import { Bytes as ST_Bytes } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -32,19 +32,19 @@ Blockly.Blocks[BlockKind.bytes_literal] = {
     },
 };
 
-SmartML.addBlock(BlockKind.string_literal, {
+SmartML.addBlock(BlockKind.bytes_literal, {
     toType: () => {
-        return SmartTSTypes.TString();
+        return ST_TBytes();
     },
     toValue: (block: Block) => {
-        return SmartTSLiterals.Bytes(block.getFieldValue('bytes'));
+        return ST_Bytes(block.getFieldValue('bytes'));
     },
 });
-Michelson.addBlock(BlockKind.string_literal, {
+Michelson.addBlock(BlockKind.bytes_literal, {
     toType: () => {
-        return MichelsonType.TBytes();
+        return M_TBytes();
     },
     toMichelson: (block: Block) => {
-        return MichelsonLiteral.Bytes(block.getFieldValue('bytes'));
+        return M_Bytes(block.getFieldValue('bytes'));
     },
 });

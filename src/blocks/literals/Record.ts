@@ -1,10 +1,10 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import { TRecord } from '@tezwell/smartts-sdk/type';
-import { Record } from '@tezwell/smartts-sdk/expression';
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
+import { TRecord as ST_TRecord } from '@tezwell/smartts-sdk/type';
+import { Record as ST_Record } from '@tezwell/smartts-sdk/expression';
+import { Record as M_Record } from '@tezwell/michelson-sdk/literal';
+import { TRecord as M_TRecord } from '@tezwell/michelson-sdk/type';
 
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -41,7 +41,7 @@ SmartML.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-        return TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
+        return ST_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
     },
     toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('record_fields');
@@ -54,7 +54,7 @@ SmartML.addBlock(BlockKind.record_literal, {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        return Record(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toValue(block, 'value') }), {}));
+        return ST_Record(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toValue(block, 'value') }), {}));
     },
 });
 
@@ -69,9 +69,7 @@ Michelson.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-        return MichelsonType.TRecord(
-            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}),
-        );
+        return M_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}));
     },
     toMichelson: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('record_fields');
@@ -84,7 +82,7 @@ Michelson.addBlock(BlockKind.record_literal, {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        return MichelsonLiteral.Record(
+        return M_Record(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toMichelson(block, 'value') }), {}),
         );
     },

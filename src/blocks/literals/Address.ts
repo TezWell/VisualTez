@@ -1,10 +1,10 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
-import SmartTSTypes from '@tezwell/smartts-sdk/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
+import { Address as M_Address } from '@tezwell/michelson-sdk/literal';
+import { TAddress as M_TAddress } from '@tezwell/michelson-sdk/type';
+import { TAddress as ST_TAddress } from '@tezwell/smartts-sdk/type';
+import { Address as ST_Address } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -32,17 +32,17 @@ Blockly.Blocks[BlockKind.address_literal] = {
 
 SmartML.addBlock(BlockKind.address_literal, {
     toType: () => {
-        return SmartTSTypes.TAddress();
+        return ST_TAddress();
     },
     toValue: (block: Block) => {
-        return SmartTSLiterals.Address(block.getFieldValue('address_value'));
+        return ST_Address(block.getFieldValue('address_value'));
     },
 });
 Michelson.addBlock(BlockKind.address_literal, {
     toType: () => {
-        return MichelsonType.TAddress();
+        return M_TAddress();
     },
     toMichelson: (block: Block) => {
-        return MichelsonLiteral.Address(block.getFieldValue('address_value'));
+        return M_Address(block.getFieldValue('address_value'));
     },
 });

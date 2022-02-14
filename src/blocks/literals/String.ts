@@ -1,10 +1,10 @@
-import { Block, Extensions, FieldImage } from 'blockly';
+import { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
-import SmartTSTypes from '@tezwell/smartts-sdk/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
+import { String as M_String } from '@tezwell/michelson-sdk/literal';
+import { TString as M_TString } from '@tezwell/michelson-sdk/type';
+import { TString as ST_TString } from '@tezwell/smartts-sdk/type';
+import { String as ST_String } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -38,18 +38,18 @@ Blockly.Blocks[BlockKind.string_literal] = {
 
 SmartML.addBlock(BlockKind.string_literal, {
     toType: () => {
-        return SmartTSTypes.TString();
+        return ST_TString();
     },
     toValue: (block: Block) => {
-        return SmartTSLiterals.String(block.getFieldValue('string_literal'));
+        return ST_String(block.getFieldValue('string_literal'));
     },
 });
 Michelson.addBlock(BlockKind.string_literal, {
     toType: () => {
-        return MichelsonType.TString();
+        return M_TString();
     },
     toMichelson: (block: Block) => {
-        return MichelsonLiteral.String(block.getFieldValue('string_literal'));
+        return M_String(block.getFieldValue('string_literal'));
     },
 });
 
