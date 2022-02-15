@@ -54,6 +54,7 @@ export enum BlockKind {
     list_literal = 'list_literal',
     set_literal = 'set_literal',
     sequence_item = 'sequence_item',
+    pair_literal = 'pair_literal',
     some_literal = 'some_literal',
     none_literal = 'none_literal',
     record_literal = 'record_literal',

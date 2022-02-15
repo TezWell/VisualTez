@@ -163,6 +163,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Value>
                                 </Block>
 
+                                <Separator gap={40} />
+                                <Block type={BlockKind.pair_literal} />
+                                <Separator gap={40} />
+
                                 <Label text="-- Record --" web-class="defaultLabel" />
                                 <Block type={BlockKind.record_field} />
                                 <Block type={BlockKind.record_literal}>

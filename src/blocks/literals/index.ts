@@ -21,7 +21,7 @@ import './Some';
 import './None';
 // import './Map';
 // import './Big_map';
-// import './Pair';
+import './Pair';
 // import './Lambda';
 // import './Ticket';
 // import './Contract';
