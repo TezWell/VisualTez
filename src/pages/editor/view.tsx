@@ -122,18 +122,29 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.string_literal} />
                                 <Block type={BlockKind.address_literal} />
                                 <Block type={BlockKind.bytes_literal} />
+                                <Block type={BlockKind.chain_id_literal} />
+                                <Block type={BlockKind.bls12_381_fr_literal} />
+                                <Block type={BlockKind.bls12_381_g1_literal} />
+                                <Block type={BlockKind.bls12_381_g2_literal} />
+                                <Block type={BlockKind.key_literal} />
+                                <Block type={BlockKind.key_hash_literal} />
+                                <Block type={BlockKind.signature_literal} />
                                 <Separator gap={40} />
                                 <Block type={BlockKind.boolean_literal} />
-                                <Label text="-- Option --" web-class="defaultLabel" />
-                                <Block type={BlockKind.some_literal} />
-                                <Block type={BlockKind.none_literal} />
                                 <Label text="-- Number --" web-class="defaultLabel" />
                                 <Block type={BlockKind.nat_literal} />
                                 <Block type={BlockKind.int_literal} />
+                                <Block type={BlockKind.mutez_literal} />
+                                <Block type={BlockKind.timestamp_literal} />
+
+                                <Label text="-- Option --" web-class="defaultLabel" />
+                                <Block type={BlockKind.some_literal} />
+                                <Block type={BlockKind.none_literal} />
                                 <Label text="-- Record --" web-class="defaultLabel" />
                                 <Block type={BlockKind.record_literal} />
                                 <Block type={BlockKind.record_field} />
-                                <Separator gap={40} />
+                                <Label text="-- Variant --" web-class="defaultLabel" />
+                                <Block type={BlockKind.variant_value} />
                             </Category>
                             <Category name="Types" categorystyle="type_category">
                                 <Label text="-- Singleton types --" web-class="defaultLabel" />
