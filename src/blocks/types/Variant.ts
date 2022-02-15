@@ -2,21 +2,19 @@ import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
 import { TRecord as ST_TRecord } from '@tezwell/smartts-sdk/type';
-import { Record as ST_Record } from '@tezwell/smartts-sdk/expression';
-import { Record as M_Record } from '@tezwell/michelson-sdk/literal';
 import { TRecord as M_TRecord } from '@tezwell/michelson-sdk/type';
 
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
 
-Blockly.Blocks[BlockKind.record_literal] = {
+Blockly.Blocks[BlockKind.variant_type] = {
     init: function () {
         this.jsonInit({
-            type: BlockKind.record_literal,
-            message0: 'Record %1',
-            args0: [{ type: 'input_statement', name: 'record_fields', check: 'RecordField' }],
-            output: ['Literal', 'Record'],
+            type: BlockKind.variant_type,
+            message0: 'Type: Variant %1',
+            args0: [{ type: 'input_statement', name: 'fields', check: 'RecordVariantField' }],
+            output: ['Type'],
             outputShape: 3,
             colour: 101,
         });
@@ -30,7 +28,7 @@ const toFieldBlock = (block: Block): [string, Block] => {
     return [key, block];
 };
 
-SmartML.addBlock(BlockKind.record_literal, {
+SmartML.addBlock(BlockKind.variant_type, {
     toType: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('record_fields');
         if (!targetBlock) {
@@ -43,22 +41,9 @@ SmartML.addBlock(BlockKind.record_literal, {
         } while ((targetBlock = targetBlock.getNextBlock()));
         return ST_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
     },
-    toValue: (block: Block) => {
-        let targetBlock = block.getInputTargetBlock('record_fields');
-        if (!targetBlock) {
-            throw new Error('The record is empty.');
-        }
-
-        const fields = [];
-        do {
-            fields.push(toFieldBlock(targetBlock));
-        } while ((targetBlock = targetBlock.getNextBlock()));
-
-        return ST_Record(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toValue(block, 'value') }), {}));
-    },
 });
 
-Michelson.addBlock(BlockKind.record_literal, {
+Michelson.addBlock(BlockKind.record_type, {
     toType: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('record_fields');
         if (!targetBlock) {
@@ -71,28 +56,13 @@ Michelson.addBlock(BlockKind.record_literal, {
         } while ((targetBlock = targetBlock.getNextBlock()));
         return M_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}));
     },
-    toMichelson: (block: Block) => {
-        let targetBlock = block.getInputTargetBlock('record_fields');
-        if (!targetBlock) {
-            throw new Error('The record is empty.');
-        }
-
-        const fields = [];
-        do {
-            fields.push(toFieldBlock(targetBlock));
-        } while ((targetBlock = targetBlock.getNextBlock()));
-
-        return M_Record(
-            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toMichelson(block, 'value') }), {}),
-        );
-    },
 });
 
-Blockly.Blocks[BlockKind.record_field] = {
+Blockly.Blocks[BlockKind.record_variant_field_type] = {
     init: function () {
         this.jsonInit({
-            type: BlockKind.record_field,
-            message0: 'key %1 Value %2',
+            type: BlockKind.record_variant_field_type,
+            message0: 'Key %1 Value %2',
             args0: [
                 {
                     type: 'field_input',
@@ -100,7 +70,7 @@ Blockly.Blocks[BlockKind.record_field] = {
                     text: '',
                     check: 'String',
                 },
-                { type: 'input_value', name: 'value', check: 'Literal' },
+                { type: 'input_value', name: 'type', check: 'Type' },
             ],
             colour: 123,
         });
@@ -109,7 +79,7 @@ Blockly.Blocks[BlockKind.record_field] = {
     },
 };
 
-SmartML.addBlock(BlockKind.record_field, {
+SmartML.addBlock(BlockKind.record_variant_field_type, {
     toFieldBlock: (block: Block) => {
         const key: string = block.getFieldValue('key');
         return [key, block];

@@ -1,7 +1,7 @@
 import Blockly from 'blockly';
 
 import { TAddress } from '@tezwell/smartts-sdk/type';
-import MichelsonTypes from '@tezwell/michelson-sdk/type';
+import { TAddress as M_TAddress } from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -29,6 +29,6 @@ SmartML.addBlock(BlockKind.address_type, {
 
 Michelson.addBlock(BlockKind.address_type, {
     toType: () => {
-        return MichelsonTypes.TAddress();
+        return M_TAddress();
     },
 });

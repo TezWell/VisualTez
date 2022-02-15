@@ -70,7 +70,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
                             )
                         }
                     >
-                        Code
+                        Storage
                     </Tab>
                     <Tab
                         className={({ selected }) =>
@@ -80,7 +80,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
                             )
                         }
                     >
-                        Storage
+                        Code
                     </Tab>
                 </Tab.List>
                 <Tab.Panels className="flex-1 overflow-y-auto">

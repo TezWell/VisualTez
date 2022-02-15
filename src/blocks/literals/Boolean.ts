@@ -1,10 +1,10 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
-import SmartTSTypes from '@tezwell/smartts-sdk/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
+import { Bool as M_Bool } from '@tezwell/michelson-sdk/literal';
+import { TBool as M_TBool } from '@tezwell/michelson-sdk/type';
+import { TBool as ST_TBool } from '@tezwell/smartts-sdk/type';
+import { Bool as ST_Bool } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -37,18 +37,18 @@ Blockly.Blocks[BlockKind.boolean_literal] = {
 
 SmartML.addBlock(BlockKind.boolean_literal, {
     toType: () => {
-        return SmartTSTypes.TBool();
+        return ST_TBool();
     },
     toValue: (block: Block) => {
-        return SmartTSLiterals.Bool(block.getFieldValue('boolean_value') === 'True');
+        return ST_Bool(block.getFieldValue('boolean_value') === 'True');
     },
 });
 
 Michelson.addBlock(BlockKind.boolean_literal, {
     toType: () => {
-        return MichelsonType.TBool();
+        return M_TBool();
     },
     toMichelson: (block: Block) => {
-        return MichelsonLiteral.Bool(block.getFieldValue('boolean_value') === 'True');
+        return M_Bool(block.getFieldValue('boolean_value') === 'True');
     },
 });

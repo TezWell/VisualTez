@@ -1,10 +1,10 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import MichelsonLiteral from '@tezwell/michelson-sdk/literal';
-import MichelsonType from '@tezwell/michelson-sdk/type';
-import SmartTSTypes from '@tezwell/smartts-sdk/type';
-import SmartTSLiterals from '@tezwell/smartts-sdk/expression';
+import { Int as M_Int } from '@tezwell/michelson-sdk/literal';
+import { TInt as M_TInt } from '@tezwell/michelson-sdk/type';
+import { TInt as ST_TInt } from '@tezwell/smartts-sdk/type';
+import { Int as ST_Int } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -32,17 +32,17 @@ Blockly.Blocks[BlockKind.int_literal] = {
 
 SmartML.addBlock(BlockKind.int_literal, {
     toType: () => {
-        return SmartTSTypes.TInt();
+        return ST_TInt();
     },
     toValue: (block: Block) => {
-        return SmartTSLiterals.Int(Number(block.getFieldValue('int_value')));
+        return ST_Int(Number(block.getFieldValue('int_value')));
     },
 });
 Michelson.addBlock(BlockKind.int_literal, {
     toType: () => {
-        return MichelsonType.TInt();
+        return M_TInt();
     },
     toMichelson: (block: Block) => {
-        return MichelsonLiteral.Int(Number(block.getFieldValue('int_value')));
+        return M_Int(Number(block.getFieldValue('int_value')));
     },
 });

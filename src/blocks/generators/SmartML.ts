@@ -43,9 +43,13 @@ class Generator extends Blockly.Generator {
         throw TypeError(`The target block ${targetBlock.type} does not have a type generator.`);
     }
 
-    toValue(block: Block, name: string) {
+    toValue(block: Block, name: string, default_value?: IExpression) {
         const targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
+            if (default_value) {
+                // Return default value if provided
+                return default_value;
+            }
             const blockName = block.type
                 .split('_')
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
