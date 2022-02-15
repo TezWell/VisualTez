@@ -51,15 +51,23 @@ export enum BlockKind {
     key_literal = 'key_literal',
     key_hash_literal = 'key_hash_literal',
     signature_literal = 'signature_literal',
+
     list_literal = 'list_literal',
     set_literal = 'set_literal',
     sequence_item = 'sequence_item',
+
+    map_literal = 'map_literal',
+    big_map_literal = 'big_map_literal',
+    map_entry = 'map_entry',
+
     pair_literal = 'pair_literal',
     some_literal = 'some_literal',
     none_literal = 'none_literal',
+
     record_literal = 'record_literal',
     record_field = 'record_field',
     variant_value = 'variant_value',
+
     // Expressions
     get_contract_storage = 'get_contract_storage',
     get_variable_block = 'get_variable_block',

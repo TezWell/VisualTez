@@ -26,7 +26,7 @@ Blockly.Blocks[BlockKind.record_literal] = {
 };
 
 const toFieldBlock = (block: Block): [string, Block] => {
-    const key: string = block.getFieldValue('key');
+    const key: string = block.getFieldValue('field');
     return [key, block];
 };
 
@@ -110,11 +110,11 @@ Blockly.Blocks[BlockKind.record_field] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.record_field,
-            message0: 'Key %1 Value %2',
+            message0: 'Field %1 Value %2',
             args0: [
                 {
                     type: 'field_input',
-                    name: 'key',
+                    name: 'field',
                     text: '',
                     check: 'String',
                 },

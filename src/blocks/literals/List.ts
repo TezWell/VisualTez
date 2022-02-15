@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 
 import { List as M_List } from '@tezwell/michelson-sdk/literal';
 import { TList as M_TList } from '@tezwell/michelson-sdk/type';
-import { TList as ST_TList } from '@tezwell/smartts-sdk/type';
+import { TList as ST_TList, TUnknown } from '@tezwell/smartts-sdk/type';
 import { List as ST_List } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -30,7 +30,7 @@ SmartML.addBlock(BlockKind.list_literal, {
     toType: (block: Block) => {
         const targetBlock = block.getInputTargetBlock('items');
         if (!targetBlock) {
-            throw new Error('The list is empty.');
+            return ST_TList(TUnknown());
         }
 
         return ST_TList(SmartML.toType(targetBlock, 'value'));
@@ -38,7 +38,7 @@ SmartML.addBlock(BlockKind.list_literal, {
     toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('items');
         if (!targetBlock) {
-            throw new Error('The list is empty.');
+            return ST_List([]);
         }
 
         const items = [];
@@ -62,7 +62,7 @@ Michelson.addBlock(BlockKind.list_literal, {
     toMichelson: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('items');
         if (!targetBlock) {
-            throw new Error('The list is empty.');
+            return M_List([]);
         }
 
         const items = [];

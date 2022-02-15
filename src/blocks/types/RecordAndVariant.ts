@@ -113,7 +113,7 @@ Blockly.Blocks[BlockKind.record_variant_field_type] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.record_variant_field_type,
-            message0: 'Key %1 Value %2',
+            message0: 'Field %1 Value %2',
             args0: [
                 {
                     type: 'field_input',

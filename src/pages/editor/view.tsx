@@ -162,6 +162,16 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                         <Block type={BlockKind.sequence_item} />
                                     </Value>
                                 </Block>
+                                <Block type={BlockKind.map_literal}>
+                                    <Value name="entries">
+                                        <Block type={BlockKind.map_entry} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.big_map_literal}>
+                                    <Value name="entries">
+                                        <Block type={BlockKind.map_entry} />
+                                    </Value>
+                                </Block>
 
                                 <Separator gap={40} />
                                 <Block type={BlockKind.pair_literal} />
