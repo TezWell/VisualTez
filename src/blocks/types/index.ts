@@ -28,3 +28,5 @@ import './Ticket';
 import './Contract';
 import './Sapling_state';
 import './Sapling_transaction';
+
+import './RecordAndVariant';

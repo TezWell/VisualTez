@@ -31,7 +31,9 @@ export enum BlockKind {
     contract_type = 'contract_type',
     sapling_state_type = 'sapling_state_type',
     sapling_transaction_type = 'sapling_transaction_type',
-
+    record_type = 'record_type',
+    variant_type = 'variant_type',
+    record_variant_field_type = 'record_variant_field_type',
     // Literals
     record_literal = 'record_literal',
     unit_literal = 'unit_literal',

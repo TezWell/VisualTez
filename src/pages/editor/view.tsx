@@ -167,6 +167,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.contract_type} />
                                 <Block type={BlockKind.sapling_state_type} />
                                 <Block type={BlockKind.sapling_transaction_type} />
+                                <Label text="-- Artificial types --" web-class="defaultLabel" />
+                                <Block type={BlockKind.record_type} />
+                                <Block type={BlockKind.variant_type} />
+                                <Block type={BlockKind.record_variant_field_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">
                                 <Block type={BlockKind.get_level_block} />
