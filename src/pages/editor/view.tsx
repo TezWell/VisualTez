@@ -116,7 +116,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Value>
                                 </Block>
                             </Category>
-                            <Category name="Literals" categorystyle="literal_category">
+                            <Category name="Values" categorystyle="literal_category">
                                 <Block type={BlockKind.unit_literal} />
                                 <Separator gap={40} />
                                 <Block type={BlockKind.string_literal} />

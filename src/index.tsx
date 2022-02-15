@@ -8,22 +8,23 @@ import Router from './router';
 import Theme from './context/Theme';
 import Tezos from './context/Tezos';
 import Deployment from './context/Deployment';
+import CircularLoading from './components/common/Spinner';
 
 render(
     <React.StrictMode>
-        <React.Suspense fallback="...">
-            <HelmetProvider>
-                <Theme.Provider>
-                    <Tezos.Provider>
-                        <Deployment.Provider>
-                            <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
+        <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
+            <React.Suspense fallback={<CircularLoading />}>
+                <HelmetProvider>
+                    <Theme.Provider>
+                        <Tezos.Provider>
+                            <Deployment.Provider>
                                 <Router />
-                            </div>
-                        </Deployment.Provider>
-                    </Tezos.Provider>
-                </Theme.Provider>
-            </HelmetProvider>
-        </React.Suspense>
+                            </Deployment.Provider>
+                        </Tezos.Provider>
+                    </Theme.Provider>
+                </HelmetProvider>
+            </React.Suspense>
+        </div>
     </React.StrictMode>,
     document.getElementById('root'),
 );
