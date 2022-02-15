@@ -15,8 +15,18 @@ import './Key';
 import './Key_hash';
 import './Signature';
 
+import './List';
+import './Set';
 import './Some';
 import './None';
+// import './Map';
+// import './Big_map';
+// import './Pair';
+// import './Lambda';
+// import './Ticket';
+// import './Contract';
+// import './Sapling_state';
+// import './Sapling_transaction';
 
 import './Record';
 import './Variant';

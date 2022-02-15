@@ -69,13 +69,17 @@ class Generator extends Blockly.Generator {
         throw TypeError(`The target block ${targetBlock.type} does not have a value generator.`);
     }
 
-    toStatements(block: Block, name: string) {
+    toStatements(block: Block, name: string, allow_empty = false) {
+        const statements: IToString[] = [];
+
         let targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
+            if (allow_empty) {
+                return statements;
+            }
             throw new Error(`Could not find any statement with name "${name}" on block ${block.type}`);
         }
 
-        const statements = [];
         do {
             const localBlock = this.blocks.get(targetBlock.type as BlockKind);
             if (!localBlock?.toStatement) {

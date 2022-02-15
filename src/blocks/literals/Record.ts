@@ -15,7 +15,7 @@ Blockly.Blocks[BlockKind.record_literal] = {
         this.jsonInit({
             type: BlockKind.record_literal,
             message0: 'Record %1',
-            args0: [{ type: 'input_statement', name: 'record_fields', check: 'RecordField' }],
+            args0: [{ type: 'input_statement', name: 'entries', check: 'RecordField' }],
             output: ['Literal', 'Record'],
             outputShape: 3,
             colour: 101,
@@ -32,7 +32,7 @@ const toFieldBlock = (block: Block): [string, Block] => {
 
 SmartML.addBlock(BlockKind.record_literal, {
     toType: (block: Block) => {
-        let targetBlock = block.getInputTargetBlock('record_fields');
+        let targetBlock = block.getInputTargetBlock('entries');
         if (!targetBlock) {
             throw new Error('The record is empty.');
         }
@@ -41,10 +41,15 @@ SmartML.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
+
+        if (fields.length < 2) {
+            throw new Error('Each record must contain at least two(2) entries.');
+        }
+
         return ST_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
     },
     toValue: (block: Block) => {
-        let targetBlock = block.getInputTargetBlock('record_fields');
+        let targetBlock = block.getInputTargetBlock('entries');
         if (!targetBlock) {
             throw new Error('The record is empty.');
         }
@@ -53,6 +58,10 @@ SmartML.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
+
+        if (fields.length < 2) {
+            throw new Error('Each record must contain at least two(2) entries.');
+        }
 
         return ST_Record(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toValue(block, 'value') }), {}));
     },
@@ -60,7 +69,7 @@ SmartML.addBlock(BlockKind.record_literal, {
 
 Michelson.addBlock(BlockKind.record_literal, {
     toType: (block: Block) => {
-        let targetBlock = block.getInputTargetBlock('record_fields');
+        let targetBlock = block.getInputTargetBlock('entries');
         if (!targetBlock) {
             throw new Error('The record is empty.');
         }
@@ -69,10 +78,15 @@ Michelson.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
+
+        if (fields.length < 2) {
+            throw new Error('Each record must contain at least two(2) entries.');
+        }
+
         return M_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}));
     },
     toMichelson: (block: Block) => {
-        let targetBlock = block.getInputTargetBlock('record_fields');
+        let targetBlock = block.getInputTargetBlock('entries');
         if (!targetBlock) {
             throw new Error('The record is empty.');
         }
@@ -81,6 +95,10 @@ Michelson.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
+
+        if (fields.length < 2) {
+            throw new Error('Each record must contain at least two(2) entries.');
+        }
 
         return M_Record(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toMichelson(block, 'value') }), {}),
@@ -108,10 +126,3 @@ Blockly.Blocks[BlockKind.record_field] = {
         this.setNextStatement(true);
     },
 };
-
-SmartML.addBlock(BlockKind.record_field, {
-    toFieldBlock: (block: Block) => {
-        const key: string = block.getFieldValue('key');
-        return [key, block];
-    },
-});

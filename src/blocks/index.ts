@@ -53,6 +53,7 @@ export const compileBlock = (block: Block): Compilation | null => {
         case BlockKind.entry_point_block:
         case BlockKind.set_variable_block:
         case BlockKind.assert_block:
+        case BlockKind.list_literal:
             return null;
         case BlockKind.contract_block:
             const name = block.getFieldValue('NAME');
