@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CogIcon, PlayIcon } from '@heroicons/react/outline';
+import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon } from '@heroicons/react/outline';
 
 import useEditor from 'src/context/hooks/useEditor';
 import { DrawerOptions } from 'src/context/Editor';
@@ -23,8 +23,8 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
     };
 
     return (
-        <div className="flex flex-col w-24 border-l border-black dark:border-white pt-5">
-            <div className="flex-1 flex flex-col items-center justify-start">
+        <div className="flex flex-col w-24 border-l border-black dark:border-white">
+            <div className="flex-1 flex flex-col items-center justify-start pt-5">
                 <button
                     onClick={() => onMenuSelection('compilation')}
                     className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
@@ -32,8 +32,24 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     <PlayIcon className="block" />
                     <p>Compile</p>
                 </button>
+                <div className="border mt-5 mb-5 w-20" />
+                <button
+                    onClick={() => onMenuSelection('compilation')}
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
+                >
+                    <ArchiveIcon className="block" />
+                    <p>Storage</p>
+                </button>
             </div>
-            <div className="h-20 flex flex-col items-center justify-start">
+            <div className="flex flex-col items-center justify-start pb-5">
+                <button
+                    onClick={() => onMenuSelection('compilation')}
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
+                >
+                    <ShareIcon className="block" />
+                    <p>Share</p>
+                </button>
+                <div className="border mt-5 mb-5 w-20" />
                 <button
                     onClick={() => onMenuSelection('settings')}
                     className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"

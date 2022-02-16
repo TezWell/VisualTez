@@ -21,7 +21,10 @@ Blockly.Blocks[BlockKind.contract_block] = {
         const initName = findName('contract', this.workspace, BlockKind.contract_block);
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
-        this.appendDummyInput().appendField('Contract').appendField(nameField, 'NAME').appendField('', 'PARAMS');
+        this.appendDummyInput()
+            .appendField('Contract compilation')
+            .appendField(nameField, 'NAME')
+            .appendField('', 'PARAMS');
         this.appendValueInput('initial_storage').setCheck(['Literal']).appendField('Initial Storage');
         this.appendStatementInput('entry_points').setCheck('EntryPoint').setAlign(3).appendField('Entry points');
         this.setTooltip('A block that represents a contract');
