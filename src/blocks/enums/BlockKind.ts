@@ -82,6 +82,7 @@ export enum BlockKind {
     assert_block = 'assert_block',
     // Base
     type_compilation = 'type_compilation',
+    value_compilation = 'value_compilation',
     entry_point_block = 'entry_point_block',
     contract_block = 'contract_block',
 }

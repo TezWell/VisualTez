@@ -124,6 +124,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                         <Block type={BlockKind.unit_type} />
                                     </Value>
                                 </Block>
+                                <Block type={BlockKind.value_compilation} />
                                 <Block type={BlockKind.type_compilation} />
                             </Category>
                             <Category name="Values" categorystyle="literal_category">

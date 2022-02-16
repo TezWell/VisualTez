@@ -120,11 +120,11 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
 };
 
 interface TypeModalProps {
-    compilation?: TypeCompilation;
+    compilation?: TypeCompilation | ValueCompilation;
     onClose: () => void;
 }
 
-const TypeModal: React.FC<TypeModalProps> = ({ compilation, ...props }) => {
+const TypeValueModal: React.FC<TypeModalProps> = ({ compilation, ...props }) => {
     const isOpen = React.useMemo(() => !!compilation, [compilation]);
 
     const michelsonJSON = React.useMemo(() => {
@@ -252,7 +252,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     const navigate = useNavigate();
     const [tab, setTab] = React.useState<CompilationKind | null>(CompilationKind.Contract);
     const [contractCompilation, setContractCompilation] = React.useState<ContractCompilation>();
-    const [typeCompilation, setTypeCompilation] = React.useState<TypeCompilation>();
+    const [typeValueCompilation, setTypeValueCompilation] = React.useState<TypeCompilation | ValueCompilation>();
     const { compilations } = useEditor();
     const { changeDeploymentState } = useDeployment();
 
@@ -264,12 +264,12 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
         setContractCompilation(compilation);
     }
 
-    function closeTypeCompilationModal() {
-        setTypeCompilation(undefined);
+    function closeTypeValueCompilationModal() {
+        setTypeValueCompilation(undefined);
     }
 
-    function openTypeCompilationModal(compilation: TypeCompilation) {
-        setTypeCompilation(compilation);
+    function openTypeValueCompilationModal(compilation: TypeCompilation | ValueCompilation) {
+        setTypeValueCompilation(compilation);
     }
 
     function onTabSelection(kind: CompilationKind) {
@@ -375,7 +375,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         </div>
                         <Button
                             fullWidth
-                            onClick={() => openTypeCompilationModal(compilation)}
+                            onClick={() => openTypeValueCompilationModal(compilation)}
                             className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
                         >
                             Show
@@ -411,7 +411,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         </div>
                         <Button
                             fullWidth
-                            onClick={() => openTypeCompilationModal(compilation)}
+                            onClick={() => openTypeValueCompilationModal(compilation)}
                             className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
                         >
                             Show
@@ -421,7 +421,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
             </div>
 
             <ContractModal compilation={contractCompilation} onClose={closeContractCompilationModal} />
-            <TypeModal compilation={typeCompilation} onClose={closeTypeCompilationModal} />
+            <TypeValueModal compilation={typeValueCompilation} onClose={closeTypeValueCompilationModal} />
         </div>
     );
 };
