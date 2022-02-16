@@ -108,6 +108,15 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     <Value name="initial_storage">
                                         <Block type={BlockKind.unit_literal} />
                                     </Value>
+                                    {/* Default empty entry point */}
+                                    <Value name="entry_points">
+                                        <Block type={BlockKind.entry_point_block}>
+                                            {/* Default input type */}
+                                            <Value name="input_type">
+                                                <Block type={BlockKind.unit_type} />
+                                            </Value>
+                                        </Block>
+                                    </Value>
                                 </Block>
                                 <Block type={BlockKind.entry_point_block}>
                                     {/* Default input type */}
@@ -116,24 +125,70 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Value>
                                 </Block>
                             </Category>
-                            <Category name="Literals" categorystyle="literal_category">
+                            <Category name="Values" categorystyle="literal_category">
                                 <Block type={BlockKind.unit_literal} />
+                                <Separator gap={40} />
+                                <Block type={BlockKind.boolean_literal} />
                                 <Separator gap={40} />
                                 <Block type={BlockKind.string_literal} />
                                 <Block type={BlockKind.address_literal} />
                                 <Block type={BlockKind.bytes_literal} />
-                                <Separator gap={40} />
-                                <Block type={BlockKind.boolean_literal} />
-                                <Label text="-- Option --" web-class="defaultLabel" />
-                                <Block type={BlockKind.some_literal} />
-                                <Block type={BlockKind.none_literal} />
+                                <Block type={BlockKind.chain_id_literal} />
+                                <Block type={BlockKind.bls12_381_fr_literal} />
+                                <Block type={BlockKind.bls12_381_g1_literal} />
+                                <Block type={BlockKind.bls12_381_g2_literal} />
+                                <Block type={BlockKind.key_literal} />
+                                <Block type={BlockKind.key_hash_literal} />
+                                <Block type={BlockKind.signature_literal} />
                                 <Label text="-- Number --" web-class="defaultLabel" />
                                 <Block type={BlockKind.nat_literal} />
                                 <Block type={BlockKind.int_literal} />
-                                <Label text="-- Record --" web-class="defaultLabel" />
-                                <Block type={BlockKind.record_literal} />
-                                <Block type={BlockKind.record_field} />
+                                <Block type={BlockKind.mutez_literal} />
+                                <Block type={BlockKind.timestamp_literal} />
+
+                                <Label text="-- Option --" web-class="defaultLabel" />
+                                <Block type={BlockKind.some_literal} />
+                                <Block type={BlockKind.none_literal} />
+
+                                <Label text="-- Sequences --" web-class="defaultLabel" />
+                                <Block type={BlockKind.sequence_item} />
+                                <Block type={BlockKind.list_literal}>
+                                    <Value name="items">
+                                        <Block type={BlockKind.sequence_item} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.set_literal}>
+                                    <Value name="items">
+                                        <Block type={BlockKind.sequence_item} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.map_literal}>
+                                    <Value name="entries">
+                                        <Block type={BlockKind.map_entry} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.big_map_literal}>
+                                    <Value name="entries">
+                                        <Block type={BlockKind.map_entry} />
+                                    </Value>
+                                </Block>
+
                                 <Separator gap={40} />
+                                <Block type={BlockKind.pair_literal} />
+                                <Separator gap={40} />
+
+                                <Label text="-- Record --" web-class="defaultLabel" />
+                                <Block type={BlockKind.record_field} />
+                                <Block type={BlockKind.record_literal}>
+                                    <Value name="entries">
+                                        <Block type={BlockKind.record_field} />
+                                    </Value>
+                                    <Value name="entries">
+                                        <Block type={BlockKind.record_field} />
+                                    </Value>
+                                </Block>
+                                <Label text="-- Variant --" web-class="defaultLabel" />
+                                <Block type={BlockKind.variant_value} />
                             </Category>
                             <Category name="Types" categorystyle="type_category">
                                 <Label text="-- Singleton types --" web-class="defaultLabel" />

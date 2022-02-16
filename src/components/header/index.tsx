@@ -66,7 +66,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                                 className="flex inline-block py-2 px-4 font-bold no-underline"
                                 to={isDevelopment() ? '/editor' : '/'}
                             >
-                                Editor <p className="ml-2 text-yellow-500">(Coming Soon)</p>
+                                Editor {isDevelopment() ? null : <p className="ml-2 text-yellow-500">(Coming Soon)</p>}
                             </NavLink>
                         </li>
                         <li className="h-10 border ml-3 mr-3 border-black dark:border-white" />

@@ -15,7 +15,7 @@ const SomeBlock = {
     args0: [{ type: 'input_value', name: 'option_value', check: 'Literal' }],
     inputsInline: true,
     output: ['Literal', 'Option'],
-    colour: 101,
+    colour: 340,
 };
 
 Blockly.Blocks[BlockKind.some_literal] = {

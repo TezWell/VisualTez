@@ -1,0 +1,24 @@
+.spin_animation {
+    animation: rotate 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
+}
+
+.spin_animation_inverted {
+    animation: rotate2 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateZ(-360deg)
+    }
+    100% {
+        transform: rotateZ(0deg)
+    }
+}
+@keyframes rotate2 {
+    0% {
+        transform: rotateZ(360deg)
+    }
+    100% {
+        transform: rotateZ(0deg)
+    }
+}
