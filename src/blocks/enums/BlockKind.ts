@@ -80,7 +80,8 @@ export enum BlockKind {
     // Statements
     set_variable_block = 'variables_set',
     assert_block = 'assert_block',
-    //
+    // Base
+    type_compilation = 'type_compilation',
     entry_point_block = 'entry_point_block',
     contract_block = 'contract_block',
 }

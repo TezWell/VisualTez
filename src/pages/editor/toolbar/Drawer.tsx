@@ -6,11 +6,10 @@ import DoubleArrowRightIcon from 'src/components/common/icons/DoubleArrowRight';
 import DrawerTitle from './DrawerTitle';
 
 interface DrawerProps {
-    compilationResults?: string;
     resizeWorkspace: () => void;
 }
 
-const Drawer: React.FC<DrawerProps> = ({ compilationResults, resizeWorkspace }) => {
+const Drawer: React.FC<DrawerProps> = ({ resizeWorkspace }) => {
     const { drawer, updateDrawer } = useEditor();
 
     const onClose = () => {
@@ -21,16 +20,16 @@ const Drawer: React.FC<DrawerProps> = ({ compilationResults, resizeWorkspace }) 
     const content = React.useMemo(() => {
         switch (drawer) {
             case 'compilation':
-                return <CompilationDrawer compilationResults={compilationResults} />;
+                return <CompilationDrawer />;
             case 'settings':
                 return (
-                    <div className="flex flex-col w-full h-full">
+                    <div className="flex flex-col w-full h-full p-5">
                         <DrawerTitle title="Settings" />
                     </div>
                 );
         }
         return null;
-    }, [compilationResults, drawer]);
+    }, [drawer]);
 
     return (
         <Transition.Root show={!!drawer} as={React.Fragment}>
@@ -44,7 +43,7 @@ const Drawer: React.FC<DrawerProps> = ({ compilationResults, resizeWorkspace }) 
                     leaveFrom="translate-x-0"
                     leaveTo="translate-x-full"
                 >
-                    <div className="flex flex-col items-center p-5 bg-white dark:bg-black">{content}</div>
+                    <div className="flex-1 flex flex-col items-center bg-white dark:bg-black">{content}</div>
                 </Transition.Child>
                 <button onClick={onClose} className="border-t-2 p-2 hover:text-yellow-500">
                     <DoubleArrowRightIcon width={32} height={32} />

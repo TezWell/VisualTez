@@ -12,7 +12,7 @@ import './blockchain_operations';
 
 import Blockly from 'blockly';
 import type { Block, Workspace } from 'blockly';
-import type { IType, IValue } from '@tezwell/michelson-sdk/typings';
+import type { IValue, MichelsonJSON, MichelsonMicheline } from '@tezwell/michelson-sdk/typings';
 import { CompilerAPI } from '@tezwell/smartts-sdk';
 
 import BlockKind from './enums/BlockKind';
@@ -24,7 +24,7 @@ export enum CompilationKind {
     Value = 'value',
     Type = 'type',
 }
-export interface ContactCompilation {
+export interface ContractCompilation {
     kind: CompilationKind.Contract;
     result: {
         name: string;
@@ -33,28 +33,56 @@ export interface ContactCompilation {
         code: string;
     };
 }
-export type Compilation =
-    | ContactCompilation
-    | {
-          kind: CompilationKind.Value;
-          result: IValue;
-      }
-    | {
-          kind: CompilationKind.Type;
-          result: IType;
-      };
+export interface TypeCompilation {
+    kind: CompilationKind.Type;
+    result: {
+        name: string;
+        micheline: MichelsonMicheline;
+        json: MichelsonJSON;
+    };
+}
+export interface ValueCompilation {
+    kind: CompilationKind.Type;
+    result: {
+        name: string;
+        micheline: MichelsonMicheline;
+        json: MichelsonJSON;
+    };
+}
+export type Compilation = ContractCompilation | ValueCompilation | TypeCompilation;
 
-export const isContractCompilation = (c: Compilation): c is ContactCompilation => c.kind === CompilationKind.Contract;
+export const filterCompilationKind =
+    <T extends Compilation>(kind: CompilationKind) =>
+    (c: Compilation): c is T =>
+        c.kind === kind;
 
 export const extractBlocks = (workspace: Workspace) => workspace.getTopBlocks(true);
 
 export const compileBlock = (block: Block): Compilation | null => {
     switch (block.type) {
-        case BlockKind.entry_point_block:
-        case BlockKind.set_variable_block:
-        case BlockKind.assert_block:
-        case BlockKind.list_literal:
-            return null;
+        case BlockKind.type_compilation: {
+            const name = block.getFieldValue('NAME');
+
+            const type = Michelson.toType(block, 'type');
+
+            console.log({
+                kind: CompilationKind.Type,
+                result: {
+                    name,
+                    micheline: type.toMicheline(),
+                    json: type.toJSON(),
+                },
+            });
+
+            return {
+                kind: CompilationKind.Type,
+                result: {
+                    name,
+                    micheline: type.toMicheline(),
+                    json: type.toJSON(),
+                },
+            };
+        }
         case BlockKind.contract_block:
             const name = block.getFieldValue('NAME');
 
@@ -77,16 +105,8 @@ export const compileBlock = (block: Block): Compilation | null => {
                     code: JSON.stringify(CompilerAPI.compileContract(code), null, 4),
                 },
             };
-        case BlockKind.string_type:
-        case BlockKind.unit_type:
-            return {
-                kind: CompilationKind.Type,
-                result: Michelson.translateType(block),
-            };
+
         default:
-            return {
-                kind: CompilationKind.Value,
-                result: Michelson.translateValue(block),
-            };
+            return null;
     }
 };
