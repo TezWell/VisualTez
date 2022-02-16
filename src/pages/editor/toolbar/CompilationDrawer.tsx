@@ -1,21 +1,24 @@
 import React from 'react';
 import { Tab } from '@headlessui/react';
 
-import { ContactCompilation, isContractCompilation } from 'src/blocks';
+import {
+    CompilationKind,
+    ContractCompilation,
+    filterCompilationKind,
+    TypeCompilation,
+    ValueCompilation,
+} from 'src/blocks';
 import CodeBlock from 'src/components/CodeBlock';
 import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
 import useEditor from 'src/context/hooks/useEditor';
 import useDeployment from 'src/context/hooks/useDeployment';
-import DrawerTitle from './DrawerTitle';
 import { useNavigate } from 'react-router-dom';
-
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ');
-}
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import { buildClassName } from 'src/utils/className';
 
 interface ContractModalProps {
-    compilation?: ContactCompilation;
+    compilation?: ContractCompilation;
     onClose: () => void;
 }
 
@@ -64,20 +67,40 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
                 <Tab.List className="flex border-t border-b border-blue-400">
                     <Tab
                         className={({ selected }) =>
-                            classNames(
-                                'w-full p-2 text-sm leading-5 font-medium bg-gray-500 bg-opacity-10 dark:text-white',
-                                selected ? 'bg-gray-100 shadow' : 'hover:bg-opacity-40',
-                            )
+                            buildClassName([
+                                {
+                                    classes:
+                                        'w-full p-2 text-sm leading-5 font-medium bg-gray-500 bg-opacity-10 dark:text-white',
+                                },
+                                {
+                                    classes: 'bg-gray-100 shadow',
+                                    append: selected,
+                                },
+                                {
+                                    classes: 'hover:bg-opacity-40',
+                                    append: !selected,
+                                },
+                            ])
                         }
                     >
                         Storage
                     </Tab>
                     <Tab
                         className={({ selected }) =>
-                            classNames(
-                                'w-full p-2 text-sm leading-5 font-medium bg-gray-500 bg-opacity-10 dark:text-white',
-                                selected ? 'bg-gray-100 shadow' : 'hover:bg-opacity-40',
-                            )
+                            buildClassName([
+                                {
+                                    classes:
+                                        'w-full p-2 text-sm leading-5 font-medium bg-gray-500 bg-opacity-10 dark:text-white',
+                                },
+                                {
+                                    classes: 'bg-gray-100 shadow',
+                                    append: selected,
+                                },
+                                {
+                                    classes: 'hover:bg-opacity-40',
+                                    append: !selected,
+                                },
+                            ])
                         }
                     >
                         Code
@@ -96,26 +119,165 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
     );
 };
 
-interface CompilationDrawerProps {
-    compilationResults?: string;
+interface TypeModalProps {
+    compilation?: TypeCompilation;
+    onClose: () => void;
 }
 
-const CompilationDrawer: React.FC<CompilationDrawerProps> = ({ compilationResults }) => {
+const TypeModal: React.FC<TypeModalProps> = ({ compilation, ...props }) => {
+    const isOpen = React.useMemo(() => !!compilation, [compilation]);
+
+    const michelsonJSON = React.useMemo(() => {
+        try {
+            if (compilation) {
+                return JSON.stringify(compilation.result.json, null, 2);
+            }
+        } catch (e: any) {
+            console.debug(e);
+            return e.message;
+        }
+    }, [compilation]);
+
+    return (
+        <Modal
+            {...props}
+            open={isOpen}
+            title={
+                <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
+                    Type <p className="ml-2 font-bold">{compilation?.result.name}</p>
+                </div>
+            }
+            actions={[
+                <Button
+                    key="close"
+                    onClick={props.onClose}
+                    className="bg-gray-400 hover:bg-gray-300 border-gray-700 hover:border-gray-600 p-2"
+                >
+                    Close
+                </Button>,
+            ]}
+        >
+            <Tab.Group as="div" className="flex-1 h-full flex flex-col">
+                <Tab.List className="flex border-t border-b border-blue-400">
+                    <Tab
+                        className={({ selected }) =>
+                            buildClassName([
+                                {
+                                    classes:
+                                        'w-full p-2 text-sm leading-5 font-medium bg-gray-500 bg-opacity-10 dark:text-white',
+                                },
+                                {
+                                    classes: 'bg-gray-100 shadow',
+                                    append: selected,
+                                },
+                                {
+                                    classes: 'hover:bg-opacity-40',
+                                    append: !selected,
+                                },
+                            ])
+                        }
+                    >
+                        Michelson JSON
+                    </Tab>
+                    <Tab
+                        className={({ selected }) =>
+                            buildClassName([
+                                {
+                                    classes:
+                                        'w-full p-2 text-sm leading-5 font-medium bg-gray-500 bg-opacity-10 dark:text-white',
+                                },
+                                {
+                                    classes: 'bg-gray-100 shadow',
+                                    append: selected,
+                                },
+                                {
+                                    classes: 'hover:bg-opacity-40',
+                                    append: !selected,
+                                },
+                            ])
+                        }
+                    >
+                        Micheline
+                    </Tab>
+                </Tab.List>
+                <Tab.Panels className="flex-1 overflow-y-auto">
+                    <Tab.Panel className="h-full">
+                        <CodeBlock withCopy language={'json'} showLineNumbers text={michelsonJSON} />
+                    </Tab.Panel>
+                    <Tab.Panel className="h-full">
+                        <CodeBlock
+                            withCopy
+                            language={'json'}
+                            showLineNumbers
+                            text={compilation?.result.micheline || ''}
+                        />
+                    </Tab.Panel>
+                </Tab.Panels>
+            </Tab.Group>
+        </Modal>
+    );
+};
+
+interface ExpandButtonProps {
+    selected: boolean;
+    select: () => void;
+}
+
+const ExpandButton: React.FC<ExpandButtonProps> = ({ selected, select }) => (
+    <button className="hover:text-yellow-500" onClick={select}>
+        {selected ? (
+            <ChevronUpIcon className="block" width={32} height={32} />
+        ) : (
+            <ChevronDownIcon className="block" width={32} height={32} />
+        )}
+    </button>
+);
+
+interface TabInfoProps {
+    title: string;
+    items: number;
+}
+
+const TabInfo: React.FC<TabInfoProps> = ({ title, items }) => (
+    <div className="flex items-center">
+        <h1 className="font-mono text-ellipsis overflow-hidden">{title}</h1>
+        <span className="ml-2 pr-4 pl-4 font-mono border rounded-full text-yellow-400 border-yellow-400">{items}</span>
+    </div>
+);
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface CompilationDrawerProps {}
+
+const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     const navigate = useNavigate();
-    const [compilation, setCompilation] = React.useState<ContactCompilation>();
+    const [tab, setTab] = React.useState<CompilationKind | null>(CompilationKind.Contract);
+    const [contractCompilation, setContractCompilation] = React.useState<ContractCompilation>();
+    const [typeCompilation, setTypeCompilation] = React.useState<TypeCompilation>();
     const { compilations } = useEditor();
     const { changeDeploymentState } = useDeployment();
 
-    function closeModal() {
-        setCompilation(undefined);
+    function closeContractCompilationModal() {
+        setContractCompilation(undefined);
     }
 
-    function openModal(compilation: ContactCompilation) {
-        setCompilation(compilation);
+    function openContractCompilationModal(compilation: ContractCompilation) {
+        setContractCompilation(compilation);
+    }
+
+    function closeTypeCompilationModal() {
+        setTypeCompilation(undefined);
+    }
+
+    function openTypeCompilationModal(compilation: TypeCompilation) {
+        setTypeCompilation(compilation);
+    }
+
+    function onTabSelection(kind: CompilationKind) {
+        setTab((t) => (t === kind ? null : kind));
     }
 
     const gotoDeployment = React.useCallback(
-        (compilation: ContactCompilation) => {
+        (compilation: ContractCompilation) => {
             changeDeploymentState({
                 storageXML: compilation.result.storageXML,
                 code: compilation.result.code,
@@ -125,11 +287,42 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = ({ compilationResult
         [changeDeploymentState, navigate],
     );
 
+    const contractCompilations = React.useMemo(
+        () => compilations.filter(filterCompilationKind<ContractCompilation>(CompilationKind.Contract)),
+        [compilations],
+    );
+
+    const valueCompilations = React.useMemo(
+        () => compilations.filter(filterCompilationKind<ValueCompilation>(CompilationKind.Value)),
+        [compilations],
+    );
+
+    const typeCompilations = React.useMemo(
+        () => compilations.filter(filterCompilationKind<TypeCompilation>(CompilationKind.Type)),
+        [compilations],
+    );
+
     return (
-        <div className="flex w-full flex-col flex-1 justify-stretch">
-            <DrawerTitle title="Compilation" />
-            <div className="flex-1 overflow-auto p-3 scrollbar-thin scrollbar-thumb-gray-400">
-                {compilations.filter(isContractCompilation).map((compilation) => (
+        <div className="flex-1 flex h-full w-full flex-col justify-stretch">
+            <div className="flex items-center justify-between p-5">
+                <TabInfo title="Contract Compilation" items={contractCompilations.length} />
+                <ExpandButton
+                    selected={tab === CompilationKind.Contract}
+                    select={() => onTabSelection(CompilationKind.Contract)}
+                />
+            </div>
+            <div
+                className={buildClassName([
+                    {
+                        classes: 'hidden',
+                        append: tab !== CompilationKind.Contract,
+                    },
+                    {
+                        classes: 'grow basis-0 border-t p-2 overflow-y-auto',
+                    },
+                ])}
+            >
+                {contractCompilations.map((compilation) => (
                     <div
                         key={compilation.result.name}
                         className="mb-3 bg-white shadow-lg rounded-md p-3 dark:bg-black border-2 border-black dark:border-white"
@@ -139,7 +332,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = ({ compilationResult
                         </div>
                         <Button
                             fullWidth
-                            onClick={() => openModal(compilation)}
+                            onClick={() => openContractCompilationModal(compilation)}
                             className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
                         >
                             Show
@@ -154,11 +347,81 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = ({ compilationResult
                     </div>
                 ))}
             </div>
-            <div className="flex items-center justify-center mt-10">
-                {compilationResults && <CodeBlock language="json" showLineNumbers text={compilationResults} />}
+            <div className="flex items-center justify-between border-t p-5">
+                <TabInfo title="Value Compilation" items={valueCompilations.length} />
+                <ExpandButton
+                    selected={tab === CompilationKind.Value}
+                    select={() => onTabSelection(CompilationKind.Value)}
+                />
+            </div>
+            <div
+                className={buildClassName([
+                    {
+                        classes: 'hidden',
+                        append: tab !== CompilationKind.Value,
+                    },
+                    {
+                        classes: 'grow basis-0 border-t p-2',
+                    },
+                ])}
+            >
+                {valueCompilations.map((compilation) => (
+                    <div
+                        key={compilation.result.name}
+                        className="mb-3 bg-white shadow-lg rounded-md p-3 dark:bg-black border-2 border-black dark:border-white"
+                    >
+                        <div className="flex items-center justify-center text-xl text-center align-middle font-mono p-2 border-2 rounded-lg mb-3">
+                            <p className="text-ellipsis overflow-hidden">{compilation.result.name}</p>
+                        </div>
+                        <Button
+                            fullWidth
+                            onClick={() => openTypeCompilationModal(compilation)}
+                            className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
+                        >
+                            Show
+                        </Button>
+                    </div>
+                ))}
+            </div>
+            <div className="flex items-center justify-between p-5 border-b border-t">
+                <TabInfo title="Type Compilation" items={typeCompilations.length} />
+                <ExpandButton
+                    selected={tab === CompilationKind.Type}
+                    select={() => onTabSelection(CompilationKind.Type)}
+                />
+            </div>
+            <div
+                className={buildClassName([
+                    {
+                        classes: 'hidden',
+                        append: tab !== CompilationKind.Type,
+                    },
+                    {
+                        classes: 'grow basis-0 p-2',
+                    },
+                ])}
+            >
+                {typeCompilations.map((compilation) => (
+                    <div
+                        key={compilation.result.name}
+                        className="mb-3 bg-white shadow-lg rounded-md p-3 dark:bg-black border-2 border-black dark:border-white"
+                    >
+                        <div className="flex items-center justify-center text-xl text-center align-middle font-mono p-2 border-2 rounded-lg mb-3">
+                            <p className="text-ellipsis overflow-hidden">{compilation.result.name}</p>
+                        </div>
+                        <Button
+                            fullWidth
+                            onClick={() => openTypeCompilationModal(compilation)}
+                            className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
+                        >
+                            Show
+                        </Button>
+                    </div>
+                ))}
             </div>
 
-            <ContractModal compilation={compilation} onClose={closeModal} />
+            <ContractModal compilation={contractCompilation} onClose={closeContractCompilationModal} />
+            <TypeModal compilation={typeCompilation} onClose={closeTypeCompilationModal} />
         </div>
     );
 };

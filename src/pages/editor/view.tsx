@@ -102,7 +102,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             onChange={onChange}
                             renderer="zelos"
                         >
-                            <Category name="Contract Base" categorystyle="class_category">
+                            <Category name="Base" categorystyle="class_category">
                                 <Block type={BlockKind.contract_block}>
                                     {/* Default input type */}
                                     <Value name="initial_storage">
@@ -124,6 +124,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                         <Block type={BlockKind.unit_type} />
                                     </Value>
                                 </Block>
+                                <Block type={BlockKind.type_compilation} />
                             </Category>
                             <Category name="Values" categorystyle="literal_category">
                                 <Block type={BlockKind.unit_literal} />
@@ -223,8 +224,22 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.sapling_state_type} />
                                 <Block type={BlockKind.sapling_transaction_type} />
                                 <Label text="-- Artificial types --" web-class="defaultLabel" />
-                                <Block type={BlockKind.record_type} />
-                                <Block type={BlockKind.variant_type} />
+                                <Block type={BlockKind.record_type}>
+                                    <Value name="fields">
+                                        <Block type={BlockKind.record_variant_field_type} />
+                                    </Value>
+                                    <Value name="fields">
+                                        <Block type={BlockKind.record_variant_field_type} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.variant_type}>
+                                    <Value name="fields">
+                                        <Block type={BlockKind.record_variant_field_type} />
+                                    </Value>
+                                    <Value name="fields">
+                                        <Block type={BlockKind.record_variant_field_type} />
+                                    </Value>
+                                </Block>
                                 <Block type={BlockKind.record_variant_field_type} />
                             </Category>
                             <Category name="Blockchain Operations" categorystyle="blockchain_category">

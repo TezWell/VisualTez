@@ -12,7 +12,7 @@ import CircularLoading from './components/common/Spinner';
 
 render(
     <React.StrictMode>
-        <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
+        <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col h-full">
             <React.Suspense fallback={<CircularLoading />}>
                 <HelmetProvider>
                     <Theme.Provider>
