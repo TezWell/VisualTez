@@ -42,7 +42,7 @@ export interface TypeCompilation {
     };
 }
 export interface ValueCompilation {
-    kind: CompilationKind.Type;
+    kind: CompilationKind.Value;
     result: {
         name: string;
         micheline: MichelsonMicheline;
@@ -65,21 +65,26 @@ export const compileBlock = (block: Block): Compilation | null => {
 
             const type = Michelson.toType(block, 'type');
 
-            console.log({
-                kind: CompilationKind.Type,
-                result: {
-                    name,
-                    micheline: type.toMicheline(),
-                    json: type.toJSON(),
-                },
-            });
-
             return {
                 kind: CompilationKind.Type,
                 result: {
                     name,
                     micheline: type.toMicheline(),
                     json: type.toJSON(),
+                },
+            };
+        }
+        case BlockKind.value_compilation: {
+            const name = block.getFieldValue('NAME');
+
+            const value = Michelson.toMichelson(block, 'value');
+
+            return {
+                kind: CompilationKind.Value,
+                result: {
+                    name,
+                    micheline: value.toMicheline(),
+                    json: value.toJSON(),
                 },
             };
         }
