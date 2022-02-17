@@ -12,6 +12,7 @@
 
 | Project repos |
 |:-:|
-| [SmartTS SDK  ](https://github.com/RomarQ/smartts-sdk) |
+| [SmartTS SDK](https://github.com/RomarQ/smartts-sdk) |
 | [Michelson SDK](https://github.com/RomarQ/michelson-sdk) |
 | [Infrastructure Automation](https://github.com/RomarQ/VisualTez-infra) |
+| [Storage](https://github.com/RomarQ/visualtez-storage)
