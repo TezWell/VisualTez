@@ -21,7 +21,7 @@ export const generatePermalink = async (content: string) => {
             { timeout: 1000 },
         );
 
-        return `${window.location.origin}/editor?w=${data.hash}&k=${passPhrase}`;
+        return `${window.location.origin}/editor?h=${data.hash}&k=${passPhrase}`;
     }
 };
 

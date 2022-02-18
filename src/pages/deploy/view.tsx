@@ -1,7 +1,6 @@
 import React from 'react';
 import type { WorkspaceSvg } from 'blockly';
 
-import BlocklyEditor from 'src/components/blockly/Editor';
 import Button from 'src/components/common/Button';
 import NetworkSelection from 'src/components/tezos/NetworkSelection';
 import DeployParameters from './DeployParameters';

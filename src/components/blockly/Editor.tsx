@@ -10,6 +10,7 @@ import 'src/blocks';
 import './overrides';
 import './blockly.css';
 import useTheme from 'src/context/hooks/useTheme';
+import Logger from 'src/utils/logger';
 
 interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -35,6 +36,7 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
         minScale: number;
         scaleSpeed: number;
     };
+    readOnly?: boolean;
     currentXML?: string;
     onLoad?: () => void;
     onError?: (error: string) => void;
@@ -81,8 +83,8 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
                 onLoad?.();
                 loaded.current = true;
             } catch (e: any) {
-                console.debug(e);
-                onError?.(e.message);
+                Logger.debug(e);
+                onError?.(e?.message);
             }
         }
         return () => {
