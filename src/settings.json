@@ -8,5 +8,6 @@
     "node_monitor": {
         "interval": 30000,
         "max_delay": 180000
-    }
+    },
+    "storage_api": "https://storage.visualtez.com"
 }

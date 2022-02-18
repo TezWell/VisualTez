@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 
 export interface ModalProps {
     open: boolean;
-    title: React.ReactElement;
+    title?: React.ReactElement;
     onClose: () => void;
     actions?: React.ReactElement[];
 }
@@ -40,15 +40,19 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                     >
                         <div className="inline-block align-bottom bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-2xl sm:w-full">
                             <div className="flex flex-col bg-white dark:bg-black">
-                                <div className="p-3 bg-gray-400 bg-opacity-20">
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="text-lg leading-6 font-medium text-black dark:text-white"
-                                    >
-                                        {title}
-                                    </Dialog.Title>
+                                {title ? (
+                                    <div className="p-3 bg-gray-400 bg-opacity-20">
+                                        <Dialog.Title
+                                            as="h3"
+                                            className="text-lg leading-6 font-medium text-black dark:text-white"
+                                        >
+                                            {title}
+                                        </Dialog.Title>
+                                    </div>
+                                ) : null}
+                                <div className="grow basis-0 border-t border-b border-yellow-400 dark:border-yellow-500 max-h-96 bg-white dark:bg-gray-400 dark:bg-opacity-20">
+                                    {children}
                                 </div>
-                                <div className="h-96 bg-white dark:bg-gray-400 dark:bg-opacity-20">{children}</div>
                                 <div className="bg-gray-400 bg-opacity-20 flex space-x-2 justify-end h-14 p-2">
                                     {actions}
                                 </div>

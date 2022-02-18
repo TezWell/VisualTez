@@ -3,6 +3,13 @@ import React, { createContext } from 'react';
 import type { Compilation } from 'src/blocks';
 import settings from 'src/settings.json';
 
+export enum DrawerKind {
+    Compilation = 'compilation',
+    Settings = 'settings',
+    Share = 'share',
+    Storage = 'storage',
+}
+
 interface IEditorStorage {
     currentXML: string;
     divider?: {
@@ -11,13 +18,12 @@ interface IEditorStorage {
     };
 }
 
-export type DrawerOptions = 'compilation' | 'settings';
 export interface IEditorContext {
     state: IEditorStorage;
     updateXML: (xml: string) => void;
     updateDivider: (left: string, right: string) => void;
-    drawer: DrawerOptions | null;
-    updateDrawer: (drawer?: DrawerOptions) => void;
+    drawer: DrawerKind | null;
+    updateDrawer: (drawer?: DrawerKind) => void;
     error?: string;
     updateError: (msg?: string) => void;
 
@@ -69,7 +75,7 @@ const saveEditorState = (state: IEditorStorage): void => {
 
 const Provider: React.FC = (props) => {
     const [state, updateState] = React.useState<IEditorStorage>(fetchEditorState());
-    const [drawer, setDrawer] = React.useState<DrawerOptions | null>(null);
+    const [drawer, setDrawer] = React.useState<DrawerKind | null>(null);
     const [error, setError] = React.useState<string>();
     const [compilations, setCompilations] = React.useState<Compilation[]>([]);
 
@@ -94,7 +100,7 @@ const Provider: React.FC = (props) => {
         }));
     }, []);
 
-    const updateDrawer = React.useCallback((newDrawer?: DrawerOptions) => setDrawer(!newDrawer ? null : newDrawer), []);
+    const updateDrawer = React.useCallback((newDrawer?: DrawerKind) => setDrawer(!newDrawer ? null : newDrawer), []);
 
     const updateError = React.useCallback((msg?: string) => setError(msg), []);
 
