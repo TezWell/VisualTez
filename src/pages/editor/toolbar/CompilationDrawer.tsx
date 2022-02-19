@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tab } from '@headlessui/react';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
 import {
     CompilationKind,
@@ -13,8 +15,6 @@ import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
 import useEditor from 'src/context/hooks/useEditor';
 import useDeployment from 'src/context/hooks/useDeployment';
-import { useNavigate } from 'react-router-dom';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import { buildClassName } from 'src/utils/className';
 
 interface ContractModalProps {
