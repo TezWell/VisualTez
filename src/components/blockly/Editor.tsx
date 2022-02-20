@@ -11,6 +11,7 @@ import './overrides';
 import './blockly.css';
 import useTheme from 'src/context/hooks/useTheme';
 import Logger from 'src/utils/logger';
+import useEditor from 'src/context/hooks/useEditor';
 
 interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -41,7 +42,6 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     onLoad?: () => void;
     onError?: (error: string) => void;
     onChange?: (event: any) => void;
-    renderer?: 'zelos';
 }
 
 const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
@@ -55,6 +55,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
     ...props
 }) => {
     const { isDark } = useTheme();
+    const { state } = useEditor();
     const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
     const toolbox = React.useRef<HTMLDivElement>(null);
@@ -66,11 +67,12 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
     }, [isDark, workspaceRef]);
 
     React.useEffect(() => {
-        if (!loaded.current && blocklyDiv.current && toolbox.current) {
+        if (blocklyDiv.current && toolbox.current) {
             try {
                 workspaceRef.current = Blockly.inject(blocklyDiv.current, {
                     toolbox: noToolbox ? undefined : toolbox.current,
                     theme: isDark ? DarkTheme : LightTheme,
+                    renderer: state.renderer,
                     ...props,
                 });
                 const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;

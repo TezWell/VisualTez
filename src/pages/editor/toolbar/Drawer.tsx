@@ -7,6 +7,7 @@ import DrawerTitle from './DrawerTitle';
 import { DrawerKind } from 'src/context/Editor';
 import SharingDrawer from './SharingDrawer';
 import StorageDrawer from './StorageDrawer';
+import SettingsDrawer from './SettingsDrawer';
 
 interface DrawerProps {
     resizeWorkspace: () => void;
@@ -29,11 +30,7 @@ const Drawer: React.FC<DrawerProps> = ({ resizeWorkspace }) => {
             case DrawerKind.Storage:
                 return <StorageDrawer />;
             case DrawerKind.Settings:
-                return (
-                    <div className="flex flex-col w-full h-full p-5">
-                        <DrawerTitle title="Settings" />
-                    </div>
-                );
+                return <SettingsDrawer />;
         }
         return null;
     }, [drawer]);

@@ -15,7 +15,7 @@ interface SharedWorkspaceProps {
 
 const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml, onClose }) => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
-    const { updateXML } = useEditor();
+    const { updateXML, state } = useEditor();
 
     const importWorkspace = React.useCallback(() => {
         if (mainWorkspaceRef.current) {
@@ -68,7 +68,6 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml
                         minScale: 0.1,
                         scaleSpeed: 1.1,
                     }}
-                    renderer="zelos"
                 />
             </div>
         </Modal>

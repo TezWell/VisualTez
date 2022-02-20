@@ -100,7 +100,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             onLoad={initiateDefaultVariables}
                             onError={onError}
                             onChange={onChange}
-                            renderer="zelos"
                         >
                             <Category name="Base" categorystyle="class_category">
                                 <Block type={BlockKind.contract_block}>

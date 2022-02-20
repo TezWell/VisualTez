@@ -10,8 +10,15 @@ export enum DrawerKind {
     Storage = 'storage',
 }
 
+export enum EditorRenderer {
+    Zelos = 'zelos',
+    Thrasos = 'thrasos',
+    Geras = 'geras',
+}
+
 interface IEditorStorage {
     currentXML: string;
+    renderer: EditorRenderer;
     divider?: {
         left: string;
         right: string;
@@ -21,6 +28,7 @@ interface IEditorStorage {
 export interface IEditorContext {
     state: IEditorStorage;
     updateXML: (xml: string) => void;
+    updateRenderer: (renderer: EditorRenderer) => void;
     updateDivider: (left: string, right: string) => void;
     drawer: DrawerKind | null;
     updateDrawer: (drawer?: DrawerKind) => void;
@@ -34,6 +42,10 @@ export interface IEditorContext {
 const contextStub: IEditorContext = {
     state: {
         currentXML: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+        renderer: EditorRenderer.Zelos,
+    },
+    updateRenderer: () => {
+        // stub
     },
     updateXML: () => {
         // stub
@@ -62,7 +74,14 @@ const EDITOR_STORAGE_KEY = `${settings.storage_prefix}/editor`;
  * @description Fetch editor state from local storage.
  * @returns {IEditorStorage} Editor state
  */
-const fetchEditorState = (): IEditorStorage => JSON.parse(window.localStorage.getItem(EDITOR_STORAGE_KEY) || '{}');
+const fetchEditorState = (): IEditorStorage => {
+    const storage = JSON.parse(window.localStorage.getItem(EDITOR_STORAGE_KEY) || '{}');
+
+    // Set default renderer
+    storage.renderer ||= EditorRenderer.Zelos;
+
+    return storage;
+};
 
 /**
  * @description Save editor state in the local storage.
@@ -106,10 +125,18 @@ const Provider: React.FC = (props) => {
 
     const updateCompilations = React.useCallback((compilations: Compilation[]) => setCompilations(compilations), []);
 
+    const updateRenderer = React.useCallback((renderer: EditorRenderer) => {
+        updateState((state) => ({
+            ...state,
+            renderer,
+        }));
+    }, []);
+
     return (
         <Context.Provider
             value={{
                 state,
+                updateRenderer,
                 updateXML,
                 updateDivider,
                 drawer,

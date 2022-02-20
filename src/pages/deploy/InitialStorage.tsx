@@ -43,7 +43,6 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                             minScale: 0.25,
                             scaleSpeed: 1.1,
                         }}
-                        renderer="zelos"
                     >
                         <Block type={BlockKind.unit_literal} />
                         <Block type={BlockKind.string_literal} />
