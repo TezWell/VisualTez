@@ -33,7 +33,7 @@ const DeleteWorkspaceModal: React.FC<DeleteWorkspaceModalProps> = ({ workspace, 
             }
             actions={[
                 <Button
-                    key="import"
+                    key="delete"
                     onClick={delWorkspace}
                     className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
                 >
@@ -85,11 +85,81 @@ const CreateWorkspaceModal: React.FC<CreateWorkspaceModalProps> = ({ onClose }) 
             }
             actions={[
                 <Button
-                    key="import"
+                    key="create"
                     onClick={newWorkspace}
                     className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
                 >
                     Create
+                </Button>,
+                <Button
+                    key="close"
+                    onClick={onClose}
+                    className="bg-gray-400 hover:bg-gray-300 border-gray-700 hover:border-gray-600 p-2"
+                >
+                    Close
+                </Button>,
+            ]}
+        >
+            <div className="p-2">
+                <input
+                    type="text"
+                    name="workspace-name"
+                    className={buildClassName([
+                        {
+                            classes:
+                                'focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-md sm:text-sm border-gray-300 dark:text-black',
+                        },
+                        {
+                            classes: 'border-red-500 dark:border-red-500 border-2',
+                            append: !name,
+                        },
+                    ])}
+                    placeholder="Workspace Name"
+                    value={name}
+                    onChange={updateName}
+                />
+            </div>
+        </Modal>
+    );
+};
+
+interface UpdateWorkspaceModalProps {
+    workspace: IEditorWorkspace;
+    onClose: () => void;
+}
+
+const UpdateWorkspaceModal: React.FC<UpdateWorkspaceModalProps> = ({ workspace, onClose }) => {
+    const [name, setName] = React.useState(workspace.name);
+    const { updateWorkspace } = useEditor();
+
+    const updateName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
+
+    const changeWorkspaceName = React.useCallback(() => {
+        if (name) {
+            updateWorkspace({
+                ...workspace,
+                name,
+            });
+            onClose();
+        }
+    }, [updateWorkspace, workspace, name, onClose]);
+
+    return (
+        <Modal
+            open={true}
+            onClose={onClose}
+            title={
+                <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
+                    Update Workspace
+                </div>
+            }
+            actions={[
+                <Button
+                    key="update"
+                    onClick={changeWorkspaceName}
+                    className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
+                >
+                    Update
                 </Button>,
                 <Button
                     key="close"
@@ -130,6 +200,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
     const { state, updateEditorState } = useEditor();
     const [createWorkspaceModal, setCreateWorkspaceModal] = React.useState(false);
     const [deleteWorkspaceModal, setDeleteWorkspaceModal] = React.useState<IEditorWorkspace>();
+    const [updateWorkspaceModal, setUpdateWorkspaceModal] = React.useState<IEditorWorkspace>();
 
     return (
         <div className="flex flex-col w-full h-full">
@@ -172,66 +243,30 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                             onClick={() => updateEditorState({ currentWorkspace: workspace.id })}
                                             className="flex justify-between items-center w-full bg-amber-500 hover:bg-amber-400 border-amber-700 hover:border-amber-500 p-1 px-5"
                                         >
-                                            <ExternalLinkIcon className="block" width={24} height={24} />
-                                            <span className="pt-1">Select Worksplace</span>
+                                            <ExternalLinkIcon className="block" width={16} height={16} />
+                                            <span className="text-sm">Select Worksplace</span>
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
                                         <Button
-                                            onClick={() => setDeleteWorkspaceModal(workspace)}
+                                            onClick={() => setUpdateWorkspaceModal(workspace)}
                                             className="flex justify-between items-center w-full bg-green-500 hover:bg-green-400 border-green-700 hover:border-green-500 p-1 px-5"
                                         >
-                                            <PencilAltIcon className="block" width={24} height={24} />
-                                            <span className="pt-1">Rename</span>
+                                            <PencilAltIcon className="block" width={16} height={16} />
+                                            <span className="text-sm">Rename</span>
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
                                         <Button
                                             onClick={() => setDeleteWorkspaceModal(workspace)}
                                             className="flex justify-between items-center w-full bg-red-500 hover:bg-red-400 border-red-700 hover:border-red-500 p-1 px-5"
                                         >
-                                            <TrashIcon className="block" width={24} height={24} />
-                                            <span className="pt-1">Delete Worksplace</span>
+                                            <TrashIcon className="block" width={16} height={16} />
+                                            <span className="text-sm">Delete Worksplace</span>
                                         </Button>
                                     </div>
                                 </Disclosure.Panel>
                             </div>
                         )}
                     </Disclosure>
-                    // <div
-                    //     key={workspace.id}
-                    //     className={buildClassName([
-                    //         {
-                    //             classes:
-                    //                 'flex mb-3 bg-white shadow-lg rounded-md p-2 dark:bg-black border-2 border-black dark:border-white',
-                    //         },
-                    //         {
-                    //             classes: 'border-blue-500 dark:border-blue-500',
-                    //             append: workspace.id === state.currentWorkspace,
-                    //         },
-                    //     ])}
-                    // >
-
-                    //     <input
-                    //         key={workspace.id}
-                    //         type="text"
-                    //         name="workspace-name"
-                    //         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-md sm:text-sm border-gray-300  dark:text-black"
-                    //         value={workspace.name}
-                    //     />
-                    //     <div className="p-2" />
-                    //     <button
-                    //         className="text-blue-200 hover:text-blue-500"
-                    //         onClick={() => updateEditorState({ currentWorkspace: workspace.id })}
-                    //     >
-                    //         <PencilAltIcon className="block" width={24} height={24} />
-                    //     </button>
-                    //     <div className="p-2" />
-                    //     <button
-                    //         className="text-red-200 hover:text-red-500"
-                    //         onClick={() => setDeleteWorkspaceModal(workspace)}
-                    //     >
-                    //         <TrashIcon className="block" width={24} height={24} />
-                    //     </button>
-                    // </div>
                 ))}
             </div>
 
@@ -249,6 +284,12 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                 <DeleteWorkspaceModal
                     workspace={deleteWorkspaceModal}
                     onClose={() => setDeleteWorkspaceModal(undefined)}
+                />
+            ) : null}
+            {updateWorkspaceModal ? (
+                <UpdateWorkspaceModal
+                    workspace={updateWorkspaceModal}
+                    onClose={() => setUpdateWorkspaceModal(undefined)}
                 />
             ) : null}
             {createWorkspaceModal ? <CreateWorkspaceModal onClose={() => setCreateWorkspaceModal(false)} /> : null}
