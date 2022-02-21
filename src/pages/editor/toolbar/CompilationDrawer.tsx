@@ -318,7 +318,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         append: tab !== CompilationKind.Contract,
                     },
                     {
-                        classes: 'grow basis-0 border-t p-2 overflow-y-auto',
+                        classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
                     },
                 ])}
             >
@@ -361,7 +361,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         append: tab !== CompilationKind.Value,
                     },
                     {
-                        classes: 'grow basis-0 border-t p-2',
+                        classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
                     },
                 ])}
             >
@@ -397,7 +397,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         append: tab !== CompilationKind.Type,
                     },
                     {
-                        classes: 'grow basis-0 p-2',
+                        classes: 'grow basis-0 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
                     },
                 ])}
             >

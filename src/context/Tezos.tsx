@@ -5,11 +5,13 @@ import settings from 'src/settings.json';
 export enum NetworkKind {
     Mainnet = 'Mainnet',
     Hangzhounet = 'Hangzhounet',
+    Ithacanet = 'Ithacanet',
 }
 
 export const DEFAULT_RPC = {
-    [NetworkKind.Mainnet]: 'https://mainnet.api.tez.ie',
-    [NetworkKind.Hangzhounet]: 'https://hangzhounet.api.tez.ie',
+    [NetworkKind.Mainnet]: 'https://mainnet.visualtez.com',
+    [NetworkKind.Hangzhounet]: 'https://hangzhounet.visualtez.com',
+    [NetworkKind.Ithacanet]: 'https://ithacanet.visualtez.com',
 };
 
 interface ITezosStorage {

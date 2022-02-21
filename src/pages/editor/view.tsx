@@ -27,7 +27,7 @@ interface EditorViewProps {
 }
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { state, updateXML, updateDivider, drawer } = useEditor();
+    const { state, workspace, updateWorkspace, updateDivider, drawer } = useEditor();
 
     const resizeWorkspace = React.useCallback(() => {
         if (workspaceRef.current) {
@@ -56,11 +56,14 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
             ) {
                 if (workspaceRef.current) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
-                    updateXML(xml);
+                    updateWorkspace({
+                        ...workspace,
+                        xml,
+                    });
                 }
             }
         },
-        [updateXML, workspaceRef],
+        [updateWorkspace, workspace, workspaceRef],
     );
 
     return (
@@ -74,7 +77,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                 >
                     <Section minSize={'40%'} size={(drawer && state.divider?.left) || '100%'} className="relative">
                         <BlocklyEditor
-                            currentXML={state.currentXML}
+                            currentXML={workspace.xml}
                             workspaceRef={workspaceRef}
                             trashcan={false}
                             move={{

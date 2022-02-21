@@ -2,6 +2,7 @@ import React, { createContext } from 'react';
 
 import type { Compilation } from 'src/blocks';
 import settings from 'src/settings.json';
+import { generateRandomString } from 'src/utils/rand';
 
 export enum DrawerKind {
     Compilation = 'compilation',
@@ -16,8 +17,15 @@ export enum EditorRenderer {
     Geras = 'geras',
 }
 
+interface IEditorWorkspace {
+    id: string;
+    name: string;
+    xml: string;
+}
+
 interface IEditorStorage {
-    currentXML: string;
+    currentWorkspace?: string;
+    workspaces: Record<string, IEditorWorkspace>;
     renderer: EditorRenderer;
     divider?: {
         left: string;
@@ -27,7 +35,9 @@ interface IEditorStorage {
 
 export interface IEditorContext {
     state: IEditorStorage;
-    updateXML: (xml: string) => void;
+    workspace: IEditorWorkspace;
+    createWorkspace: (name: string, xml: string) => void;
+    updateWorkspace: (workspace: IEditorWorkspace) => void;
     updateRenderer: (renderer: EditorRenderer) => void;
     updateDivider: (left: string, right: string) => void;
     drawer: DrawerKind | null;
@@ -41,13 +51,21 @@ export interface IEditorContext {
 
 const contextStub: IEditorContext = {
     state: {
-        currentXML: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+        workspaces: {},
         renderer: EditorRenderer.Zelos,
     },
-    updateRenderer: () => {
+    workspace: {
+        id: '',
+        name: '',
+        xml: '',
+    },
+    createWorkspace: () => {
         // stub
     },
-    updateXML: () => {
+    updateWorkspace: () => {
+        // stub
+    },
+    updateRenderer: () => {
         // stub
     },
     updateDivider: () => {
@@ -70,15 +88,28 @@ const Context = createContext<IEditorContext>(contextStub);
 
 const EDITOR_STORAGE_KEY = `${settings.storage_prefix}/editor`;
 
+const newWorkspace = (name: string, xml?: string): IEditorWorkspace => ({
+    id: generateRandomString(),
+    name,
+    xml: xml || '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+});
+
 /**
  * @description Fetch editor state from local storage.
  * @returns {IEditorStorage} Editor state
  */
 const fetchEditorState = (): IEditorStorage => {
-    const storage = JSON.parse(window.localStorage.getItem(EDITOR_STORAGE_KEY) || '{}');
+    const storage: IEditorStorage = JSON.parse(window.localStorage.getItem(EDITOR_STORAGE_KEY) || '{}');
 
     // Set default renderer
     storage.renderer ||= EditorRenderer.Zelos;
+
+    if (!Object.keys(storage.workspaces)?.length) {
+        const defaultWorkspace = newWorkspace('Default Workspace');
+        storage.workspaces = {
+            [defaultWorkspace.id]: defaultWorkspace,
+        };
+    }
 
     return storage;
 };
@@ -98,14 +129,33 @@ const Provider: React.FC = (props) => {
     const [error, setError] = React.useState<string>();
     const [compilations, setCompilations] = React.useState<Compilation[]>([]);
 
+    const workspace = React.useMemo(() => {
+        return state.currentWorkspace ? state.workspaces[state.currentWorkspace] : Object.values(state.workspaces)[0];
+    }, [state.currentWorkspace, state.workspaces]);
+
     React.useEffect(() => {
         saveEditorState(state);
     }, [state]);
 
-    const updateXML = React.useCallback((xml: string) => {
+    const updateWorkspace = React.useCallback((workspace: IEditorWorkspace) => {
         updateState((state) => ({
             ...state,
-            currentXML: xml,
+            workspaces: {
+                ...state.workspaces,
+                [workspace.id]: workspace,
+            },
+        }));
+    }, []);
+
+    const createWorkspace = React.useCallback((name: string, xml: string) => {
+        const workspace = newWorkspace(name, xml);
+
+        updateState((state) => ({
+            ...state,
+            workspaces: {
+                ...state.workspaces,
+                [workspace.id]: workspace,
+            },
         }));
     }, []);
 
@@ -136,8 +186,10 @@ const Provider: React.FC = (props) => {
         <Context.Provider
             value={{
                 state,
+                workspace,
+                updateWorkspace,
+                createWorkspace,
                 updateRenderer,
-                updateXML,
                 updateDivider,
                 drawer,
                 updateDrawer,
