@@ -24,7 +24,6 @@ SmartML.addBlock(BlockKind.set_variable_block, {
 
 SmartML.addBlock(BlockKind.variables_get, {
     toValue: (block: Block) => {
-        console.error(block);
         const variable = block.getFieldValue('VAR');
         switch (variable) {
             case Variable.contract_storage:

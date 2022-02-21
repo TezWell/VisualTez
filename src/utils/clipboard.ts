@@ -1,3 +1,5 @@
+import Logger from './logger';
+
 /**
  * @description Identifies if the application is running on safari.
  */
@@ -12,7 +14,7 @@ export const copyToClipboard = (text: string) => {
     if (navigator && navigator.clipboard && !usingSafari()) {
         navigator.clipboard.writeText(text);
     } else {
-        console.warn("Your browser doesn't support clipboard API, using a legacy functionality.");
+        Logger.warn("Your browser doesn't support clipboard API, using a legacy functionality.");
         LEGACY_copyToClipboard(text);
     }
 };

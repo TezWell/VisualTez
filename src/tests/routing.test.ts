@@ -3,6 +3,12 @@ import { waitFor } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import { routes } from 'src/router/routes';
 
+// Mock crypto.getRandomValues
+
+Object.defineProperty(window, 'crypto', {
+    value: { getRandomValues: () => new Uint32Array(10) },
+});
+
 describe('Application Routing', () => {
     routes
         .filter(({ disabled }) => !disabled)

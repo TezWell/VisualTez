@@ -16,6 +16,7 @@ import Drawer from './toolbar/Drawer';
 import { initiateDefaultVariables } from 'src/blocks/utils/variables';
 import Separator from 'src/components/blockly/Separator';
 import Label from 'src/components/blockly/Label';
+import { IEditorWorkspace } from 'src/context/Editor';
 
 // Debouncer
 const onDebouncer = debounce(10);
@@ -27,7 +28,7 @@ interface EditorViewProps {
 }
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { state, workspace, updateWorkspace, updateDivider, drawer } = useEditor();
+    const { state, workspace, updateWorkspace, updateEditorState, drawer } = useEditor();
 
     const resizeWorkspace = React.useCallback(() => {
         if (workspaceRef.current) {
@@ -38,14 +39,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
     const saveSectionSizes = React.useCallback(
         (sizes: { editorSize: string; outputSize: string }) => {
-            updateDivider(sizes.editorSize, sizes.outputSize);
+            updateEditorState({
+                divider: {
+                    left: sizes.editorSize,
+                    right: sizes.outputSize,
+                },
+            });
             resizeWorkspace();
         },
-        [updateDivider, resizeWorkspace],
+        [updateEditorState, resizeWorkspace],
     );
 
     const onChange = React.useCallback(
-        (event: any) => {
+        (_workspace: IEditorWorkspace, event: any) => {
             if (
                 [
                     Blockly.Events.BLOCK_CHANGE,
@@ -102,7 +108,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             }}
                             onLoad={initiateDefaultVariables}
                             onError={onError}
-                            onChange={onChange}
+                            onChange={(e) => onChange(workspace, e)}
                         >
                             <Category name="Base" categorystyle="class_category">
                                 <Block type={BlockKind.contract_block}>

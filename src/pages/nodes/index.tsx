@@ -2,6 +2,7 @@ import React from 'react';
 
 import settings from 'src/settings.json';
 import Http from 'src/utils/http';
+import Logger from 'src/utils/logger';
 import NodesView, { NodeStatus } from './view';
 
 const Nodes = () => {
@@ -39,7 +40,7 @@ const Nodes = () => {
                         };
                     })
                     .catch((e) => {
-                        console.debug(e);
+                        Logger.debug(e);
                         return {
                             network: network,
                             online: false,

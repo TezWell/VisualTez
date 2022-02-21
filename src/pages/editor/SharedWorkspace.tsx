@@ -1,6 +1,5 @@
 import React from 'react';
-import type { Workspace, WorkspaceSvg } from 'blockly';
-import Blockly from 'blockly';
+import type { WorkspaceSvg } from 'blockly';
 
 import BlocklyEditor from 'src/components/blockly/Editor';
 import Button from 'src/components/common/Button';
@@ -26,9 +25,6 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml
     const importWorkspace = React.useCallback(() => {
         if (mainWorkspaceRef.current) {
             createWorkspace(name, xml);
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(xml), mainWorkspaceRef.current as Workspace);
-            Blockly.svgResize(mainWorkspaceRef.current);
-            mainWorkspaceRef.current.scrollCenter();
             onClose();
         }
     }, [createWorkspace, mainWorkspaceRef, name, onClose, xml]);

@@ -17,7 +17,7 @@ export enum EditorRenderer {
     Geras = 'geras',
 }
 
-interface IEditorWorkspace {
+export interface IEditorWorkspace {
     id: string;
     name: string;
     xml: string;
@@ -36,10 +36,17 @@ interface IEditorStorage {
 export interface IEditorContext {
     state: IEditorStorage;
     workspace: IEditorWorkspace;
-    createWorkspace: (name: string, xml: string) => void;
+    createWorkspace: (name: string, xml?: string) => void;
     updateWorkspace: (workspace: IEditorWorkspace) => void;
+    deleteWorkspace: (workspaceId: string) => void;
     updateRenderer: (renderer: EditorRenderer) => void;
-    updateDivider: (left: string, right: string) => void;
+    updateEditorState: (args: {
+        currentWorkspace?: string;
+        divider?: {
+            left: string;
+            right: string;
+        };
+    }) => void;
     drawer: DrawerKind | null;
     updateDrawer: (drawer?: DrawerKind) => void;
     error?: string;
@@ -65,10 +72,13 @@ const contextStub: IEditorContext = {
     updateWorkspace: () => {
         // stub
     },
+    deleteWorkspace: () => {
+        // stub
+    },
     updateRenderer: () => {
         // stub
     },
-    updateDivider: () => {
+    updateEditorState: () => {
         // stub
     },
     drawer: null,
@@ -104,13 +114,6 @@ const fetchEditorState = (): IEditorStorage => {
     // Set default renderer
     storage.renderer ||= EditorRenderer.Zelos;
 
-    if (!Object.keys(storage.workspaces)?.length) {
-        const defaultWorkspace = newWorkspace('Default Workspace');
-        storage.workspaces = {
-            [defaultWorkspace.id]: defaultWorkspace,
-        };
-    }
-
     return storage;
 };
 
@@ -129,13 +132,25 @@ const Provider: React.FC = (props) => {
     const [error, setError] = React.useState<string>();
     const [compilations, setCompilations] = React.useState<Compilation[]>([]);
 
-    const workspace = React.useMemo(() => {
-        return state.currentWorkspace ? state.workspaces[state.currentWorkspace] : Object.values(state.workspaces)[0];
-    }, [state.currentWorkspace, state.workspaces]);
-
     React.useEffect(() => {
         saveEditorState(state);
     }, [state]);
+
+    const updateEditorState = React.useCallback(
+        (args: {
+            currentWorkspace?: string;
+            divider?: {
+                left: string;
+                right: string;
+            };
+        }) => {
+            updateState((state) => ({
+                ...state,
+                ...args,
+            }));
+        },
+        [],
+    );
 
     const updateWorkspace = React.useCallback((workspace: IEditorWorkspace) => {
         updateState((state) => ({
@@ -147,7 +162,23 @@ const Provider: React.FC = (props) => {
         }));
     }, []);
 
-    const createWorkspace = React.useCallback((name: string, xml: string) => {
+    const deleteWorkspace = React.useCallback(
+        (workspaceId: string) => {
+            updateState({
+                ...state,
+                currentWorkspace: state.currentWorkspace === workspaceId ? undefined : state.currentWorkspace,
+                workspaces: Object.keys(state.workspaces).reduce((p, c) => {
+                    if (workspaceId !== c) {
+                        p[c] = state.workspaces[c];
+                    }
+                    return p;
+                }, {} as Record<string, IEditorWorkspace>),
+            });
+        },
+        [state],
+    );
+
+    const createWorkspace = React.useCallback((name: string, xml?: string) => {
         const workspace = newWorkspace(name, xml);
 
         updateState((state) => ({
@@ -156,17 +187,10 @@ const Provider: React.FC = (props) => {
                 ...state.workspaces,
                 [workspace.id]: workspace,
             },
+            currentWorkspace: workspace.id,
         }));
-    }, []);
 
-    const updateDivider = React.useCallback((left: string, right: string) => {
-        updateState((state) => ({
-            ...state,
-            divider: {
-                left,
-                right,
-            },
-        }));
+        return workspace;
     }, []);
 
     const updateDrawer = React.useCallback((newDrawer?: DrawerKind) => setDrawer(!newDrawer ? null : newDrawer), []);
@@ -182,6 +206,18 @@ const Provider: React.FC = (props) => {
         }));
     }, []);
 
+    const workspace = React.useMemo(() => {
+        if (state.currentWorkspace && state.workspaces?.[state.currentWorkspace]) {
+            return state.workspaces[state.currentWorkspace];
+        }
+
+        if (Object.keys(state?.workspaces || {}).length) {
+            return Object.values(state.workspaces)[0];
+        }
+
+        return createWorkspace('Default Workspace');
+    }, [createWorkspace, state.currentWorkspace, state.workspaces]);
+
     return (
         <Context.Provider
             value={{
@@ -189,8 +225,9 @@ const Provider: React.FC = (props) => {
                 workspace,
                 updateWorkspace,
                 createWorkspace,
+                deleteWorkspace,
                 updateRenderer,
-                updateDivider,
+                updateEditorState,
                 drawer,
                 updateDrawer,
                 error,

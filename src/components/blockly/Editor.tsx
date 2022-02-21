@@ -55,7 +55,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
     ...props
 }) => {
     const { isDark } = useTheme();
-    const { state } = useEditor();
+    const { state, workspace } = useEditor();
     const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
     const toolbox = React.useRef<HTMLDivElement>(null);
@@ -75,24 +75,32 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
                     renderer: state.renderer,
                     ...props,
                 });
-                const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
-                Blockly.Xml.domToWorkspace(
-                    Blockly.Xml.textToDom(currentXML || baseXML),
-                    workspaceRef.current as Workspace,
-                );
-                onChange && workspaceRef.current.addChangeListener(onChange);
-                workspaceRef.current.scrollCenter();
                 onLoad?.();
-                loaded.current = true;
             } catch (e: any) {
                 Logger.debug(e);
                 onError?.(e?.message);
             }
         }
+    }, []);
+
+    React.useEffect(() => {
+        onChange && workspaceRef.current?.addChangeListener(onChange);
         return () => {
             onChange && workspaceRef.current?.removeChangeListener(onChange);
         };
-    }, []);
+    }, [onChange, workspaceRef]);
+
+    React.useEffect(() => {
+        if (workspaceRef.current) {
+            const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(
+                Blockly.Xml.textToDom(currentXML || baseXML),
+                workspaceRef.current as Workspace,
+            );
+            Blockly.svgResize(workspaceRef.current);
+            workspaceRef.current.scrollCenter();
+        }
+    }, [currentXML, workspaceRef]);
 
     return (
         <React.Fragment>
