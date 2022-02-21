@@ -16,7 +16,6 @@ import Drawer from './toolbar/Drawer';
 import { initiateDefaultVariables } from 'src/blocks/utils/variables';
 import Separator from 'src/components/blockly/Separator';
 import Label from 'src/components/blockly/Label';
-import { IEditorWorkspace } from 'src/context/Editor';
 
 // Debouncer
 const onDebouncer = debounce(10);
@@ -29,6 +28,7 @@ interface EditorViewProps {
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
     const { state, workspace, updateWorkspace, updateEditorState, drawer } = useEditor();
+    const workspaceID = React.useRef(workspace.id);
 
     const resizeWorkspace = React.useCallback(() => {
         if (workspaceRef.current) {
@@ -51,7 +51,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
     );
 
     const onChange = React.useCallback(
-        (_workspace: IEditorWorkspace, event: any) => {
+        (event: any) => {
             if (
                 [
                     Blockly.Events.BLOCK_CHANGE,
@@ -71,6 +71,18 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
         },
         [updateWorkspace, workspace, workspaceRef],
     );
+
+    React.useEffect(() => {
+        if (workspaceRef.current && workspaceID.current !== workspace.id) {
+            const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(
+                Blockly.Xml.textToDom(workspace.xml || baseXML),
+                workspaceRef.current as Workspace,
+            );
+            resizeWorkspace();
+            workspaceID.current = workspace.id;
+        }
+    }, [resizeWorkspace, workspace, workspaceRef]);
 
     return (
         <div className="flex flex-row flex-1">
@@ -108,7 +120,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             }}
                             onLoad={initiateDefaultVariables}
                             onError={onError}
-                            onChange={(e) => onChange(workspace, e)}
+                            onChange={onChange}
                         >
                             <Category name="Base" categorystyle="class_category">
                                 <Block type={BlockKind.contract_block}>

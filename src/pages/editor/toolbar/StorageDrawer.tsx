@@ -223,8 +223,8 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                     },
                                 ])}
                             >
-                                <Disclosure.Button className="flex justify-between w-full p-2 text-sm font-medium bg-blue-400 rounded hover:bg-blue-300">
-                                    <span>{workspace.name}</span>
+                                <Disclosure.Button className="flex justify-between w-full p-2 bg-blue-400 rounded hover:bg-blue-300">
+                                    <span className="text-sm font-medium truncate">{workspace.name}</span>
                                     <ChevronDownIcon
                                         className={buildClassName([
                                             {
