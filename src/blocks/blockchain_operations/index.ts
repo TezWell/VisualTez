@@ -1,5 +1,11 @@
 import './amount';
 import './balance';
+import './chain_id';
+import './timestamp';
+import './current_contract';
+import './current_contract_address';
 import './level';
 import './sender';
 import './source';
+import './total_voting_power';
+import './voting_power';
