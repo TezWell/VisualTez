@@ -1,4 +1,4 @@
-type LogLevel = 'info' | 'debug' | 'error';
+type LogLevel = 'info' | 'debug' | 'error' | 'warn';
 type LogLevelMethod = (...d: unknown[]) => void;
 
 /**
@@ -18,6 +18,7 @@ const Logger = {
     info: createLogLevel('info'),
     debug: createLogLevel('debug'),
     error: createLogLevel('error'),
+    warn: createLogLevel('warn'),
 };
 
 export default Logger;

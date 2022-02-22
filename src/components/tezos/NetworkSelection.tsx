@@ -43,7 +43,7 @@ const NetworkSelection = () => {
                         type="text"
                         name="tezos-rpc"
                         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300  dark:text-black"
-                        placeholder="https://mainnet.api.tez.ie"
+                        placeholder="https://mainnet.visualtez.com"
                         value={state.rpc}
                         onChange={onRpcChange}
                     />

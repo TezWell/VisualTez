@@ -5,6 +5,7 @@ import BlockKind from '../enums/BlockKind';
 import { IType } from '@tezwell/smartts-sdk/typings/type';
 import { IToString } from '@tezwell/smartts-sdk/typings/shared';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
+import Logger from 'src/utils/logger';
 
 interface IBlock {
     toType?: (block: Block) => IType<unknown>;
@@ -128,7 +129,7 @@ class Generator extends Blockly.Generator {
     workspaceToCode(workspace: Workspace) {
         if (!workspace) {
             // Backwards compatibility from before there could be multiple workspaces.
-            console.warn('No workspace specified in workspaceToCode call.  Guessing.');
+            Logger.warn('No workspace specified in workspaceToCode call.  Guessing.');
             workspace = Blockly.common.getMainWorkspace();
         }
         const codeBlocks = [];

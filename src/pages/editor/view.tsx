@@ -27,7 +27,8 @@ interface EditorViewProps {
 }
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { state, updateXML, updateDivider, drawer } = useEditor();
+    const { state, workspace, updateWorkspace, updateEditorState, drawer } = useEditor();
+    const workspaceID = React.useRef(workspace.id);
 
     const resizeWorkspace = React.useCallback(() => {
         if (workspaceRef.current) {
@@ -38,10 +39,15 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
     const saveSectionSizes = React.useCallback(
         (sizes: { editorSize: string; outputSize: string }) => {
-            updateDivider(sizes.editorSize, sizes.outputSize);
+            updateEditorState({
+                divider: {
+                    left: sizes.editorSize,
+                    right: sizes.outputSize,
+                },
+            });
             resizeWorkspace();
         },
-        [updateDivider, resizeWorkspace],
+        [updateEditorState, resizeWorkspace],
     );
 
     const onChange = React.useCallback(
@@ -56,12 +62,27 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
             ) {
                 if (workspaceRef.current) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
-                    updateXML(xml);
+                    updateWorkspace({
+                        ...workspace,
+                        xml,
+                    });
                 }
             }
         },
-        [updateXML, workspaceRef],
+        [updateWorkspace, workspace, workspaceRef],
     );
+
+    React.useEffect(() => {
+        if (workspaceRef.current && workspaceID.current !== workspace.id) {
+            const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(
+                Blockly.Xml.textToDom(workspace.xml || baseXML),
+                workspaceRef.current as Workspace,
+            );
+            resizeWorkspace();
+            workspaceID.current = workspace.id;
+        }
+    }, [resizeWorkspace, workspace, workspaceRef]);
 
     return (
         <div className="flex flex-row flex-1">
@@ -74,7 +95,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                 >
                     <Section minSize={'40%'} size={(drawer && state.divider?.left) || '100%'} className="relative">
                         <BlocklyEditor
-                            currentXML={state.currentXML}
+                            currentXML={workspace.xml}
                             workspaceRef={workspaceRef}
                             trashcan={false}
                             move={{
@@ -100,7 +121,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             onLoad={initiateDefaultVariables}
                             onError={onError}
                             onChange={onChange}
-                            renderer="zelos"
                         >
                             <Category name="Base" categorystyle="class_category">
                                 <Block type={BlockKind.contract_block}>

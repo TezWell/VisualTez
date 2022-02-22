@@ -2,6 +2,7 @@ import type { IValue } from '@tezwell/michelson-sdk/typings';
 import type { IType } from '@tezwell/michelson-sdk/typings';
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
+import Logger from 'src/utils/logger';
 
 import BlockKind from '../enums/BlockKind';
 
@@ -85,7 +86,7 @@ class Generator extends Blockly.Generator {
      */
     translateValue(block: Block | null): IValue {
         if (this.isInitialized === false) {
-            console.warn('Generator init was not called before blockToCode was called.');
+            Logger.warn('Generator init was not called before blockToCode was called.');
         }
         if (!block) {
             throw Error('Unexpected null block when translating to Michelson value.');
@@ -121,7 +122,7 @@ class Generator extends Blockly.Generator {
      */
     translateType(block: Block | null): IType {
         if (this.isInitialized === false) {
-            console.warn('Generator init was not called before blockToCode was called.');
+            Logger.warn('Generator init was not called before blockToCode was called.');
         }
         if (!block) {
             throw Error('Unexpected null block when translating to Michelson type.');

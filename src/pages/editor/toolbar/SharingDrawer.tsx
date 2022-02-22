@@ -29,20 +29,20 @@ export const generatePermalink = async (content: string) => {
 interface SharingDrawerProps {}
 
 const SharingDrawer: React.FC<SharingDrawerProps> = () => {
-    const { state } = useEditor();
+    const { workspace } = useEditor();
     const [permalink, setPermalink] = React.useState<string>();
     const [error, setError] = React.useState<string>();
     const [generatingPermalink, setGeneratingPermalink] = React.useState(false);
 
     const generatePermaLink = React.useCallback(() => {
         setGeneratingPermalink(true);
-        generatePermalink(state.currentXML)
+        generatePermalink(workspace.xml)
             .then(setPermalink)
             .catch((e) => {
                 setError(e?.toString() || 'Could not generate permalink.');
             })
             .finally(() => setGeneratingPermalink(false));
-    }, [state]);
+    }, [workspace]);
 
     return (
         <div className="flex flex-col w-full h-full p-5">

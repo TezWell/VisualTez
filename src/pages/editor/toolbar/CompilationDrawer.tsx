@@ -16,6 +16,7 @@ import Modal from 'src/components/common/Modal';
 import useEditor from 'src/context/hooks/useEditor';
 import useDeployment from 'src/context/hooks/useDeployment';
 import { buildClassName } from 'src/utils/className';
+import Logger from 'src/utils/logger';
 
 interface ContractModalProps {
     compilation?: ContractCompilation;
@@ -28,11 +29,10 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
     const storageJSON = React.useMemo(() => {
         try {
             if (compilation) {
-                console.error(compilation);
                 return JSON.stringify(compilation.result.storage.toJSON(), null, 2);
             }
         } catch (e: any) {
-            console.debug(e);
+            Logger.debug(e);
             return e.message;
         }
     }, [compilation]);
@@ -133,7 +133,7 @@ const TypeValueModal: React.FC<TypeModalProps> = ({ compilation, ...props }) => 
                 return JSON.stringify(compilation.result.json, null, 2);
             }
         } catch (e: any) {
-            console.debug(e);
+            Logger.debug(e);
             return e.message;
         }
     }, [compilation]);
@@ -318,7 +318,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         append: tab !== CompilationKind.Contract,
                     },
                     {
-                        classes: 'grow basis-0 border-t p-2 overflow-y-auto',
+                        classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
                     },
                 ])}
             >
@@ -361,7 +361,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         append: tab !== CompilationKind.Value,
                     },
                     {
-                        classes: 'grow basis-0 border-t p-2',
+                        classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
                     },
                 ])}
             >
@@ -397,7 +397,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         append: tab !== CompilationKind.Type,
                     },
                     {
-                        classes: 'grow basis-0 p-2',
+                        classes: 'grow basis-0 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
                     },
                 ])}
             >

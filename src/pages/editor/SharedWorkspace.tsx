@@ -1,11 +1,11 @@
 import React from 'react';
-import type { Workspace, WorkspaceSvg } from 'blockly';
-import Blockly from 'blockly';
+import type { WorkspaceSvg } from 'blockly';
 
 import BlocklyEditor from 'src/components/blockly/Editor';
 import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
 import useEditor from 'src/context/hooks/useEditor';
+import { generateRandomString } from 'src/utils/rand';
 
 interface SharedWorkspaceProps {
     mainWorkspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -15,17 +15,19 @@ interface SharedWorkspaceProps {
 
 const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml, onClose }) => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
-    const { updateXML } = useEditor();
+    const [name, setName] = React.useState(`Workspace_${generateRandomString()}`);
+    const { createWorkspace } = useEditor();
+
+    const updateName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value);
+    }, []);
 
     const importWorkspace = React.useCallback(() => {
         if (mainWorkspaceRef.current) {
-            updateXML(xml);
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(xml), mainWorkspaceRef.current as Workspace);
-            Blockly.svgResize(mainWorkspaceRef.current);
-            mainWorkspaceRef.current.scrollCenter();
+            createWorkspace(name, xml);
             onClose();
         }
-    }, [mainWorkspaceRef, onClose, updateXML, xml]);
+    }, [createWorkspace, mainWorkspaceRef, name, onClose, xml]);
 
     return (
         <Modal
@@ -53,23 +55,34 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml
                 </Button>,
             ]}
         >
-            <div className="relative h-96">
-                <BlocklyEditor
-                    currentXML={xml}
-                    noToolbox
-                    workspaceRef={workspaceRef}
-                    trashcan={false}
-                    readOnly
-                    zoom={{
-                        controls: true,
-                        wheel: true,
-                        startScale: 0.4,
-                        maxScale: 1,
-                        minScale: 0.1,
-                        scaleSpeed: 1.1,
-                    }}
-                    renderer="zelos"
-                />
+            <div className="flex flex-col h-96">
+                <div className="p-2">
+                    <input
+                        type="text"
+                        name="workspace-name"
+                        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-md sm:text-sm border-gray-300  dark:text-black"
+                        placeholder="Workspace Name"
+                        value={name}
+                        onChange={updateName}
+                    />
+                </div>
+                <div className="relative grow">
+                    <BlocklyEditor
+                        currentXML={xml}
+                        noToolbox
+                        workspaceRef={workspaceRef}
+                        trashcan={false}
+                        readOnly
+                        zoom={{
+                            controls: true,
+                            wheel: true,
+                            startScale: 0.4,
+                            maxScale: 1,
+                            minScale: 0.1,
+                            scaleSpeed: 1.1,
+                        }}
+                    />
+                </div>
             </div>
         </Modal>
     );
