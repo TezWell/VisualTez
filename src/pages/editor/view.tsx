@@ -98,17 +98,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             currentXML={workspace.xml}
                             workspaceRef={workspaceRef}
                             trashcan={false}
-                            move={{
-                                scrollbars: true,
-                                drag: true,
-                                wheel: true,
-                            }}
                             comments={true}
                             grid={{
                                 spacing: 50,
                                 length: 3,
                                 colour: '#ccc',
-                                snap: true,
+                                snap: false,
                             }}
                             zoom={{
                                 controls: true,
@@ -263,9 +258,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 </Block>
                                 <Block type={BlockKind.record_variant_field_type} />
                             </Category>
-                            <Category name="Blockchain Operations" categorystyle="blockchain_category">
+                            <Category name="(Block & Operation) Values" categorystyle="blockchain_category">
+                                <Block type={BlockKind.get_amount_block} />
+                                <Block type={BlockKind.get_balance_block} />
                                 <Block type={BlockKind.get_level_block} />
                                 <Block type={BlockKind.get_sender_block} />
+                                <Block type={BlockKind.get_source_block} />
                             </Category>
                             <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
                                 <Block type={BlockKind.param_access} />
