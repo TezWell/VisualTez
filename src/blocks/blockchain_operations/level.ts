@@ -9,7 +9,7 @@ const BlockLevel = {
     type: BlockKind.get_level_block,
     message0: 'Get Level',
     tooltip: 'Returns the level of the head block.',
-    output: 'Number',
+    output: ['Expression', 'Nat'],
     colour: 1,
 };
 

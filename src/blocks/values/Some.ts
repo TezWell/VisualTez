@@ -12,7 +12,7 @@ import Michelson from '../generators/Michelson';
 const SomeBlock = {
     type: BlockKind.some_literal,
     message0: 'Some %1',
-    args0: [{ type: 'input_value', name: 'option_value', check: 'Literal' }],
+    args0: [{ type: 'input_value', name: 'option_value', check: ['Literal', 'Expression'] }],
     inputsInline: true,
     output: ['Literal', 'Option'],
     colour: 340,

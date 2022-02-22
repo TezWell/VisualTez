@@ -9,7 +9,7 @@ const GetSenderBlock = {
     type: BlockKind.get_sender_block,
     message0: 'Get Sender',
     tooltip: 'Returns the address of the operation sender.',
-    output: 'Address',
+    output: ['Expression', 'Address'],
     colour: 1,
 };
 
