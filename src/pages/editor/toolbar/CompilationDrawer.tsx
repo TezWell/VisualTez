@@ -19,11 +19,12 @@ import { buildClassName } from 'src/utils/className';
 import Logger from 'src/utils/logger';
 
 interface ContractModalProps {
-    compilation?: ContractCompilation;
+    gotoDeployment: (compilation: ContractCompilation) => void;
+    compilation: ContractCompilation;
     onClose: () => void;
 }
 
-const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) => {
+const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilation, ...props }) => {
     const isOpen = React.useMemo(() => !!compilation, [compilation]);
 
     const storageJSON = React.useMemo(() => {
@@ -49,10 +50,10 @@ const ContractModal: React.FC<ContractModalProps> = ({ compilation, ...props }) 
             actions={[
                 <Button
                     key="deploy"
-                    disabled
-                    className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 disabled:bg-yellow-500 disabled:border-yellow-700 p-2"
+                    onClick={() => gotoDeployment(compilation)}
+                    className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
                 >
-                    Deploy (In Progress)
+                    Deploy
                 </Button>,
                 <Button
                     key="close"
@@ -335,14 +336,14 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                             onClick={() => openContractCompilationModal(compilation)}
                             className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
                         >
-                            Show
+                            Show Contract
                         </Button>
                         <Button
                             fullWidth
                             onClick={() => gotoDeployment(compilation)}
                             className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-1"
                         >
-                            Deploy (In Progress)
+                            Deploy Contract
                         </Button>
                     </div>
                 ))}
@@ -420,7 +421,13 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 ))}
             </div>
 
-            <ContractModal compilation={contractCompilation} onClose={closeContractCompilationModal} />
+            {contractCompilation ? (
+                <ContractModal
+                    gotoDeployment={gotoDeployment}
+                    compilation={contractCompilation}
+                    onClose={closeContractCompilationModal}
+                />
+            ) : null}
             <TypeValueModal compilation={typeValueCompilation} onClose={closeTypeValueCompilationModal} />
         </div>
     );

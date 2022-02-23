@@ -56,12 +56,11 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
 }) => {
     const { isDark } = useTheme();
     const { state } = useEditor();
-    const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
     const toolbox = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-        if (loaded.current && workspaceRef.current) {
+        if (workspaceRef.current) {
             workspaceRef.current.setTheme(isDark ? DarkTheme : LightTheme);
         }
     }, [isDark, workspaceRef]);

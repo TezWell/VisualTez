@@ -63,6 +63,7 @@ export enum BlockKind {
     pair_literal = 'pair_literal',
     some_literal = 'some_literal',
     none_literal = 'none_literal',
+    none_with_type_literal = 'none_with_type_literal',
 
     record_literal = 'record_literal',
     record_field = 'record_field',
