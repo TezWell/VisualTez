@@ -27,12 +27,18 @@ const NetworkSelection = () => {
             <div className="mt-1 flex">
                 <select
                     name="tezos-network"
+                    value={state.network}
                     onChange={onNetworkChange}
                     className="focus:ring-indigo-500 focus:border-indigo-500 rounded-md sm:text-sm border-gray-300 dark:text-black"
                 >
-                    {Object.keys(NetworkKind).map((network) => (
-                        <option key={network}>{network}</option>
+                    {Object.entries(NetworkKind).map(([text, value]) => (
+                        <option key={value} value={value}>
+                            {text}
+                        </option>
                     ))}
+                    <option disabled value="CUSTOM">
+                        Custom
+                    </option>
                 </select>
                 <div className="relative h-10 border ml-3 mr-3 border-black dark:border-white" />
                 <div className="flex flex-1 rounded-md shadow-sm">
