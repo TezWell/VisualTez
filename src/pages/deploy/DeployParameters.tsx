@@ -1,10 +1,22 @@
+import type { Workspace, WorkspaceSvg } from 'blockly';
 import React from 'react';
+
+import { extractBlocks } from 'src/blocks';
+import Michelson from 'src/blocks/generators/Michelson';
 import Button from 'src/components/common/Button';
 import { Field } from 'src/context/Deployment';
 import useDeployment from 'src/context/hooks/useDeployment';
+import useTezos from 'src/context/hooks/useTezos';
+import { estimateOrigination } from 'src/services/wallet/estimator';
+import Logger from 'src/utils/logger';
 
-const DeployParameters = () => {
-    const { parameters, changeParameters } = useDeployment();
+interface DeployParametersProps {
+    workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
+}
+
+const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => {
+    const { client } = useTezos();
+    const { state, parameters, changeParameters } = useDeployment();
 
     const onFieldChange = React.useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,12 +39,42 @@ const DeployParameters = () => {
         [changeParameters, parameters],
     );
 
+    const estimate = React.useCallback(() => {
+        if (workspaceRef.current) {
+            try {
+                const blocks = extractBlocks(workspaceRef.current as Workspace);
+                const code = JSON.parse(state.code || '{}');
+                if (!code) {
+                    throw new Error('Could not prepare contract code.');
+                }
+                const storage = blocks.map((block) => Michelson.translateValue(block).toJSON())?.[0];
+                if (!storage) {
+                    throw new Error('Could not generate initial storage.');
+                }
+                if (client.current) {
+                    estimateOrigination(client.current, {
+                        code,
+                        storage,
+                    }).then(({ fee, gasLimit: gas_limit, storageLimit: storage_limit }) => {
+                        changeParameters({
+                            fee,
+                            gas_limit,
+                            storage_limit,
+                        });
+                    });
+                }
+            } catch (e: any) {
+                Logger.debug(e);
+            }
+        }
+    }, [changeParameters, client, state.code, workspaceRef]);
+
     return (
-        <div className="relative shadow-lg rounded-md p-2 border-2 border-black dark:border-white">
+        <div className="rounded-md p-2 border-2 shadow-xl border-2 border-amber-500 dark:border-amber-400">
             <div className="flex justify-between items-center border-b border-black dark:border-white mb-2 pb-2">
                 <label className="font-mono text-xl font-bold">Parameters</label>
                 <Button
-                    type="button"
+                    onClick={estimate}
                     className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-1 px-2"
                 >
                     Estimate Costs
@@ -57,7 +99,7 @@ const DeployParameters = () => {
                     </span>
                     <input
                         type="number"
-                        defaultValue={0}
+                        value={parameters[Field.Amount]}
                         min={0}
                         step={1}
                         name={Field.Amount}
@@ -71,7 +113,7 @@ const DeployParameters = () => {
                     </span>
                     <input
                         type="number"
-                        defaultValue={parameters[Field.Fee]}
+                        value={parameters[Field.Fee]}
                         min={0}
                         step={0.001}
                         name={Field.Fee}
@@ -85,7 +127,7 @@ const DeployParameters = () => {
                     </span>
                     <input
                         type="number"
-                        defaultValue={parameters[Field.Gas_limit]}
+                        value={parameters[Field.Gas_limit]}
                         min={0}
                         step={100}
                         name={Field.Gas_limit}
@@ -99,7 +141,7 @@ const DeployParameters = () => {
                     </span>
                     <input
                         type="number"
-                        defaultValue={parameters[Field.Storage_limit]}
+                        value={parameters[Field.Storage_limit]}
                         min={0}
                         step={100}
                         name={Field.Storage_limit}

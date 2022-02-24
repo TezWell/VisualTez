@@ -22,7 +22,7 @@ const AccountInformation = () => {
 
     if (account) {
         return (
-            <div className=" container mx-auto rounded flex flex-col md:flex-row justify-center items-center p-5 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+            <div className="container mx-auto rounded flex flex-col md:flex-row justify-center items-center p-5 shadow-xl border-2 border-amber-500 dark:border-amber-400">
                 <div className="flex items-center justify-center p-2 rounded-full border-2 border-amber-500 dark:border-amber-400">
                     <Avatar value={account.address} size={64} />
                 </div>

@@ -20,7 +20,7 @@ const NetworkSelection = () => {
     );
 
     return (
-        <div className="relative shadow-lg rounded-md p-2 border-2 border-black dark:border-white">
+        <div className="relative shadow-lg rounded-md p-2 shadow-xl border-2 border-amber-500 dark:border-amber-400">
             <div className="relative border-b border-black dark:border-white mb-2">
                 <label className="block text-sm font-medium">Network Selection</label>
             </div>
