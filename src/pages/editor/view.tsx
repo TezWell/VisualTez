@@ -103,7 +103,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 spacing: 50,
                                 length: 3,
                                 colour: '#ccc',
-                                snap: false,
                             }}
                             zoom={{
                                 controls: true,
@@ -165,7 +164,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                                 <Label text="-- Option --" web-class="defaultLabel" />
                                 <Block type={BlockKind.some_literal} />
-                                <Block type={BlockKind.none_literal} />
+                                <Block type={BlockKind.none_with_type_literal} />
 
                                 <Label text="-- Sequences --" web-class="defaultLabel" />
                                 <Block type={BlockKind.sequence_item} />

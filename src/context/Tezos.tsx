@@ -1,11 +1,14 @@
 import React, { createContext } from 'react';
+import { TezosToolkit } from '@taquito/taquito';
+import { connect } from 'src/services/wallet';
 
 import settings from 'src/settings.json';
+import Logger from 'src/utils/logger';
 
 export enum NetworkKind {
-    Mainnet = 'Mainnet',
-    Hangzhounet = 'Hangzhounet',
-    Ithacanet = 'Ithacanet',
+    Mainnet = 'mainnet',
+    Hangzhounet = 'hangzhounet',
+    Ithacanet = 'ithacanet',
 }
 
 export const DEFAULT_RPC = {
@@ -14,13 +17,38 @@ export const DEFAULT_RPC = {
     [NetworkKind.Ithacanet]: 'https://ithacanet.visualtez.com',
 };
 
+export const NETWORK_OF_RPC: Record<string, NetworkKind> = Object.values(NetworkKind).reduce(
+    (p, network: NetworkKind) => ({
+        ...p,
+        [DEFAULT_RPC[network]]: network,
+    }),
+    {},
+);
+
 interface ITezosStorage {
     network: NetworkKind;
     rpc: string;
 }
 
+type ITezosWalletStatus = {
+    connecting: boolean;
+    error?: string;
+} & (
+    | {
+          address: string;
+          balance: number;
+          connected: true;
+      }
+    | {
+          connected: false;
+      }
+);
+
 export interface ITezosContext {
     state: ITezosStorage;
+    client: React.MutableRefObject<TezosToolkit | undefined>;
+    walletStatus: ITezosWalletStatus;
+    connectWallet: (tryReconnection?: boolean) => void;
     changeNetwork: (network: NetworkKind) => void;
     changeRPC: (rpc: string) => void;
 }
@@ -29,6 +57,16 @@ const contextStub: ITezosContext = {
     state: {
         network: NetworkKind.Mainnet,
         rpc: DEFAULT_RPC[NetworkKind.Mainnet],
+    },
+    client: {
+        current: {} as any,
+    },
+    walletStatus: {
+        connected: false,
+        connecting: false,
+    },
+    connectWallet: () => {
+        // stub
     },
     changeNetwork: () => {
         // stub
@@ -66,6 +104,39 @@ const saveState = (state: ITezosStorage): void => {
 
 const Provider: React.FC = (props) => {
     const [state, setState] = React.useState<ITezosStorage>(fetchState());
+    const [walletStatus, setWalletStatus] = React.useState<ITezosWalletStatus>({
+        connected: false,
+        connecting: false,
+    });
+    const client = React.useRef<TezosToolkit>();
+
+    const connectWallet = React.useCallback(
+        async (tryReconnection = false) => {
+            setWalletStatus({
+                connected: false,
+                connecting: true,
+            });
+            try {
+                client.current = await connect(state.rpc, state.network, tryReconnection);
+                const address = await client.current.wallet.pkh();
+                setWalletStatus({
+                    address,
+                    balance: 0,
+                    connected: true,
+                    connecting: false,
+                    error: '',
+                });
+            } catch (e: any) {
+                Logger.debug(e);
+                setWalletStatus({
+                    connected: false,
+                    connecting: false,
+                    error: e?.message || `${e}`,
+                });
+            }
+        },
+        [state.network, state.rpc],
+    );
 
     const changeNetwork = (network: NetworkKind) => {
         setState((s) => ({
@@ -73,23 +144,51 @@ const Provider: React.FC = (props) => {
             network,
             rpc: DEFAULT_RPC[network],
         }));
+        client.current?.setRpcProvider(DEFAULT_RPC[network]);
+        setWalletStatus((prev) => ({
+            ...prev,
+            error: '',
+        }));
     };
 
     const changeRPC = (rpc: string) => {
         setState((s) => ({
             ...s,
+            network: NETWORK_OF_RPC[rpc] || 'CUSTOM',
             rpc,
         }));
+        client.current?.setRpcProvider(rpc);
+        setWalletStatus((prev) => ({
+            ...prev,
+            error: '',
+        }));
     };
+
+    const updateBalance = React.useCallback(async () => {
+        if (client.current && walletStatus.connected) {
+            const balance = (await client.current.rpc.getBalance(walletStatus.address)).toNumber();
+            setWalletStatus((s) => ({
+                ...s,
+                balance,
+            }));
+        }
+    }, [walletStatus.connected]);
 
     React.useEffect(() => {
         saveState(state);
     }, [state]);
 
+    React.useEffect(() => {
+        updateBalance();
+    }, [updateBalance, state.rpc]);
+
     return (
         <Context.Provider
             value={{
                 state,
+                client,
+                walletStatus,
+                connectWallet,
                 changeNetwork,
                 changeRPC,
             }}

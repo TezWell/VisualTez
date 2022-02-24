@@ -18,24 +18,24 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     noToolbox?: boolean;
     trashcan?: boolean;
     move?: {
-        scrollbars: boolean;
-        drag: boolean;
+        scrollbars?: boolean;
+        drag?: boolean;
         wheel: boolean;
     };
     comments?: boolean;
     grid?: {
-        spacing: number;
-        length: number;
-        colour: string;
-        snap: boolean;
+        spacing?: number;
+        length?: number;
+        colour?: string;
+        snap?: boolean;
     };
     zoom?: {
-        controls: boolean;
-        wheel: boolean;
-        startScale: number;
-        maxScale: number;
-        minScale: number;
-        scaleSpeed: number;
+        controls?: boolean;
+        wheel?: boolean;
+        startScale?: number;
+        maxScale?: number;
+        minScale?: number;
+        scaleSpeed?: number;
     };
     readOnly?: boolean;
     currentXML?: string;
@@ -56,12 +56,11 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
 }) => {
     const { isDark } = useTheme();
     const { state } = useEditor();
-    const loaded = React.useRef(false);
     const blocklyDiv = React.useRef<HTMLDivElement>(null);
     const toolbox = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-        if (loaded.current && workspaceRef.current) {
+        if (workspaceRef.current) {
             workspaceRef.current.setTheme(isDark ? DarkTheme : LightTheme);
         }
     }, [isDark, workspaceRef]);

@@ -32,14 +32,6 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     <PlayIcon className="block" />
                     <p>Compile</p>
                 </button>
-                <div className="border mt-5 mb-5 w-20" />
-                <button
-                    onClick={() => onMenuSelection(DrawerKind.Storage)}
-                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
-                >
-                    <ArchiveIcon className="block" />
-                    <p>Storage</p>
-                </button>
             </div>
             <div className="flex flex-col items-center justify-start pb-5">
                 <button
@@ -48,6 +40,14 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                 >
                     <ShareIcon className="block" />
                     <p>Share</p>
+                </button>
+                <div className="border mt-5 mb-5 w-20" />
+                <button
+                    onClick={() => onMenuSelection(DrawerKind.Storage)}
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
+                >
+                    <ArchiveIcon className="block" />
+                    <p>Storage</p>
                 </button>
                 <div className="border mt-5 mb-5 w-20" />
                 <button

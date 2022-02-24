@@ -2,6 +2,7 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTSCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CracoEsbuildPlugin = require('craco-esbuild');
+const webpack = require('webpack');
 
 module.exports = {
     plugins: [
@@ -35,9 +36,14 @@ module.exports = {
                 fs: false,
                 tty: false,
                 constants: false,
-                stream: false,
                 path: false,
                 child_process: false,
+                http: false,
+                https: false,
+                os: false,
+                url: false,
+                crypto: require.resolve('crypto-browserify'),
+                stream: require.resolve('stream-browserify'),
             };
 
             // Let Babel compile outside of src/.
@@ -66,6 +72,9 @@ module.exports = {
                 'ForkTsCheckerWebpackPlugin',
             ],
             add: [
+                new webpack.ProvidePlugin({
+                    Buffer: ['buffer', 'Buffer'],
+                }),
                 // Use newer version of ForkTSCheckerWebpackPlugin to type check files across the monorepo.
                 new ForkTSCheckerWebpackPlugin({
                     issue: {
