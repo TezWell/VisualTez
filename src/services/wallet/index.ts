@@ -1,4 +1,4 @@
-import { TezosToolkit } from '@taquito/taquito';
+import { TezosToolkit, WalletOriginateParams } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 
 import { NetworkKind } from 'src/context/Tezos';
@@ -18,7 +18,6 @@ enum PermissionScope {
 }
 
 const getNetwork = (network: NetworkKind): NetworkType => {
-    console.error(network, NetworkKind.Mainnet);
     switch (network) {
         case NetworkKind.Mainnet:
             return NetworkType.MAINNET;
@@ -37,7 +36,12 @@ const getNetwork = (network: NetworkKind): NetworkType => {
  *
  * @returns A promise that resolves to void;
  */
-export const connect = async (rpc: string, network: NetworkKind, networkType = getNetwork(network)) => {
+export const connect = async (
+    rpc: string,
+    network: NetworkKind,
+    tryRecover = false,
+    networkType = getNetwork(network),
+) => {
     const tezos = new TezosToolkit(rpc);
 
     const options = {
@@ -47,19 +51,38 @@ export const connect = async (rpc: string, network: NetworkKind, networkType = g
         appUrl: 'https://visualtez.com',
     };
     const wallet = new BeaconWallet(options);
-    // Reset config, we want users to always be able to select a wallet provider.
-    await wallet.disconnect();
-    // Request permissions
-    await wallet.requestPermissions({
-        scopes: [PermissionScope.OPERATION_REQUEST],
-        network: {
-            type: networkType,
-            rpcUrl: rpc,
-        },
-    });
-
     // Set beacon as wallet provider
     tezos.setWalletProvider(wallet);
 
+    const activeAccount = await wallet.client.getActiveAccount();
+
+    if (!tryRecover || !activeAccount) {
+        // Reset config, we want users to always be able to select a wallet provider.
+        await wallet.disconnect();
+        // Request permissions
+        await wallet.requestPermissions({
+            scopes: [PermissionScope.OPERATION_REQUEST],
+            network: {
+                type: networkType,
+                rpcUrl: rpc,
+            },
+        });
+    }
+
     return tezos;
+};
+
+/**
+ * @description Deploy smart-contract.
+ *
+ * @param client Tezos client
+ * @param params Origination arguments
+ * @returns The originated contract address and a confirmation promise.
+ */
+export const deployContract = async (client: TezosToolkit, params: WalletOriginateParams<unknown>) => {
+    const result = await client.wallet.originate(params).send();
+    return {
+        address: (await result.contract()).address,
+        operationHash: result.opHash,
+    };
 };

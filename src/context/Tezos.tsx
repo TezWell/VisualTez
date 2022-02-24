@@ -48,7 +48,7 @@ export interface ITezosContext {
     state: ITezosStorage;
     client: React.MutableRefObject<TezosToolkit | undefined>;
     walletStatus: ITezosWalletStatus;
-    connectWallet: () => void;
+    connectWallet: (tryReconnection?: boolean) => void;
     changeNetwork: (network: NetworkKind) => void;
     changeRPC: (rpc: string) => void;
 }
@@ -110,31 +110,33 @@ const Provider: React.FC = (props) => {
     });
     const client = React.useRef<TezosToolkit>();
 
-    const connectWallet = async () => {
-        setWalletStatus({
-            connected: false,
-            connecting: true,
-        });
-        try {
-            client.current = await connect(state.rpc, state.network);
-            const address = await client.current.wallet.pkh();
-            const balance = (await client.current.rpc.getBalance(address)).toNumber();
-            setWalletStatus({
-                address,
-                balance,
-                connected: true,
-                connecting: false,
-                error: '',
-            });
-        } catch (e: any) {
-            Logger.debug(e);
+    const connectWallet = React.useCallback(
+        async (tryReconnection = false) => {
             setWalletStatus({
                 connected: false,
-                connecting: false,
-                error: e?.message || `${e}`,
+                connecting: true,
             });
-        }
-    };
+            try {
+                client.current = await connect(state.rpc, state.network, tryReconnection);
+                const address = await client.current.wallet.pkh();
+                setWalletStatus({
+                    address,
+                    balance: 0,
+                    connected: true,
+                    connecting: false,
+                    error: '',
+                });
+            } catch (e: any) {
+                Logger.debug(e);
+                setWalletStatus({
+                    connected: false,
+                    connecting: false,
+                    error: e?.message || `${e}`,
+                });
+            }
+        },
+        [state.network, state.rpc],
+    );
 
     const changeNetwork = (network: NetworkKind) => {
         setState((s) => ({
@@ -162,9 +164,23 @@ const Provider: React.FC = (props) => {
         }));
     };
 
+    const updateBalance = React.useCallback(async () => {
+        if (client.current && walletStatus.connected) {
+            const balance = (await client.current.rpc.getBalance(walletStatus.address)).toNumber();
+            setWalletStatus((s) => ({
+                ...s,
+                balance,
+            }));
+        }
+    }, [walletStatus.connected]);
+
     React.useEffect(() => {
         saveState(state);
     }, [state]);
+
+    React.useEffect(() => {
+        updateBalance();
+    }, [updateBalance, state.rpc]);
 
     return (
         <Context.Provider

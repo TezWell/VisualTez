@@ -18,24 +18,24 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     noToolbox?: boolean;
     trashcan?: boolean;
     move?: {
-        scrollbars: boolean;
-        drag: boolean;
+        scrollbars?: boolean;
+        drag?: boolean;
         wheel: boolean;
     };
     comments?: boolean;
     grid?: {
-        spacing: number;
-        length: number;
-        colour: string;
-        snap: boolean;
+        spacing?: number;
+        length?: number;
+        colour?: string;
+        snap?: boolean;
     };
     zoom?: {
-        controls: boolean;
-        wheel: boolean;
-        startScale: number;
-        maxScale: number;
-        minScale: number;
-        scaleSpeed: number;
+        controls?: boolean;
+        wheel?: boolean;
+        startScale?: number;
+        maxScale?: number;
+        minScale?: number;
+        scaleSpeed?: number;
     };
     readOnly?: boolean;
     currentXML?: string;

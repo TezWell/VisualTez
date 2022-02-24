@@ -1,22 +1,36 @@
-import { Workspace, WorkspaceSvg } from 'blockly';
+import type { WalletOriginateParams } from '@taquito/taquito';
+import type { Workspace, WorkspaceSvg } from 'blockly';
 import React from 'react';
+
 import { extractBlocks } from 'src/blocks';
 import Michelson from 'src/blocks/generators/Michelson';
-
+import { DeploymentActionKind } from 'src/context/Deployment';
 import Editor from 'src/context/Editor';
 import useDeployment from 'src/context/hooks/useDeployment';
+import useTezos from 'src/context/hooks/useTezos';
+import { deployContract } from 'src/services/wallet';
 import Logger from 'src/utils/logger';
 import EditorView from './view';
 
 const DeployContainer = () => {
-    const { state: deploymentState } = useDeployment();
+    const { client, walletStatus } = useTezos();
+    const { state, dispatch } = useDeployment();
     const workspaceRef = React.useRef<WorkspaceSvg>();
 
-    const deploy = React.useCallback(() => {
-        if (workspaceRef.current) {
+    const deploy = React.useCallback(async () => {
+        if (workspaceRef.current && client.current) {
+            // Start deployment
+            dispatch({
+                type: DeploymentActionKind.UPDATE_STATE,
+                payload: {
+                    deploying: true,
+                    error: '',
+                },
+            });
+
             try {
                 const blocks = extractBlocks(workspaceRef.current as Workspace);
-                const code = JSON.parse(deploymentState.code || '{}');
+                const code = JSON.parse(state.code || '{}');
                 if (!code) {
                     throw new Error('Could not prepare contract code.');
                 }
@@ -24,15 +38,52 @@ const DeployContainer = () => {
                 if (!storage) {
                     throw new Error('Could not generate initial storage.');
                 }
+
+                const params: WalletOriginateParams = {
+                    code,
+                    init: storage,
+                    balance: String(state.parameters.balance),
+                    fee: state.parameters.fee,
+                    gasLimit: state.parameters.gasLimit,
+                    storageLimit: state.parameters.storageLimit,
+                    mutez: true,
+                };
+                if (state.parameters.delegate) {
+                    params.delegate = state.parameters.delegate;
+                }
+
+                const result = await deployContract(client.current, params);
+
+                dispatch({
+                    type: DeploymentActionKind.UPDATE_RESULT,
+                    payload: {
+                        address: result.address,
+                        operationHash: result.operationHash,
+                    },
+                });
             } catch (e: any) {
                 Logger.debug(e);
+                dispatch({
+                    type: DeploymentActionKind.UPDATE_STATE,
+                    payload: {
+                        error: e?.message || e.toString(),
+                    },
+                });
             }
+
+            // Tear down
+            dispatch({
+                type: DeploymentActionKind.UPDATE_STATE,
+                payload: {
+                    deploying: false,
+                },
+            });
         }
-    }, [deploymentState.code]);
+    }, [client, dispatch, state]);
 
     return (
         <Editor.Provider>
-            <EditorView deploy={deploy} workspaceRef={workspaceRef} />
+            <EditorView enabled={walletStatus.connected} deploy={deploy} workspaceRef={workspaceRef} />
         </Editor.Provider>
     );
 };

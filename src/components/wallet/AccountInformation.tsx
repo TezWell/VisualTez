@@ -9,7 +9,11 @@ const AccountInformation = () => {
     const { walletStatus } = useTezos();
 
     if (walletStatus.connecting) {
-        return <CircularLoading message="Connecting..." />;
+        return (
+            <div className="flex justify-center items-center rounded p-5 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+                <CircularLoading className="h-56 w-56" message="Connecting..." />
+            </div>
+        );
     }
 
     if (walletStatus.error) {

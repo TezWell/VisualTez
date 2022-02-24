@@ -103,7 +103,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 spacing: 50,
                                 length: 3,
                                 colour: '#ccc',
-                                snap: false,
                             }}
                             zoom={{
                                 controls: true,

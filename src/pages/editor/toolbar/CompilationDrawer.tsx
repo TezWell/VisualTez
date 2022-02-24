@@ -17,6 +17,7 @@ import useEditor from 'src/context/hooks/useEditor';
 import useDeployment from 'src/context/hooks/useDeployment';
 import { buildClassName } from 'src/utils/className';
 import Logger from 'src/utils/logger';
+import { DeploymentActionKind } from 'src/context/Deployment';
 
 interface ContractModalProps {
     gotoDeployment: (compilation: ContractCompilation) => void;
@@ -255,7 +256,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     const [contractCompilation, setContractCompilation] = React.useState<ContractCompilation>();
     const [typeValueCompilation, setTypeValueCompilation] = React.useState<TypeCompilation | ValueCompilation>();
     const { compilations } = useEditor();
-    const { changeDeploymentState } = useDeployment();
+    const { dispatch: deploymentDispatch } = useDeployment();
 
     function closeContractCompilationModal() {
         setContractCompilation(undefined);
@@ -279,13 +280,16 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
 
     const gotoDeployment = React.useCallback(
         (compilation: ContractCompilation) => {
-            changeDeploymentState({
-                storageXML: compilation.result.storageXML,
-                code: compilation.result.code,
+            deploymentDispatch({
+                type: DeploymentActionKind.UPDATE_STATE,
+                payload: {
+                    storageXML: compilation.result.storageXML,
+                    code: compilation.result.code,
+                },
             });
             navigate('/deploy');
         },
-        [changeDeploymentState, navigate],
+        [deploymentDispatch, navigate],
     );
 
     const contractCompilations = React.useMemo(

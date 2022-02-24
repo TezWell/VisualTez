@@ -1,19 +1,21 @@
 import type { Workspace, WorkspaceSvg } from 'blockly';
 import React from 'react';
 import Blockly from 'blockly';
+
 import BlockKind from 'src/blocks/enums/BlockKind';
 import Block from 'src/components/blockly/Block';
-
 import BlocklyEditor from 'src/components/blockly/Editor';
 import Separator from 'src/components/blockly/Separator';
 import useDeployment from 'src/context/hooks/useDeployment';
 import Label from 'src/components/blockly/Label';
 import Value from 'src/components/blockly/Value';
+import { DeploymentActionKind } from 'src/context/Deployment';
+
 interface InitialStorageProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
 }
 const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
-    const { state, changeDeploymentState } = useDeployment();
+    const { state, dispatch } = useDeployment();
 
     const onChange = React.useCallback(
         (event: any) => {
@@ -27,14 +29,16 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
             ) {
                 if (workspaceRef.current) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
-                    changeDeploymentState({
-                        ...state,
-                        storageXML: xml,
+                    dispatch({
+                        type: DeploymentActionKind.UPDATE_STATE,
+                        payload: {
+                            storageXML: xml,
+                        },
                     });
                 }
             }
         },
-        [changeDeploymentState, state, workspaceRef],
+        [dispatch, workspaceRef],
     );
 
     return (
@@ -53,7 +57,6 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                             spacing: 50,
                             length: 3,
                             colour: '#ccc',
-                            snap: true,
                         }}
                         zoom={{
                             controls: true,

@@ -4,7 +4,7 @@ import React from 'react';
 import { extractBlocks } from 'src/blocks';
 import Michelson from 'src/blocks/generators/Michelson';
 import Button from 'src/components/common/Button';
-import { Field } from 'src/context/Deployment';
+import { DeploymentActionKind, Field } from 'src/context/Deployment';
 import useDeployment from 'src/context/hooks/useDeployment';
 import useTezos from 'src/context/hooks/useTezos';
 import { estimateOrigination } from 'src/services/wallet/estimator';
@@ -15,28 +15,32 @@ interface DeployParametersProps {
 }
 
 const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => {
-    const { client } = useTezos();
-    const { state, parameters, changeParameters } = useDeployment();
+    const { client, walletStatus } = useTezos();
+    const { state, dispatch } = useDeployment();
 
     const onFieldChange = React.useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             switch (e.target.name) {
                 case Field.Delegate:
-                    return changeParameters({
-                        ...parameters,
-                        [e.target.name]: e.target.value,
+                    return dispatch({
+                        type: DeploymentActionKind.UPDATE_PARAMETERS,
+                        payload: {
+                            [e.target.name]: e.target.value,
+                        },
                     });
-                case Field.Amount:
+                case Field.Balance:
                 case Field.Fee:
                 case Field.Gas_limit:
                 case Field.Storage_limit:
-                    return changeParameters({
-                        ...parameters,
-                        [e.target.name]: Number(e.target.value),
+                    return dispatch({
+                        type: DeploymentActionKind.UPDATE_PARAMETERS,
+                        payload: {
+                            [e.target.name]: Number(e.target.value),
+                        },
                     });
             }
         },
-        [changeParameters, parameters],
+        [dispatch],
     );
 
     const estimate = React.useCallback(() => {
@@ -51,34 +55,45 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                 if (!storage) {
                     throw new Error('Could not generate initial storage.');
                 }
-                if (client.current) {
+                if (walletStatus.connected && client.current) {
                     estimateOrigination(client.current, {
                         code,
                         storage,
-                    }).then(({ fee, gasLimit: gas_limit, storageLimit: storage_limit }) => {
-                        changeParameters({
-                            fee,
-                            gas_limit,
-                            storage_limit,
+                    }).then(({ fee, gasLimit, storageLimit }) => {
+                        return dispatch({
+                            type: DeploymentActionKind.UPDATE_PARAMETERS,
+                            payload: {
+                                fee,
+                                gasLimit,
+                                storageLimit,
+                            },
                         });
                     });
                 }
             } catch (e: any) {
                 Logger.debug(e);
+                return dispatch({
+                    type: DeploymentActionKind.UPDATE_STATE,
+                    payload: {
+                        error: e?.message || e.toString(),
+                    },
+                });
             }
         }
-    }, [changeParameters, client, state.code, workspaceRef]);
+    }, [dispatch, client, state.code, walletStatus.connected, workspaceRef]);
 
     return (
         <div className="rounded-md p-2 border-2 shadow-xl border-2 border-amber-500 dark:border-amber-400">
             <div className="flex justify-between items-center border-b border-black dark:border-white mb-2 pb-2">
                 <label className="font-mono text-xl font-bold">Parameters</label>
-                <Button
-                    onClick={estimate}
-                    className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-1 px-2"
-                >
-                    Estimate Costs
-                </Button>
+                {walletStatus.connected ? (
+                    <Button
+                        onClick={estimate}
+                        className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-1 px-2"
+                    >
+                        Estimate Costs
+                    </Button>
+                ) : null}
             </div>
             <div className="flex flex-col space-y-1">
                 <div className="flex flex-1 rounded-md shadow-sm">
@@ -95,14 +110,14 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                 </div>
                 <div className="flex flex-1 rounded-md shadow-sm">
                     <span className="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                        Amount* (ꜩ)
+                        Balance* (ꜩ)
                     </span>
                     <input
                         type="number"
-                        value={parameters[Field.Amount]}
+                        value={state.parameters[Field.Balance]}
                         min={0}
                         step={1}
-                        name={Field.Amount}
+                        name={Field.Balance}
                         onChange={onFieldChange}
                         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 dark:text-black"
                     />
@@ -113,7 +128,7 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                     </span>
                     <input
                         type="number"
-                        value={parameters[Field.Fee]}
+                        value={state.parameters[Field.Fee]}
                         min={0}
                         step={0.001}
                         name={Field.Fee}
@@ -127,7 +142,7 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                     </span>
                     <input
                         type="number"
-                        value={parameters[Field.Gas_limit]}
+                        value={state.parameters[Field.Gas_limit]}
                         min={0}
                         step={100}
                         name={Field.Gas_limit}
@@ -141,7 +156,7 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                     </span>
                     <input
                         type="number"
-                        value={parameters[Field.Storage_limit]}
+                        value={state.parameters[Field.Storage_limit]}
                         min={0}
                         step={100}
                         name={Field.Storage_limit}

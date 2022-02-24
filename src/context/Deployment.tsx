@@ -2,40 +2,89 @@ import React, { createContext } from 'react';
 import { DEFAULT_ORIGINATION_COSTS } from 'src/services/wallet/estimator';
 
 import settings from 'src/settings.json';
+import { SelectivePartial } from 'src/typings/utils';
 
-export interface IDeploymentState {
-    storageXML?: string;
-    code?: string;
+interface IDeploymentPersistentState {
+    storageXML: string;
+    code: string;
 }
 
-export interface IDeploymentContext {
+interface IDeployParameters {
+    [Field.Delegate]: string;
+    [Field.Balance]: number;
+    [Field.Fee]: number;
+    [Field.Gas_limit]: number;
+    [Field.Storage_limit]: number;
+}
+
+interface IDeploymentState {
+    code: string;
+    storageXML: string;
+    storage: string;
+    deploying: boolean;
+    error: string;
+    parameters: SelectivePartial<IDeployParameters, Field.Delegate>;
+    result: {
+        address: string;
+        operationHash: string;
+    };
+}
+
+type DeploymentReducerAction =
+    | {
+          type: DeploymentActionKind.UPDATE_PARAMETERS;
+          payload: Partial<IDeployParameters>;
+      }
+    | {
+          type: DeploymentActionKind.UPDATE_STATE;
+          payload: Partial<IDeploymentState>;
+      }
+    | {
+          type: DeploymentActionKind.UPDATE_RESULT;
+          payload: {
+              address?: string;
+              operationHash?: string;
+          };
+      };
+
+interface IDeploymentContext {
     state: IDeploymentState;
-    changeDeploymentState: (state: IDeploymentState) => void;
-    parameters: Record<Field, number | string>;
-    changeParameters: (parameters: Record<string, number | string>) => void;
+    dispatch: React.Dispatch<DeploymentReducerAction>;
+}
+
+export enum DeploymentActionKind {
+    UPDATE_PARAMETERS = 'DEPLOY__UPDATE_PARAMETERS__ACTION',
+    UPDATE_STATE = 'DEPLOY__UPDATE_STATE__ACTION',
+    UPDATE_RESULT = 'DEPLOY__UPDATE_RESULT__ACTION',
 }
 
 export enum Field {
     Delegate = 'delegate',
-    Amount = 'amount',
+    Balance = 'balance',
     Fee = 'fee',
-    Gas_limit = 'gas_limit',
-    Storage_limit = 'storage_limit',
+    Gas_limit = 'gasLimit',
+    Storage_limit = 'storageLimit',
 }
 
 const contextStub: IDeploymentContext = {
-    state: {},
-    changeDeploymentState: () => {
-        // stub
+    state: {
+        code: '',
+        storageXML: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+        storage: '',
+        deploying: false,
+        error: '',
+        parameters: {
+            [Field.Balance]: 0,
+            [Field.Fee]: DEFAULT_ORIGINATION_COSTS.Fee / 1_000_000,
+            [Field.Gas_limit]: DEFAULT_ORIGINATION_COSTS.Gas_limit,
+            [Field.Storage_limit]: DEFAULT_ORIGINATION_COSTS.Storage_limit,
+        },
+        result: {
+            address: '',
+            operationHash: '',
+        },
     },
-    parameters: {
-        [Field.Delegate]: '',
-        [Field.Amount]: 0,
-        [Field.Fee]: DEFAULT_ORIGINATION_COSTS.Fee,
-        [Field.Gas_limit]: DEFAULT_ORIGINATION_COSTS.Gas_limit,
-        [Field.Storage_limit]: DEFAULT_ORIGINATION_COSTS.Storage_limit,
-    },
-    changeParameters: () => {
+    dispatch: () => {
         // stub
     },
 };
@@ -45,56 +94,81 @@ const Context = createContext<IDeploymentContext>(contextStub);
 const DEPLOY_STORAGE_KEY = `${settings.storage_prefix}/deploy`;
 
 /**
- * @description Fetch state from local storage.
- * @returns {IEditorStorage} state
+ * @description Fetch persistent state from local storage.
+ * @returns {SelectivePartial<IDeploymentPersistentState, 'code'>}
  */
-const fetchState = (): IDeploymentState => {
-    const storage: IDeploymentState = JSON.parse(window.localStorage.getItem(DEPLOY_STORAGE_KEY) || '{}');
+const fetchPersistentState = (): SelectivePartial<IDeploymentPersistentState, 'code'> => {
+    const storage: Partial<IDeploymentPersistentState> = JSON.parse(
+        window.localStorage.getItem(DEPLOY_STORAGE_KEY) || '{}',
+    );
 
     // Set default renderer
     storage.storageXML ||= `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
 
-    return storage;
+    return storage as SelectivePartial<IDeploymentPersistentState, 'code'>;
 };
 
 /**
  * @description Save state in the local storage.
- * @param {IEditorStorage} state
+ * @param {Partial<IDeploymentPersistentState>} state
  * @returns {void}
  */
-const saveState = (state: IDeploymentState): void => {
+const persistState = (state: Partial<IDeploymentPersistentState>): void => {
     globalThis.localStorage.setItem(DEPLOY_STORAGE_KEY, JSON.stringify(state));
 };
 
+/**
+ * @description State reducer
+ * @param state Previous state
+ * @param action An action to be performed
+ * @returns New state
+ */
+const reducer = (state: IDeploymentState, action: DeploymentReducerAction): IDeploymentState => {
+    switch (action.type) {
+        case DeploymentActionKind.UPDATE_PARAMETERS:
+            return {
+                ...state,
+                parameters: {
+                    ...state.parameters,
+                    ...action.payload,
+                },
+            };
+        case DeploymentActionKind.UPDATE_RESULT:
+            return {
+                ...state,
+                result: {
+                    ...state.result,
+                    ...action.payload,
+                },
+            };
+        case DeploymentActionKind.UPDATE_STATE:
+            return {
+                ...state,
+                ...action.payload,
+            };
+        default:
+            return state;
+    }
+};
+
 const Provider: React.FC = (props) => {
-    const [state, setState] = React.useState<IDeploymentState>(fetchState());
-    const [parameters, setParameters] = React.useState<Record<string, number | string>>(contextStub.parameters);
+    const [state, dispatch] = React.useReducer(reducer, {
+        ...contextStub.state,
+        ...fetchPersistentState(),
+    });
 
     React.useEffect(() => {
-        saveState(state);
-    }, [state]);
-
-    const changeState = (state: IDeploymentState) => {
-        setState((s) => ({
-            ...s,
-            ...state,
-        }));
-    };
-
-    const changeParameters = (_parameters: Record<string, number | string>) => {
-        setParameters((p) => ({
-            ...p,
-            ..._parameters,
-        }));
-    };
+        persistState({
+            code: state.code,
+            storageXML: state.storageXML,
+        });
+    }, [state.code, state.storageXML]);
 
     return (
         <Context.Provider
             value={{
                 state,
-                changeDeploymentState: changeState,
-                parameters,
-                changeParameters,
+                dispatch,
             }}
         >
             {props.children}
