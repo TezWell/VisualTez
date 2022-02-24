@@ -30,16 +30,24 @@ interface ITezosStorage {
     rpc: string;
 }
 
-interface ITezosAccount {
-    address: string;
-    balance: number;
-}
+type ITezosWalletStatus = {
+    connecting: boolean;
+    error?: string;
+} & (
+    | {
+          address: string;
+          balance: number;
+          connected: true;
+      }
+    | {
+          connected: false;
+      }
+);
 
 export interface ITezosContext {
     state: ITezosStorage;
     client: React.MutableRefObject<TezosToolkit | undefined>;
-    account?: ITezosAccount;
-    error: string;
+    walletStatus: ITezosWalletStatus;
     connectWallet: () => void;
     changeNetwork: (network: NetworkKind) => void;
     changeRPC: (rpc: string) => void;
@@ -53,7 +61,10 @@ const contextStub: ITezosContext = {
     client: {
         current: {} as any,
     },
-    error: '',
+    walletStatus: {
+        connected: false,
+        connecting: false,
+    },
     connectWallet: () => {
         // stub
     },
@@ -93,26 +104,35 @@ const saveState = (state: ITezosStorage): void => {
 
 const Provider: React.FC = (props) => {
     const [state, setState] = React.useState<ITezosStorage>(fetchState());
-    const [account, setAccount] = React.useState<ITezosAccount>();
-    const [walletConnected, setWalletConnected] = React.useState(false);
-    const [error, setError] = React.useState('');
+    const [walletStatus, setWalletStatus] = React.useState<ITezosWalletStatus>({
+        connected: false,
+        connecting: false,
+    });
     const client = React.useRef<TezosToolkit>();
 
     const connectWallet = async () => {
-        setWalletConnected(false);
+        setWalletStatus({
+            connected: false,
+            connecting: true,
+        });
         try {
             client.current = await connect(state.rpc, state.network);
             const address = await client.current.wallet.pkh();
             const balance = (await client.current.rpc.getBalance(address)).toNumber();
-            setAccount({
+            setWalletStatus({
                 address,
                 balance,
+                connected: true,
+                connecting: false,
+                error: '',
             });
-            setWalletConnected(true);
-            setError('');
         } catch (e: any) {
             Logger.debug(e);
-            setError(e?.message || `${e}`);
+            setWalletStatus({
+                connected: false,
+                connecting: false,
+                error: e?.message || `${e}`,
+            });
         }
     };
 
@@ -123,7 +143,10 @@ const Provider: React.FC = (props) => {
             rpc: DEFAULT_RPC[network],
         }));
         client.current?.setRpcProvider(DEFAULT_RPC[network]);
-        setError('');
+        setWalletStatus((prev) => ({
+            ...prev,
+            error: '',
+        }));
     };
 
     const changeRPC = (rpc: string) => {
@@ -133,7 +156,10 @@ const Provider: React.FC = (props) => {
             rpc,
         }));
         client.current?.setRpcProvider(rpc);
-        setError('');
+        setWalletStatus((prev) => ({
+            ...prev,
+            error: '',
+        }));
     };
 
     React.useEffect(() => {
@@ -145,8 +171,7 @@ const Provider: React.FC = (props) => {
             value={{
                 state,
                 client,
-                account,
-                error,
+                walletStatus,
                 connectWallet,
                 changeNetwork,
                 changeRPC,
