@@ -1,6 +1,6 @@
 import React from 'react';
 import useTezos from 'src/context/hooks/useTezos';
-import { NetworkKind } from 'src/context/Tezos';
+import { DEFAULT_RPC, NetworkKind } from 'src/context/Tezos';
 
 const NetworkSelection = () => {
     const { state, changeNetwork, changeRPC } = useTezos();
@@ -20,27 +20,32 @@ const NetworkSelection = () => {
     );
 
     return (
-        <div className="relative shadow-lg rounded-md p-2 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+        <div className="relative shadow-lg rounded-md p-2 shadow-xl border-2 border-black dark:border-amber-400">
             <div className="relative border-b border-black dark:border-white mb-2">
                 <label className="block text-sm font-medium">Network Selection</label>
             </div>
-            <div className="mt-1 flex">
-                <select
-                    name="tezos-network"
-                    value={state.network}
-                    onChange={onNetworkChange}
-                    className="focus:ring-indigo-500 focus:border-indigo-500 rounded-md sm:text-sm border-gray-300 dark:text-black"
-                >
-                    {Object.entries(NetworkKind).map(([text, value]) => (
-                        <option key={value} value={value}>
-                            {text}
+            <div className="mt-1 flex flex-col md:flex-row">
+                <div className="flex rounded-md shadow-sm">
+                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                        Network
+                    </span>
+                    <select
+                        name="tezos-network"
+                        value={state.network}
+                        onChange={onNetworkChange}
+                        className="block w-full rounded-none rounded-r-md text-sm border-gray-300 text-black"
+                    >
+                        {Object.entries(NetworkKind).map(([text, value]) => (
+                            <option key={value} value={value}>
+                                {text}
+                            </option>
+                        ))}
+                        <option disabled value="CUSTOM">
+                            Custom
                         </option>
-                    ))}
-                    <option disabled value="CUSTOM">
-                        Custom
-                    </option>
-                </select>
-                <div className="relative h-10 border ml-3 mr-3 border-black dark:border-white" />
+                    </select>
+                </div>
+                <div className="border-t border-r m-1 border-black dark:border-white" />
                 <div className="flex flex-1 rounded-md shadow-sm">
                     <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                         RPC
@@ -48,8 +53,8 @@ const NetworkSelection = () => {
                     <input
                         type="text"
                         name="tezos-rpc"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300  dark:text-black"
-                        placeholder="https://mainnet.visualtez.com"
+                        className="block w-full rounded-none rounded-r-md text-sm border-gray-300 dark:text-black"
+                        placeholder={DEFAULT_RPC[NetworkKind.Mainnet]}
                         value={state.rpc}
                         onChange={onRpcChange}
                     />

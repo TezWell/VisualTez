@@ -19,6 +19,7 @@ import './List';
 import './Set';
 import './Some';
 import './None';
+import './NoneWithType';
 import './Map';
 import './Big_map';
 import './Pair';

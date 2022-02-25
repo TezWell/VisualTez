@@ -42,8 +42,8 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
     );
 
     return (
-        <div className="relative w-full h-96 shadow-lg rounded-md p-2  shadow-xl border-2 border-amber-500 dark:border-amber-400 bg-[#F4F0FD] dark:bg-[#1e1e1e]">
-            <div className="relative border-b border-black dark:border-white" style={{ height: 24 }}>
+        <div className="w-full h-96 shadow-lg rounded-md p-2 shadow-xl border-2 border-black dark:border-amber-400 dark:bg-[#1e1e1e]">
+            <div className="border-b border-black dark:border-white" style={{ height: 24 }}>
                 <label className="block text-sm font-medium">Initial Storage</label>
             </div>
             <div className="relative w-full" style={{ height: 'calc(100% - 24px)' }}>

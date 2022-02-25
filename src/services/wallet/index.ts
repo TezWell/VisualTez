@@ -79,7 +79,52 @@ export const connect = async (
  * @param params Origination arguments
  * @returns The originated contract address and a confirmation promise.
  */
-export const deployContract = async (client: TezosToolkit, params: WalletOriginateParams<unknown>) => {
+export const deployContract = async (client: TezosToolkit, params: WalletOriginateParams) => {
+    // DO NOT REMOVE THE COMMENTS BELLOW
+
+    // const pkh = await client.wallet.pkh();
+    // const counter = Number((await client.rpc.getContract(pkh)).counter || 0);
+    // const blockHeader = await client.rpc.getBlockHeader();
+    // const operation: any = {
+    //     kind: 'origination',
+    //     counter: String(counter + 1),
+    //     source: pkh,
+    //     fee: String((params.fee || 0) * 1_000_000),
+    //     balance: String(params.balance),
+    //     gas_limit: String(params.gasLimit),
+    //     storage_limit: String(params.storageLimit),
+    //     script: {
+    //         code: params.code,
+    //         storage: params.init,
+    //     },
+    //     delegate: params.delegate || undefined,
+    // };
+    // const bytes = await localForger.forge({
+    //     branch: blockHeader.hash,
+    //     contents: [operation],
+    // });
+    // const bytesHex = Buffer.from(bytes, 'hex');
+    // console.error(bytes, bytesHex);
+
+    // const signingResult = await (client.wallet as any).beacon.client.requestSignPayload({
+    //     payload: bytes,
+    //     signingType: SigningType.RAW,
+    // });
+    // console.error(signingResult);
+
+    // const signed = { bytes: bytesHex, signature: signingResult.signature };
+
+    // console.error(
+    //     client.rpc.preapplyOperations([
+    //         {
+    //             branch: blockHeader.hash,
+    //             protocol: blockHeader.protocol,
+    //             contents: [operation],
+    //             signature: signingResult.signature,
+    //         },
+    //     ]),
+    // );
+
     const result = await client.wallet.originate(params).send();
     return {
         address: (await result.contract()).address,

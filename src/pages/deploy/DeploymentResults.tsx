@@ -11,7 +11,7 @@ const DeploymentResults = () => {
 
     if (state.deploying) {
         return (
-            <div className="rounded flex flex-col md:flex-row justify-center items-center p-5 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+            <div className="flex flex-col md:flex-row justify-center items-center p-5 rounded shadow-xl border-2 border-black dark:border-amber-400">
                 <CircularLoading className="h-56 w-56" message="Deploying..." />
             </div>
         );
@@ -32,7 +32,7 @@ const DeploymentResults = () => {
 
     if (state.result.address) {
         return (
-            <div className="rounded flex flex-col justify-center items-center p-5 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+            <div className="flex flex-col justify-center items-center p-5 shadow-xl border-2 border-black rounded dark:border-amber-400">
                 <div className="text-center mb-5">
                     <p className="text-sm font-bold text-amber-600 dark:text-amber-300">
                         The contract was successfully deployed!

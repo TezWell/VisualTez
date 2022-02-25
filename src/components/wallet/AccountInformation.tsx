@@ -10,7 +10,7 @@ const AccountInformation = () => {
 
     if (walletStatus.connecting) {
         return (
-            <div className="flex justify-center items-center rounded p-5 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+            <div className="flex justify-center items-center rounded p-5 shadow-xl border-2 border-black dark:border-amber-400">
                 <CircularLoading className="h-56 w-56" message="Connecting..." />
             </div>
         );
@@ -31,7 +31,7 @@ const AccountInformation = () => {
 
     if (walletStatus.connected) {
         return (
-            <div className="rounded flex flex-col md:flex-row justify-center items-center p-5 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+            <div className="rounded flex flex-col md:flex-row justify-center items-center p-5 shadow-xl border-2 border-black dark:border-amber-400">
                 <div className="flex items-center justify-center p-2 rounded-full border-2 border-amber-500 dark:border-amber-400">
                     <Avatar value={walletStatus.address} size={64} />
                 </div>
