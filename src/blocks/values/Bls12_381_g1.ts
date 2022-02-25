@@ -20,7 +20,7 @@ const Bls12_381_g1Block = {
         },
     ],
     output: ['Literal', 'Bls12_381_g1'],
-    colour: 160,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.bls12_381_g1_literal] = {

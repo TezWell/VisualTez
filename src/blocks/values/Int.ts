@@ -20,7 +20,7 @@ const IntBlock = {
         },
     ],
     output: ['Literal', 'Number'],
-    colour: 320,
+    colour: 40,
 };
 Blockly.Blocks[BlockKind.int_literal] = {
     init: function () {

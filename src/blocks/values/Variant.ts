@@ -21,7 +21,7 @@ Blockly.Blocks[BlockKind.variant_value] = {
                 },
                 { type: 'input_value', name: 'value', check: 'Literal' },
             ],
-            colour: 123,
+            colour: 70,
         });
     },
 };

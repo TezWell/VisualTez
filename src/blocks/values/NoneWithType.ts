@@ -15,7 +15,7 @@ const NoneBlock = {
     args0: [{ type: 'input_value', name: 'inner_type', check: 'Type' }],
     inputsInline: true,
     output: ['Literal', 'Option'],
-    colour: 310,
+    colour: 340,
 };
 
 Blockly.Blocks[BlockKind.none_with_type_literal] = {

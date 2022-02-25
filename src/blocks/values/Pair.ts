@@ -18,7 +18,7 @@ const PairBlock = {
     ],
     inputsInline: true,
     output: ['Literal', 'Pair'],
-    colour: 500,
+    colour: 190,
 };
 
 Blockly.Blocks[BlockKind.pair_literal] = {

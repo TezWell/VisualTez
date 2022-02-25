@@ -21,7 +21,7 @@ const StringBlock = {
         },
     ],
     output: ['Literal', 'String'],
-    colour: 80,
+    colour: 40,
     // style: 'text_blocks',
     // helpUrl: '%{BKY_TEXT_TEXT_HELPURL}',
     // tooltip: '%{BKY_TEXT_TEXT_TOOLTIP}',

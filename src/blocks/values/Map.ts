@@ -15,7 +15,7 @@ const MapBlock = {
     args0: [{ type: 'input_statement', name: 'entries', check: 'MapEntry' }],
     output: ['Literal', 'Map'],
     outputShape: 3,
-    colour: 440,
+    colour: 160,
 };
 
 Blockly.Blocks[BlockKind.map_literal] = {
@@ -84,7 +84,7 @@ Blockly.Blocks[BlockKind.map_entry] = {
                 { type: 'input_value', name: 'value', check: 'Literal' },
             ],
             inputsInline: true,
-            colour: 123,
+            colour: 170,
         });
         this.setPreviousStatement(true);
         this.setNextStatement(true);

@@ -20,7 +20,7 @@ const AddressBlock = {
         },
     ],
     output: ['Literal', 'Address'],
-    colour: 20,
+    colour: 40,
 };
 Blockly.Blocks[BlockKind.address_literal] = {
     init: function () {

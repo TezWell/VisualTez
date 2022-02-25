@@ -18,7 +18,7 @@ Blockly.Blocks[BlockKind.record_literal] = {
             args0: [{ type: 'input_statement', name: 'entries', check: 'RecordField' }],
             output: ['Literal', 'Record'],
             outputShape: 3,
-            colour: 101,
+            colour: 100,
         });
         this.setPreviousStatement(false);
         this.setNextStatement(false);
@@ -120,7 +120,7 @@ Blockly.Blocks[BlockKind.record_field] = {
                 },
                 { type: 'input_value', name: 'value', check: 'Literal' },
             ],
-            colour: 123,
+            colour: 110,
         });
         this.setPreviousStatement(true);
         this.setNextStatement(true);

@@ -15,7 +15,7 @@ const SetBlock = {
     args0: [{ type: 'input_statement', name: 'items', check: 'Literal' }],
     output: ['Literal', 'Set'],
     outputShape: 3,
-    colour: 410,
+    colour: 210,
 };
 
 Blockly.Blocks[BlockKind.set_literal] = {

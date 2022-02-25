@@ -20,7 +20,7 @@ const TimestampBlock = {
         },
     ],
     output: ['Literal', 'Timestamp'],
-    colour: 100,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.timestamp_literal] = {

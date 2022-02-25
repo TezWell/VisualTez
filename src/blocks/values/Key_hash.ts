@@ -20,7 +20,7 @@ const Key_hashBlock = {
         },
     ],
     output: ['Literal', 'Key_hash'],
-    colour: 250,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.key_hash_literal] = {

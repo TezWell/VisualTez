@@ -20,7 +20,7 @@ const SignatureBlock = {
         },
     ],
     output: ['Literal', 'Signature'],
-    colour: 280,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.signature_literal] = {

@@ -24,9 +24,6 @@ import './Map';
 import './Big_map';
 import './Pair';
 // import './Lambda';
-// import './Ticket';
-// import './Sapling_state';
-// import './Sapling_transaction';
 
 import './Record';
 import './Variant';

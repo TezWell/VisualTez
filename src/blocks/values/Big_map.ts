@@ -15,7 +15,7 @@ const Big_mapBlock = {
     args0: [{ type: 'input_statement', name: 'entries', check: 'MapEntry' }],
     output: ['Literal', 'Big_map'],
     outputShape: 3,
-    colour: 470,
+    colour: 160,
 };
 
 Blockly.Blocks[BlockKind.big_map_literal] = {

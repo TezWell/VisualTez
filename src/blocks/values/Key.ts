@@ -20,7 +20,7 @@ const KeyBlock = {
         },
     ],
     output: ['Literal', 'Key'],
-    colour: 220,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.key_literal] = {

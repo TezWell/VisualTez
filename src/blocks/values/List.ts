@@ -15,7 +15,7 @@ const ListBlock = {
     args0: [{ type: 'input_statement', name: 'items', check: 'Literal' }],
     output: ['Literal', 'List'],
     outputShape: 3,
-    colour: 380,
+    colour: 210,
 };
 
 Blockly.Blocks[BlockKind.list_literal] = {
@@ -86,7 +86,7 @@ Blockly.Blocks[BlockKind.sequence_item] = {
                     check: 'Literal',
                 },
             ],
-            colour: 370,
+            colour: 220,
         });
         this.setPreviousStatement(true);
         this.setNextStatement(true);

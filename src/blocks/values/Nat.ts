@@ -20,7 +20,7 @@ const NatBlock = {
         },
     ],
     output: ['Literal', 'Number'],
-    colour: 10,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.nat_literal] = {

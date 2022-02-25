@@ -8,7 +8,7 @@ const NoneBlock = {
     type: BlockKind.none_literal,
     message0: 'None',
     output: ['Literal', 'Option'],
-    colour: 310,
+    colour: 340,
 };
 
 Blockly.Blocks[BlockKind.none_literal] = {

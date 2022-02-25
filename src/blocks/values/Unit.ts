@@ -12,7 +12,7 @@ const UnitLiteralBlock = {
     type: BlockKind.unit_literal,
     message0: 'Unit',
     output: ['Literal', 'Unit'],
-    colour: 20,
+    colour: 40,
     tooltip: 'Unit Literal',
 };
 Blockly.Blocks[BlockKind.unit_literal] = {

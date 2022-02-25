@@ -21,7 +21,7 @@ const BytesBlock = {
         },
     ],
     output: ['Literal', 'Bytes'],
-    colour: 190,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.bytes_literal] = {

@@ -20,7 +20,7 @@ const Chain_idBlock = {
         },
     ],
     output: ['Literal', 'Chain_id'],
-    colour: 70,
+    colour: 40,
 };
 
 Blockly.Blocks[BlockKind.chain_id_literal] = {
