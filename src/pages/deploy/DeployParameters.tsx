@@ -84,12 +84,12 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
 
     return (
         <div className="rounded-md p-2 border-2 shadow-xl border-2 border-black dark:border-amber-400">
-            <div className="flex justify-between items-center border-b border-black dark:border-white mb-2 pb-2">
-                <label className="font-mono text-xl font-bold">Parameters</label>
+            <div className="border-b border-black dark:border-white mb-2">
+                <label className="block text-sm font-medium">Parameters</label>
                 {walletStatus.connected ? (
                     <Button
                         onClick={estimate}
-                        className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-1 px-2"
+                        className="hidden bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-1 px-2"
                     >
                         Estimate Costs
                     </Button>
@@ -122,7 +122,7 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 dark:text-black"
                     />
                 </div>
-                <div className="flex flex-1 rounded-md shadow-sm">
+                <div className="hidden flex flex-1 rounded-md shadow-sm">
                     <span className="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                         Fee* (ꜩ)
                     </span>
@@ -136,7 +136,7 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 dark:text-black"
                     />
                 </div>
-                <div className="flex flex-1 rounded-md shadow-sm">
+                <div className="hidden flex flex-1 rounded-md shadow-sm">
                     <span className="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                         Gas Limit*
                     </span>
@@ -150,7 +150,7 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
                         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 dark:text-black"
                     />
                 </div>
-                <div className="flex flex-1 rounded-md shadow-sm">
+                <div className="hidden flex flex-1 rounded-md shadow-sm">
                     <span className="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                         Storage Limit*
                     </span>
