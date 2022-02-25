@@ -83,7 +83,7 @@ const DeployParameters: React.FC<DeployParametersProps> = ({ workspaceRef }) => 
     }, [dispatch, client, state.code, walletStatus.connected, workspaceRef]);
 
     return (
-        <div className="rounded-md p-2 border-2 shadow-xl border-2 border-amber-500 dark:border-amber-400">
+        <div className="rounded-md p-2 border-2 shadow-xl border-2 border-black dark:border-amber-400">
             <div className="flex justify-between items-center border-b border-black dark:border-white mb-2 pb-2">
                 <label className="font-mono text-xl font-bold">Parameters</label>
                 {walletStatus.connected ? (
