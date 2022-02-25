@@ -22,7 +22,7 @@ const LambdaBlock = {
         },
     ],
     output: 'Type',
-    colour: 480,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.lambda_type] = {

@@ -22,7 +22,7 @@ const PairBlock = {
         },
     ],
     output: 'Type',
-    colour: 450,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.pair_type] = {

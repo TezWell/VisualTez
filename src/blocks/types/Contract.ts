@@ -17,7 +17,7 @@ const ContractBlock = {
         },
     ],
     output: 'Type',
-    colour: 540,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.contract_type] = {

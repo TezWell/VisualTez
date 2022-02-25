@@ -10,7 +10,7 @@ const UnitTypeBlock = {
     type: BlockKind.unit_type,
     message0: 'Type: Unit',
     output: 'Type',
-    colour: 48,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.unit_type] = {

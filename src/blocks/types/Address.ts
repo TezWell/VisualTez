@@ -10,7 +10,7 @@ const AddressBlock = {
     type: BlockKind.address_type,
     message0: 'Type: Address',
     output: 'Type',
-    colour: 20,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.address_type] = {

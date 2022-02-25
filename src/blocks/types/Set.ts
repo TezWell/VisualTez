@@ -17,7 +17,7 @@ const SetBlock = {
         },
     ],
     output: 'Type',
-    colour: 360,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.set_type] = {

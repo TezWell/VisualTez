@@ -10,7 +10,7 @@ const StringBlock = {
     type: BlockKind.string_type,
     message0: 'Type: String',
     output: 'Type',
-    colour: 11,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.string_type] = {

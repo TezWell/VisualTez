@@ -213,22 +213,22 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                             <Category name="Types" categorystyle="type_category">
                                 <Label text="-- Singleton types --" web-class="defaultLabel" />
-                                <Block type={BlockKind.string_type} />
-                                <Block type={BlockKind.unit_type} />
-                                <Block type={BlockKind.boolean_type} />
-                                <Block type={BlockKind.address_type} />
                                 <Block type={BlockKind.nat_type} />
                                 <Block type={BlockKind.int_type} />
                                 <Block type={BlockKind.mutez_type} />
-                                <Block type={BlockKind.chain_id_type} />
                                 <Block type={BlockKind.timestamp_type} />
+                                <Block type={BlockKind.unit_type} />
+                                <Block type={BlockKind.boolean_type} />
+                                <Block type={BlockKind.string_type} />
+                                <Block type={BlockKind.address_type} />
                                 <Block type={BlockKind.bytes_type} />
-                                <Block type={BlockKind.bls12_381_fr_type} />
-                                <Block type={BlockKind.bls12_381_g1_type} />
-                                <Block type={BlockKind.bls12_381_g2_type} />
+                                <Block type={BlockKind.chain_id_type} />
                                 <Block type={BlockKind.key_type} />
                                 <Block type={BlockKind.key_hash_type} />
                                 <Block type={BlockKind.signature_type} />
+                                <Block type={BlockKind.bls12_381_fr_type} />
+                                <Block type={BlockKind.bls12_381_g1_type} />
+                                <Block type={BlockKind.bls12_381_g2_type} />
                                 <Block type={BlockKind.operation_type} />
                                 <Block type={BlockKind.never_type} />
                                 <Label text="-- Container types --" web-class="defaultLabel" />
@@ -262,7 +262,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 </Block>
                                 <Block type={BlockKind.record_variant_field_type} />
                             </Category>
-                            <Category name="(Block & Operation) Values" categorystyle="blockchain_category">
+                            <Category name="Operation Properties" categorystyle="blockchain_category">
                                 <Block type={BlockKind.get_amount_block} />
                                 <Block type={BlockKind.get_balance_block} />
                                 <Block type={BlockKind.get_chain_id_block} />
@@ -275,18 +275,20 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.get_total_voting_power_block} />
                                 <Block type={BlockKind.get_voting_power} />
                             </Category>
-                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
-                                <Block type={BlockKind.param_access} />
-                            </Category>
-                            <Category name="Logic" categorystyle="logic_category">
+                            {/* <Category name="Logic" categorystyle="logic_category">
                                 <Category name="Boolean" categorystyle="logic_category">
                                     <Block type={BlockKind.compare_block} />
                                 </Category>
-                            </Category>
-                            <Category name="Math" categorystyle="logic_category">
+                            </Category> */}
+                            <Category name="Various" categorystyle="logic_category">
+                                <Block type={BlockKind.compare_block} />
                                 <Block type={BlockKind.math_block} />
                             </Category>
-                            <Category name="Assertion" categorystyle="assertion_category">
+
+                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
+                                <Block type={BlockKind.param_access} />
+                            </Category>
+                            <Category name="Control Statements" categorystyle="control_statements_category">
                                 <Block type="assert_block">
                                     {/* Default error message */}
                                     <Value name="error_message">

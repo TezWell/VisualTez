@@ -10,7 +10,7 @@ const NatTypeBlock = {
     type: BlockKind.nat_type,
     message0: 'Type: Nat',
     output: 'Type',
-    colour: 10,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.nat_type] = {

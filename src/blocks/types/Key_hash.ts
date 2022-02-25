@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.key_hash_type,
     message0: 'Type: Key_hash',
     output: 'Type',
-    colour: 319,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.key_hash_type] = {

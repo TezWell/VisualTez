@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.operation_type,
     message0: 'Type: Operation',
     output: 'Type',
-    colour: 379,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.operation_type] = {

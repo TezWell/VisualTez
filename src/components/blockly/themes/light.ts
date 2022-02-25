@@ -20,8 +20,8 @@ const LightTheme = Blockly.Theme.defineTheme('light', {
         variables_category: {
             colour: '#0075D3',
         },
-        assertion_category: {
-            colour: '#252526',
+        control_statements_category: {
+            colour: '#f61961',
         },
     },
     blockStyles: {

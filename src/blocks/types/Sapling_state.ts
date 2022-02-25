@@ -18,7 +18,7 @@ const Sapling_stateBlock = {
         },
     ],
     output: 'Type',
-    colour: 570,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.sapling_state_type] = {

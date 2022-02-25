@@ -17,7 +17,7 @@ const ListBlock = {
         },
     ],
     output: 'Type',
-    colour: 330,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.list_type] = {

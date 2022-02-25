@@ -18,7 +18,7 @@ const Sapling_transactionBlock = {
         },
     ],
     output: 'Type',
-    colour: 600,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.sapling_transaction_type] = {

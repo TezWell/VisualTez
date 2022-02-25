@@ -17,7 +17,7 @@ const OptionBlock = {
         },
     ],
     output: 'Type',
-    colour: 300,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.option_type] = {

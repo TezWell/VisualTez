@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.never_type,
     message0: 'Type: Never',
     output: 'Type',
-    colour: 379,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.never_type] = {

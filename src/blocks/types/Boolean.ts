@@ -10,7 +10,7 @@ const BooleanBlock = {
     type: BlockKind.boolean_type,
     message0: 'Type: Boolean',
     output: 'Type',
-    colour: 209,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.boolean_type] = {

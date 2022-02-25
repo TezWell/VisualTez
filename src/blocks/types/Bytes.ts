@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.bytes_type,
     message0: 'Type: Bytes',
     output: 'Type',
-    colour: 269,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.bytes_type] = {

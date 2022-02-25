@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.mutez_type,
     message0: 'Type: Mutez',
     output: 'Type',
-    colour: 409,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.mutez_type] = {

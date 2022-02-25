@@ -22,7 +22,7 @@ const BigMapBlock = {
         },
     ],
     output: 'Type',
-    colour: 420,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.big_map_type] = {

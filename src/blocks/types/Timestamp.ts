@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.timestamp_type,
     message0: 'Type: Timestamp',
     output: 'Type',
-    colour: 239,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.timestamp_type] = {

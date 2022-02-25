@@ -17,7 +17,7 @@ const TicketBlock = {
         },
     ],
     output: 'Type',
-    colour: 510,
+    colour: 260,
 };
 
 Blockly.Blocks[BlockKind.ticket_type] = {

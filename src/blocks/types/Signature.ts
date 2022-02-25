@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.signature_type,
     message0: 'Type: Signature',
     output: 'Type',
-    colour: 349,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.signature_type] = {

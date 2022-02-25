@@ -10,7 +10,7 @@ const BlockConfig = {
     type: BlockKind.bls12_381_g2_type,
     message0: 'Type: Bls12_381_g2',
     output: 'Type',
-    colour: 259,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.bls12_381_g2_type] = {

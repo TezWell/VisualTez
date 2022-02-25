@@ -10,7 +10,7 @@ const IntTypeBlock = {
     type: BlockKind.int_type,
     message0: 'Type: Int',
     output: 'Type',
-    colour: 320,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.int_type] = {
