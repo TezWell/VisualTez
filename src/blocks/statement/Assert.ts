@@ -1,10 +1,10 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 import { Require } from '@tezwell/smartts-sdk/statement';
+import { Unit } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from './enums/BlockKind';
-import { Unit } from '@tezwell/smartts-sdk';
+import BlockKind from '../enums/BlockKind';
 
 const AssertBlock = {
     type: BlockKind.assert_block,

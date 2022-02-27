@@ -17,6 +17,7 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
         this.setTooltip('A block that represents an entry point.');
         this.arguments_ = [];
         this.argumentVarModels_ = [];
+        this.setOutput(false, 'Entrypoint');
         this.setColour(140);
         this.setInputsInline(true);
         this.setPreviousStatement(true);

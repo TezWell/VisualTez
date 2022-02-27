@@ -26,9 +26,10 @@ Blockly.Blocks[BlockKind.contract_block] = {
             .appendField(nameField, 'NAME')
             .appendField('', 'PARAMS');
         this.appendValueInput('initial_storage').setCheck(['Literal']).appendField('Initial Storage');
-        this.appendStatementInput('entry_points').setCheck('EntryPoint').setAlign(3).appendField('Entry points');
+        this.appendStatementInput('entry_points').setCheck(['Entrypoint']).appendField('Entry points');
         this.setTooltip('A block that represents a contract');
         this.setColour(200);
+        this.setInputsInline(true);
     },
 };
 
