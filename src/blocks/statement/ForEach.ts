@@ -4,7 +4,8 @@ import { ForEachOf } from '@tezwell/smartts-sdk/statement';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
-import Context, { ScopeKind } from '../core/context';
+import Context, { ScopeKind, VariableKind } from '../core/context';
+import { extractVariableName } from '../utils/variables';
 
 const ForEachBlock = {
     type: BlockKind.for_each_block,
@@ -47,12 +48,17 @@ SmartML.addBlock(BlockKind.for_each_block, {
         const list = SmartML.toValue(block, 'LIST');
 
         // Blockly Typescript support is terrible
-        const iteratorName = (block.getField('VAR') as any).getVariable().name;
+        const iteratorName = extractVariableName(block, 'VAR');
 
         // Add a (For) scope
         Context.main.enterScope({
-            type: ScopeKind.For,
-            iterator: iteratorName,
+            kind: ScopeKind.For,
+            variables: {
+                [iteratorName]: {
+                    kind: VariableKind.Iterator,
+                    name: iteratorName,
+                },
+            },
         });
 
         const instructions = SmartML.toStatements(block, 'DO', true);
@@ -60,6 +66,8 @@ SmartML.addBlock(BlockKind.for_each_block, {
         // Remove current scope
         Context.main.exitScope();
 
-        return ForEachOf(list, iteratorName).Do(() => instructions);
+        return ForEachOf(list)
+            .setIteratorName(iteratorName)
+            .Do(() => instructions);
     },
 });

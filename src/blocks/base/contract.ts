@@ -37,7 +37,7 @@ Blockly.Blocks[BlockKind.contract_block] = {
 SmartML[BlockKind.contract_block] = function (block: Block) {
     // Update current scope to (Contract)
     Context.main.enterScope({
-        type: ScopeKind.Contract,
+        kind: ScopeKind.Contract,
     });
 
     const storageType = SmartML.toType(block, 'initial_storage');

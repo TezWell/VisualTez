@@ -90,7 +90,7 @@ export enum BlockKind {
     variables_get = 'variables_get',
     param_access = 'param_access',
     // Statements
-    set_variable_block = 'variables_set',
+    variable_setter_block = 'variables_set',
     assert_block = 'assert_block',
     if_block = 'if_block',
     for_each_block = 'for_each_block',

@@ -30,7 +30,8 @@ SmartML.addBlock(BlockKind.entry_point_block, {
     toStatement: (block: Block) => {
         // Add an (Entrypoint) scope
         Context.main.enterScope({
-            type: ScopeKind.Entrypoint,
+            kind: ScopeKind.Entrypoint,
+            variables: {},
         });
 
         const name = block.getFieldValue('NAME');

@@ -1,23 +1,24 @@
+import type { Block, Workspace } from 'blockly';
+import type { IValue, MichelsonJSON, MichelsonMicheline } from '@tezwell/michelson-sdk/typings';
+import Blockly from 'blockly';
+import { CompilerAPI } from '@tezwell/smartts-sdk';
+
 import './base';
 import './values';
 import './types';
 import './statement';
+import './expression';
 //
 import './VariableBlocks';
-import './ParamAccess';
 //
 import './comparison';
 import './math';
 import './blockchain_operations';
 
-import Blockly from 'blockly';
-import type { Block, Workspace } from 'blockly';
-import type { IValue, MichelsonJSON, MichelsonMicheline } from '@tezwell/michelson-sdk/typings';
-import { CompilerAPI } from '@tezwell/smartts-sdk';
-
 import BlockKind from './enums/BlockKind';
 import SmartML from './generators/SmartML';
 import Michelson from './generators/Michelson';
+import Context from './core/context';
 
 export enum CompilationKind {
     Contract = 'contract',
@@ -89,6 +90,9 @@ export const compileBlock = (block: Block): Compilation | null => {
             };
         }
         case BlockKind.contract_block:
+            // Reset context
+            Context.reset();
+
             const name = block.getFieldValue('NAME');
 
             const storageBlock = block.getInputTargetBlock('initial_storage');

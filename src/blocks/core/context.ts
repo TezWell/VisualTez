@@ -6,37 +6,52 @@ export enum ScopeKind {
     For,
 }
 
-type Scope =
+export enum VariableKind {
+    Local,
+    Iterator,
+}
+
+interface IVariable {
+    kind: VariableKind;
+    name: string;
+}
+
+type IScope =
     | {
-          type: ScopeKind.Contract;
+          kind: ScopeKind.Contract;
       }
     | {
-          type: ScopeKind.Entrypoint;
+          kind: ScopeKind.Entrypoint;
+          variables: Record<string, IVariable>;
       }
     | {
-          type: ScopeKind.For;
-          iterator: string;
+          kind: ScopeKind.For;
+          variables: Record<string, IVariable>;
       };
 
 const increment = (v: number) => v + 1;
 const decrement = (v: number) => v + (v > 0 ? -1 : 0);
 
-class Context {
-    private scopes: Scope[] = [];
+class CompilationContext {
+    #scopes: IScope[] = [];
     private blockCounter: Map<BlockKind, number> = new Map();
 
     // + Scope methods
 
-    public enterScope(scope: Scope): void {
-        this.scopes.push(scope);
+    public enterScope(scope: IScope): void {
+        this.#scopes.push(scope);
     }
 
     public exitScope(): void {
-        this.scopes.pop();
+        this.#scopes.pop();
     }
 
-    public get scope(): Readonly<Scope> {
-        return this.scopes[this.scopes.length - 1];
+    public get scope(): Readonly<IScope> {
+        return this.#scopes[this.#scopes.length - 1];
+    }
+
+    public get scopes(): Readonly<IScope[]> {
+        return (JSON.parse(JSON.stringify(this.#scopes)) as IScope[]).reverse();
     }
 
     // - Scope methods
@@ -59,8 +74,11 @@ class Context {
     private getBlockCounter = (kind: BlockKind) => this.blockCounter.get(kind) || 0;
 }
 
-const Ctx = {
-    main: new Context(),
+const Context = {
+    main: new CompilationContext(),
+    reset: function () {
+        this.main = new CompilationContext();
+    },
 };
 
-export default Ctx;
+export default Context;

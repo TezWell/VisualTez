@@ -286,6 +286,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
+                                <Block type={BlockKind.variable_setter_block} />
                                 <Block type={BlockKind.param_access} />
                             </Category>
                             <Category name="Control Statements" categorystyle="control_statements_category">
