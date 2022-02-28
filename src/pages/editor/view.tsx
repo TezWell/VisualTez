@@ -296,6 +296,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Value>
                                 </Block>
                                 <Block type={BlockKind.if_block} />
+                                <Block type={BlockKind.for_each_block} />
                             </Category>
                         </BlocklyEditor>
                     </Section>

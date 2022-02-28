@@ -4,6 +4,7 @@ import { EntryPoint } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
+import Context, { ScopeKind } from '../core/context';
 
 Blockly.Blocks[BlockKind.entry_point_block] = {
     ...Blockly.Blocks['procedures_defnoreturn'],
@@ -27,8 +28,18 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
 
 SmartML.addBlock(BlockKind.entry_point_block, {
     toStatement: (block: Block) => {
+        // Add an (Entrypoint) scope
+        Context.main.enterScope({
+            type: ScopeKind.Entrypoint,
+        });
+
         const name = block.getFieldValue('NAME');
         const type = SmartML.toType(block, 'input_type');
-        return new EntryPoint(name).inputType(type).code(() => SmartML.toStatements(block, 'entry_point_code', true));
+        const code = SmartML.toStatements(block, 'entry_point_code', true);
+
+        // Remove current scope
+        Context.main.exitScope();
+
+        return new EntryPoint(name).inputType(type).code(() => code);
     },
 });

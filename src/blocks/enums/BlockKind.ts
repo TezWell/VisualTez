@@ -93,6 +93,7 @@ export enum BlockKind {
     set_variable_block = 'variables_set',
     assert_block = 'assert_block',
     if_block = 'if_block',
+    for_each_block = 'for_each_block',
     // Base
     type_compilation = 'type_compilation',
     value_compilation = 'value_compilation',

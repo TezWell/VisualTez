@@ -6,6 +6,7 @@ import { Contract, EntryPoint } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
+import Context, { ScopeKind } from '../core/context';
 
 Blockly.Blocks[BlockKind.contract_block] = {
     rename: function (oldName: string) {
@@ -34,11 +35,19 @@ Blockly.Blocks[BlockKind.contract_block] = {
 };
 
 SmartML[BlockKind.contract_block] = function (block: Block) {
+    // Update current scope to (Contract)
+    Context.main.enterScope({
+        type: ScopeKind.Contract,
+    });
+
     const storageType = SmartML.toType(block, 'initial_storage');
     const storageValue = SmartML.toValue(block, 'initial_storage') as ILiteral<unknown>;
     const contract = new Contract().setStorageType(storageType).setStorage(storageValue);
 
     SmartML.toStatements(block, 'entry_points', true).forEach((st) => contract.addEntrypoint(st as EntryPoint));
+
+    // Remove current scope
+    Context.main.exitScope();
 
     console.debug(contract.toString());
     return contract.toString();
