@@ -9,7 +9,7 @@ import './types';
 import './statement';
 import './expression';
 //
-import './VariableBlocks';
+import './overrides';
 //
 import './comparison';
 import './math';

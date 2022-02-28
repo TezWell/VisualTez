@@ -13,7 +13,6 @@ import debounce from 'src/utils/debounce';
 import useEditor from 'src/context/hooks/useEditor';
 import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
-import { initiateDefaultVariables } from 'src/blocks/utils/variables';
 import Separator from 'src/components/blockly/Separator';
 import Label from 'src/components/blockly/Label';
 
@@ -112,7 +111,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 minScale: 0.25,
                                 scaleSpeed: 1.1,
                             }}
-                            onLoad={initiateDefaultVariables}
                             onError={onError}
                             onChange={onChange}
                         >
