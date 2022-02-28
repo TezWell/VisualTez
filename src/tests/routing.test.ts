@@ -25,7 +25,7 @@ describe('Application Routing', () => {
                 await renderWithRouter({
                     path,
                 });
-                await waitFor(async () => expect(document.title).toMatch(route.title));
+                await waitFor(() => expect(document.title).toMatch(route.title));
             });
         });
 });

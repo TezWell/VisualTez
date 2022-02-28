@@ -300,6 +300,17 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     <Block type={BlockKind.if_block} />
                                 </Category>
                                 <Category name="Loops" categorystyle="control_statements_category">
+                                    <Block type={BlockKind.for_block}>
+                                        <Value name="FROM">
+                                            <Block type={BlockKind.nat_literal} />
+                                        </Value>
+                                        <Value name="TO">
+                                            <Block type={BlockKind.nat_literal} />
+                                        </Value>
+                                        <Value name="BY">
+                                            <Block type={BlockKind.nat_literal} />
+                                        </Value>
+                                    </Block>
                                     <Block type={BlockKind.for_each_block} />
                                     <Block type={BlockKind.while_block} />
                                 </Category>

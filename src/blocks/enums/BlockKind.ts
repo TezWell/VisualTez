@@ -95,6 +95,7 @@ export enum BlockKind {
     if_block = 'if_block',
     for_each_block = 'for_each_block',
     while_block = 'while_block',
+    for_block = 'for_block',
     // Base
     type_compilation = 'type_compilation',
     value_compilation = 'value_compilation',
