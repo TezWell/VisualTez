@@ -45,7 +45,7 @@ const ForBlock = {
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 100,
+    colour: 180,
 };
 
 Blockly.Blocks[BlockKind.for_block] = {

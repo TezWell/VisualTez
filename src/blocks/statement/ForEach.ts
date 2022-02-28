@@ -19,7 +19,7 @@ const ForEachBlock = {
         {
             type: 'input_value',
             name: 'LIST',
-            check: 'List',
+            check: ['Expression', 'List'],
         },
     ],
     message1: '%{BKY_CONTROLS_REPEAT_INPUT_DO} %1',
@@ -32,7 +32,7 @@ const ForEachBlock = {
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 100,
+    colour: 180,
     helpUrl: '%{BKY_CONTROLS_FOREACH_HELPURL}',
     extensions: ['contextMenu_newGetVariableBlock', 'controls_forEach_tooltip'],
 };

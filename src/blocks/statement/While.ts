@@ -25,7 +25,7 @@ const WhileBlock = {
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 100,
+    colour: 180,
 };
 
 Blockly.Blocks[BlockKind.while_block] = {
