@@ -13,7 +13,7 @@ describe('Application Routing', () => {
     routes
         .filter(({ disabled }) => !disabled)
         .forEach((route) => {
-            let path = route.routeProps.path as string;
+            let path = route.routeProps.path;
             let testDescription = `Test Route ${route.title}`;
 
             if (route.routeProps.path === '*') {
@@ -22,10 +22,8 @@ describe('Application Routing', () => {
             }
 
             it(testDescription, async () => {
-                await renderWithRouter({
-                    path,
-                });
-                await waitFor(async () => expect(document.title).toMatch(route.title));
+                renderWithRouter({ path });
+                await waitFor(() => expect(document.title).toMatch(route.title));
             });
         });
 });

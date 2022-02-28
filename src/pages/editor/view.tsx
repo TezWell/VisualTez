@@ -286,15 +286,34 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
+                                <Block type={BlockKind.variable_setter_block} />
                                 <Block type={BlockKind.param_access} />
                             </Category>
                             <Category name="Control Statements" categorystyle="control_statements_category">
-                                <Block type="assert_block">
-                                    {/* Default error message */}
-                                    <Value name="error_message">
-                                        <Block type={BlockKind.unit_literal} />
-                                    </Value>
-                                </Block>
+                                <Category name="Logic" categorystyle="logic_category">
+                                    <Block type="assert_block">
+                                        {/* Default error message */}
+                                        <Value name="error_message">
+                                            <Block type={BlockKind.unit_literal} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.if_block} />
+                                </Category>
+                                <Category name="Loops" categorystyle="control_statements_category">
+                                    <Block type={BlockKind.for_block}>
+                                        <Value name="FROM">
+                                            <Block type={BlockKind.nat_literal} />
+                                        </Value>
+                                        <Value name="TO">
+                                            <Block type={BlockKind.nat_literal} />
+                                        </Value>
+                                        <Value name="BY">
+                                            <Block type={BlockKind.nat_literal} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.for_each_block} />
+                                    <Block type={BlockKind.while_block} />
+                                </Category>
                             </Category>
                         </BlocklyEditor>
                     </Section>

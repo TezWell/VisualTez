@@ -1,5 +1,5 @@
 import Blockly from 'blockly';
-import BlockKind from './enums/BlockKind';
+import BlockKind from '../enums/BlockKind';
 
 const GetVariableBlock = {
     type: BlockKind.get_variable_block,
