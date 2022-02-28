@@ -290,14 +290,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.param_access} />
                             </Category>
                             <Category name="Control Statements" categorystyle="control_statements_category">
-                                <Block type="assert_block">
-                                    {/* Default error message */}
-                                    <Value name="error_message">
-                                        <Block type={BlockKind.unit_literal} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.if_block} />
-                                <Block type={BlockKind.for_each_block} />
+                                <Category name="Logic" categorystyle="logic_category">
+                                    <Block type="assert_block">
+                                        {/* Default error message */}
+                                        <Value name="error_message">
+                                            <Block type={BlockKind.unit_literal} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.if_block} />
+                                </Category>
+                                <Category name="Loops" categorystyle="control_statements_category">
+                                    <Block type={BlockKind.for_each_block} />
+                                    <Block type={BlockKind.while_block} />
+                                </Category>
                             </Category>
                         </BlocklyEditor>
                     </Section>

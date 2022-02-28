@@ -1,7 +1,7 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import { Add, Sub, Mul, Div } from '@tezwell/smartts-sdk/expression';
+import { Math } from '@tezwell/smartts-sdk/expression';
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
 
@@ -50,13 +50,13 @@ SmartML.addBlock(MathBlock.type, {
         const operator = block.getFieldValue('OP');
         switch (operator) {
             case 'SUM':
-                return Add(left, right);
+                return Math.Add(left, right);
             case 'SUB':
-                return Sub(left, right);
+                return Math.Subtract(left, right);
             case 'MUL':
-                return Mul(left, right);
+                return Math.Multiply(left, right);
             case 'DIV':
-                return Div(left, right);
+                return Math.Divide(left, right);
         }
         throw new Error(`Unexpected operator ${operator}.`);
     },

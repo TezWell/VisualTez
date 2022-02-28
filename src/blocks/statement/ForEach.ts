@@ -32,7 +32,7 @@ const ForEachBlock = {
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 10,
+    colour: 100,
     helpUrl: '%{BKY_CONTROLS_FOREACH_HELPURL}',
     extensions: ['contextMenu_newGetVariableBlock', 'controls_forEach_tooltip'],
 };
