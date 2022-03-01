@@ -26,15 +26,19 @@ import BlockKind from '../enums/BlockKind';
  * @alias Blockly.Variables.flyoutCategoryBlocks
  */
 const flyoutCategoryBlocks = (workspace: Workspace) => {
+    const statementBlocks = [BlockKind.variable_declaration_block, BlockKind.variable_setter_block];
     const persistentVariableTypes = [BlockKind.contract_storage_block, BlockKind.entrypoint_arg_block];
     const variableModelList = workspace.getVariablesOfType('');
 
     const xmlList: Element[] = [];
 
-    const block = Blockly.utils.xml.createElement('block');
-    block.setAttribute('type', BlockKind.variable_setter_block);
-    block.setAttribute('gap', '24');
-    xmlList.push(block);
+    const statements = statementBlocks.map((blockType, index) => {
+        const block = Blockly.utils.xml.createElement('block');
+        block.setAttribute('type', blockType);
+        block.setAttribute('gap', index === statementBlocks.length - 1 ? '24' : '8');
+        return block;
+    });
+    xmlList.push(...statements);
 
     const persistentVariables = persistentVariableTypes.map((blockType, index) => {
         const block = Blockly.utils.xml.createElement('block');
