@@ -1,6 +1,6 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
-import { ContractStorage, GetLocal, Iterator, MethodArgument } from '@tezwell/smartts-sdk';
+import { ContractStorage, GetVariable, Iterator, LambdaArgument, MethodArgument, TUnknown } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
@@ -52,9 +52,18 @@ SmartML.addBlock(BlockKind.variables_get, {
                                 return Iterator(variableName);
                         }
                     }
+                    break;
+                case ScopeKind.Lambda:
+                    if (variableName in scope.variables) {
+                        switch (scope.variables[variableName].kind) {
+                            case VariableKind.LambdaArgument:
+                                return LambdaArgument(variableName, TUnknown(), scope.id);
+                        }
+                    }
+                    break;
             }
         }
 
-        return GetLocal(variableName);
+        return GetVariable(variableName);
     },
 });

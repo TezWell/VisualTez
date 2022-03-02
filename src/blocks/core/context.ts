@@ -4,11 +4,13 @@ export enum ScopeKind {
     Contract,
     Entrypoint,
     For,
+    Lambda,
 }
 
 export enum VariableKind {
     Local,
     Iterator,
+    LambdaArgument,
 }
 
 interface IVariable {
@@ -21,12 +23,13 @@ type IScope =
           kind: ScopeKind.Contract;
       }
     | {
-          kind: ScopeKind.Entrypoint;
+          kind: ScopeKind.Entrypoint | ScopeKind.For;
           variables: Record<string, IVariable>;
       }
     | {
-          kind: ScopeKind.For;
+          kind: ScopeKind.Lambda;
           variables: Record<string, IVariable>;
+          id: number;
       };
 
 const increment = (v: number) => v + 1;

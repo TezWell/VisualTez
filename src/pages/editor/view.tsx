@@ -140,153 +140,144 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.type_compilation} />
                             </Category>
                             <Category name="Values" categorystyle="literal_category">
-                                <Block type={BlockKind.nat_literal} />
-                                <Block type={BlockKind.int_literal} />
-                                <Block type={BlockKind.mutez_literal} />
-                                <Block type={BlockKind.timestamp_literal} />
-                                <Block type={BlockKind.unit_literal} />
-                                <Block type={BlockKind.boolean_literal} />
-                                <Block type={BlockKind.string_literal} />
-                                <Block type={BlockKind.address_literal} />
-                                <Block type={BlockKind.bytes_literal} />
-                                <Block type={BlockKind.chain_id_literal} />
-                                <Block type={BlockKind.key_literal} />
-                                <Block type={BlockKind.key_hash_literal} />
-                                <Block type={BlockKind.signature_literal} />
-                                <Block type={BlockKind.bls12_381_fr_literal} />
-                                <Block type={BlockKind.bls12_381_g1_literal} />
-                                <Block type={BlockKind.bls12_381_g2_literal} />
+                                <Category name="Simple" categorystyle="simple_literal_category">
+                                    <Block type={BlockKind.nat_literal} />
+                                    <Block type={BlockKind.int_literal} />
+                                    <Block type={BlockKind.mutez_literal} />
+                                    <Block type={BlockKind.timestamp_literal} />
+                                    <Block type={BlockKind.unit_literal} />
+                                    <Block type={BlockKind.boolean_literal} />
+                                    <Block type={BlockKind.string_literal} />
+                                    <Block type={BlockKind.address_literal} />
+                                    <Block type={BlockKind.bytes_literal} />
+                                    <Block type={BlockKind.chain_id_literal} />
+                                    <Block type={BlockKind.key_literal} />
+                                    <Block type={BlockKind.key_hash_literal} />
+                                    <Block type={BlockKind.signature_literal} />
+                                    <Block type={BlockKind.bls12_381_fr_literal} />
+                                    <Block type={BlockKind.bls12_381_g1_literal} />
+                                    <Block type={BlockKind.bls12_381_g2_literal} />
+                                </Category>
 
-                                <Separator gap={40} />
-                                <Block type={BlockKind.pair_literal} />
-                                <Separator gap={40} />
+                                <Category name="Sequences" categorystyle="sequence_literal_category">
+                                    <Block type={BlockKind.list_literal}>
+                                        <Value name="items">
+                                            <Block type={BlockKind.sequence_item} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.set_literal}>
+                                        <Value name="items">
+                                            <Block type={BlockKind.sequence_item} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.sequence_item} />
+                                </Category>
 
-                                <Label text="-- Option --" web-class="defaultLabel" />
-                                <Block type={BlockKind.some_literal} />
-                                <Block type={BlockKind.none_with_type_literal} />
+                                <Category name="Maps" categorystyle="map_literal_category">
+                                    <Block type={BlockKind.map_literal}>
+                                        <Value name="entries">
+                                            <Block type={BlockKind.map_entry} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.big_map_literal}>
+                                        <Value name="entries">
+                                            <Block type={BlockKind.map_entry} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.map_entry} />
+                                </Category>
 
-                                <Label text="-- Sequences --" web-class="defaultLabel" />
+                                <Category name="Option" categorystyle="option_literal_category">
+                                    <Block type={BlockKind.some_literal} />
+                                    <Block type={BlockKind.none_with_type_literal} />
+                                </Category>
 
-                                <Block type={BlockKind.list_literal}>
-                                    <Value name="items">
-                                        <Block type={BlockKind.sequence_item} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.set_literal}>
-                                    <Value name="items">
-                                        <Block type={BlockKind.sequence_item} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.sequence_item} />
+                                <Category name="Others" categorystyle="blockchain_category">
+                                    <Block type={BlockKind.pair_literal} />
+                                    <Block type={BlockKind.lambda_literal}>
+                                        <Value name="CODE">
+                                            <Block type={BlockKind.return_statement_block}>
+                                                <Value name="VALUE">
+                                                    <Block type={BlockKind.unit_literal} />
+                                                </Value>
+                                            </Block>
+                                        </Value>
+                                    </Block>
 
-                                <Label text="-- Maps --" web-class="defaultLabel" />
+                                    <Label text="-- Record --" web-class="defaultLabel" />
 
-                                <Block type={BlockKind.map_literal}>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.map_entry} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.big_map_literal}>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.map_entry} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.map_entry} />
+                                    <Block type={BlockKind.record_literal}>
+                                        <Value name="entries">
+                                            <Block type={BlockKind.record_field} />
+                                        </Value>
+                                        <Value name="entries">
+                                            <Block type={BlockKind.record_field} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.record_field} />
 
-                                <Label text="-- Record --" web-class="defaultLabel" />
+                                    <Label text="-- Variant --" web-class="defaultLabel" />
 
-                                <Block type={BlockKind.record_literal}>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.record_field} />
-                                    </Value>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.record_field} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.record_field} />
-
-                                <Label text="-- Variant --" web-class="defaultLabel" />
-
-                                <Block type={BlockKind.variant_value} />
+                                    <Block type={BlockKind.variant_value} />
+                                </Category>
                             </Category>
                             <Category name="Types" categorystyle="type_category">
-                                <Label text="-- Singleton types --" web-class="defaultLabel" />
-                                <Block type={BlockKind.nat_type} />
-                                <Block type={BlockKind.int_type} />
-                                <Block type={BlockKind.mutez_type} />
-                                <Block type={BlockKind.timestamp_type} />
-                                <Block type={BlockKind.unit_type} />
-                                <Block type={BlockKind.boolean_type} />
-                                <Block type={BlockKind.string_type} />
-                                <Block type={BlockKind.address_type} />
-                                <Block type={BlockKind.bytes_type} />
-                                <Block type={BlockKind.chain_id_type} />
-                                <Block type={BlockKind.key_type} />
-                                <Block type={BlockKind.key_hash_type} />
-                                <Block type={BlockKind.signature_type} />
-                                <Block type={BlockKind.bls12_381_fr_type} />
-                                <Block type={BlockKind.bls12_381_g1_type} />
-                                <Block type={BlockKind.bls12_381_g2_type} />
-                                <Block type={BlockKind.operation_type} />
-                                <Block type={BlockKind.never_type} />
-                                <Label text="-- Container types --" web-class="defaultLabel" />
-                                <Block type={BlockKind.list_type} />
-                                <Block type={BlockKind.set_type} />
-                                <Block type={BlockKind.option_type} />
-                                <Block type={BlockKind.map_type} />
-                                <Block type={BlockKind.big_map_type} />
-                                <Block type={BlockKind.pair_type} />
-                                <Block type={BlockKind.lambda_type} />
-                                <Block type={BlockKind.ticket_type} />
-                                <Block type={BlockKind.contract_type} />
-                                <Block type={BlockKind.sapling_state_type} />
-                                <Block type={BlockKind.sapling_transaction_type} />
-                                <Label text="-- Artificial types --" web-class="defaultLabel" />
-                                <Block type={BlockKind.record_type}>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.variant_type}>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.record_variant_field_type} />
-                            </Category>
-                            <Category name="Operation Properties" categorystyle="blockchain_category">
-                                <Block type={BlockKind.get_amount_block} />
-                                <Block type={BlockKind.get_balance_block} />
-                                <Block type={BlockKind.get_chain_id_block} />
-                                <Block type={BlockKind.get_level_block} />
-                                <Block type={BlockKind.get_timestamp_block} />
-                                <Block type={BlockKind.get_current_contract_block} />
-                                <Block type={BlockKind.get_current_contract_address_block} />
-                                <Block type={BlockKind.get_sender_block} />
-                                <Block type={BlockKind.get_source_block} />
-                                <Block type={BlockKind.get_total_voting_power_block} />
-                                <Block type={BlockKind.get_voting_power} />
-                            </Category>
-                            {/* <Category name="Logic" categorystyle="logic_category">
-                                <Category name="Boolean" categorystyle="logic_category">
-                                    <Block type={BlockKind.compare_block} />
+                                <Category name="Singleton Types" categorystyle="type_category">
+                                    <Block type={BlockKind.nat_type} />
+                                    <Block type={BlockKind.int_type} />
+                                    <Block type={BlockKind.mutez_type} />
+                                    <Block type={BlockKind.timestamp_type} />
+                                    <Block type={BlockKind.unit_type} />
+                                    <Block type={BlockKind.boolean_type} />
+                                    <Block type={BlockKind.string_type} />
+                                    <Block type={BlockKind.address_type} />
+                                    <Block type={BlockKind.bytes_type} />
+                                    <Block type={BlockKind.chain_id_type} />
+                                    <Block type={BlockKind.key_type} />
+                                    <Block type={BlockKind.key_hash_type} />
+                                    <Block type={BlockKind.signature_type} />
+                                    <Block type={BlockKind.bls12_381_fr_type} />
+                                    <Block type={BlockKind.bls12_381_g1_type} />
+                                    <Block type={BlockKind.bls12_381_g2_type} />
+                                    <Block type={BlockKind.operation_type} />
+                                    <Block type={BlockKind.never_type} />
                                 </Category>
-                            </Category> */}
-                            <Category name="Various" categorystyle="logic_category">
-                                <Block type={BlockKind.compare_block} />
-                                <Block type={BlockKind.math_block} />
+
+                                <Category name="Container Types" categorystyle="container_type_category">
+                                    <Block type={BlockKind.list_type} />
+                                    <Block type={BlockKind.set_type} />
+                                    <Block type={BlockKind.option_type} />
+                                    <Block type={BlockKind.map_type} />
+                                    <Block type={BlockKind.big_map_type} />
+                                    <Block type={BlockKind.pair_type} />
+                                    <Block type={BlockKind.lambda_type} />
+                                    <Block type={BlockKind.ticket_type} />
+                                    <Block type={BlockKind.contract_type} />
+                                    <Block type={BlockKind.sapling_state_type} />
+                                    <Block type={BlockKind.sapling_transaction_type} />
+                                </Category>
+
+                                <Category name="Artificial Types" categorystyle="artificial_type_category">
+                                    <Block type={BlockKind.record_type}>
+                                        <Value name="fields">
+                                            <Block type={BlockKind.record_variant_field_type} />
+                                        </Value>
+                                        <Value name="fields">
+                                            <Block type={BlockKind.record_variant_field_type} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.variant_type}>
+                                        <Value name="fields">
+                                            <Block type={BlockKind.record_variant_field_type} />
+                                        </Value>
+                                        <Value name="fields">
+                                            <Block type={BlockKind.record_variant_field_type} />
+                                        </Value>
+                                    </Block>
+                                    <Block type={BlockKind.record_variant_field_type} />
+                                </Category>
                             </Category>
 
-                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
-                                <Block type={BlockKind.variable_setter_block} />
-                                <Block type={BlockKind.param_access} />
-                            </Category>
                             <Category name="Control Statements" categorystyle="control_statements_category">
                                 <Category name="Logic" categorystyle="logic_category">
                                     <Block type="assert_block">
@@ -313,6 +304,35 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     <Block type={BlockKind.while_block} />
                                 </Category>
                             </Category>
+
+                            <Category name="Blockchain Properties" categorystyle="blockchain_category">
+                                <Category name="Block" categorystyle="block_properties_category">
+                                    <Block type={BlockKind.get_chain_id_block} />
+                                    <Block type={BlockKind.get_level_block} />
+                                    <Block type={BlockKind.get_timestamp_block} />
+                                    <Block type={BlockKind.get_total_voting_power_block} />
+                                    <Block type={BlockKind.get_voting_power} />
+                                </Category>
+                                <Category name="Transaction" categorystyle="transaction_properties_category">
+                                    <Block type={BlockKind.get_amount_block} />
+                                    <Block type={BlockKind.get_balance_block} />
+                                    <Block type={BlockKind.get_current_contract_block} />
+                                    <Block type={BlockKind.get_current_contract_address_block} />
+                                    <Block type={BlockKind.get_sender_block} />
+                                    <Block type={BlockKind.get_source_block} />
+                                </Category>
+                            </Category>
+                            {/* <Category name="Logic" categorystyle="logic_category">
+                                <Category name="Boolean" categorystyle="logic_category">
+                                    <Block type={BlockKind.compare_block} />
+                                </Category>
+                            </Category> */}
+                            <Category name="Various" categorystyle="logic_category">
+                                <Block type={BlockKind.compare_block} />
+                                <Block type={BlockKind.math_block} />
+                            </Category>
+
+                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
                         </BlocklyEditor>
                     </Section>
                     <Section

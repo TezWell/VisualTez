@@ -1,6 +1,6 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
-import { DefineVar } from '@tezwell/smartts-sdk/statement';
+import { NewVariable } from '@tezwell/smartts-sdk/statement';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -8,7 +8,7 @@ import { extractVariableName } from '../utils/variables';
 
 const VariableCreationBlock = {
     type: BlockKind.variable_declaration_block,
-    message0: 'Let %1 = %2',
+    message0: 'Create variable %1 with value %2',
     args0: [
         {
             type: 'field_variable',
@@ -37,6 +37,6 @@ SmartML.addBlock(BlockKind.variable_declaration_block, {
     toStatement: (block: Block) => {
         const variableName = extractVariableName(block, 'VAR');
         const value = SmartML.toValue(block, 'VALUE');
-        return DefineVar(variableName, value);
+        return NewVariable(variableName, value);
     },
 });

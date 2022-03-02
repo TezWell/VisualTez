@@ -50,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                                         </Dialog.Title>
                                     </div>
                                 ) : null}
-                                <div className="grow basis-0 border-t border-b border-yellow-400 dark:border-yellow-500 max-h-96 bg-white dark:bg-gray-400 dark:bg-opacity-20">
+                                <div className="relative h-96 border-t border-b border-yellow-400 dark:border-yellow-500 max-h-96 bg-white dark:bg-gray-400 dark:bg-opacity-20">
                                     {children}
                                 </div>
                                 <div className="bg-gray-400 bg-opacity-20 flex space-x-2 justify-end h-14 p-2">

@@ -65,6 +65,8 @@ export enum BlockKind {
     none_literal = 'none_literal',
     none_with_type_literal = 'none_with_type_literal',
 
+    lambda_literal = 'lambda_literal',
+
     record_literal = 'record_literal',
     record_field = 'record_field',
     variant_value = 'variant_value',
@@ -90,6 +92,7 @@ export enum BlockKind {
     variables_get = 'variables_get',
     param_access = 'param_access',
     // Statements
+    return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',
     variable_setter_block = 'variable_setter_block',
     assert_block = 'assert_block',
