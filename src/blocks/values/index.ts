@@ -23,7 +23,7 @@ import './NoneWithType';
 import './Map';
 import './Big_map';
 import './Pair';
-// import './Lambda';
+import './Lambda';
 
 import './Record';
 import './Variant';

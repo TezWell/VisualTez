@@ -122,7 +122,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
 };
 
 interface TypeModalProps {
-    compilation?: TypeCompilation | ValueCompilation;
+    compilation: TypeCompilation | ValueCompilation;
     onClose: () => void;
 }
 
@@ -146,7 +146,8 @@ const TypeValueModal: React.FC<TypeModalProps> = ({ compilation, ...props }) => 
             open={isOpen}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
-                    Type <p className="ml-2 font-bold">{compilation?.result.name}</p>
+                    {compilation.kind === CompilationKind.Type ? 'Type' : 'Value'}{' '}
+                    <p className="ml-2 font-bold">{compilation?.result.name}</p>
                 </div>
             }
             actions={[
@@ -432,7 +433,10 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                     onClose={closeContractCompilationModal}
                 />
             ) : null}
-            <TypeValueModal compilation={typeValueCompilation} onClose={closeTypeValueCompilationModal} />
+
+            {typeValueCompilation ? (
+                <TypeValueModal compilation={typeValueCompilation} onClose={closeTypeValueCompilationModal} />
+            ) : null}
         </div>
     );
 };

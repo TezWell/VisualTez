@@ -56,7 +56,6 @@ Blockly.Blocks[BlockKind.for_block] = {
 
 SmartML.addBlock(BlockKind.for_block, {
     toStatement: (block: Block) => {
-        // Blockly Typescript support is terrible
         const iteratorName = extractVariableName(block, 'VAR');
 
         const from = SmartML.toValue(block, 'FROM');

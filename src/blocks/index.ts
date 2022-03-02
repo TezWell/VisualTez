@@ -9,7 +9,7 @@ import './types';
 import './statement';
 import './expression';
 //
-import './VariableBlocks';
+import './overrides';
 //
 import './comparison';
 import './math';
@@ -79,7 +79,7 @@ export const compileBlock = (block: Block): Compilation | null => {
             const name = block.getFieldValue('NAME');
 
             const value = Michelson.toMichelson(block, 'value');
-
+            console.error(value);
             return {
                 kind: CompilationKind.Value,
                 result: {

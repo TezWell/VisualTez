@@ -7,7 +7,7 @@ import BlockKind from '../enums/BlockKind';
 
 const VariableSetterBlock = {
     type: BlockKind.variable_setter_block,
-    message0: 'Variable %1 = %2',
+    message0: 'Set variable %1 to be %2',
     args0: [
         {
             type: 'input_value',
