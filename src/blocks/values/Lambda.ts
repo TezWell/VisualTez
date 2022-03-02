@@ -2,8 +2,10 @@ import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
 import { TLambda as ST_TLambda, TUnknown } from '@tezwell/smartts-sdk/type';
-import { Lambda as ST_Lambda } from '@tezwell/smartts-sdk/expression';
+import { Lambda as ST_Lambda, Unit } from '@tezwell/smartts-sdk/expression';
 import { Lambda as M_Lambda } from '@tezwell/michelson-sdk/literal';
+import { Return } from '@tezwell/smartts-sdk/statement';
+
 import Compiler from '@tezwell/smartts-sdk/compiler';
 
 import SmartML from '../generators/SmartML';
@@ -27,6 +29,8 @@ Blockly.Blocks[BlockKind.lambda_literal] = {
             ],
             message1: 'Code %1',
             args1: [{ type: 'input_statement', name: 'CODE', check: 'Statement' }],
+            message2: 'Return %1',
+            args2: [{ type: 'input_value', name: 'RETURN', check: ['Literal', 'Expression'], align: 'RIGHT' }],
             inputsInline: true,
             output: ['Literal', 'Lambda'],
             outputShape: 3,
@@ -59,7 +63,9 @@ SmartML.addBlock(BlockKind.lambda_literal, {
             },
         });
 
-        lambda.code(() => SmartML.toStatements(block, 'CODE', true));
+        const statements = SmartML.toStatements(block, 'CODE', true);
+        const returnValue = Return(SmartML.toValue(block, 'RETURN', Unit()), buildErrorInfo(block));
+        lambda.code(() => [...statements, returnValue]);
 
         // Remove current scope
         Context.main.exitScope();
@@ -89,12 +95,12 @@ Michelson.addBlock(BlockKind.lambda_literal, {
             },
         });
 
-        lambda.code(() => SmartML.toStatements(block, 'CODE', true));
+        const statements = SmartML.toStatements(block, 'CODE', true);
+        const returnValue = Return(SmartML.toValue(block, 'RETURN'), buildErrorInfo(block));
+        lambda.code(() => [...statements, returnValue]);
 
         // Remove current scope
         Context.main.exitScope();
-
-        console.error(lambda.toString());
 
         const compiledLambda = Compiler.compileLambda(lambda.toString());
 

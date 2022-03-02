@@ -70,6 +70,8 @@ export enum BlockKind {
     record_literal = 'record_literal',
     record_field = 'record_field',
     variant_value = 'variant_value',
+    left_literal_block = 'left_literal_block',
+    right_literal_block = 'right_literal_block',
 
     // Block & Operation Values
     get_amount_block = 'get_amount_block',

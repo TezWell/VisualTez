@@ -41,7 +41,7 @@ export const routes = [
             path: '/editor',
         },
         component: (
-            <AdaptableViewport minSize={768}>
+            <AdaptableViewport minSize={1024}>
                 <Page withNavigation>
                     <EditorContext.Provider>
                         <EditorPage />

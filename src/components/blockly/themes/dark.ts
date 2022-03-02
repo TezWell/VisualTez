@@ -17,6 +17,7 @@ const DarkTheme = Blockly.Theme.defineTheme('dark', {
         artificial_type_category: {
             colour: '#5b5ba4',
         },
+
         literal_category: {
             colour: '#D18A55',
         },
@@ -31,6 +32,12 @@ const DarkTheme = Blockly.Theme.defineTheme('dark', {
         },
         map_literal_category: {
             colour: '#5ba58c',
+        },
+        pair_literal_category: {
+            colour: '#5b99a5',
+        },
+        variant_literal_category: {
+            colour: '#99a55b',
         },
 
         blockchain_category: {

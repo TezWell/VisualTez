@@ -12,7 +12,7 @@ Blockly.Blocks[BlockKind.contract_storage_block] = {
         this.jsonInit({
             type: BlockKind.contract_storage_block,
             message0: 'Contract Storage',
-            output: null,
+            output: 'Expression',
             colour: 80,
         });
     },
@@ -28,7 +28,7 @@ Blockly.Blocks[BlockKind.entrypoint_arg_block] = {
         this.jsonInit({
             type: BlockKind.entrypoint_arg_block,
             message0: 'Entrypoint Argument',
-            output: null,
+            output: 'Expression',
             colour: 80,
         });
     },

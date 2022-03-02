@@ -192,17 +192,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     <Block type={BlockKind.none_with_type_literal} />
                                 </Category>
 
-                                <Category name="Others" categorystyle="blockchain_category">
+                                <Category name="Pair / Record" categorystyle="pair_literal_category">
                                     <Block type={BlockKind.pair_literal} />
-                                    <Block type={BlockKind.lambda_literal}>
-                                        <Value name="CODE">
-                                            <Block type={BlockKind.return_statement_block}>
-                                                <Value name="VALUE">
-                                                    <Block type={BlockKind.unit_literal} />
-                                                </Value>
-                                            </Block>
-                                        </Value>
-                                    </Block>
 
                                     <Label text="-- Record --" web-class="defaultLabel" />
 
@@ -215,9 +206,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                         </Value>
                                     </Block>
                                     <Block type={BlockKind.record_field} />
+                                </Category>
 
-                                    <Label text="-- Variant --" web-class="defaultLabel" />
+                                <Category name="Lambda" categorystyle="blockchain_category">
+                                    <Block type={BlockKind.lambda_literal}>
+                                        <Value name="RETURN">
+                                            <Block type={BlockKind.unit_literal} />
+                                        </Value>
+                                    </Block>
+                                </Category>
 
+                                <Category name="Variants" categorystyle="variant_literal_category">
+                                    <Block type={BlockKind.left_literal_block} />
+                                    <Block type={BlockKind.right_literal_block} />
                                     <Block type={BlockKind.variant_value} />
                                 </Category>
                             </Category>

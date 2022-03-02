@@ -253,11 +253,39 @@ interface CompilationDrawerProps {}
 
 const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     const navigate = useNavigate();
-    const [tab, setTab] = React.useState<CompilationKind | null>(CompilationKind.Contract);
+    const [tab, setTab] = React.useState<CompilationKind | null>();
     const [contractCompilation, setContractCompilation] = React.useState<ContractCompilation>();
     const [typeValueCompilation, setTypeValueCompilation] = React.useState<TypeCompilation | ValueCompilation>();
     const { compilations } = useEditor();
     const { dispatch: deploymentDispatch } = useDeployment();
+
+    const contractCompilations = React.useMemo(
+        () => compilations.filter(filterCompilationKind<ContractCompilation>(CompilationKind.Contract)),
+        [compilations],
+    );
+
+    const valueCompilations = React.useMemo(
+        () => compilations.filter(filterCompilationKind<ValueCompilation>(CompilationKind.Value)),
+        [compilations],
+    );
+
+    const typeCompilations = React.useMemo(
+        () => compilations.filter(filterCompilationKind<TypeCompilation>(CompilationKind.Type)),
+        [compilations],
+    );
+
+    const selectedTab = React.useMemo(() => {
+        if (tab) {
+            return tab;
+        } else if (contractCompilations.length) {
+            return CompilationKind.Contract;
+        } else if (typeCompilations.length) {
+            return CompilationKind.Type;
+        } else if (valueCompilations.length) {
+            return CompilationKind.Value;
+        }
+        return CompilationKind.Contract;
+    }, [contractCompilations.length, tab, typeCompilations.length, valueCompilations.length]);
 
     function closeContractCompilationModal() {
         setContractCompilation(undefined);
@@ -293,27 +321,12 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
         [deploymentDispatch, navigate],
     );
 
-    const contractCompilations = React.useMemo(
-        () => compilations.filter(filterCompilationKind<ContractCompilation>(CompilationKind.Contract)),
-        [compilations],
-    );
-
-    const valueCompilations = React.useMemo(
-        () => compilations.filter(filterCompilationKind<ValueCompilation>(CompilationKind.Value)),
-        [compilations],
-    );
-
-    const typeCompilations = React.useMemo(
-        () => compilations.filter(filterCompilationKind<TypeCompilation>(CompilationKind.Type)),
-        [compilations],
-    );
-
     return (
         <div className="flex-1 flex h-full w-full flex-col justify-stretch">
             <div className="flex items-center justify-between p-5">
                 <TabInfo title="Contract Compilation" items={contractCompilations.length} />
                 <ExpandButton
-                    selected={tab === CompilationKind.Contract}
+                    selected={selectedTab === CompilationKind.Contract}
                     select={() => onTabSelection(CompilationKind.Contract)}
                 />
             </div>
@@ -321,7 +334,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 className={buildClassName([
                     {
                         classes: 'hidden',
-                        append: tab !== CompilationKind.Contract,
+                        append: selectedTab !== CompilationKind.Contract,
                     },
                     {
                         classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
@@ -356,7 +369,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
             <div className="flex items-center justify-between border-t p-5">
                 <TabInfo title="Value Compilation" items={valueCompilations.length} />
                 <ExpandButton
-                    selected={tab === CompilationKind.Value}
+                    selected={selectedTab === CompilationKind.Value}
                     select={() => onTabSelection(CompilationKind.Value)}
                 />
             </div>
@@ -364,7 +377,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 className={buildClassName([
                     {
                         classes: 'hidden',
-                        append: tab !== CompilationKind.Value,
+                        append: selectedTab !== CompilationKind.Value,
                     },
                     {
                         classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
@@ -392,7 +405,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
             <div className="flex items-center justify-between p-5 border-b border-t">
                 <TabInfo title="Type Compilation" items={typeCompilations.length} />
                 <ExpandButton
-                    selected={tab === CompilationKind.Type}
+                    selected={selectedTab === CompilationKind.Type}
                     select={() => onTabSelection(CompilationKind.Type)}
                 />
             </div>
@@ -400,7 +413,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 className={buildClassName([
                     {
                         classes: 'hidden',
-                        append: tab !== CompilationKind.Type,
+                        append: selectedTab !== CompilationKind.Type,
                     },
                     {
                         classes: 'grow basis-0 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
