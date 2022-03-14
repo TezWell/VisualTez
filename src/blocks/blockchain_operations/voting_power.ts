@@ -6,6 +6,7 @@ import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
 import { TypeAtom } from '@tezwell/smartts-sdk/core/enums/type';
+import ValueAtom from '@tezwell/smartts-sdk/core/enums/literal';
 
 const GetVotingPowerBlock = {
     type: BlockKind.get_voting_power,
@@ -33,7 +34,7 @@ Blockly.Blocks[BlockKind.get_voting_power] = {
 SmartML.addBlock(BlockKind.get_voting_power, {
     toType: () => TNat(),
     toValue: (block: Block) => {
-        const account = SmartML.toValue(block, 'account') as ILiteral<TypeAtom.key_hash>;
+        const account = SmartML.toValue(block, 'account') as ILiteral<ValueAtom.key_hash>;
         return GetVotingPower(account);
     },
 });

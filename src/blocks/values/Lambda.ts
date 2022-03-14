@@ -14,6 +14,7 @@ import Michelson from '../generators/Michelson';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { extractVariableName } from '../utils/variables';
 import { buildErrorInfo } from '../utils/errorHandling';
+import { MichelsonJSON } from '@tezwell/michelson-sdk/typings';
 
 Blockly.Blocks[BlockKind.lambda_literal] = {
     init: function () {
@@ -102,11 +103,11 @@ Michelson.addBlock(BlockKind.lambda_literal, {
         // Remove current scope
         Context.main.exitScope();
 
-        const compiledLambda = Compiler.compileLambda(lambda.toString());
+        const compiledLambda = Compiler.compileValue(lambda);
 
         if (typeof compiledLambda === 'string') {
             throw new Error(compiledLambda);
         }
-        return M_Lambda(compiledLambda.json as any);
+        return M_Lambda(compiledLambda.json as MichelsonJSON);
     },
 });

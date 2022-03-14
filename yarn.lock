@@ -1783,15 +1783,15 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@tezwell/michelson-sdk@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@tezwell/michelson-sdk/-/michelson-sdk-0.4.1.tgz#370879226aa826c4a0075f2cbd67281419074f08"
-  integrity sha512-wljEpBWapGJUep1dgmBR0rWcbhdFNMbTQykH886UKcZav1QzYYX1jSVkYybXLP4cx7tGgqMCTprHQ9nEpQA06w==
+"@tezwell/michelson-sdk@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@tezwell/michelson-sdk/-/michelson-sdk-0.4.2.tgz#e70cd5ea0058228c713678c4458a2f43130c9d54"
+  integrity sha512-nT7NpgpDpxFDB6rbCpSpneqXeNL3jGkcEeJgmVftduyi/IVMi8Bz0c2gME5Bf8/HVxieJaicIuV0P2Xi9/HKFA==
 
-"@tezwell/smartts-sdk@0.5.5":
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/@tezwell/smartts-sdk/-/smartts-sdk-0.5.5.tgz#99020299ce77019c3d6a0c3da3de67da64f463e9"
-  integrity sha512-+rWBXMOGIZOczDtB5xZh8lER30/Hs0WpJFy9Fxsp4gvMCfmNck26CvKKr6v5znTGWXtZQ6aOCvNYY9lqruhDbg==
+"@tezwell/smartts-sdk@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@tezwell/smartts-sdk/-/smartts-sdk-0.6.3.tgz#2d99ca3ba5d26a28ee6d00d33fb97777c68369f6"
+  integrity sha512-yZmUUWAzfx24pox4VEtYOHrhVWuYNsM17dA2Re2bi4c3Sq+meGdRnuVEW+EH5J7Q6OVBkeWePZhc6uWq2n0SjA==
 
 "@tootallnate/once@1":
   version "1.1.2"

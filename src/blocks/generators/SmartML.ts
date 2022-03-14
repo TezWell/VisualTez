@@ -6,10 +6,9 @@ import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 
 import BlockKind from '../enums/BlockKind';
 import Logger from 'src/utils/logger';
-import Context from '../core/context';
 
 interface IBlock {
-    toType?: (block: Block) => IType<unknown>;
+    toType?: (block: Block) => IType;
     toValue?: (block: Block) => IExpression;
     toStatement?: (block: Block) => IToString;
     toFieldBlock?: (block: Block) => [string, Block];

@@ -41,6 +41,6 @@ SmartML.addBlock(BlockKind.entry_point_block, {
         // Remove current scope
         Context.main.exitScope();
 
-        return new EntryPoint(name).inputType(type).code(() => code);
+        return new EntryPoint(name).setInputType(type).code(() => code);
     },
 });
