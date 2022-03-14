@@ -1,6 +1,5 @@
 import Blockly, { Block, FieldTextInput } from 'blockly';
 
-import type { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
 import { Contract, EntryPoint } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
@@ -34,7 +33,7 @@ Blockly.Blocks[BlockKind.contract_block] = {
     },
 };
 
-SmartML[BlockKind.contract_block] = function (block: Block) {
+export const extractContract = (block: Block) => {
     // Update current scope to (Contract)
     Context.main.enterScope({
         kind: ScopeKind.Contract,

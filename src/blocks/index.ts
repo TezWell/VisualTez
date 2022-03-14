@@ -16,10 +16,9 @@ import './math';
 import './blockchain_operations';
 
 import BlockKind from './enums/BlockKind';
-import SmartML from './generators/SmartML';
 import Michelson from './generators/Michelson';
 import Context from './core/context';
-import { Contract } from '@tezwell/smartts-sdk';
+import { extractContract } from './base/contract';
 
 export enum CompilationKind {
     Contract = 'contract',
@@ -104,7 +103,7 @@ export const compileBlock = (block: Block): Compilation | null => {
             const storageXML = Blockly.Xml.domToText(Blockly.Xml.blockToDom(storageBlock));
 
             // Translate contract block to SmartML
-            const code = SmartML.blockToCode(block) as unknown as Contract;
+            const code = extractContract(block);
 
             return {
                 kind: CompilationKind.Contract,
@@ -112,7 +111,7 @@ export const compileBlock = (block: Block): Compilation | null => {
                     name: block.getFieldValue('NAME'),
                     storage: Michelson.translateValue(storageBlock),
                     storageXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageXML}</xml>`,
-                    code: JSON.stringify(Compiler.compileContract(code), null, 4),
+                    code: JSON.stringify(Compiler.compileContract(code).json, null, 4),
                 },
             };
 
