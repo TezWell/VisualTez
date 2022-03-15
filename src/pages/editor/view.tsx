@@ -238,7 +238,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.never_type} />
                             </Category>
 
-                            <Category name="Container Types" categorystyle="container_type_category">
+                            <Category name="Container Types" categorystyle="type_category">
                                 <Block type={BlockKind.list_type} />
                                 <Block type={BlockKind.set_type} />
                                 <Block type={BlockKind.option_type} />
@@ -252,7 +252,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.sapling_transaction_type} />
                             </Category>
 
-                            <Category name="Artificial Types" categorystyle="artificial_type_category">
+                            <Category name="Artificial Types" categorystyle="type_category">
                                 <Block type={BlockKind.record_type}>
                                     <Value name="fields">
                                         <Block type={BlockKind.record_variant_field_type} />
@@ -323,6 +323,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         <Category name="Various" categorystyle="logic_category">
                             <Block type={BlockKind.compare_block} />
                             <Block type={BlockKind.math_block} />
+                            <Block type={BlockKind.param_access} />
+                            <Block type={BlockKind.get_map_entries} />
+                            <Block type={BlockKind.get_map_value} />
                         </Category>
                     </BlocklyEditor>
                 </div>
