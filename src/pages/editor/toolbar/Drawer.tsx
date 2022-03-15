@@ -3,7 +3,6 @@ import { Transition } from '@headlessui/react';
 import useEditor from 'src/context/hooks/useEditor';
 import CompilationDrawer from './CompilationDrawer';
 import DoubleArrowRightIcon from 'src/components/common/icons/DoubleArrowRight';
-import DrawerTitle from './DrawerTitle';
 import { DrawerKind } from 'src/context/Editor';
 import SharingDrawer from './SharingDrawer';
 import StorageDrawer from './StorageDrawer';
@@ -35,9 +34,13 @@ const Drawer: React.FC<DrawerProps> = ({ resizeWorkspace }) => {
         return null;
     }, [drawer]);
 
+    if (!drawer) {
+        return null;
+    }
+
     return (
         <Transition.Root show={!!drawer} as={React.Fragment}>
-            <div className="relative h-full w-full flex flex-col justify-between">
+            <div className="relative h-full w-96 border-l-2 flex flex-col justify-between">
                 <Transition.Child
                     as={React.Fragment}
                     enter="transform transition ease-in-out duration-1000"

@@ -1,6 +1,13 @@
 import React from 'react';
 import { Disclosure } from '@headlessui/react';
-import { TrashIcon, PencilAltIcon, DocumentAddIcon, ChevronDownIcon, ExternalLinkIcon } from '@heroicons/react/outline';
+import {
+    TrashIcon,
+    PencilAltIcon,
+    DocumentAddIcon,
+    ChevronDownIcon,
+    ExternalLinkIcon,
+    DownloadIcon,
+} from '@heroicons/react/outline';
 
 import Button from 'src/components/common/Button';
 import useEditor from 'src/context/hooks/useEditor';
@@ -8,6 +15,7 @@ import DrawerTitle from './DrawerTitle';
 import { buildClassName } from 'src/utils/className';
 import Modal from 'src/components/common/Modal';
 import { IEditorWorkspace } from 'src/context/Editor';
+import { downloadFile } from 'src/utils/download_upload';
 
 interface DeleteWorkspaceModalProps {
     workspace: IEditorWorkspace;
@@ -202,6 +210,14 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
     const [deleteWorkspaceModal, setDeleteWorkspaceModal] = React.useState<IEditorWorkspace>();
     const [updateWorkspaceModal, setUpdateWorkspaceModal] = React.useState<IEditorWorkspace>();
 
+    const downloadWorkspace = () => {
+        if (state.currentWorkspace && state.currentWorkspace in state.workspaces) {
+            const workspace = state.workspaces[state.currentWorkspace];
+            const fileName = `${workspace.name.replace(/\s/g, '_').toLowerCase()}.xml`;
+            downloadFile(fileName, workspace.xml);
+        }
+    };
+
     return (
         <div className="flex flex-col w-full h-full">
             <div className="p-5">
@@ -245,6 +261,14 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                         >
                                             <ExternalLinkIcon className="block" width={16} height={16} />
                                             <span className="text-sm">Select Worksplace</span>
+                                        </Button>
+                                        <div className="border border-black dark:border-white m-1" />
+                                        <Button
+                                            onClick={downloadWorkspace}
+                                            className="flex justify-between items-center w-full bg-indigo-500 hover:bg-indigo-400 border-indigo-700 hover:border-indigo-500 p-1 px-5"
+                                        >
+                                            <DownloadIcon className="block" width={16} height={16} />
+                                            <span className="text-sm">Download</span>
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
                                         <Button
