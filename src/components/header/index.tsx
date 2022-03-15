@@ -39,13 +39,13 @@ const Navigation: React.FC<NavigationProps> = () => {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Items className="z-10 absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <Menu.Item>
                                     <NavLink
                                         className="inline-block w-full rounded font-bold no-underline p-2 bg-gray-200 dark:bg-gray-800"
-                                        to={isDevelopment() ? '/editor' : '/'}
+                                        to="/editor"
                                     >
-                                        Editor <p className="ml-2 text-yellow-500">(Coming Soon)</p>
+                                        Editor
                                     </NavLink>
                                 </Menu.Item>
                             </Menu.Items>
@@ -62,11 +62,8 @@ const Navigation: React.FC<NavigationProps> = () => {
                 >
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li>
-                            <NavLink
-                                className="flex inline-block py-2 px-4 font-bold no-underline"
-                                to={isDevelopment() ? '/editor' : '/'}
-                            >
-                                Editor {isDevelopment() ? null : <p className="ml-2 text-yellow-500">(Coming Soon)</p>}
+                            <NavLink className="flex inline-block py-2 px-4 font-bold no-underline" to="/editor">
+                                Editor
                             </NavLink>
                         </li>
                         <li className="h-10 border ml-3 mr-3 border-black dark:border-white" />

@@ -32,8 +32,10 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     <PlayIcon className="block" />
                     <p>Compile</p>
                 </button>
+                <div className="border mt-5 mb-5 w-20" />
             </div>
             <div className="flex flex-col items-center justify-start pb-5">
+                <div className="border mt-5 mb-5 w-20" />
                 <button
                     onClick={() => onMenuSelection(DrawerKind.Share)}
                     className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"

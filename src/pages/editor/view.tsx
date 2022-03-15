@@ -323,17 +323,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     <Block type={BlockKind.get_source_block} />
                                 </Category>
                             </Category>
-                            {/* <Category name="Logic" categorystyle="logic_category">
-                                <Category name="Boolean" categorystyle="logic_category">
-                                    <Block type={BlockKind.compare_block} />
-                                </Category>
-                            </Category> */}
+
+                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
+
                             <Category name="Various" categorystyle="logic_category">
                                 <Block type={BlockKind.compare_block} />
                                 <Block type={BlockKind.math_block} />
                             </Category>
-
-                            <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
                         </BlocklyEditor>
                     </Section>
                     <Section

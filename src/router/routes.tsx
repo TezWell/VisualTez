@@ -58,9 +58,11 @@ export const routes = [
             path: '/deploy',
         },
         component: (
-            <Page withNavigation>
-                <DeployPage />
-            </Page>
+            <AdaptableViewport minSize={720}>
+                <Page withNavigation>
+                    <DeployPage />
+                </Page>
+            </AdaptableViewport>
         ),
     },
     // Privacy Page
