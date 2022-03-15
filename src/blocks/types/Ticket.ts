@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const TicketBlock = {
     type: BlockKind.ticket_type,
-    message0: 'Type: Ticket of %1',
+    message0: 'Type | Ticket of %1',
     args0: [
         {
             type: 'input_value',
@@ -17,7 +17,7 @@ const TicketBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.ticket_type] = {

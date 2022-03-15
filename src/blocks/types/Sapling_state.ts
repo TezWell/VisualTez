@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const Sapling_stateBlock = {
     type: BlockKind.sapling_state_type,
-    message0: 'Type: Sapling_state ( memo %1)',
+    message0: 'Type | Sapling_state ( memo %1)',
     args0: [
         {
             type: 'field_input',
@@ -18,7 +18,7 @@ const Sapling_stateBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.sapling_state_type] = {

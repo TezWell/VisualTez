@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BigMapBlock = {
     type: BlockKind.big_map_type,
-    message0: 'Type: Big_map (%1 -> %2)',
+    message0: 'Type | Big_map (%1 -> %2)',
     args0: [
         {
             type: 'input_value',
@@ -22,7 +22,7 @@ const BigMapBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.big_map_type] = {

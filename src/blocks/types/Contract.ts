@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const ContractBlock = {
     type: BlockKind.contract_type,
-    message0: 'Type: Contract of %1',
+    message0: 'Type | Contract of %1',
     args0: [
         {
             type: 'input_value',
@@ -17,7 +17,7 @@ const ContractBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.contract_type] = {

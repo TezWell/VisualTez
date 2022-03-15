@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.never_type,
-    message0: 'Type: Never',
+    message0: 'Type | Never',
     output: 'Type',
     colour: 230,
 };

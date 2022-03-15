@@ -19,11 +19,11 @@ Blockly.Blocks[BlockKind.record_type] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.record_type,
-            message0: 'Type: Record %1',
+            message0: 'Type | Record %1',
             args0: [{ type: 'input_statement', name: 'fields', check: 'VariantRecordField' }],
             output: ['Type'],
             outputShape: 3,
-            colour: 240,
+            colour: 230,
         });
         this.setPreviousStatement(false);
         this.setNextStatement(false);
@@ -66,11 +66,11 @@ Blockly.Blocks[BlockKind.variant_type] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.variant_type,
-            message0: 'Type: Variant %1',
+            message0: 'Type | Variant %1',
             args0: [{ type: 'input_statement', name: 'fields', check: 'VariantRecordField' }],
             output: ['Type'],
             outputShape: 3,
-            colour: 240,
+            colour: 230,
         });
         this.setPreviousStatement(false);
         this.setNextStatement(false);

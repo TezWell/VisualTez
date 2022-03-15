@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const ListBlock = {
     type: BlockKind.list_type,
-    message0: 'Type: List of %1',
+    message0: 'Type | List of %1',
     args0: [
         {
             type: 'input_value',
@@ -17,7 +17,7 @@ const ListBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.list_type] = {

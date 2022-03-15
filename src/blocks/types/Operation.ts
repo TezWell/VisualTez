@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.operation_type,
-    message0: 'Type: Operation',
+    message0: 'Type | Operation',
     output: 'Type',
     colour: 230,
 };

@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const IntTypeBlock = {
     type: BlockKind.int_type,
-    message0: 'Type: Int',
+    message0: 'Type | Int',
     output: 'Type',
     colour: 230,
 };

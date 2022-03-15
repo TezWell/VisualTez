@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.key_hash_type,
-    message0: 'Type: Key_hash',
+    message0: 'Type | Key_hash',
     output: 'Type',
     colour: 230,
 };

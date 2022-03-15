@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const LambdaBlock = {
     type: BlockKind.lambda_type,
-    message0: 'Type: Lambda (%1 -> %2)',
+    message0: 'Type | Lambda (%1 -> %2)',
     args0: [
         {
             type: 'input_value',
@@ -22,7 +22,7 @@ const LambdaBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.lambda_type] = {

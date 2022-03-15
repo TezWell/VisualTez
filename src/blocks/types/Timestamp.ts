@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.timestamp_type,
-    message0: 'Type: Timestamp',
+    message0: 'Type | Timestamp',
     output: 'Type',
     colour: 230,
 };

@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BooleanBlock = {
     type: BlockKind.boolean_type,
-    message0: 'Type: Boolean',
+    message0: 'Type | Bool',
     output: 'Type',
     colour: 230,
 };

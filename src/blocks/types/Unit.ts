@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const UnitTypeBlock = {
     type: BlockKind.unit_type,
-    message0: 'Type: Unit',
+    message0: 'Type | Unit',
     output: 'Type',
     colour: 230,
 };
