@@ -32,7 +32,6 @@ Blockly.Blocks[BlockKind.get_current_contract_block] = {
 SmartML.addBlock(BlockKind.get_current_contract_block, {
     toType: () => TContract(TUnknown()),
     toValue: (block: Block) => {
-        console.error(GetSelf(block.getFieldValue('entry_point')));
         return GetSelf(block.getFieldValue('entry_point'));
     },
 });

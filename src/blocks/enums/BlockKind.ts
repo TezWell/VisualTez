@@ -104,6 +104,8 @@ export enum BlockKind {
     for_each_block = 'for_each_block',
     while_block = 'while_block',
     for_block = 'for_block',
+    match_variant = 'match_variant',
+    match_variant_case = 'match_variant_case',
     // Base
     type_compilation = 'type_compilation',
     value_compilation = 'value_compilation',

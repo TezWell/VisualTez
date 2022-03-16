@@ -5,6 +5,7 @@ import { EntryPoint } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Context, { ScopeKind } from '../core/context';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.entry_point_block] = {
     ...Blockly.Blocks['procedures_defnoreturn'],
@@ -12,8 +13,8 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
         const initName = Procedures.findLegalName('entrypoint', this);
         const nameField = new FieldTextInput(initName, Procedures.rename);
         nameField.setSpellcheck(false);
-        this.appendDummyInput().appendField('Entrypoint').appendField(nameField, 'NAME').appendField('', 'PARAMS');
-        this.appendValueInput('input_type').setCheck(['Type']).appendField('Input Type');
+        this.appendDummyInput().appendField('Entrypoint').appendField(nameField, 'NAME');
+        this.appendValueInput('input_type').setCheck(['Type']).appendField('with input type');
         this.appendStatementInput('entry_point_code').setCheck(['Statement']).appendField('Code');
         this.setTooltip('A block that represents an entry point.');
         this.arguments_ = [];
@@ -41,6 +42,6 @@ SmartML.addBlock(BlockKind.entry_point_block, {
         // Remove current scope
         Context.main.exitScope();
 
-        return new EntryPoint(name).setInputType(type).code(() => code);
+        return new EntryPoint(name, buildErrorInfo(block)).setInputType(type).code(() => code);
     },
 });

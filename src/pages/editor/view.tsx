@@ -51,12 +51,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                     Blockly.Events.CREATE,
                 ].includes(event.type)
             ) {
-                console.error(
-                    workspaceRef.current,
-                    workspace,
-                    Blockly.Xml.domToPrettyText(workspaceRef.current?.svgGroup_ as any),
-                    // new XMLSerializer().serializeToString(workspaceRef.current?.getParentSvg() as any),
-                );
                 if (workspaceRef.current) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
                     updateWorkspace({

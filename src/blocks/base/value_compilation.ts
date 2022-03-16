@@ -22,8 +22,9 @@ Blockly.Blocks[BlockKind.value_compilation] = {
             .appendField('Value compilation')
             .appendField(nameField, 'NAME')
             .appendField('', 'PARAMS');
-        this.appendValueInput('value').setCheck(['Literal']).appendField('Value');
+        this.appendValueInput('value').setCheck(['Literal']).setAlign(Blockly.ALIGN_RIGHT);
         this.setTooltip('A block used to compile a value.');
+        this.setInputsInline(true);
         this.setColour(200);
     },
 };

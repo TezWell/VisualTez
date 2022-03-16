@@ -13,6 +13,7 @@ import settings from 'src/settings.json';
 
 import EditorView from './view';
 import SharedWorkspace from './SharedWorkspace';
+import { updateErrorInfo } from 'src/blocks/utils/errorHandling';
 
 export const extractWorkspaceFromPermalink = async (hash: string, passPhrase: string) => {
     try {
@@ -29,7 +30,7 @@ export const extractWorkspaceFromPermalink = async (hash: string, passPhrase: st
 const EditorContainer = () => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
     const mounted = React.useRef(false);
-    const { error, updateError, updateCompilations } = useEditor();
+    const { error, updateDrawer, updateError, updateCompilations } = useEditor();
     const [sharedWorkspace, setSharedWorkspace] = React.useState<string>();
     const [searchParams] = useSearchParams();
 
@@ -42,17 +43,22 @@ const EditorContainer = () => {
     }, [searchParams]);
 
     const compile = React.useCallback(() => {
+        // Close drawer
+        updateDrawer(undefined);
         if (workspaceRef.current) {
             try {
                 const blocks = extractBlocks(workspaceRef.current as Workspace);
                 const compilations: Compilation[] = blocks.map(compileBlock).filter(notNull);
                 updateCompilations(compilations);
             } catch (e: any) {
-                Logger.debug(e);
-                updateError(e.message);
+                const errorMessage: string = e?.message || e.toString();
+                Logger.debug(errorMessage);
+                if (updateErrorInfo(workspaceRef.current, errorMessage)) {
+                    updateError(errorMessage);
+                }
             }
         }
-    }, [updateCompilations, updateError]);
+    }, [updateCompilations, updateDrawer, updateError]);
 
     React.useEffect(() => {
         if (!mounted.current) {

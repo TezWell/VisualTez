@@ -211,7 +211,6 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
     const [updateWorkspaceModal, setUpdateWorkspaceModal] = React.useState<IEditorWorkspace>();
 
     const downloadWorkspace = () => {
-        console.error(workspace);
         const fileName = `${workspace.name.replace(/\s/g, '_').toLowerCase()}.xml`;
         downloadFile(fileName, workspace.xml);
     };

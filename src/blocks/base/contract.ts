@@ -6,6 +6,7 @@ import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
 import Context, { ScopeKind } from '../core/context';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.contract_block] = {
     rename: function (oldName: string) {
@@ -21,15 +22,19 @@ Blockly.Blocks[BlockKind.contract_block] = {
         const initName = findName('contract', this.workspace, BlockKind.contract_block);
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
-        this.appendDummyInput()
-            .appendField('Contract compilation')
-            .appendField(nameField, 'NAME')
-            .appendField('', 'PARAMS');
-        this.appendValueInput('initial_storage').setCheck(['Literal']).appendField('Initial Storage');
-        this.appendStatementInput('entry_points').setCheck(['Entrypoint']).appendField('Entry points');
+        this.appendDummyInput().appendField('Contract compilation').appendField(nameField, 'NAME');
+        this.appendValueInput('TYPE').setCheck(['Type']).appendField('with storage type');
+        this.appendValueInput('initial_storage')
+            .setCheck(['Literal'])
+            .appendField('and initial storage')
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.appendStatementInput('entry_points')
+            .setCheck(['Entrypoint'])
+            .appendField('Entry points')
+            .setAlign(Blockly.ALIGN_RIGHT);
         this.setTooltip('A block that represents a contract');
-        this.setColour(200);
         this.setInputsInline(true);
+        this.setColour(200);
     },
 };
 
@@ -39,9 +44,9 @@ export const extractContract = (block: Block) => {
         kind: ScopeKind.Contract,
     });
 
-    const storageType = SmartML.toType(block, 'initial_storage');
+    const storageType = SmartML.toType(block, 'TYPE');
     const storageValue = SmartML.toValue(block, 'initial_storage');
-    const contract = new Contract().setStorageType(storageType).setStorage(storageValue);
+    const contract = new Contract(buildErrorInfo(block)).setStorageType(storageType).setStorage(storageValue);
 
     SmartML.toStatements(block, 'entry_points', true).forEach((st) => contract.addEntrypoint(st as EntryPoint));
 
