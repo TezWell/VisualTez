@@ -5,6 +5,7 @@ import { Unit } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const AssertBlock = {
     type: BlockKind.assert_block,
@@ -33,6 +34,6 @@ SmartML.addBlock(AssertBlock.type, {
     toStatement: (block: Block) => {
         const failWithMsg = SmartML.toValue(block, 'error_message', Unit());
         const condition = SmartML.toValue(block, 'assert_condition');
-        return Require(condition, failWithMsg);
+        return Require(condition, failWithMsg, buildErrorInfo(block));
     },
 });

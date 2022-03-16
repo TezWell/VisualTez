@@ -6,6 +6,7 @@ import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { extractVariableName } from '../utils/variables';
 import Context, { ScopeKind, VariableKind } from '../core/context';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const ForBlock = {
     type: BlockKind.for_block,
@@ -75,7 +76,7 @@ SmartML.addBlock(BlockKind.for_block, {
 
         const instructions = SmartML.toStatements(block, 'DO', true);
 
-        return For(from, to, step)
+        return For(from, to, step, [], undefined, buildErrorInfo(block))
             .setIteratorName(iteratorName)
             .Do(() => instructions);
     },

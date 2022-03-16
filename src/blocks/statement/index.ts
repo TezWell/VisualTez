@@ -1,5 +1,6 @@
 import './Assert';
 import './If';
+import './VariantMatch';
 
 import './For';
 import './ForEach';

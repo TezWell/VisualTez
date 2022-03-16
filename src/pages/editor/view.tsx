@@ -6,18 +6,10 @@ import { Block, Category, Value } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
 import BlockKind from 'src/blocks/enums/BlockKind';
 
-import { Section } from 'src/components/section-divider';
-import { Sections } from 'src/components/section-divider';
-
-import debounce from 'src/utils/debounce';
 import useEditor from 'src/context/hooks/useEditor';
 import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
-import Separator from 'src/components/blockly/Separator';
 import Label from 'src/components/blockly/Label';
-
-// Debouncer
-const onDebouncer = debounce(10);
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -26,7 +18,7 @@ interface EditorViewProps {
 }
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { state, workspace, updateWorkspace, updateEditorState, drawer } = useEditor();
+    const { workspace, updateWorkspace, updateEditorState } = useEditor();
     const workspaceID = React.useRef(workspace.id);
 
     const resizeWorkspace = React.useCallback(() => {
@@ -59,6 +51,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                     Blockly.Events.CREATE,
                 ].includes(event.type)
             ) {
+                console.error(
+                    workspaceRef.current,
+                    workspace,
+                    Blockly.Xml.domToPrettyText(workspaceRef.current?.svgGroup_ as any),
+                    // new XMLSerializer().serializeToString(workspaceRef.current?.getParentSvg() as any),
+                );
                 if (workspaceRef.current) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
                     updateWorkspace({
@@ -204,6 +202,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <Category name="Lambda" categorystyle="blockchain_category">
                                 <Block type={BlockKind.lambda_literal}>
+                                    <Value name="TYPE">
+                                        <Block type={BlockKind.unit_type} />
+                                    </Value>
                                     <Value name="RETURN">
                                         <Block type={BlockKind.unit_literal} />
                                     </Value>
@@ -295,6 +296,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Value>
                                 </Block>
                                 <Block type={BlockKind.if_block} />
+                                <Block type={BlockKind.match_variant}>
+                                    <Value name="CASES">
+                                        <Block type={BlockKind.match_variant_case} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.match_variant_case} />
                             </Category>
                             <Category name="Loops" categorystyle="control_statements_category">
                                 <Block type={BlockKind.for_block}>

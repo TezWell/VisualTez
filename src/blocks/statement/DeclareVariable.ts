@@ -5,6 +5,7 @@ import { NewVariable } from '@tezwell/smartts-sdk/statement';
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { extractVariableName } from '../utils/variables';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const VariableCreationBlock = {
     type: BlockKind.variable_declaration_block,
@@ -37,6 +38,6 @@ SmartML.addBlock(BlockKind.variable_declaration_block, {
     toStatement: (block: Block) => {
         const variableName = extractVariableName(block, 'VAR');
         const value = SmartML.toValue(block, 'VALUE');
-        return NewVariable(variableName, value);
+        return NewVariable(variableName, value, true, buildErrorInfo(block));
     },
 });

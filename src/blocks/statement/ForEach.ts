@@ -6,6 +6,7 @@ import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { extractVariableName } from '../utils/variables';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const ForEachBlock = {
     type: BlockKind.for_each_block,
@@ -65,7 +66,7 @@ SmartML.addBlock(BlockKind.for_each_block, {
         // Remove current scope
         Context.main.exitScope();
 
-        return ForEachOf(list)
+        return ForEachOf(list, [], undefined, buildErrorInfo(block))
             .setIteratorName(iteratorName)
             .Do(() => instructions);
     },

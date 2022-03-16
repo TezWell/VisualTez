@@ -4,6 +4,7 @@ import { If } from '@tezwell/smartts-sdk/statement';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const IfBlock = {
     type: BlockKind.if_block,
@@ -49,6 +50,6 @@ SmartML.addBlock(BlockKind.if_block, {
         const thenStatements = SmartML.toStatements(block, 'then_statements', true);
         const elseStatements = SmartML.toStatements(block, 'else_statements', true);
 
-        return If(condition, thenStatements, elseStatements);
+        return If(condition, thenStatements, elseStatements, buildErrorInfo(block));
     },
 });
