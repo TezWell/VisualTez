@@ -87,6 +87,8 @@ export enum BlockKind {
     get_voting_power = 'get_voting_power',
 
     // Expressions
+    get_first_pair_element = 'get_first_pair_element',
+    get_second_pair_element = 'get_second_pair_element',
     contract_storage_block = 'contract_storage_block',
     entrypoint_arg_block = 'entrypoint_arg_block',
     compare_block = 'compare_block',

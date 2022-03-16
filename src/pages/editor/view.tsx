@@ -269,15 +269,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         <Category name="Expressions" categorystyle="container_type_category">
-                            <Category name="Map" categorystyle="logic_category">
-                                <Block type={BlockKind.get_map_entries} />
-                                <Block type={BlockKind.get_map_value} />
-                            </Category>
                             <Category name="Equality & Comparison" categorystyle="logic_category">
                                 <Block type={BlockKind.compare_block} />
                             </Category>
                             <Category name="Arithmetic" categorystyle="logic_category">
                                 <Block type={BlockKind.math_block} />
+                            </Category>
+                            <Category name="Map Expressions" categorystyle="logic_category">
+                                <Block type={BlockKind.get_map_entries} />
+                                <Block type={BlockKind.get_map_value} />
+                            </Category>
+                            <Category name="Pair Expressions" categorystyle="logic_category">
+                                <Block type={BlockKind.get_first_pair_element} />
+                                <Block type={BlockKind.get_second_pair_element} />
                             </Category>
                         </Category>
 

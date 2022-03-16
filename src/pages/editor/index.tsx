@@ -14,6 +14,7 @@ import settings from 'src/settings.json';
 import EditorView from './view';
 import SharedWorkspace from './SharedWorkspace';
 import { updateErrorInfo } from 'src/blocks/utils/errorHandling';
+import { DrawerKind } from 'src/context/Editor';
 
 export const extractWorkspaceFromPermalink = async (hash: string, passPhrase: string) => {
     try {
@@ -50,6 +51,7 @@ const EditorContainer = () => {
                 const blocks = extractBlocks(workspaceRef.current as Workspace);
                 const compilations: Compilation[] = blocks.map(compileBlock).filter(notNull);
                 updateCompilations(compilations);
+                updateDrawer(DrawerKind.Compilation);
             } catch (e: any) {
                 const errorMessage: string = e?.message || e.toString();
                 Logger.debug(errorMessage);

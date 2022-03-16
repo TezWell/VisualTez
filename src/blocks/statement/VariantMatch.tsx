@@ -40,9 +40,9 @@ SmartML.addBlock(BlockKind.match_variant, {
         }
 
         do {
-            const [variant, stmts] = getMatchCase(targetBlock);
+            const [variant, variantArgumentName, stmts] = getMatchCase(targetBlock);
 
-            matchStatement.Case(variant, () => stmts);
+            matchStatement.Case(variant, () => stmts, variantArgumentName);
         } while ((targetBlock = targetBlock.getNextBlock()));
 
         return matchStatement;
@@ -51,7 +51,7 @@ SmartML.addBlock(BlockKind.match_variant, {
 
 const MatchCaseBlock = {
     type: BlockKind.match_variant_case,
-    message0: 'Case %1 with argument %2 -> do %3',
+    message0: 'Case %1 with argument %2',
     args0: [
         { type: 'field_input', name: 'CASE' },
         {
@@ -59,8 +59,9 @@ const MatchCaseBlock = {
             name: 'VAR',
             variable: null,
         },
-        { type: 'input_statement', name: 'DO' },
     ],
+    message1: 'Do %1',
+    args1: [{ type: 'input_statement', name: 'DO' }],
     colour: 200,
     inputsInline: true,
     previousStatement: null,
@@ -73,7 +74,7 @@ Blockly.Blocks[BlockKind.match_variant_case] = {
     },
 };
 
-const getMatchCase = (block: Block): [string, IStatement[]] => {
+const getMatchCase = (block: Block): [string, string, IStatement[]] => {
     const variant: string = block.getFieldValue('CASE');
     const variantArgumentName = extractVariableName(block, 'VAR');
 
@@ -93,5 +94,5 @@ const getMatchCase = (block: Block): [string, IStatement[]] => {
     // Remove current scope
     Context.main.exitScope();
 
-    return [variant, instructions];
+    return [variant, variantArgumentName, instructions];
 };
