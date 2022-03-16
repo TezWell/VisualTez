@@ -273,6 +273,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
+                        <Category name="Expressions" categorystyle="container_type_category">
+                            <Category name="Map" categorystyle="logic_category">
+                                <Block type={BlockKind.get_map_entries} />
+                                <Block type={BlockKind.get_map_value} />
+                            </Category>
+                            <Category name="Equality & Comparison" categorystyle="logic_category">
+                                <Block type={BlockKind.compare_block} />
+                            </Category>
+                            <Category name="Arithmetic" categorystyle="logic_category">
+                                <Block type={BlockKind.math_block} />
+                            </Category>
+                        </Category>
+
                         <Category name="Control Statements" categorystyle="control_statements_category">
                             <Category name="Logic" categorystyle="logic_category">
                                 <Block type="assert_block">
@@ -321,11 +334,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
 
                         <Category name="Various" categorystyle="logic_category">
-                            <Block type={BlockKind.compare_block} />
-                            <Block type={BlockKind.math_block} />
                             <Block type={BlockKind.param_access} />
-                            <Block type={BlockKind.get_map_entries} />
-                            <Block type={BlockKind.get_map_value} />
                         </Category>
                     </BlocklyEditor>
                 </div>

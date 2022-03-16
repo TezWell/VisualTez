@@ -8,6 +8,7 @@ import { None as ST_None } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const NoneBlock = {
     type: BlockKind.none_with_type_literal,
@@ -30,8 +31,8 @@ SmartML.addBlock(BlockKind.none_with_type_literal, {
     toType: (block: Block) => {
         return ST_TOption(SmartML.toType(block, 'inner_type'));
     },
-    toValue: () => {
-        return ST_None();
+    toValue: (block: Block) => {
+        return ST_None(buildErrorInfo(block));
     },
 });
 

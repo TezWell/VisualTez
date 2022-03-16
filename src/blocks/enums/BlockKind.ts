@@ -93,6 +93,8 @@ export enum BlockKind {
     math_block = 'math_block',
     variables_get = 'variables_get',
     param_access = 'param_access',
+    get_map_entries = 'get_map_entries',
+    get_map_value = 'get_map_value',
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',

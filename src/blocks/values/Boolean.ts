@@ -8,6 +8,7 @@ import { Bool as ST_Bool } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const BooleanBlock = {
     type: BlockKind.boolean_literal,
@@ -40,7 +41,7 @@ SmartML.addBlock(BlockKind.boolean_literal, {
         return ST_TBool();
     },
     toValue: (block: Block) => {
-        return ST_Bool(block.getFieldValue('boolean_value') === 'True');
+        return ST_Bool(block.getFieldValue('boolean_value') === 'True', buildErrorInfo(block));
     },
 });
 

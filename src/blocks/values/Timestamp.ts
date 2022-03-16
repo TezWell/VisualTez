@@ -8,6 +8,7 @@ import { Timestamp as ST_Timestamp } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const TimestampBlock = {
     type: BlockKind.timestamp_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.timestamp_literal, {
         return ST_TTimestamp();
     },
     toValue: (block: Block) => {
-        return ST_Timestamp(block.getFieldValue('value'));
+        return ST_Timestamp(block.getFieldValue('value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.timestamp_literal, {

@@ -8,6 +8,7 @@ import { Key_hash as ST_Key_hash } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const Key_hashBlock = {
     type: BlockKind.key_hash_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.key_hash_literal, {
         return ST_TKey_hash();
     },
     toValue: (block: Block) => {
-        return ST_Key_hash(block.getFieldValue('value'));
+        return ST_Key_hash(block.getFieldValue('value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.key_hash_literal, {

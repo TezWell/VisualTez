@@ -9,6 +9,7 @@ import { TRecord as M_TRecord } from '@tezwell/michelson-sdk/type';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.record_literal] = {
     init: function () {
@@ -63,7 +64,10 @@ SmartML.addBlock(BlockKind.record_literal, {
             throw new Error('Each record must contain at least two(2) entries.');
         }
 
-        return ST_Record(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toValue(block, 'value') }), {}));
+        return ST_Record(
+            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toValue(block, 'value') }), {}),
+            buildErrorInfo(block),
+        );
     },
 });
 

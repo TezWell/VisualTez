@@ -8,6 +8,7 @@ import { Map as ST_Map } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const MapBlock = {
     type: BlockKind.map_literal,
@@ -37,8 +38,9 @@ SmartML.addBlock(BlockKind.map_literal, {
     },
     toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('entries');
+        const line = buildErrorInfo(block);
         if (!targetBlock) {
-            return ST_Map([]);
+            return ST_Map([], undefined, undefined, line);
         }
 
         const entries = [];
@@ -46,7 +48,7 @@ SmartML.addBlock(BlockKind.map_literal, {
             entries.push([SmartML.toValue(targetBlock, 'key'), SmartML.toValue(targetBlock, 'value')]);
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        return ST_Map(entries);
+        return ST_Map(entries, undefined, undefined, line);
     },
 });
 

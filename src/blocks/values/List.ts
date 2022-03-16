@@ -8,6 +8,7 @@ import { List as ST_List } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const ListBlock = {
     type: BlockKind.list_literal,
@@ -37,8 +38,9 @@ SmartML.addBlock(BlockKind.list_literal, {
     },
     toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('items');
+        const line = buildErrorInfo(block);
         if (!targetBlock) {
-            return ST_List([]);
+            return ST_List([], line);
         }
 
         const items = [];
@@ -46,7 +48,7 @@ SmartML.addBlock(BlockKind.list_literal, {
             items.push(SmartML.toValue(targetBlock, 'value'));
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        return ST_List(items);
+        return ST_List(items, line);
     },
 });
 

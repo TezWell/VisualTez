@@ -8,6 +8,7 @@ import { Bls12_381_g2 as ST_Bls12_381_g2 } from '@tezwell/smartts-sdk/expression
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const Bls12_381_g2Block = {
     type: BlockKind.bls12_381_g2_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.bls12_381_g2_literal, {
         return ST_TBls12_381_g2();
     },
     toValue: (block: Block) => {
-        return ST_Bls12_381_g2(block.getFieldValue('value'));
+        return ST_Bls12_381_g2(block.getFieldValue('value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.bls12_381_g2_literal, {

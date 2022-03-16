@@ -50,7 +50,7 @@ SmartML.addBlock(BlockKind.lambda_literal, {
     toValue: (block: Block) => {
         const argumentName = extractVariableName(block, 'VAR');
 
-        const lambda = ST_Lambda([], TUnknown(), argumentName);
+        const lambda = ST_Lambda([], TUnknown(), argumentName, buildErrorInfo(block));
 
         // Add an (Lambda) scope
         Context.main.enterScope({

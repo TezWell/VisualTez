@@ -8,6 +8,7 @@ import { Int as ST_Int } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const IntBlock = {
     type: BlockKind.int_literal,
@@ -35,7 +36,7 @@ SmartML.addBlock(BlockKind.int_literal, {
         return ST_TInt();
     },
     toValue: (block: Block) => {
-        return ST_Int(Number(block.getFieldValue('int_value')));
+        return ST_Int(Number(block.getFieldValue('int_value')), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.int_literal, {

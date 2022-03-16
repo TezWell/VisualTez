@@ -8,6 +8,7 @@ import { String as ST_String } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const StringBlock = {
     type: BlockKind.string_literal,
@@ -41,7 +42,7 @@ SmartML.addBlock(BlockKind.string_literal, {
         return ST_TString();
     },
     toValue: (block: Block) => {
-        return ST_String(block.getFieldValue('string_literal'));
+        return ST_String(block.getFieldValue('string_literal'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.string_literal, {

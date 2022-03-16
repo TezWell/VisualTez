@@ -8,6 +8,7 @@ import { Pair as ST_Pair } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const PairBlock = {
     type: BlockKind.pair_literal,
@@ -38,7 +39,7 @@ SmartML.addBlock(BlockKind.pair_literal, {
     toValue: (block: Block) => {
         const left = SmartML.toValue(block, 'left_value');
         const right = SmartML.toValue(block, 'right_value');
-        return ST_Pair(left, right);
+        return ST_Pair(left, right, buildErrorInfo(block));
     },
 });
 

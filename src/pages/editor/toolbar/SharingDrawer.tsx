@@ -50,7 +50,7 @@ const SharingDrawer: React.FC<SharingDrawerProps> = () => {
 
             <div className="flex grow justify-center items-center">
                 {generatingPermalink ? (
-                    <CircularLoading message="UPLOADING" />
+                    <CircularLoading message="UPLOADING..." />
                 ) : permalink ? (
                     <div className="p-5 flex flex-col justify-center items-center gap-3 w-full">
                         <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-200">

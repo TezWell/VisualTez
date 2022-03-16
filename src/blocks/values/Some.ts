@@ -8,6 +8,7 @@ import { Some as ST_Some } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const SomeBlock = {
     type: BlockKind.some_literal,
@@ -31,7 +32,7 @@ SmartML.addBlock(BlockKind.some_literal, {
         return ST_TOption(SmartML.toType(block, 'option_value'));
     },
     toValue: (block: Block) => {
-        return ST_Some(SmartML.toValue(block, 'option_value'));
+        return ST_Some(SmartML.toValue(block, 'option_value'), buildErrorInfo(block));
     },
 });
 

@@ -8,6 +8,7 @@ import { Key as ST_Key } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const KeyBlock = {
     type: BlockKind.key_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.key_literal, {
         return ST_TKey();
     },
     toValue: (block: Block) => {
-        return ST_Key(block.getFieldValue('value'));
+        return ST_Key(block.getFieldValue('value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.key_literal, {

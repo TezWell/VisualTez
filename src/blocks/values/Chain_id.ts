@@ -8,6 +8,7 @@ import { Chain_id as ST_Chain_id } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const Chain_idBlock = {
     type: BlockKind.chain_id_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.chain_id_literal, {
         return ST_TChain_id();
     },
     toValue: (block: Block) => {
-        return ST_Chain_id(block.getFieldValue('value'));
+        return ST_Chain_id(block.getFieldValue('value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.chain_id_literal, {
