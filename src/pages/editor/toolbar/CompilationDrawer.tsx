@@ -18,6 +18,7 @@ import useDeployment from 'src/context/hooks/useDeployment';
 import { buildClassName } from 'src/utils/className';
 import Logger from 'src/utils/logger';
 import { DeploymentActionKind } from 'src/context/Deployment';
+import ConditionalRender from 'src/components/common/ConditionalRender';
 
 interface ContractModalProps {
     gotoDeployment: (compilation: ContractCompilation) => void;
@@ -439,17 +440,22 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 ))}
             </div>
 
-            {contractCompilation ? (
-                <ContractModal
-                    gotoDeployment={gotoDeployment}
-                    compilation={contractCompilation}
-                    onClose={closeContractCompilationModal}
-                />
-            ) : null}
-
-            {typeValueCompilation ? (
-                <TypeValueModal compilation={typeValueCompilation} onClose={closeTypeValueCompilationModal} />
-            ) : null}
+            <ConditionalRender
+                props={{
+                    compilation: contractCompilation,
+                }}
+            >
+                {(props) => (
+                    <ContractModal gotoDeployment={gotoDeployment} onClose={closeContractCompilationModal} {...props} />
+                )}
+            </ConditionalRender>
+            <ConditionalRender
+                props={{
+                    compilation: typeValueCompilation,
+                }}
+            >
+                {(props) => <TypeValueModal onClose={closeTypeValueCompilationModal} {...props} />}
+            </ConditionalRender>
         </div>
     );
 };

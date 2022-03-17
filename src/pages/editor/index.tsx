@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Workspace, WorkspaceSvg } from 'blockly';
+import Blockly, { Workspace, WorkspaceSvg } from 'blockly';
 import { useSearchParams } from 'react-router-dom';
 
 import { extractBlocks, compileBlock, Compilation } from 'src/blocks';
@@ -15,6 +15,7 @@ import EditorView from './view';
 import SharedWorkspace from './SharedWorkspace';
 import { updateErrorInfo } from 'src/blocks/utils/errorHandling';
 import { DrawerKind } from 'src/context/Editor';
+import ConditionalRender from 'src/components/common/ConditionalRender';
 
 export const extractWorkspaceFromPermalink = async (hash: string, passPhrase: string) => {
     try {
@@ -31,9 +32,10 @@ export const extractWorkspaceFromPermalink = async (hash: string, passPhrase: st
 const EditorContainer = () => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
     const mounted = React.useRef(false);
-    const { error, updateDrawer, updateError, updateCompilations } = useEditor();
+    const { error, workspace, updateDrawer, updateError, updateCompilations } = useEditor();
     const [sharedWorkspace, setSharedWorkspace] = React.useState<string>();
     const [searchParams] = useSearchParams();
+    const workspaceID = React.useRef(workspace.id);
 
     const getPermalink = React.useCallback(() => {
         const hash = searchParams.get('h');
@@ -62,6 +64,13 @@ const EditorContainer = () => {
         }
     }, [updateCompilations, updateDrawer, updateError]);
 
+    const resizeWorkspace = React.useCallback(() => {
+        if (workspaceRef.current) {
+            Blockly.svgResize(workspaceRef.current);
+            workspaceRef.current.scrollCenter();
+        }
+    }, [workspaceRef]);
+
     React.useEffect(() => {
         if (!mounted.current) {
             mounted.current = true;
@@ -69,19 +78,47 @@ const EditorContainer = () => {
         }
     }, [getPermalink]);
 
+    React.useEffect(() => {
+        try {
+            if (workspaceID.current !== workspace.id) {
+                const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
+                Blockly.Xml.clearWorkspaceAndLoadFromXml(
+                    Blockly.Xml.textToDom(workspace.xml || baseXML),
+                    workspaceRef.current as Workspace,
+                );
+                resizeWorkspace();
+                workspaceID.current = workspace.id;
+            }
+        } catch (e: any) {
+            Logger.debug(e);
+            updateError(e.message || e.toString?.());
+        }
+    }, [workspace.id]);
+
     return (
         <>
-            <EditorView workspaceRef={workspaceRef} compile={compile} onError={updateError} />
-            <ErrorModal title="Editor Error" open={!!error} onClose={() => updateError()}>
+            <EditorView
+                resizeWorkspace={resizeWorkspace}
+                workspaceRef={workspaceRef}
+                compile={compile}
+                onError={updateError}
+            />
+            <ErrorModal title="Editor Error" open={!!error} onClose={() => updateError(undefined)}>
                 {error}
             </ErrorModal>
-            {sharedWorkspace ? (
-                <SharedWorkspace
-                    mainWorkspaceRef={workspaceRef}
-                    xml={sharedWorkspace}
-                    onClose={() => setSharedWorkspace(undefined)}
-                />
-            ) : null}
+            <ConditionalRender
+                props={{
+                    xml: sharedWorkspace,
+                }}
+            >
+                {(props) => (
+                    <SharedWorkspace
+                        mainWorkspaceRef={workspaceRef}
+                        onClose={() => setSharedWorkspace(undefined)}
+                        {...props}
+                    />
+                )}
+            </ConditionalRender>
         </>
     );
 };

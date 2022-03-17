@@ -13,33 +13,26 @@ import Label from 'src/components/blockly/Label';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
+    resizeWorkspace: () => void;
     compile: () => void;
     onError: (error: string) => void;
 }
 
-const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { workspace, updateWorkspace, updateEditorState } = useEditor();
-    const workspaceID = React.useRef(workspace.id);
+const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError, resizeWorkspace }) => {
+    const { workspace, updateWorkspace } = useEditor();
 
-    const resizeWorkspace = React.useCallback(() => {
-        if (workspaceRef.current) {
-            Blockly.svgResize(workspaceRef.current);
-            workspaceRef.current.scrollCenter();
-        }
-    }, [workspaceRef]);
-
-    const saveSectionSizes = React.useCallback(
-        (sizes: { editorSize: string; outputSize: string }) => {
-            updateEditorState({
-                divider: {
-                    left: sizes.editorSize,
-                    right: sizes.outputSize,
-                },
-            });
-            resizeWorkspace();
-        },
-        [updateEditorState, resizeWorkspace],
-    );
+    // const saveSectionSizes = React.useCallback(
+    //     (sizes: { editorSize: string; outputSize: string }) => {
+    //         updateEditorState({
+    //             divider: {
+    //                 left: sizes.editorSize,
+    //                 right: sizes.outputSize,
+    //             },
+    //         });
+    //         resizeWorkspace();
+    //     },
+    //     [updateEditorState, resizeWorkspace],
+    // );
 
     const onChange = React.useCallback(
         (event: any) => {
@@ -62,18 +55,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
         },
         [updateWorkspace, workspace, workspaceRef],
     );
-
-    React.useEffect(() => {
-        if (workspaceRef.current && workspaceID.current !== workspace.id) {
-            const baseXML = `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`;
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(
-                Blockly.Xml.textToDom(workspace.xml || baseXML),
-                workspaceRef.current as Workspace,
-            );
-            resizeWorkspace();
-            workspaceID.current = workspace.id;
-        }
-    }, [resizeWorkspace, workspace, workspaceRef]);
 
     return (
         <div className="flex flex-row flex-1">
