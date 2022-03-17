@@ -8,6 +8,7 @@ import { Bytes as ST_Bytes } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const BytesBlock = {
     type: BlockKind.bytes_literal,
@@ -37,7 +38,7 @@ SmartML.addBlock(BlockKind.bytes_literal, {
         return ST_TBytes();
     },
     toValue: (block: Block) => {
-        return ST_Bytes(block.getFieldValue('bytes'));
+        return ST_Bytes(block.getFieldValue('bytes'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.bytes_literal, {

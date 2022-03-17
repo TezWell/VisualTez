@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.mutez_type,
-    message0: 'Type: Mutez',
+    message0: 'Type | Mutez',
     output: 'Type',
     colour: 230,
 };

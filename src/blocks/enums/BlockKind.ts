@@ -87,12 +87,16 @@ export enum BlockKind {
     get_voting_power = 'get_voting_power',
 
     // Expressions
+    get_first_pair_element = 'get_first_pair_element',
+    get_second_pair_element = 'get_second_pair_element',
     contract_storage_block = 'contract_storage_block',
     entrypoint_arg_block = 'entrypoint_arg_block',
     compare_block = 'compare_block',
     math_block = 'math_block',
     variables_get = 'variables_get',
     param_access = 'param_access',
+    get_map_entries = 'get_map_entries',
+    get_map_value = 'get_map_value',
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',
@@ -102,6 +106,8 @@ export enum BlockKind {
     for_each_block = 'for_each_block',
     while_block = 'while_block',
     for_block = 'for_block',
+    match_variant = 'match_variant',
+    match_variant_case = 'match_variant_case',
     // Base
     type_compilation = 'type_compilation',
     value_compilation = 'value_compilation',

@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const OptionBlock = {
     type: BlockKind.option_type,
-    message0: 'Type: Option of %1',
+    message0: 'Type | Option of %1',
     args0: [
         {
             type: 'input_value',
@@ -17,7 +17,7 @@ const OptionBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.option_type] = {

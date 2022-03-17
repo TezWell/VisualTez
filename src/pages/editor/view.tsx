@@ -6,18 +6,10 @@ import { Block, Category, Value } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
 import BlockKind from 'src/blocks/enums/BlockKind';
 
-import { Section } from 'src/components/section-divider';
-import { Sections } from 'src/components/section-divider';
-
-import debounce from 'src/utils/debounce';
 import useEditor from 'src/context/hooks/useEditor';
 import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
-import Separator from 'src/components/blockly/Separator';
 import Label from 'src/components/blockly/Label';
-
-// Debouncer
-const onDebouncer = debounce(10);
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -26,7 +18,7 @@ interface EditorViewProps {
 }
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { state, workspace, updateWorkspace, updateEditorState, drawer } = useEditor();
+    const { workspace, updateWorkspace, updateEditorState } = useEditor();
     const workspaceID = React.useRef(workspace.id);
 
     const resizeWorkspace = React.useCallback(() => {
@@ -204,6 +196,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <Category name="Lambda" categorystyle="blockchain_category">
                                 <Block type={BlockKind.lambda_literal}>
+                                    <Value name="TYPE">
+                                        <Block type={BlockKind.unit_type} />
+                                    </Value>
                                     <Value name="RETURN">
                                         <Block type={BlockKind.unit_literal} />
                                     </Value>
@@ -238,7 +233,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.never_type} />
                             </Category>
 
-                            <Category name="Container Types" categorystyle="container_type_category">
+                            <Category name="Container Types" categorystyle="type_category">
                                 <Block type={BlockKind.list_type} />
                                 <Block type={BlockKind.set_type} />
                                 <Block type={BlockKind.option_type} />
@@ -252,7 +247,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.sapling_transaction_type} />
                             </Category>
 
-                            <Category name="Artificial Types" categorystyle="artificial_type_category">
+                            <Category name="Artificial Types" categorystyle="type_category">
                                 <Block type={BlockKind.record_type}>
                                     <Value name="fields">
                                         <Block type={BlockKind.record_variant_field_type} />
@@ -273,6 +268,23 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
+                        <Category name="Expressions" categorystyle="container_type_category">
+                            <Category name="Equality & Comparison" categorystyle="logic_category">
+                                <Block type={BlockKind.compare_block} />
+                            </Category>
+                            <Category name="Arithmetic" categorystyle="logic_category">
+                                <Block type={BlockKind.math_block} />
+                            </Category>
+                            <Category name="Map Expressions" categorystyle="logic_category">
+                                <Block type={BlockKind.get_map_entries} />
+                                <Block type={BlockKind.get_map_value} />
+                            </Category>
+                            <Category name="Pair Expressions" categorystyle="logic_category">
+                                <Block type={BlockKind.get_first_pair_element} />
+                                <Block type={BlockKind.get_second_pair_element} />
+                            </Category>
+                        </Category>
+
                         <Category name="Control Statements" categorystyle="control_statements_category">
                             <Category name="Logic" categorystyle="logic_category">
                                 <Block type="assert_block">
@@ -282,6 +294,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Value>
                                 </Block>
                                 <Block type={BlockKind.if_block} />
+                                <Block type={BlockKind.match_variant}>
+                                    <Value name="CASES">
+                                        <Block type={BlockKind.match_variant_case} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.match_variant_case} />
                             </Category>
                             <Category name="Loops" categorystyle="control_statements_category">
                                 <Block type={BlockKind.for_block}>
@@ -321,8 +339,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
 
                         <Category name="Various" categorystyle="logic_category">
-                            <Block type={BlockKind.compare_block} />
-                            <Block type={BlockKind.math_block} />
+                            <Block type={BlockKind.param_access} />
                         </Category>
                     </BlocklyEditor>
                 </div>

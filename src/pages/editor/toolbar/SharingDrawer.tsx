@@ -18,7 +18,7 @@ export const generatePermalink = async (content: string) => {
         const { data } = await Http.post<{ hash: string }>(
             `${settings.storage_api}/sharings`,
             { content: encrypted },
-            { timeout: 1000 },
+            { timeout: 10000 },
         );
 
         return `${window.location.origin}/editor?h=${data.hash}&k=${passPhrase}`;
@@ -50,7 +50,7 @@ const SharingDrawer: React.FC<SharingDrawerProps> = () => {
 
             <div className="flex grow justify-center items-center">
                 {generatingPermalink ? (
-                    <CircularLoading />
+                    <CircularLoading message="UPLOADING..." />
                 ) : permalink ? (
                     <div className="p-5 flex flex-col justify-center items-center gap-3 w-full">
                         <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-200">

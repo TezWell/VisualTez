@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const PairBlock = {
     type: BlockKind.pair_type,
-    message0: 'Type: Pair (%1 , %2)',
+    message0: 'Type | Pair (%1 , %2)',
     args0: [
         {
             type: 'input_value',
@@ -22,7 +22,7 @@ const PairBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.pair_type] = {

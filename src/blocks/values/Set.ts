@@ -8,6 +8,7 @@ import { List as ST_List } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const SetBlock = {
     type: BlockKind.set_literal,
@@ -46,7 +47,7 @@ SmartML.addBlock(BlockKind.set_literal, {
             items.push(SmartML.toValue(targetBlock, 'value'));
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        return ST_List(items);
+        return ST_List(items, buildErrorInfo(block));
     },
 });
 

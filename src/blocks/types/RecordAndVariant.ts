@@ -19,11 +19,13 @@ Blockly.Blocks[BlockKind.record_type] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.record_type,
-            message0: 'Type: Record %1',
-            args0: [{ type: 'input_statement', name: 'fields', check: 'VariantRecordField' }],
+            message0: 'Type | Record %1',
+            args0: [{ type: 'input_statement', name: 'fields' }],
+            message1: 'Layout %1',
+            args1: [{ type: 'field_input', name: 'LAYOUT', align: 'RIGHT' }],
             output: ['Type'],
             outputShape: 3,
-            colour: 240,
+            colour: 230,
         });
         this.setPreviousStatement(false);
         this.setNextStatement(false);
@@ -41,7 +43,12 @@ SmartML.addBlock(BlockKind.record_type, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-        return ST_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
+
+        const layout = block.getFieldValue('LAYOUT');
+        return ST_TRecord(
+            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'type') }), {}),
+            layout ? JSON.parse(layout) : undefined,
+        );
     },
 });
 
@@ -56,7 +63,12 @@ Michelson.addBlock(BlockKind.record_type, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-        return M_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}));
+
+        const layout = block.getFieldValue('LAYOUT');
+        return M_TRecord(
+            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'type') }), {}),
+            layout ? JSON.parse(layout) : undefined,
+        );
     },
 });
 
@@ -66,11 +78,13 @@ Blockly.Blocks[BlockKind.variant_type] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.variant_type,
-            message0: 'Type: Variant %1',
-            args0: [{ type: 'input_statement', name: 'fields', check: 'VariantRecordField' }],
+            message0: 'Type | Variant %1',
+            args0: [{ type: 'input_statement', name: 'fields' }],
+            message1: 'Layout %1',
+            args1: [{ type: 'field_input', name: 'LAYOUT', align: 'RIGHT' }],
             output: ['Type'],
             outputShape: 3,
-            colour: 240,
+            colour: 230,
         });
         this.setPreviousStatement(false);
         this.setNextStatement(false);
@@ -88,7 +102,12 @@ SmartML.addBlock(BlockKind.variant_type, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-        return ST_TVariant(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'type') }), {}));
+
+        const layout = block.getFieldValue('LAYOUT');
+        return ST_TVariant(
+            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'type') }), {}),
+            layout ? JSON.parse(layout) : undefined,
+        );
     },
 });
 
@@ -103,7 +122,12 @@ Michelson.addBlock(BlockKind.variant_type, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-        return M_TVariant(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'type') }), {}));
+
+        const layout = block.getFieldValue('LAYOUT');
+        return M_TVariant(
+            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'type') }), {}),
+            layout ? JSON.parse(layout) : undefined,
+        );
     },
 });
 
@@ -113,7 +137,7 @@ Blockly.Blocks[BlockKind.record_variant_field_type] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.record_variant_field_type,
-            message0: 'Field %1 Value %2',
+            message0: '%1 with type %2',
             args0: [
                 {
                     type: 'field_input',
@@ -129,10 +153,3 @@ Blockly.Blocks[BlockKind.record_variant_field_type] = {
         this.setNextStatement(true);
     },
 };
-
-SmartML.addBlock(BlockKind.record_variant_field_type, {
-    toFieldBlock: (block: Block) => {
-        const key: string = block.getFieldValue('key');
-        return [key, block];
-    },
-});

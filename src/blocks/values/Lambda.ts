@@ -20,12 +20,17 @@ Blockly.Blocks[BlockKind.lambda_literal] = {
     init: function () {
         this.jsonInit({
             type: BlockKind.lambda_literal,
-            message0: 'Lambda | Argument: %1',
+            message0: 'Lambda with argument %1 of type %2',
             args0: [
                 {
                     type: 'field_variable',
                     name: 'VAR',
                     variable: null,
+                },
+                {
+                    type: 'input_value',
+                    name: 'TYPE',
+                    check: ['Type'],
                 },
             ],
             message1: 'Code %1',
@@ -47,32 +52,7 @@ SmartML.addBlock(BlockKind.lambda_literal, {
     toType: () => {
         return ST_TLambda(TUnknown(), TUnknown());
     },
-    toValue: (block: Block) => {
-        const argumentName = extractVariableName(block, 'VAR');
-
-        const lambda = ST_Lambda([], TUnknown(), argumentName);
-
-        // Add an (Lambda) scope
-        Context.main.enterScope({
-            kind: ScopeKind.Lambda,
-            id: lambda.id,
-            variables: {
-                [argumentName]: {
-                    kind: VariableKind.LambdaArgument,
-                    name: argumentName,
-                },
-            },
-        });
-
-        const statements = SmartML.toStatements(block, 'CODE', true);
-        const returnValue = Return(SmartML.toValue(block, 'RETURN', Unit()), buildErrorInfo(block));
-        lambda.code(() => [...statements, returnValue]);
-
-        // Remove current scope
-        Context.main.exitScope();
-
-        return lambda;
-    },
+    toValue: getLambdaExpression,
 });
 
 Michelson.addBlock(BlockKind.lambda_literal, {
@@ -80,29 +60,7 @@ Michelson.addBlock(BlockKind.lambda_literal, {
         throw new Error('Lambda literals do not enough information to generate a type.');
     },
     toMichelson: (block: Block) => {
-        const argumentName = extractVariableName(block, 'VAR');
-
-        const lambda = ST_Lambda([], TUnknown(), argumentName, buildErrorInfo(block));
-
-        // Add an (Lambda) scope
-        Context.main.enterScope({
-            kind: ScopeKind.Lambda,
-            id: lambda.id,
-            variables: {
-                [argumentName]: {
-                    kind: VariableKind.LambdaArgument,
-                    name: argumentName,
-                },
-            },
-        });
-
-        const statements = SmartML.toStatements(block, 'CODE', true);
-        const returnValue = Return(SmartML.toValue(block, 'RETURN'), buildErrorInfo(block));
-        lambda.code(() => [...statements, returnValue]);
-
-        // Remove current scope
-        Context.main.exitScope();
-
+        const lambda = getLambdaExpression(block);
         const compiledLambda = Compiler.compileValue(lambda);
 
         if (typeof compiledLambda === 'string') {
@@ -111,3 +69,32 @@ Michelson.addBlock(BlockKind.lambda_literal, {
         return M_Lambda(compiledLambda.json as MichelsonJSON);
     },
 });
+
+function getLambdaExpression(block: Block) {
+    const argumentName = extractVariableName(block, 'VAR');
+    const type = SmartML.toType(block, 'TYPE', TUnknown());
+
+    const lambda = ST_Lambda([], type, argumentName, buildErrorInfo(block));
+
+    // Add an (Lambda) scope
+    Context.main.enterScope({
+        kind: ScopeKind.Lambda,
+        id: lambda.id,
+        variables: {
+            [argumentName]: {
+                kind: VariableKind.LambdaArgument,
+                type: type,
+                name: argumentName,
+            },
+        },
+    });
+
+    const statements = SmartML.toStatements(block, 'CODE', true);
+    const returnValue = Return(SmartML.toValue(block, 'RETURN', Unit()), buildErrorInfo(block));
+    lambda.code(() => [...statements, returnValue]);
+
+    // Remove current scope
+    Context.main.exitScope();
+
+    return lambda;
+}

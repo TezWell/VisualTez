@@ -205,17 +205,14 @@ const UpdateWorkspaceModal: React.FC<UpdateWorkspaceModalProps> = ({ workspace, 
 interface StorageDrawerProps {}
 
 const StorageDrawer: React.FC<StorageDrawerProps> = () => {
-    const { state, updateEditorState } = useEditor();
+    const { state, workspace, updateEditorState } = useEditor();
     const [createWorkspaceModal, setCreateWorkspaceModal] = React.useState(false);
     const [deleteWorkspaceModal, setDeleteWorkspaceModal] = React.useState<IEditorWorkspace>();
     const [updateWorkspaceModal, setUpdateWorkspaceModal] = React.useState<IEditorWorkspace>();
 
     const downloadWorkspace = () => {
-        if (state.currentWorkspace && state.currentWorkspace in state.workspaces) {
-            const workspace = state.workspaces[state.currentWorkspace];
-            const fileName = `${workspace.name.replace(/\s/g, '_').toLowerCase()}.xml`;
-            downloadFile(fileName, workspace.xml);
-        }
+        const fileName = `${workspace.name.replace(/\s/g, '_').toLowerCase()}.xml`;
+        downloadFile(fileName, workspace.xml);
     };
 
     return (
@@ -225,8 +222,8 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
             </div>
 
             <div className="flex flex-col grow basis-0 p-5 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400">
-                {Object.values(state.workspaces).map((workspace) => (
-                    <Disclosure key={workspace.id}>
+                {Object.values(state.workspaces).map((w) => (
+                    <Disclosure key={w.id}>
                         {({ open }) => (
                             <div
                                 className={buildClassName([
@@ -235,12 +232,12 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                     },
                                     {
                                         classes: 'border-blue-500 dark:border-blue-500',
-                                        append: workspace.id === state.currentWorkspace,
+                                        append: w.id === workspace.id,
                                     },
                                 ])}
                             >
                                 <Disclosure.Button className="flex justify-between w-full p-2 bg-blue-400 rounded hover:bg-blue-300">
-                                    <span className="text-sm font-medium truncate">{workspace.name}</span>
+                                    <span className="text-sm font-medium truncate">{w.name}</span>
                                     <ChevronDownIcon
                                         className={buildClassName([
                                             {
@@ -256,7 +253,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                 <Disclosure.Panel>
                                     <div className="mt-2 border rounded border-black dark:border-white p-2">
                                         <Button
-                                            onClick={() => updateEditorState({ currentWorkspace: workspace.id })}
+                                            onClick={() => updateEditorState({ currentWorkspace: w.id })}
                                             className="flex justify-between items-center w-full bg-amber-500 hover:bg-amber-400 border-amber-700 hover:border-amber-500 p-1 px-5"
                                         >
                                             <ExternalLinkIcon className="block" width={16} height={16} />
@@ -272,7 +269,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
                                         <Button
-                                            onClick={() => setUpdateWorkspaceModal(workspace)}
+                                            onClick={() => setUpdateWorkspaceModal(w)}
                                             className="flex justify-between items-center w-full bg-green-500 hover:bg-green-400 border-green-700 hover:border-green-500 p-1 px-5"
                                         >
                                             <PencilAltIcon className="block" width={16} height={16} />
@@ -280,7 +277,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
                                         <Button
-                                            onClick={() => setDeleteWorkspaceModal(workspace)}
+                                            onClick={() => setDeleteWorkspaceModal(w)}
                                             className="flex justify-between items-center w-full bg-red-500 hover:bg-red-400 border-red-700 hover:border-red-500 p-1 px-5"
                                         >
                                             <TrashIcon className="block" width={16} height={16} />

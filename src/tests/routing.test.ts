@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { act, cleanup, getByText, waitFor, screen } from '@testing-library/react';
 
 import renderWithRouter from './renderWithRouter';
 import { routes } from 'src/router/routes';
@@ -9,21 +9,30 @@ Object.defineProperty(window, 'crypto', {
     value: { getRandomValues: () => new Uint32Array(10) },
 });
 
+afterEach(cleanup);
+
 describe('Application Routing', () => {
-    routes
-        .filter(({ disabled }) => !disabled)
-        .forEach((route) => {
+    test.each(routes.filter(({ disabled }) => !disabled).map((route) => [route.title, route]))(
+        `Test Route %s`,
+        async (_, route: any) => {
             let path = route.routeProps.path;
-            let testDescription = `Test Route ${route.title}`;
 
             if (route.routeProps.path === '*') {
                 path = '/not-found';
-                testDescription = 'Test Non Existent Route';
             }
 
-            it(testDescription, async () => {
-                renderWithRouter({ path });
-                await waitFor(() => expect(document.title).toMatch(route.title));
+            await act(async () => {
+                const { getByRole } = renderWithRouter({ path });
+                const el = await waitFor(() => getByRole('main'), { timeout: 20000 });
+                // Snapshot pages that do not use blockly
+                if (!['/editor', '/deploy'].includes(route.routeProps.path)) {
+                    expect(el).toMatchSnapshot();
+                }
+                await waitFor(() => expect(document.title || 'FAILED').toMatch(route.title), {
+                    timeout: 20000,
+                });
             });
-        });
+        },
+        20000,
+    );
 });

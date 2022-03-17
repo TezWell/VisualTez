@@ -8,6 +8,7 @@ import { Nat as ST_Nat } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const NatBlock = {
     type: BlockKind.nat_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.nat_literal, {
         return ST_TNat();
     },
     toValue: (block: Block) => {
-        return ST_Nat(block.getFieldValue('nat_value'));
+        return ST_Nat(block.getFieldValue('nat_value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.nat_literal, {

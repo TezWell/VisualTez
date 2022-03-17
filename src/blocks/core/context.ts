@@ -1,3 +1,4 @@
+import { IType } from '@tezwell/smartts-sdk/typings/type';
 import BlockKind from '../enums/BlockKind';
 
 export enum ScopeKind {
@@ -5,16 +6,19 @@ export enum ScopeKind {
     Entrypoint,
     For,
     Lambda,
+    MatchCase,
 }
 
 export enum VariableKind {
     Local,
     Iterator,
     LambdaArgument,
+    VariantArgument,
 }
 
 interface IVariable {
     kind: VariableKind;
+    type?: IType;
     name: string;
 }
 
@@ -23,7 +27,7 @@ type IScope =
           kind: ScopeKind.Contract;
       }
     | {
-          kind: ScopeKind.Entrypoint | ScopeKind.For;
+          kind: ScopeKind.Entrypoint | ScopeKind.For | ScopeKind.MatchCase;
           variables: Record<string, IVariable>;
       }
     | {
@@ -54,7 +58,7 @@ class CompilationContext {
     }
 
     public get scopes(): Readonly<IScope[]> {
-        return (JSON.parse(JSON.stringify(this.#scopes)) as IScope[]).reverse();
+        return [...this.#scopes].reverse();
     }
 
     // - Scope methods

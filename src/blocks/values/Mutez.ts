@@ -8,6 +8,7 @@ import { Mutez as ST_Mutez } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const MutezBlock = {
     type: BlockKind.mutez_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.mutez_literal, {
         return ST_TMutez();
     },
     toValue: (block: Block) => {
-        return ST_Mutez(block.getFieldValue('value'));
+        return ST_Mutez(block.getFieldValue('value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.mutez_literal, {

@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const AddressBlock = {
     type: BlockKind.address_type,
-    message0: 'Type: Address',
+    message0: 'Type | Address',
     output: 'Type',
     colour: 230,
 };

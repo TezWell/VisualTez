@@ -22,8 +22,9 @@ Blockly.Blocks[BlockKind.type_compilation] = {
             .appendField('Type compilation')
             .appendField(nameField, 'NAME')
             .appendField('', 'PARAMS');
-        this.appendValueInput('type').setCheck(['Type']).appendField('Type');
+        this.appendValueInput('type').setCheck(['Type']).setAlign(Blockly.ALIGN_RIGHT);
         this.setTooltip('A block used to compile a type.');
+        this.setInputsInline(true);
         this.setColour(200);
     },
 };

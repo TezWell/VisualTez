@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.bytes_type,
-    message0: 'Type: Bytes',
+    message0: 'Type | Bytes',
     output: 'Type',
     colour: 230,
 };

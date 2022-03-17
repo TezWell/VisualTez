@@ -8,6 +8,7 @@ import { Signature as ST_Signature } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const SignatureBlock = {
     type: BlockKind.signature_literal,
@@ -36,7 +37,7 @@ SmartML.addBlock(BlockKind.signature_literal, {
         return ST_TSignature();
     },
     toValue: (block: Block) => {
-        return ST_Signature(block.getFieldValue('value'));
+        return ST_Signature(block.getFieldValue('value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.signature_literal, {

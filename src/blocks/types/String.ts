@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const StringBlock = {
     type: BlockKind.string_type,
-    message0: 'Type: String',
+    message0: 'Type | String',
     output: 'Type',
     colour: 230,
 };

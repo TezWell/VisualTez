@@ -112,7 +112,7 @@ const fetchEditorState = (): IEditorStorage => {
     const storage: IEditorStorage = JSON.parse(window.localStorage.getItem(EDITOR_STORAGE_KEY) || '{}');
 
     // Set default renderer
-    storage.renderer ||= EditorRenderer.Zelos;
+    storage.renderer ||= EditorRenderer.Geras;
 
     return storage;
 };
@@ -162,21 +162,18 @@ const Provider: React.FC = (props) => {
         }));
     }, []);
 
-    const deleteWorkspace = React.useCallback(
-        (workspaceId: string) => {
-            updateState({
-                ...state,
-                currentWorkspace: state.currentWorkspace === workspaceId ? undefined : state.currentWorkspace,
-                workspaces: Object.keys(state.workspaces).reduce((p, c) => {
-                    if (workspaceId !== c) {
-                        p[c] = state.workspaces[c];
-                    }
-                    return p;
-                }, {} as Record<string, IEditorWorkspace>),
-            });
-        },
-        [state],
-    );
+    const deleteWorkspace = React.useCallback((workspaceId: string) => {
+        updateState((state) => ({
+            ...state,
+            currentWorkspace: state.currentWorkspace === workspaceId ? undefined : state.currentWorkspace,
+            workspaces: Object.keys(state.workspaces).reduce((p, c) => {
+                if (workspaceId !== c) {
+                    p[c] = state.workspaces[c];
+                }
+                return p;
+            }, {} as Record<string, IEditorWorkspace>),
+        }));
+    }, []);
 
     const createWorkspace = React.useCallback((name: string, xml?: string) => {
         const workspace = newWorkspace(name, xml);
@@ -207,7 +204,7 @@ const Provider: React.FC = (props) => {
     }, []);
 
     const workspace = React.useMemo(() => {
-        if (state.currentWorkspace && state.workspaces?.[state.currentWorkspace]) {
+        if (state.currentWorkspace && state.currentWorkspace in state.workspaces) {
             return state.workspaces[state.currentWorkspace];
         }
 

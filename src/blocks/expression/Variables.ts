@@ -1,11 +1,12 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
-import { ContractStorage, GetVariable, Iterator, LambdaArgument, MethodArgument, TUnknown } from '@tezwell/smartts-sdk';
+import { ContractStorage, GetVariable, Iterator, LambdaArgument, MethodArgument } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
 import { extractVariableName } from '../utils/variables';
 import Context, { ScopeKind, VariableKind } from '../core/context';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.contract_storage_block] = {
     init: function () {
@@ -42,6 +43,7 @@ SmartML.addBlock(BlockKind.entrypoint_arg_block, {
 SmartML.addBlock(BlockKind.variables_get, {
     toValue: (block: Block) => {
         const variableName = extractVariableName(block, 'VAR');
+        const line = buildErrorInfo(block);
 
         for (const scope of Context.main.scopes) {
             switch (scope.kind) {
@@ -49,7 +51,7 @@ SmartML.addBlock(BlockKind.variables_get, {
                     if (variableName in scope.variables) {
                         switch (scope.variables[variableName].kind) {
                             case VariableKind.Iterator:
-                                return Iterator(variableName);
+                                return Iterator(variableName, line);
                         }
                     }
                     break;
@@ -57,13 +59,13 @@ SmartML.addBlock(BlockKind.variables_get, {
                     if (variableName in scope.variables) {
                         switch (scope.variables[variableName].kind) {
                             case VariableKind.LambdaArgument:
-                                return LambdaArgument(variableName, TUnknown(), scope.id);
+                                return LambdaArgument(variableName, scope.variables[variableName].type, scope.id, line);
                         }
                     }
                     break;
             }
         }
 
-        return GetVariable(variableName);
+        return GetVariable(variableName, line);
     },
 });

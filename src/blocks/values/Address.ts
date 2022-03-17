@@ -8,6 +8,7 @@ import { Address as ST_Address } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const AddressBlock = {
     type: BlockKind.address_literal,
@@ -35,7 +36,7 @@ SmartML.addBlock(BlockKind.address_literal, {
         return ST_TAddress();
     },
     toValue: (block: Block) => {
-        return ST_Address(block.getFieldValue('address_value'));
+        return ST_Address(block.getFieldValue('address_value'), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.address_literal, {

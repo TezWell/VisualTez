@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const SetBlock = {
     type: BlockKind.set_type,
-    message0: 'Type: Set of %1',
+    message0: 'Type | Set of %1',
     args0: [
         {
             type: 'input_value',
@@ -17,7 +17,7 @@ const SetBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.set_type] = {

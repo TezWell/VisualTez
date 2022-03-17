@@ -21,9 +21,13 @@ class Generator extends Blockly.Generator {
         this.blocks.set(type, block);
     }
 
-    toType(block: Block, name: string): IType {
+    toType(block: Block, name: string, default_type?: IType): IType {
         const targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
+            if (default_type) {
+                // Return default type if provided
+                return default_type;
+            }
             const blockName = block.type
                 .split('_')
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))

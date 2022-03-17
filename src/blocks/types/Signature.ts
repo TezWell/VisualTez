@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.signature_type,
-    message0: 'Type: Signature',
+    message0: 'Type | Signature',
     output: 'Type',
     colour: 230,
 };

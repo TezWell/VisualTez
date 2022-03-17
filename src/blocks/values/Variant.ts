@@ -7,6 +7,7 @@ import { Left as M_Left, Right as M_Right } from '@tezwell/michelson-sdk/literal
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.variant_value] = {
     init: function () {
@@ -32,7 +33,7 @@ SmartML.addBlock(BlockKind.variant_value, {
     toValue: (block: Block) => {
         const variant: string = block.getFieldValue('variant');
         const value = SmartML.toValue(block, 'value');
-        return ST_Variant(variant, value);
+        return ST_Variant(variant, value, buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.variant_value, {
@@ -55,7 +56,7 @@ Blockly.Blocks[BlockKind.left_literal_block] = {
 SmartML.addBlock(BlockKind.left_literal_block, {
     toValue: (block: Block) => {
         const value = SmartML.toValue(block, 'value');
-        return ST_Left(value);
+        return ST_Left(value, buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.left_literal_block, {
@@ -79,7 +80,7 @@ Blockly.Blocks[BlockKind.right_literal_block] = {
 SmartML.addBlock(BlockKind.right_literal_block, {
     toValue: (block: Block) => {
         const value = SmartML.toValue(block, 'value');
-        return ST_Right(value);
+        return ST_Right(value, buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.right_literal_block, {

@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application Routing Test Route VisualTez - 404 1`] = `
+<main
+  class="flex flex-col flex-1"
+  style=""
+>
+  <div
+    class="flex-1 flex justify-center items-center"
+  >
+    <svg
+      class="block"
+      viewBox="0 0 345 200"
+      width="345"
+    >
+      <text
+        dominant-baseline="middle"
+        fill="currentColor"
+        fill-opacity="1"
+        font-family="sans-serif"
+        font-size="192px"
+        font-stretch="normal"
+        font-style="italic"
+        font-weight="bold"
+        letter-spacing="0px"
+        stroke="none"
+        text-anchor="middle"
+        x="50%"
+        y="50%"
+      >
+        404
+      </text>
+    </svg>
+    <p>
+      Page 
+      <b
+        class="italic tracking-wider"
+      >
+        /
+      </b>
+       does not exist!
+    </p>
+  </div>
+</main>
+`;
+
+exports[`Application Routing Test Route VisualTez - Contact 1`] = `
+<main
+  class="flex flex-col flex-1"
+>
+  <div
+    class="prose dark:prose-invert md:prose-2xl container mx-auto pt-24 pb-24 pl-5 pr-5"
+  >
+    <p>
+      contact.md
+    </p>
+  </div>
+</main>
+`;
+
+exports[`Application Routing Test Route VisualTez - Nodes 1`] = `
+<main
+  class="flex flex-col flex-1"
+  style=""
+>
+  <div
+    class="flex-1 flex flex-row justify-center items-center p-2 flex-wrap"
+  />
+</main>
+`;
+
+exports[`Application Routing Test Route VisualTez - Privacy 1`] = `
+<main
+  class="flex flex-col flex-1"
+>
+  <div
+    class="prose dark:prose-invert md:prose-2xl container mx-auto pt-24 pb-24 pl-5 pr-5"
+  >
+    <p>
+      privacy.md
+    </p>
+  </div>
+</main>
+`;
+
+exports[`Application Routing Test Route VisualTez - Terms 1`] = `
+<main
+  class="flex flex-col flex-1"
+>
+  <div
+    class="prose dark:prose-invert md:prose-2xl container mx-auto pt-24 pb-24 pl-5 pr-5"
+  >
+    <p>
+      terms.md
+    </p>
+  </div>
+</main>
+`;
+
+exports[`Application Routing Test Route VisualTez 1`] = `
+<main
+  class="flex flex-col flex-1"
+  style=""
+>
+  <div
+    class="pt-20 pb-20"
+  >
+    <div
+      class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center justify-evenly"
+    >
+      <div
+        class="flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left"
+      >
+        <p
+          class="uppercase tracking-loose w-full"
+        >
+          About the Project
+        </p>
+        <h1
+          class="my-4 text-5xl font-bold leading-tight w-full"
+        >
+          VisualTez
+        </h1>
+        <p
+          class="leading-normal text-2xl mb-8"
+        >
+          A visual programming tool for writing smart contracts in the Tezos blockchain.
+        </p>
+        <a
+          href="/editor"
+        >
+          <button
+            class="mx-auto lg:mx-0 hover:underline bg-black dark:bg-white text-white dark:text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+          >
+            Open Editor
+          </button>
+        </a>
+      </div>
+      <div
+        class="flex justify-center h-full w-full md:w-2/5 py-6 text-center"
+      >
+        <img
+          class="h-full w-full"
+          src="/assets/sample.svg"
+        />
+      </div>
+    </div>
+  </div>
+</main>
+`;

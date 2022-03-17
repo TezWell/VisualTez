@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const MapBlock = {
     type: BlockKind.map_type,
-    message0: 'Type: Map (%1 -> %2)',
+    message0: 'Type | Map (%1 -> %2)',
     args0: [
         {
             type: 'input_value',
@@ -22,7 +22,7 @@ const MapBlock = {
         },
     ],
     output: 'Type',
-    colour: 260,
+    colour: 230,
 };
 
 Blockly.Blocks[BlockKind.map_type] = {

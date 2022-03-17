@@ -1,4 +1,4 @@
-import Blockly from 'blockly';
+import Blockly, { Block } from 'blockly';
 
 import { Unit as M_Unit } from '@tezwell/michelson-sdk/literal';
 import { TUnit as M_TUnit } from '@tezwell/michelson-sdk/type';
@@ -7,6 +7,7 @@ import { Unit as ST_Unit } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const UnitLiteralBlock = {
     type: BlockKind.unit_literal,
@@ -25,7 +26,7 @@ Blockly.Blocks[BlockKind.unit_literal] = {
 
 SmartML.addBlock(BlockKind.unit_literal, {
     toType: () => ST_TUnit(),
-    toValue: () => ST_Unit(),
+    toValue: (block: Block) => ST_Unit(buildErrorInfo(block)),
 });
 Michelson.addBlock(BlockKind.unit_literal, {
     toType: () => M_TUnit(),

@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const NatTypeBlock = {
     type: BlockKind.nat_type,
-    message0: 'Type: Nat',
+    message0: 'Type | Nat',
     output: 'Type',
     colour: 230,
 };

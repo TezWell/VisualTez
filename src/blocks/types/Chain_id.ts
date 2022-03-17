@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.chain_id_type,
-    message0: 'Type: Chain_id',
+    message0: 'Type | Chain_id',
     output: 'Type',
     colour: 230,
 };

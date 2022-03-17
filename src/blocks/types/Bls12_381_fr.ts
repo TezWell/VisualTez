@@ -8,7 +8,7 @@ import Michelson from '../generators/Michelson';
 
 const BlockConfig = {
     type: BlockKind.bls12_381_fr_type,
-    message0: 'Type: Bls12_381_fr',
+    message0: 'Type | Bls12_381_fr',
     output: 'Type',
     colour: 230,
 };

@@ -1,25 +1,36 @@
-import Blockly from 'blockly';
+import { GetProperty } from '@tezwell/smartts-sdk';
+import Blockly, { Block } from 'blockly';
 import BlockKind from '../enums/BlockKind';
+import SmartML from '../generators/SmartML';
 
 const ParamAccessBlock = {
-    type: BlockKind.record_field,
-    message0: 'Field %1 of %2',
+    type: BlockKind.param_access,
+    message0: 'Get property %1 of record %2',
     args0: [
         {
             type: 'field_input',
-            name: 'param',
+            name: 'PROP',
             text: '',
             check: 'String',
         },
-        { type: 'input_value', name: 'value', check: 'Literal' },
+        { type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] },
     ],
     colour: 123,
+    output: ['Expression'],
 };
 
 Blockly.Blocks[BlockKind.param_access] = {
     init: function () {
         this.jsonInit(ParamAccessBlock);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
+
+SmartML.addBlock(BlockKind.param_access, {
+    toValue: (block: Block) => {
+        const propertyName = block.getFieldValue('PROP');
+        const ofExpression = SmartML.toValue(block, 'FROM');
+        return GetProperty(ofExpression, propertyName);
+    },
+});

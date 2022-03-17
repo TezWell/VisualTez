@@ -4,6 +4,7 @@ import { While } from '@tezwell/smartts-sdk/statement';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const WhileBlock = {
     type: BlockKind.while_block,
@@ -40,6 +41,6 @@ SmartML.addBlock(BlockKind.while_block, {
 
         const instructions = SmartML.toStatements(block, 'DO', true);
 
-        return While(condition, instructions);
+        return While(condition, instructions, buildErrorInfo(block));
     },
 });

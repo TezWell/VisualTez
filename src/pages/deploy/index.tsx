@@ -10,7 +10,7 @@ import useDeployment from 'src/context/hooks/useDeployment';
 import useTezos from 'src/context/hooks/useTezos';
 import { deployContract } from 'src/services/wallet';
 import Logger from 'src/utils/logger';
-import EditorView from './view';
+import DeployView from './view';
 
 const DeployContainer = () => {
     const { client, walletStatus } = useTezos();
@@ -83,7 +83,7 @@ const DeployContainer = () => {
 
     return (
         <Editor.Provider>
-            <EditorView enabled={walletStatus.connected} deploy={deploy} workspaceRef={workspaceRef} />
+            <DeployView enabled={walletStatus.connected} deploy={deploy} workspaceRef={workspaceRef} />
         </Editor.Provider>
     );
 };

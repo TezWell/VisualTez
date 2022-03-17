@@ -17,8 +17,10 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
         switch (drawer) {
             case DrawerKind.Compilation:
                 compile();
+                break;
+            default:
+                updateDrawer(drawer);
         }
-        updateDrawer(drawer);
         setTimeout(resizeWorkspace, 100);
     };
 
