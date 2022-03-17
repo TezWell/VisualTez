@@ -7,6 +7,7 @@ import { DrawerKind } from 'src/context/Editor';
 import SharingDrawer from './SharingDrawer';
 import StorageDrawer from './StorageDrawer';
 import SettingsDrawer from './SettingsDrawer';
+import TemplatesDrawer from './TemplatesDrawer';
 
 interface DrawerProps {
     resizeWorkspace: () => void;
@@ -30,6 +31,8 @@ const Drawer: React.FC<DrawerProps> = ({ resizeWorkspace }) => {
                 return <StorageDrawer />;
             case DrawerKind.Settings:
                 return <SettingsDrawer />;
+            case DrawerKind.Templates:
+                return <TemplatesDrawer />;
         }
         return null;
     }, [drawer]);

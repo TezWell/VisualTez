@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon } from '@heroicons/react/outline';
+import { TemplateIcon } from '@heroicons/react/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
 import { DrawerKind } from 'src/context/Editor';
@@ -29,7 +30,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
             <div className="flex-1 flex flex-col items-center justify-start pt-5">
                 <button
                     onClick={() => onMenuSelection(DrawerKind.Compilation)}
-                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
                 >
                     <PlayIcon className="block" />
                     <p>Compile</p>
@@ -39,8 +40,16 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
             <div className="flex flex-col items-center justify-start pb-5">
                 <div className="border mt-5 mb-5 w-20" />
                 <button
+                    onClick={() => onMenuSelection(DrawerKind.Templates)}
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
+                >
+                    <TemplateIcon className="block" />
+                    <p>Templates</p>
+                </button>
+                <div className="border mt-5 mb-5 w-20" />
+                <button
                     onClick={() => onMenuSelection(DrawerKind.Share)}
-                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
                 >
                     <ShareIcon className="block" />
                     <p>Share</p>
@@ -48,7 +57,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                 <div className="border mt-5 mb-5 w-20" />
                 <button
                     onClick={() => onMenuSelection(DrawerKind.Storage)}
-                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
                 >
                     <ArchiveIcon className="block" />
                     <p>Storage</p>
@@ -56,7 +65,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                 <div className="border mt-5 mb-5 w-20" />
                 <button
                     onClick={() => onMenuSelection(DrawerKind.Settings)}
-                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-500 font-bold"
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
                 >
                     <CogIcon className="block" />
                     <p>Settings</p>

@@ -9,6 +9,7 @@ export enum DrawerKind {
     Settings = 'settings',
     Share = 'share',
     Storage = 'storage',
+    Templates = 'templates',
 }
 
 export enum EditorRenderer {
@@ -112,7 +113,7 @@ const fetchEditorState = (): IEditorStorage => {
     const storage: IEditorStorage = JSON.parse(window.localStorage.getItem(EDITOR_STORAGE_KEY) || '{}');
 
     // Set default renderer
-    storage.renderer ||= EditorRenderer.Geras;
+    storage.renderer ||= EditorRenderer.Zelos;
 
     return storage;
 };
