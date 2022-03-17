@@ -81,9 +81,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError,
                         onError={onError}
                         onChange={onChange}
                     >
-                        <Category name="Base" categorystyle="class_category">
+                        <Category name="Bootstrap Blocks" categorystyle="class_category">
                             <Block type={BlockKind.contract_block}>
-                                {/* Default input type */}
+                                {/* Default storage type */}
+                                <Value name="TYPE">
+                                    <Block type={BlockKind.unit_type} />
+                                </Value>
+                                {/* Default storage value */}
                                 <Value name="initial_storage">
                                     <Block type={BlockKind.unit_literal} />
                                 </Value>
@@ -266,7 +270,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError,
                             </Category>
                         </Category>
 
-                        <Category name="Control Statements" categorystyle="control_statements_category">
+                        <Category name="Statements" categorystyle="control_statements_category">
                             <Category name="Logic" categorystyle="logic_category">
                                 <Block type="assert_block">
                                     {/* Default error message */}
