@@ -63,7 +63,7 @@
   "scripts": {
     "start": "craco --max_old_space_size=4096 start",
     "build": "craco --max_old_space_size=4096 build",
-    "test": "craco --max_old_space_size=4096 test",
+    "test": "craco --max_old_space_size=4096 test --detectOpenHandles",
     "eject": "react-scripts eject",
     "prettier:fix": "prettier --write 'src/**/*.{ts,tsx}'",
     "lint:fix": "eslint '*/**/*.{ts,tsx}' --quiet --fix",

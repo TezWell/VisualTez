@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import { render } from '@testing-library/react';
-
-import Routes from 'src/router/routes';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
+
+import Routes from 'src/router/routes';
 
 interface Props {
     path: string;
@@ -11,13 +11,13 @@ interface Props {
 
 const renderWithRouter = ({ path }: Props) => {
     const Wrapper: React.FC = () => (
-        <HelmetProvider>
-            <Suspense fallback={'Loading...'}>
+        <Suspense fallback={'Loading...'}>
+            <HelmetProvider>
                 <MemoryRouter initialEntries={[path]}>
                     <Routes />
                 </MemoryRouter>
-            </Suspense>
-        </HelmetProvider>
+            </HelmetProvider>
+        </Suspense>
     );
 
     return render(<Wrapper />);
