@@ -34,7 +34,7 @@ Blockly.Blocks[BlockKind.lambda_literal] = {
                 },
             ],
             message1: 'Code %1',
-            args1: [{ type: 'input_statement', name: 'CODE', check: 'Statement' }],
+            args1: [{ type: 'input_statement', name: 'CODE', check: ['Statement'] }],
             message2: 'Return %1',
             args2: [{ type: 'input_value', name: 'RETURN', check: ['Literal', 'Expression'], align: 'RIGHT' }],
             inputsInline: true,

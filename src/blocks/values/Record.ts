@@ -16,7 +16,7 @@ Blockly.Blocks[BlockKind.record_literal] = {
         this.jsonInit({
             type: BlockKind.record_literal,
             message0: 'Record %1',
-            args0: [{ type: 'input_statement', name: 'entries', check: 'RecordField' }],
+            args0: [{ type: 'input_statement', name: 'entries', check: ['RecordField'] }],
             output: ['Literal', 'Record'],
             outputShape: 3,
             colour: 100,
@@ -126,7 +126,7 @@ Blockly.Blocks[BlockKind.record_field] = {
             ],
             colour: 110,
         });
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setPreviousStatement(true, ['RecordField']);
+        this.setNextStatement(true, ['RecordField']);
     },
 };

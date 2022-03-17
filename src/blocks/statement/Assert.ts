@@ -20,13 +20,13 @@ const AssertBlock = {
     ],
     colour: 200,
     inputsInline: true,
-    previousStatement: null,
-    nextStatement: null,
 };
 
 Blockly.Blocks[AssertBlock.type] = {
     init: function () {
         this.jsonInit(AssertBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

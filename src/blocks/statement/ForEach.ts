@@ -31,8 +31,6 @@ const ForEachBlock = {
             check: 'Statement',
         },
     ],
-    previousStatement: null,
-    nextStatement: null,
     colour: 180,
     helpUrl: '%{BKY_CONTROLS_FOREACH_HELPURL}',
     extensions: ['contextMenu_newGetVariableBlock', 'controls_forEach_tooltip'],
@@ -41,6 +39,8 @@ const ForEachBlock = {
 Blockly.Blocks[BlockKind.for_each_block] = {
     init: function () {
         this.jsonInit(ForEachBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

@@ -1,0 +1,151 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <variables>
+        <variable id="E=`9O(am2c{/+nZY,:Tf">i</variable>
+        <variable id="|^Pp7nCr:YGM38Gn7Jdg">j</variable>
+        <variable id="/$6H7fu38cI#*y-%F[$H">k</variable>
+        <variable id="TdadJX~FM2)|w}@6j|UX">m</variable>
+    </variables>
+    <block type="value_compilation" id="QG?lJ-KwW6g$sQWD02z^" x="-700" y="-581">
+        <field name="NAME">A lambda value</field>
+        <value name="value">
+            <block type="lambda_literal" id=".Ok8PLK~,D2[[oe`hy:x">
+                <field name="VAR" id="E=`9O(am2c{/+nZY,:Tf">i</field>
+                <value name="TYPE">
+                    <block type="variant_type" id="X:#I$s`@E$a?uEvoIrh?">
+                        <field name="LAYOUT"/>
+                        <statement name="fields">
+                            <block type="record_variant_field_type" id="G-CC~_1ku/FIm6xR?V%U">
+                                <field name="key">add</field>
+                                <value name="type">
+                                    <block type="pair_type" id="1#Iz~oOw{Kh)d89.i;J|">
+                                        <value name="left_type">
+                                            <block type="int_type" id="z8_eC5$X^SpUQ@59fp7f"/>
+                                        </value>
+                                        <value name="right_type">
+                                            <block type="int_type" id="L4!d0/3a2!+F}77KA`.:"/>
+                                        </value>
+                                    </block>
+                                </value>
+                                <next>
+                                    <block type="record_variant_field_type" id="AP6!h_O2gEllvKMNZ}#@">
+                                        <field name="key">subtract</field>
+                                        <value name="type">
+                                            <block type="pair_type" id="{`-YA:*QPeI_EF$~ebZ}">
+                                                <value name="left_type">
+                                                    <block type="int_type" id="8^$%(o_C)^lG:{bwMl9P"/>
+                                                </value>
+                                                <value name="right_type">
+                                                    <block type="int_type" id="NdY*a~773bsKnOo,%{mp"/>
+                                                </value>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </next>
+                            </block>
+                        </statement>
+                    </block>
+                </value>
+                <statement name="CODE">
+                    <block type="variable_declaration_block" id="!H81tIyT4~*q2~}i{D:8">
+                        <field name="VAR" id="|^Pp7nCr:YGM38Gn7Jdg">j</field>
+                        <value name="VALUE">
+                            <block type="int_literal" id="tBT7EaF*vKxM8VY,LmT/">
+                                <field name="int_value">0</field>
+                            </block>
+                        </value>
+                        <next>
+                            <block type="match_variant" id="U,.YEzp/:,$68ZCh1pB=">
+                                <value name="VALUE">
+                                    <block type="variables_get" id="kEdK-*q4EWC%OjIe0)#]">
+                                        <field name="VAR" id="E=`9O(am2c{/+nZY,:Tf">i</field>
+                                    </block>
+                                </value>
+                                <statement name="CASES">
+                                    <block type="match_variant_case" id="lE-S9PQAg)C36IlgyPwm">
+                                        <field name="CASE">add</field>
+                                        <field name="VAR" id="/$6H7fu38cI#*y-%F[$H">k</field>
+                                        <statement name="DO">
+                                            <block type="variable_setter_block" id="-AS)[@F]PVbd;DGe}Xye">
+                                                <value name="VAR">
+                                                    <block type="variables_get" id="TEu3=zWD1Bi-s=zC,6l5">
+                                                        <field name="VAR" id="|^Pp7nCr:YGM38Gn7Jdg">j</field>
+                                                    </block>
+                                                </value>
+                                                <value name="VALUE">
+                                                    <block type="math_block" id="8Aa||6q7GqpYz/bUAM0-">
+                                                        <field name="OP">SUM</field>
+                                                        <value name="A">
+                                                            <block type="get_first_pair_element" id="BvkPvFb`AK`;beZyr?pV">
+                                                                <value name="FROM">
+                                                                    <block type="variables_get" id="7J]v|%3?Gtvm6IVJ/e$z">
+                                                                        <field name="VAR" id="/$6H7fu38cI#*y-%F[$H">k</field>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                        <value name="B">
+                                                            <block type="get_second_pair_element" id="Weh;rn|@Uc}]ZT*B!U;t">
+                                                                <value name="FROM">
+                                                                    <block type="variables_get" id="A_WCCxs{D=c@Bc6g~I5~">
+                                                                        <field name="VAR" id="/$6H7fu38cI#*y-%F[$H">k</field>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </statement>
+                                        <next>
+                                            <block type="match_variant_case" id="H.j%A!f:T-bpN7cD}ihQ">
+                                                <field name="CASE">subtract</field>
+                                                <field name="VAR" id="TdadJX~FM2)|w}@6j|UX">m</field>
+                                                <statement name="DO">
+                                                    <block type="variable_setter_block" id="~M:Er.4})ZRA8T6aiBEm">
+                                                        <value name="VAR">
+                                                            <block type="variables_get" id="7E:sp?6BeR+s.ve+._qQ">
+                                                                <field name="VAR" id="|^Pp7nCr:YGM38Gn7Jdg">j</field>
+                                                            </block>
+                                                        </value>
+                                                        <value name="VALUE">
+                                                            <block type="math_block" id="qhO!xDVxIO#n=p1k+YfI">
+                                                                <field name="OP">SUB</field>
+                                                                <value name="A">
+                                                                    <block type="get_first_pair_element" id="^xva8trs+bGF,[V@GZ4{">
+                                                                        <value name="FROM">
+                                                                            <block type="variables_get" id="{Q38kiY;ESxeW4o{5BhW">
+                                                                                <field name="VAR" id="TdadJX~FM2)|w}@6j|UX">m</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                    <block type="get_second_pair_element" id="RQ6d)Di9i)Go[!-(usaq">
+                                                                        <value name="FROM">
+                                                                            <block type="variables_get" id="/NDi?+=?d)j[:brArJ$s">
+                                                                                <field name="VAR" id="TdadJX~FM2)|w}@6j|UX">m</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </statement>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </statement>
+                            </block>
+                        </next>
+                    </block>
+                </statement>
+                <value name="RETURN">
+                    <block type="variables_get" id="IpGpjxsC34,D_TGHQVN,">
+                        <field name="VAR" id="|^Pp7nCr:YGM38Gn7Jdg">j</field>
+                    </block>
+                </value>
+            </block>
+        </value>
+    </block>
+</xml>

@@ -1,6 +1,6 @@
 import Blockly, { Block, FieldTextInput } from 'blockly';
 
-import { Contract, EntryPoint } from '@tezwell/smartts-sdk';
+import { Contract, EntryPoint, TUnknown } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -23,7 +23,7 @@ Blockly.Blocks[BlockKind.contract_block] = {
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
         this.appendDummyInput().appendField('Contract compilation').appendField(nameField, 'NAME');
-        this.appendValueInput('TYPE').setCheck(['Type']).appendField('with storage type');
+        this.appendValueInput('TYPE').setCheck(['Type']).appendField('with storage type').setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput('initial_storage')
             .setCheck(['Literal'])
             .appendField('and initial storage')
@@ -33,8 +33,9 @@ Blockly.Blocks[BlockKind.contract_block] = {
             .appendField('Entry points')
             .setAlign(Blockly.ALIGN_RIGHT);
         this.setTooltip('A block that represents a contract');
-        this.setInputsInline(true);
         this.setColour(200);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
 
@@ -44,9 +45,13 @@ export const extractContract = (block: Block) => {
         kind: ScopeKind.Contract,
     });
 
-    const storageType = SmartML.toType(block, 'TYPE');
-    const storageValue = SmartML.toValue(block, 'initial_storage');
-    const contract = new Contract(buildErrorInfo(block)).setStorageType(storageType).setStorage(storageValue);
+    const storageType = SmartML.toType(block, 'TYPE', TUnknown());
+    const contract = new Contract(buildErrorInfo(block)).setStorageType(storageType);
+
+    // The initial storage is not enforced
+    if (block.getInputTargetBlock('initial_storage')) {
+        contract.setStorage(SmartML.toValue(block, 'initial_storage'));
+    }
 
     SmartML.toStatements(block, 'entry_points', true).forEach((st) => contract.addEntrypoint(st as EntryPoint));
 

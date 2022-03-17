@@ -21,8 +21,6 @@ const VariableCreationBlock = {
             name: 'VALUE',
         },
     ],
-    previousStatement: null,
-    nextStatement: null,
     colour: 20,
     inputsInline: true,
     extensions: ['contextMenu_newGetVariableBlock'],
@@ -31,6 +29,8 @@ const VariableCreationBlock = {
 Blockly.Blocks[BlockKind.variable_declaration_block] = {
     init: function () {
         this.jsonInit(VariableCreationBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

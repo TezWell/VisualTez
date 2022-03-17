@@ -19,6 +19,7 @@ import BlockKind from './enums/BlockKind';
 import Michelson from './generators/Michelson';
 import Context from './core/context';
 import { extractContract } from './base/contract';
+import { Unit } from '@tezwell/michelson-sdk/literal';
 
 export enum CompilationKind {
     Contract = 'contract',
@@ -93,14 +94,10 @@ export const compileBlock = (block: Block): Compilation | null => {
             // Reset context
             Context.reset();
 
-            const name = block.getFieldValue('NAME');
-
             const storageBlock = block.getInputTargetBlock('initial_storage');
-            if (!storageBlock) {
-                throw new Error(`Contract (${name}) requires an initial storage.`);
-            }
+
             // The xml will be used in the deployment page
-            const storageXML = Blockly.Xml.domToText(Blockly.Xml.blockToDom(storageBlock));
+            const storageXML = storageBlock ? Blockly.Xml.domToText(Blockly.Xml.blockToDom(storageBlock)) : '';
 
             // Translate contract block to SmartML
             const code = extractContract(block);
@@ -109,7 +106,7 @@ export const compileBlock = (block: Block): Compilation | null => {
                 kind: CompilationKind.Contract,
                 result: {
                     name: block.getFieldValue('NAME'),
-                    storage: Michelson.translateValue(storageBlock),
+                    storage: storageBlock ? Michelson.translateValue(storageBlock) : Unit(),
                     storageXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageXML}</xml>`,
                     code: JSON.stringify(Compiler.compileContract(code).json, null, 4),
                 },

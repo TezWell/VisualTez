@@ -16,8 +16,6 @@ const ReturnBlock = {
             checks: ['Expression', 'Literal'],
         },
     ],
-    previousStatement: null,
-    nextStatement: null,
     colour: 20,
     inputsInline: true,
 };
@@ -25,6 +23,8 @@ const ReturnBlock = {
 Blockly.Blocks[BlockKind.return_statement_block] = {
     init: function () {
         this.jsonInit(ReturnBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

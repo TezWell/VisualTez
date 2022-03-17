@@ -8,7 +8,6 @@ import Context, { ScopeKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.entry_point_block] = {
-    ...Blockly.Blocks['procedures_defnoreturn'],
     init: function () {
         const initName = Procedures.findLegalName('entrypoint', this);
         const nameField = new FieldTextInput(initName, Procedures.rename);
@@ -17,13 +16,11 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
         this.appendValueInput('input_type').setCheck(['Type']).appendField('with input type');
         this.appendStatementInput('entry_point_code').setCheck(['Statement']).appendField('Code');
         this.setTooltip('A block that represents an entry point.');
-        this.arguments_ = [];
-        this.argumentVarModels_ = [];
         this.setOutput(false, 'Entrypoint');
         this.setColour(140);
         this.setInputsInline(true);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setPreviousStatement(true, ['Entrypoint']);
+        this.setNextStatement(true, ['Entrypoint']);
     },
 };
 

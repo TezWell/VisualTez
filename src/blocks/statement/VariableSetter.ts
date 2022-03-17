@@ -19,8 +19,6 @@ const VariableSetterBlock = {
             name: 'VALUE',
         },
     ],
-    previousStatement: null,
-    nextStatement: null,
     colour: 20,
     inputsInline: true,
     tooltip: '%{BKY_VARIABLES_SET_TOOLTIP}',
@@ -31,6 +29,8 @@ const VariableSetterBlock = {
 Blockly.Blocks[BlockKind.variable_setter_block] = {
     init: function () {
         this.jsonInit(VariableSetterBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

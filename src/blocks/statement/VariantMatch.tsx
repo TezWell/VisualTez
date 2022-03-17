@@ -14,18 +14,17 @@ const MatchVariantBlock = {
     message0: 'Match variant %1 with cases %2',
     args0: [
         { type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] },
-        { type: 'input_statement', name: 'CASES' },
+        { type: 'input_statement', name: 'CASES', check: ['MatchCase'] },
     ],
     colour: 200,
-    output: ['Statement'],
     inputsInline: true,
-    previousStatement: null,
-    nextStatement: null,
 };
 
 Blockly.Blocks[BlockKind.match_variant] = {
     init: function () {
         this.jsonInit(MatchVariantBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 
@@ -61,7 +60,7 @@ const MatchCaseBlock = {
         },
     ],
     message1: 'Do %1',
-    args1: [{ type: 'input_statement', name: 'DO' }],
+    args1: [{ type: 'input_statement', name: 'DO', check: ['Statement'] }],
     colour: 200,
     inputsInline: true,
     previousStatement: null,
@@ -71,6 +70,8 @@ const MatchCaseBlock = {
 Blockly.Blocks[BlockKind.match_variant_case] = {
     init: function () {
         this.jsonInit(MatchCaseBlock);
+        this.setPreviousStatement(true, ['MatchCase']);
+        this.setNextStatement(true, ['MatchCase']);
     },
 };
 

@@ -1,4 +1,4 @@
-import type { Block } from 'blockly';
+import { Block, FieldTextInput } from 'blockly';
 import Blockly from 'blockly';
 
 import { TRecord as ST_TRecord, TVariant as ST_TVariant } from '@tezwell/smartts-sdk/type';
@@ -20,15 +20,17 @@ Blockly.Blocks[BlockKind.record_type] = {
         this.jsonInit({
             type: BlockKind.record_type,
             message0: 'Type | Record %1',
-            args0: [{ type: 'input_statement', name: 'fields' }],
-            message1: 'Layout %1',
-            args1: [{ type: 'field_input', name: 'LAYOUT', align: 'RIGHT' }],
+            args0: [{ type: 'input_statement', name: 'fields', check: ['RecordVariantFieldType'] }],
             output: ['Type'],
             outputShape: 3,
             colour: 230,
         });
+        const layoutField = new FieldTextInput('');
+        layoutField.setTooltip('Default: Right combs\n---\nExample: ["prop1", ["prop2", "props3"]]');
+        this.appendDummyInput().appendField('Layout').appendField(layoutField, 'LAYOUT').setAlign(Blockly.ALIGN_RIGHT);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
+        this.setInputsInline(false);
     },
 };
 
@@ -45,9 +47,16 @@ SmartML.addBlock(BlockKind.record_type, {
         } while ((targetBlock = targetBlock.getNextBlock()));
 
         const layout = block.getFieldValue('LAYOUT');
+        let layoutArray = undefined;
+        try {
+            layoutArray = layout ? JSON.parse(layout) : undefined;
+        } catch {
+            /* Ignore parsing error */
+        }
+
         return ST_TRecord(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'type') }), {}),
-            layout ? JSON.parse(layout) : undefined,
+            layoutArray,
         );
     },
 });
@@ -79,15 +88,17 @@ Blockly.Blocks[BlockKind.variant_type] = {
         this.jsonInit({
             type: BlockKind.variant_type,
             message0: 'Type | Variant %1',
-            args0: [{ type: 'input_statement', name: 'fields' }],
-            message1: 'Layout %1',
-            args1: [{ type: 'field_input', name: 'LAYOUT', align: 'RIGHT' }],
+            args0: [{ type: 'input_statement', name: 'fields', check: ['RecordVariantFieldType'] }],
             output: ['Type'],
             outputShape: 3,
             colour: 230,
         });
+        const layoutField = new FieldTextInput('');
+        layoutField.setTooltip('Default: Right combs\n---\nExample: ["prop1", ["prop2", "props3"]]');
+        this.appendDummyInput().appendField('Layout').appendField(layoutField, 'LAYOUT').setAlign(Blockly.ALIGN_RIGHT);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
+        this.setInputsInline(false);
     },
 };
 
@@ -104,9 +115,16 @@ SmartML.addBlock(BlockKind.variant_type, {
         } while ((targetBlock = targetBlock.getNextBlock()));
 
         const layout = block.getFieldValue('LAYOUT');
+        let layoutArray = undefined;
+        try {
+            layoutArray = layout ? JSON.parse(layout) : undefined;
+        } catch {
+            /* Ignore parsing error */
+        }
+
         return ST_TVariant(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'type') }), {}),
-            layout ? JSON.parse(layout) : undefined,
+            layoutArray,
         );
     },
 });
@@ -149,7 +167,7 @@ Blockly.Blocks[BlockKind.record_variant_field_type] = {
             ],
             colour: 250,
         });
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setPreviousStatement(true, ['RecordVariantFieldType']);
+        this.setNextStatement(true, ['RecordVariantFieldType']);
     },
 };

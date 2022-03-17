@@ -44,14 +44,14 @@ const ForBlock = {
         },
     ],
     inputsInline: true,
-    previousStatement: null,
-    nextStatement: null,
     colour: 180,
 };
 
 Blockly.Blocks[BlockKind.for_block] = {
     init: function () {
         this.jsonInit(ForBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

@@ -18,14 +18,13 @@ Blockly.Blocks[BlockKind.type_compilation] = {
         const initName = findName('type', this.workspace, BlockKind.type_compilation);
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
-        this.appendDummyInput()
-            .appendField('Type compilation')
-            .appendField(nameField, 'NAME')
-            .appendField('', 'PARAMS');
+        this.appendDummyInput().appendField('Type compilation').appendField(nameField, 'NAME');
         this.appendValueInput('type').setCheck(['Type']).setAlign(Blockly.ALIGN_RIGHT);
         this.setTooltip('A block used to compile a type.');
         this.setInputsInline(true);
         this.setColour(200);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
     },
 };
 

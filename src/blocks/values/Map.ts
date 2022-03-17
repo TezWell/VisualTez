@@ -88,7 +88,7 @@ Blockly.Blocks[BlockKind.map_entry] = {
             inputsInline: true,
             colour: 170,
         });
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setPreviousStatement(true, ['MapEntry']);
+        this.setNextStatement(true, ['MapEntry']);
     },
 };

@@ -33,13 +33,13 @@ const IfBlock = {
         },
     ],
     colour: 200,
-    previousStatement: null,
-    nextStatement: null,
 };
 
 Blockly.Blocks[BlockKind.if_block] = {
     init: function () {
         this.jsonInit(IfBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

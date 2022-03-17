@@ -24,14 +24,14 @@ const WhileBlock = {
             check: 'Statement',
         },
     ],
-    previousStatement: null,
-    nextStatement: null,
     colour: 180,
 };
 
 Blockly.Blocks[BlockKind.while_block] = {
     init: function () {
         this.jsonInit(WhileBlock);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 
