@@ -14,15 +14,15 @@ const Nodes = () => {
         const nodes = await Promise.all(
             settings.networks.map(async (network: string) => {
                 const rpc = `https://${network}.visualtez.com`;
-                return await Http.get(`${rpc}/chains/main/blocks/head/header`, { timeout: 1000 })
+                return await Http.get(`${rpc}/chains/main/blocks/head/header`, { timeout: 5000 })
                     .then(async ({ data: { timestamp, level } }) => {
                         // Get version info
-                        const version = await Http.get(`${rpc}/version`, { timeout: 1000 })
+                        const version = await Http.get(`${rpc}/version`, { timeout: 5000 })
                             .then(({ data }) => data)
                             .catch(() => ({}));
 
                         // Get history mode
-                        const historyMode = await Http.get(`${rpc}/chains/main/checkpoint`, { timeout: 1000 })
+                        const historyMode = await Http.get(`${rpc}/chains/main/checkpoint`, { timeout: 5000 })
                             .then(({ data: { history_mode } }) =>
                                 typeof history_mode === 'string' ? history_mode : Object.keys(history_mode)[0],
                             )
