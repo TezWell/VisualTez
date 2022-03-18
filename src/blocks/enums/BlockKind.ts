@@ -110,6 +110,8 @@ export enum BlockKind {
     for_block = 'for_block',
     match_variant = 'match_variant',
     match_variant_case = 'match_variant_case',
+    transfer_statement = 'transfer_statement',
+    call_contract_statement = 'call_contract_statement',
     // Base
     type_compilation = 'type_compilation',
     value_compilation = 'value_compilation',

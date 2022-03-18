@@ -22,6 +22,7 @@ const MapBlock = {
         },
     ],
     output: 'Type',
+    outputShape: 3,
     colour: 230,
 };
 

@@ -6,6 +6,7 @@ import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 
 import BlockKind from '../enums/BlockKind';
 import Logger from 'src/utils/logger';
+import { buildBlockErrorString, buildErrorInfo } from '../utils/errorHandling';
 
 interface IBlock {
     toType?: (block: Block) => IType;
@@ -37,7 +38,9 @@ class Generator extends Blockly.Generator {
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
                 .join(' ');
 
-            throw TypeError(`Could not find "${targetBlockName}" in "${blockName}".`);
+            throw TypeError(
+                `You must provide "${targetBlockName}" in "${blockName}". (${buildErrorInfo(block).fileName}, line 1)`,
+            );
         }
 
         const localBlock = this.blocks.get(targetBlock.type as BlockKind);
@@ -45,7 +48,7 @@ class Generator extends Blockly.Generator {
             return localBlock.toType(targetBlock);
         }
 
-        throw TypeError(`The target block ${targetBlock.type} does not have a type generator.`);
+        throw new Error(`Block ${targetBlock.type} is in the wrong place. ${buildBlockErrorString(targetBlock)}`);
     }
 
     toValue(block: Block, name: string, default_value?: IExpression) {
@@ -63,7 +66,8 @@ class Generator extends Blockly.Generator {
                 .split('_')
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
                 .join(' ');
-            throw TypeError(`Could not find "${targetBlockName}" in "${blockName}".`);
+
+            throw Error(`You must provide "${targetBlockName}" in "${blockName}". ${buildBlockErrorString(block)}`);
         }
 
         const localBlock = this.blocks.get(targetBlock.type as BlockKind);
@@ -71,7 +75,7 @@ class Generator extends Blockly.Generator {
             return localBlock.toValue(targetBlock);
         }
 
-        throw TypeError(`The target block ${targetBlock.type} does not have a value generator.`);
+        throw new Error(`Block ${targetBlock.type} is in the wrong place. ${buildBlockErrorString(targetBlock)}`);
     }
 
     toStatements(block: Block, name: string, allow_empty = false) {
@@ -82,13 +86,16 @@ class Generator extends Blockly.Generator {
             if (allow_empty) {
                 return statements;
             }
-            throw new Error(`Could not find any statement with name "${name}" on block ${block.type}`);
+
+            throw new Error(`No statements found on block ${block.type}. ${buildBlockErrorString(block)}`);
         }
 
         do {
             const localBlock = this.blocks.get(targetBlock.type as BlockKind);
             if (!localBlock?.toStatement) {
-                throw TypeError(`The target block ${targetBlock.type} does not have a statement generator.`);
+                throw new Error(
+                    `Block ${targetBlock.type} is in the wrong place. ${buildBlockErrorString(targetBlock)}`,
+                );
             }
             statements.push(localBlock.toStatement(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));

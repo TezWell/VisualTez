@@ -10,3 +10,5 @@ import './DeclareVariable';
 import './VariableSetter';
 
 import './Return';
+
+import './operations';

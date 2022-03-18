@@ -56,6 +56,9 @@ const LightTheme = Blockly.Theme.defineTheme('light', {
         control_statements_category: {
             colour: '#f61961',
         },
+        operation_statements_category: {
+            colour: '#5b74a5',
+        },
     },
     blockStyles: {
         list_blocks: {

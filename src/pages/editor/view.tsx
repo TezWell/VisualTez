@@ -36,7 +36,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
     const resizeWorkspace = () => {
         if (workspaceRef.current) {
             Blockly.svgResize(workspaceRef.current);
-            workspaceRef.current.scrollCenter();
         }
     };
 
@@ -309,6 +308,25 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 </Block>
                                 <Block type={BlockKind.for_each_block} />
                                 <Block type={BlockKind.while_block} />
+                            </Category>
+
+                            <Category name="Transfer, Delegate, ..." categorystyle="operation_statements_category">
+                                <Block type={BlockKind.transfer_statement}>
+                                    <Value name="AMOUNT">
+                                        <Block type={BlockKind.mutez_literal} />
+                                    </Value>
+                                    <Value name="ADDRESS">
+                                        <Block type={BlockKind.address_literal} />
+                                    </Value>
+                                </Block>
+                                <Block type={BlockKind.call_contract_statement}>
+                                    <Value name="AMOUNT">
+                                        <Block type={BlockKind.mutez_literal} />
+                                    </Value>
+                                    <Value name="ARGUMENT">
+                                        <Block type={BlockKind.unit_literal} />
+                                    </Value>
+                                </Block>
                             </Category>
                         </Category>
 

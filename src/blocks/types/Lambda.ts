@@ -22,6 +22,7 @@ const LambdaBlock = {
         },
     ],
     output: 'Type',
+    outputShape: 3,
     colour: 230,
 };
 

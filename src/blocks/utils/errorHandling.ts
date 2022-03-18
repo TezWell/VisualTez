@@ -10,6 +10,11 @@ import { LineInfo } from '@tezwell/smartts-sdk/misc/utils';
  * @returns Information that identifies the source location.
  */
 export const buildErrorInfo = (block: Block) => new LineInfo(`BLOCK__${block.id}`, '1');
+/**
+ * @param block
+ * @returns Information that identifies the source location.
+ */
+export const buildBlockErrorString = (block: Block) => `(BLOCK__${block.id}, line 1)`;
 
 /**
  * Add error information to the workspace.
@@ -26,9 +31,19 @@ export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean
         block.setWarningText(error.replace(/[(]BLOCK__(.*),\sline\s\d[)]/g, ''));
         block.warning?.setVisible(true);
 
+        // Set RED color
+        block.warning?.bubble_.setColour('#ff0000');
+
+        // Scroll to the error bubble
+        const coords = block.warning?.bubble_.getRelativeToSurfaceXY();
+        if (coords) {
+            workspace.scroll(coords.x, coords.y);
+        }
+
         const teardDown = () => {
-            block.warning?.setVisible(false);
             block.setWarningText(null);
+            block.warning?.setVisible(false);
+            block.warning?.dispose();
 
             workspace.svgGroup_.removeEventListener('click', teardDown);
         };
