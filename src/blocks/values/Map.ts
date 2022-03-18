@@ -82,8 +82,8 @@ Blockly.Blocks[BlockKind.map_entry] = {
             type: BlockKind.map_entry,
             message0: 'Key %1 Value %2',
             args0: [
-                { type: 'input_value', name: 'key', check: 'Literal' },
-                { type: 'input_value', name: 'value', check: 'Literal' },
+                { type: 'input_value', name: 'key', check: ['Literal', 'Expression'] },
+                { type: 'input_value', name: 'value', check: ['Literal', 'Expression'] },
             ],
             inputsInline: true,
             colour: 170,

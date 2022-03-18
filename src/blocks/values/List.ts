@@ -13,7 +13,7 @@ import { buildErrorInfo } from '../utils/errorHandling';
 const ListBlock = {
     type: BlockKind.list_literal,
     message0: 'List %1',
-    args0: [{ type: 'input_statement', name: 'items', check: 'Literal' }],
+    args0: [{ type: 'input_statement', name: 'items', check: ['SequenceItem'] }],
     output: ['Literal', 'List'],
     outputShape: 3,
     colour: 210,
@@ -85,12 +85,12 @@ Blockly.Blocks[BlockKind.sequence_item] = {
                 {
                     type: 'input_value',
                     name: 'value',
-                    check: 'Literal',
+                    check: ['Literal', 'Expression'],
                 },
             ],
             colour: 220,
         });
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setPreviousStatement(true, ['SequenceItem']);
+        this.setNextStatement(true, ['SequenceItem']);
     },
 };

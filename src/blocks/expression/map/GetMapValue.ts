@@ -1,8 +1,8 @@
 import Blockly, { Block } from 'blockly';
 import { GetMapValue } from '@tezwell/smartts-sdk';
 
-import BlockKind from '../enums/BlockKind';
-import SmartML from '../generators/SmartML';
+import BlockKind from '../../enums/BlockKind';
+import SmartML from '../../generators/SmartML';
 
 const GetMapValueBlock = {
     type: BlockKind.get_map_value,

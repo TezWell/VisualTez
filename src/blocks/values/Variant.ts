@@ -21,7 +21,7 @@ Blockly.Blocks[BlockKind.variant_value] = {
                     text: '',
                     check: 'String',
                 },
-                { type: 'input_value', name: 'value', check: 'Literal' },
+                { type: 'input_value', name: 'value', check: ['Literal', 'Expression'] },
             ],
             colour: 70,
             output: 'Expression',

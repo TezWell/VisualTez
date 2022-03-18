@@ -43,10 +43,6 @@ SmartML.addBlock(BlockKind.record_literal, {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        if (fields.length < 2) {
-            throw new Error('Each record must contain at least two(2) entries.');
-        }
-
         return ST_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
     },
     toValue: (block: Block) => {
@@ -59,10 +55,6 @@ SmartML.addBlock(BlockKind.record_literal, {
         do {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
-
-        if (fields.length < 2) {
-            throw new Error('Each record must contain at least two(2) entries.');
-        }
 
         return ST_Record(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toValue(block, 'value') }), {}),
@@ -122,7 +114,7 @@ Blockly.Blocks[BlockKind.record_field] = {
                     text: '',
                     check: 'String',
                 },
-                { type: 'input_value', name: 'value', check: 'Literal' },
+                { type: 'input_value', name: 'value', check: ['Literal', 'Expression'] },
             ],
             colour: 110,
         });

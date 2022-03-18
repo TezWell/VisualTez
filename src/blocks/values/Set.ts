@@ -13,7 +13,7 @@ import { buildErrorInfo } from '../utils/errorHandling';
 const SetBlock = {
     type: BlockKind.set_literal,
     message0: 'Set %1',
-    args0: [{ type: 'input_statement', name: 'items', check: 'Literal' }],
+    args0: [{ type: 'input_statement', name: 'items', check: ['SequenceItem'] }],
     output: ['Literal', 'Set'],
     outputShape: 3,
     colour: 210,

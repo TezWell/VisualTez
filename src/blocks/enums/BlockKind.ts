@@ -97,6 +97,8 @@ export enum BlockKind {
     param_access = 'param_access',
     get_map_entries = 'get_map_entries',
     get_map_value = 'get_map_value',
+    map_contains_key = 'map_contains_key',
+    not = 'not',
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',

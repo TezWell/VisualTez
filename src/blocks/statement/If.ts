@@ -13,7 +13,7 @@ const IfBlock = {
         {
             type: 'input_value',
             name: 'condition',
-            check: 'Boolean',
+            check: ['Expression'],
         },
     ],
     message1: 'Then %1',

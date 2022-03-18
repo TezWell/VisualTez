@@ -14,8 +14,8 @@ const PairBlock = {
     type: BlockKind.pair_literal,
     message0: 'Pair (%1 , %2)',
     args0: [
-        { type: 'input_value', name: 'left_value', check: 'Literal' },
-        { type: 'input_value', name: 'right_value', check: 'Literal' },
+        { type: 'input_value', name: 'left_value', check: ['Literal', 'Expression'] },
+        { type: 'input_value', name: 'right_value', check: ['Literal', 'Expression'] },
     ],
     inputsInline: true,
     output: ['Literal', 'Pair'],

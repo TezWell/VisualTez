@@ -48,10 +48,10 @@ Blockly.Blocks[BlockKind.variables_get] = {
  * @return {!Array<!Element>} Array of XML elements.
  * @alias Blockly.Variables.flyoutCategory
  */
-const flyoutCategory = function (workspace: Workspace) {
-    return flyoutCategoryBlocks(workspace);
-};
-Blockly.Variables.flyoutCategory = flyoutCategory;
+// const flyoutCategory = function (workspace: Workspace) {
+//     return flyoutCategoryBlocks(workspace);
+// };
+// Blockly.Variables.flyoutCategory = flyoutCategory;
 
 /**
  * @description Override "flyoutCategoryBlocks" method
