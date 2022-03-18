@@ -36,12 +36,14 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError,
 
     const onChange = React.useCallback(
         (event: any) => {
+            console.error(event.type);
             if (
                 [
                     Blockly.Events.BLOCK_CHANGE,
                     Blockly.Events.MOVE,
                     Blockly.Events.DELETE,
                     Blockly.Events.CREATE,
+                    Blockly.Events.VAR_RENAME,
                 ].includes(event.type)
             ) {
                 if (workspaceRef.current) {
@@ -263,6 +265,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError,
                             <Category name="Map Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.get_map_entries} />
                                 <Block type={BlockKind.get_map_value} />
+                                <Block type={BlockKind.map_contains_key} />
                             </Category>
                             <Category name="Pair Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.get_first_pair_element} />
@@ -325,6 +328,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError,
 
                         <Category name="Various" categorystyle="logic_category">
                             <Block type={BlockKind.param_access} />
+                            <Block type={BlockKind.not} />
                         </Category>
                     </BlocklyEditor>
                 </div>
