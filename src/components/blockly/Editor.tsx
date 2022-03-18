@@ -98,7 +98,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
 
     return (
         <React.Fragment>
-            <div ref={blocklyDiv} className="h-full w-full absolute" />
+            <div ref={blocklyDiv} className="h-full w-full relative" />
             <div is="blockly" style={{ display: 'none' }} id="toolbox" ref={toolbox}>
                 {children}
             </div>

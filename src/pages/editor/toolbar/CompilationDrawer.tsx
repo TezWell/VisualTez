@@ -228,7 +228,7 @@ interface ExpandButtonProps {
 }
 
 const ExpandButton: React.FC<ExpandButtonProps> = ({ selected, select }) => (
-    <button className="hover:text-yellow-500" onClick={select}>
+    <button className="hover:text-yellow-500 pl-5 pr-5" onClick={select}>
         {selected ? (
             <ChevronUpIcon className="block" width={32} height={32} />
         ) : (
@@ -243,7 +243,7 @@ interface TabInfoProps {
 }
 
 const TabInfo: React.FC<TabInfoProps> = ({ title, items }) => (
-    <div className="flex items-center">
+    <div className="flex items-center justify-between w-full">
         <h1 className="font-mono text-ellipsis overflow-hidden">{title}</h1>
         <span className="ml-2 pr-4 pl-4 font-mono border rounded-full text-yellow-400 border-yellow-400">{items}</span>
     </div>
@@ -325,7 +325,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     return (
         <div className="flex-1 flex h-full w-full flex-col justify-stretch">
             <div className="flex items-center justify-between p-5">
-                <TabInfo title="Contract Compilation" items={contractCompilations.length} />
+                <TabInfo title="Contracts" items={contractCompilations.length} />
                 <ExpandButton
                     selected={selectedTab === CompilationKind.Contract}
                     select={() => onTabSelection(CompilationKind.Contract)}
@@ -368,7 +368,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 ))}
             </div>
             <div className="flex items-center justify-between border-t p-5">
-                <TabInfo title="Value Compilation" items={valueCompilations.length} />
+                <TabInfo title="Values" items={valueCompilations.length} />
                 <ExpandButton
                     selected={selectedTab === CompilationKind.Value}
                     select={() => onTabSelection(CompilationKind.Value)}
@@ -404,7 +404,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 ))}
             </div>
             <div className="flex items-center justify-between p-5 border-b border-t">
-                <TabInfo title="Type Compilation" items={typeCompilations.length} />
+                <TabInfo title="Types" items={typeCompilations.length} />
                 <ExpandButton
                     selected={selectedTab === CompilationKind.Type}
                     select={() => onTabSelection(CompilationKind.Type)}

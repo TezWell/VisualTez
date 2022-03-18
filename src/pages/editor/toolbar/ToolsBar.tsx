@@ -5,6 +5,7 @@ import { TemplateIcon } from '@heroicons/react/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
 import { DrawerKind } from 'src/context/Editor';
+import Drawer from './Drawer';
 
 interface ToolsBarProps {
     compile: () => void;
@@ -15,12 +16,9 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
     const { updateDrawer } = useEditor();
 
     const onMenuSelection = (drawer?: DrawerKind) => {
-        switch (drawer) {
+        switch (updateDrawer(drawer)) {
             case DrawerKind.Compilation:
                 compile();
-                break;
-            default:
-                updateDrawer(drawer);
         }
         setTimeout(resizeWorkspace, 100);
     };

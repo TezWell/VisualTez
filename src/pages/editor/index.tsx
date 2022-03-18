@@ -46,8 +46,6 @@ const EditorContainer = () => {
     }, [searchParams]);
 
     const compile = React.useCallback(() => {
-        // Close drawer
-        updateDrawer(undefined);
         if (workspaceRef.current) {
             try {
                 const blocks = extractBlocks(workspaceRef.current as Workspace);
@@ -64,13 +62,6 @@ const EditorContainer = () => {
         }
     }, [updateCompilations, updateDrawer, updateError]);
 
-    const resizeWorkspace = React.useCallback(() => {
-        if (workspaceRef.current) {
-            Blockly.svgResize(workspaceRef.current);
-            workspaceRef.current.scrollCenter();
-        }
-    }, [workspaceRef]);
-
     React.useEffect(() => {
         if (!mounted.current) {
             mounted.current = true;
@@ -86,7 +77,6 @@ const EditorContainer = () => {
                     Blockly.Xml.textToDom(workspace.xml || baseXML),
                     workspaceRef.current as Workspace,
                 );
-                resizeWorkspace();
                 workspaceID.current = workspace.id;
             }
         } catch (e: any) {
@@ -97,12 +87,7 @@ const EditorContainer = () => {
 
     return (
         <>
-            <EditorView
-                resizeWorkspace={resizeWorkspace}
-                workspaceRef={workspaceRef}
-                compile={compile}
-                onError={updateError}
-            />
+            <EditorView workspaceRef={workspaceRef} compile={compile} onError={updateError} />
             <ErrorModal title="Editor Error" open={!!error} onClose={() => updateError(undefined)}>
                 {error}
             </ErrorModal>

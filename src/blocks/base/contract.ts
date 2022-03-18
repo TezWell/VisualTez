@@ -58,6 +58,5 @@ export const extractContract = (block: Block) => {
     // Remove current scope
     Context.main.exitScope();
 
-    console.debug(contract.toString());
     return contract;
 };

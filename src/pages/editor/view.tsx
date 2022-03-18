@@ -13,12 +13,11 @@ import Label from 'src/components/blockly/Label';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
-    resizeWorkspace: () => void;
     compile: () => void;
     onError: (error: string) => void;
 }
 
-const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError, resizeWorkspace }) => {
+const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
     const { workspace, updateWorkspace } = useEditor();
 
     // const saveSectionSizes = React.useCallback(
@@ -34,19 +33,26 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError,
     //     [updateEditorState, resizeWorkspace],
     // );
 
+    const resizeWorkspace = () => {
+        if (workspaceRef.current) {
+            Blockly.svgResize(workspaceRef.current);
+            workspaceRef.current.scrollCenter();
+        }
+    };
+
     const onChange = React.useCallback(
         (event: any) => {
             console.error(event.type);
-            if (
-                [
-                    Blockly.Events.BLOCK_CHANGE,
-                    Blockly.Events.MOVE,
-                    Blockly.Events.DELETE,
-                    Blockly.Events.CREATE,
-                    Blockly.Events.VAR_RENAME,
-                ].includes(event.type)
-            ) {
-                if (workspaceRef.current) {
+            if (workspaceRef.current) {
+                if (
+                    [
+                        Blockly.Events.BLOCK_CHANGE,
+                        Blockly.Events.MOVE,
+                        Blockly.Events.DELETE,
+                        Blockly.Events.CREATE,
+                        Blockly.Events.VAR_RENAME,
+                    ].includes(event.type)
+                ) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
                     updateWorkspace({
                         ...workspace,
@@ -332,7 +338,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError,
                         </Category>
                     </BlocklyEditor>
                 </div>
-                <Drawer resizeWorkspace={resizeWorkspace} />
+                <Drawer />
                 {/*
                     @TODO : Remove later if not necessary
 

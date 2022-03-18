@@ -49,7 +49,7 @@ export interface IEditorContext {
         };
     }) => void;
     drawer: DrawerKind | null;
-    updateDrawer: (drawer?: DrawerKind) => void;
+    updateDrawer: (drawer?: DrawerKind) => DrawerKind | null;
     error?: string;
     updateError: (msg?: string) => void;
 
@@ -84,7 +84,7 @@ const contextStub: IEditorContext = {
     },
     drawer: null,
     updateDrawer: () => {
-        // stub
+        return null;
     },
     updateError: () => {
         // stub
@@ -191,7 +191,14 @@ const Provider: React.FC = (props) => {
         return workspace;
     }, []);
 
-    const updateDrawer = React.useCallback((newDrawer?: DrawerKind) => setDrawer(!newDrawer ? null : newDrawer), []);
+    const updateDrawer = React.useCallback(
+        (newDrawer?: DrawerKind) => {
+            const new_drawer = !newDrawer || drawer === newDrawer ? null : newDrawer;
+            setDrawer(new_drawer);
+            return new_drawer;
+        },
+        [drawer],
+    );
 
     const updateError = React.useCallback((msg?: string) => setError(msg), []);
 
