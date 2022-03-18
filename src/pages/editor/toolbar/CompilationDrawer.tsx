@@ -108,6 +108,26 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
                     >
                         Code
                     </Tab>
+                    <Tab
+                        className={({ selected }) =>
+                            buildClassName([
+                                {
+                                    classes:
+                                        'w-full p-2 text-sm leading-5 font-medium bg-gray-500 bg-opacity-10 dark:text-white',
+                                },
+                                {
+                                    classes: 'bg-gray-100 shadow',
+                                    append: selected,
+                                },
+                                {
+                                    classes: 'hover:bg-opacity-40',
+                                    append: !selected,
+                                },
+                            ])
+                        }
+                    >
+                        SmartPy
+                    </Tab>
                 </Tab.List>
                 <Tab.Panels className="flex-1 overflow-y-auto">
                     <Tab.Panel className="h-full">
@@ -115,6 +135,14 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
                     </Tab.Panel>
                     <Tab.Panel className="h-full">
                         <CodeBlock withCopy language={'json'} showLineNumbers text={compilation?.result.code || ''} />
+                    </Tab.Panel>
+                    <Tab.Panel className="h-full">
+                        <CodeBlock
+                            withCopy
+                            language={'python'}
+                            showLineNumbers
+                            text={compilation?.result.smartpy || ''}
+                        />
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>

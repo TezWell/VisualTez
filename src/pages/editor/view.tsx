@@ -80,7 +80,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         }}
                         zoom={{
                             controls: true,
-                            wheel: false,
+                            wheel: true,
                             startScale: 0.8,
                             maxScale: 4,
                             minScale: 0.25,

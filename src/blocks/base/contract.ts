@@ -49,9 +49,9 @@ export const extractContract = (block: Block) => {
     const contract = new Contract(buildErrorInfo(block)).setStorageType(storageType);
 
     // The initial storage is not enforced
-    if (block.getInputTargetBlock('initial_storage')) {
-        contract.setStorage(SmartML.toValue(block, 'initial_storage'));
-    }
+    // if (block.getInputTargetBlock('initial_storage')) {
+    //     contract.setStorage(SmartML.toValue(block, 'initial_storage'));
+    // }
 
     SmartML.toStatements(block, 'entry_points', true).forEach((st) => contract.addEntrypoint(st as EntryPoint));
 

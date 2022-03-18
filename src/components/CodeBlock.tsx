@@ -1,6 +1,7 @@
 import React from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json';
+import python from 'react-syntax-highlighter/dist/cjs/languages/prism/python';
 import darkTheme from 'react-syntax-highlighter/dist/cjs/styles/prism/a11y-dark';
 import lightTheme from 'react-syntax-highlighter/dist/cjs/styles/prism/material-light';
 
@@ -9,6 +10,7 @@ import { copyToClipboard } from 'src/utils/clipboard';
 import Button from './common/Button';
 
 SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('python', python);
 
 interface OwnProps {
     square?: boolean;
