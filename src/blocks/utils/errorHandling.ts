@@ -24,21 +24,21 @@ export const buildBlockErrorString = (block: Block) => `(BLOCK__${block.id}, lin
  * @returns `false` if the block containing the error was found, `true` otherwise
  */
 export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean => {
-    const regex = new RegExp(/[(]BLOCK__(.*),/);
+    const regex = new RegExp(/[(]BLOCK__(.*?),\sline\s\d[)]/);
     const blockID = error.match(regex)?.reverse()[0];
     const block = workspace.getBlockById(blockID || '');
     if (block) {
-        block.setWarningText(error.replace(/[(]BLOCK__(.*),\sline\s\d[)]/g, ''));
+        block.setWarningText(error.replace(/[(]BLOCK__(.*?),\sline\s\d[)]/g, ''));
         block.warning?.setVisible(true);
 
         // Set RED color
         block.warning?.bubble_.setColour('#ff0000');
 
         // Scroll to the error bubble
-        const coords = block.warning?.bubble_.getRelativeToSurfaceXY();
-        if (coords) {
-            workspace.scroll(coords.x, coords.y);
-        }
+        // const coords = block.warning?.bubble_.getRelativeToSurfaceXY();
+        // if (coords) {
+        //     workspace.scroll(coords.x, coords.y);
+        // }
 
         const teardDown = () => {
             block.setWarningText(null);
@@ -51,5 +51,6 @@ export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean
 
         return false;
     }
+    console.error(error.match(regex), error);
     return true;
 };
