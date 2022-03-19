@@ -3,6 +3,7 @@ import { FirstElement, SecondElement } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const FirstPairElementBlock = {
     type: BlockKind.get_first_pair_element,
@@ -47,7 +48,6 @@ Blockly.Blocks[BlockKind.get_second_pair_element] = {
 
 SmartML.addBlock(BlockKind.get_second_pair_element, {
     toValue: (block: Block) => {
-        const expression = SmartML.toValue(block, 'FROM');
-        return SecondElement(expression);
+        return SecondElement(SmartML.toValue(block, 'FROM'), buildErrorInfo(block));
     },
 });

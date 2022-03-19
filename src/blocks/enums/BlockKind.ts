@@ -99,6 +99,8 @@ export enum BlockKind {
     get_map_value = 'get_map_value',
     map_contains_key = 'map_contains_key',
     not = 'not',
+    pack = 'pack',
+    unpack = 'unpack',
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',

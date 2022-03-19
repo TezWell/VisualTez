@@ -2,6 +2,7 @@ import { Not } from '@tezwell/smartts-sdk';
 import Blockly, { Block } from 'blockly';
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const NotBlock = {
     type: BlockKind.not,
@@ -27,7 +28,6 @@ Blockly.Blocks[BlockKind.not] = {
 
 SmartML.addBlock(BlockKind.not, {
     toValue: (block: Block) => {
-        const ofExpression = SmartML.toValue(block, 'VALUE');
-        return Not(ofExpression);
+        return Not(SmartML.toValue(block, 'VALUE'), buildErrorInfo(block));
     },
 });

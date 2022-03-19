@@ -2,6 +2,7 @@ import { GetProperty } from '@tezwell/smartts-sdk';
 import Blockly, { Block } from 'blockly';
 import BlockKind from '../enums/BlockKind';
 import SmartML from '../generators/SmartML';
+import { buildErrorInfo } from '../utils/errorHandling';
 
 const ParamAccessBlock = {
     type: BlockKind.param_access,
@@ -16,6 +17,7 @@ const ParamAccessBlock = {
         { type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] },
     ],
     colour: 123,
+    inputsInline: true,
     output: ['Expression'],
 };
 
@@ -31,6 +33,6 @@ SmartML.addBlock(BlockKind.param_access, {
     toValue: (block: Block) => {
         const propertyName = block.getFieldValue('PROP');
         const ofExpression = SmartML.toValue(block, 'FROM');
-        return GetProperty(ofExpression, propertyName);
+        return GetProperty(ofExpression, propertyName, buildErrorInfo(block));
     },
 });

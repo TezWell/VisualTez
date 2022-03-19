@@ -80,9 +80,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         zoom={{
                             controls: true,
                             wheel: true,
-                            startScale: 0.8,
-                            maxScale: 4,
-                            minScale: 0.25,
+                            startScale: 0.7,
+                            maxScale: 2,
+                            minScale: 0.01,
                             scaleSpeed: 1.1,
                         }}
                         onError={onError}
@@ -266,6 +266,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                             <Category name="Arithmetic" categorystyle="logic_category">
                                 <Block type={BlockKind.math_block} />
+                            </Category>
+                            <Category name="Serialization" categorystyle="logic_category">
+                                <Block type={BlockKind.pack} />
+                                <Block type={BlockKind.unpack} />
                             </Category>
                             <Category name="Map Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.get_map_entries} />
