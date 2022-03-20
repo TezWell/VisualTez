@@ -24,8 +24,7 @@ Blockly.Blocks[BlockKind.get_first_pair_element] = {
 
 SmartML.addBlock(BlockKind.get_first_pair_element, {
     toValue: (block: Block) => {
-        const expression = SmartML.toValue(block, 'FROM');
-        return FirstElement(expression);
+        return FirstElement(SmartML.toValue(block, 'FROM'), buildErrorInfo(block));
     },
 });
 

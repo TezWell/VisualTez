@@ -261,6 +261,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         <Category name="Expressions" categorystyle="container_type_category">
+                            <Category name="Typing" categorystyle="logic_category">
+                                <Block type={BlockKind.as_type} />
+                            </Category>
                             <Category name="Equality & Comparison" categorystyle="logic_category">
                                 <Block type={BlockKind.compare_block} />
                             </Category>
