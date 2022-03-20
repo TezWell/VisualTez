@@ -114,6 +114,7 @@ export enum BlockKind {
     match_variant_case = 'match_variant_case',
     transfer_statement = 'transfer_statement',
     call_contract_statement = 'call_contract_statement',
+    delegate_statement = 'delegate_statement',
     // Base
     type_compilation = 'type_compilation',
     value_compilation = 'value_compilation',

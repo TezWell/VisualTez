@@ -13,7 +13,7 @@ import { buildErrorInfo } from '../utils/errorHandling';
 const NoneBlock = {
     type: BlockKind.none_with_type_literal,
     message0: 'None of type %1',
-    args0: [{ type: 'input_value', name: 'inner_type', check: 'Type' }],
+    args0: [{ type: 'input_value', name: 'TYPE', check: 'Type' }],
     inputsInline: true,
     output: ['Literal', 'Option'],
     colour: 340,
@@ -29,7 +29,7 @@ Blockly.Blocks[BlockKind.none_with_type_literal] = {
 
 SmartML.addBlock(BlockKind.none_with_type_literal, {
     toType: (block: Block) => {
-        return ST_TOption(SmartML.toType(block, 'inner_type'));
+        return ST_TOption(SmartML.toType(block, 'TYPE'));
     },
     toValue: (block: Block) => {
         return ST_None(buildErrorInfo(block));
@@ -38,7 +38,7 @@ SmartML.addBlock(BlockKind.none_with_type_literal, {
 
 Michelson.addBlock(BlockKind.none_with_type_literal, {
     toType: (block: Block) => {
-        return M_TOption(Michelson.toType(block, 'inner_type'));
+        return M_TOption(Michelson.toType(block, 'TYPE'));
     },
     toMichelson: () => {
         return M_None();

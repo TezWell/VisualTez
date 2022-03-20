@@ -331,6 +331,15 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                         <Block type={BlockKind.unit_literal} />
                                     </Value>
                                 </Block>
+                                <Block type={BlockKind.delegate_statement}>
+                                    <Value name="DELEGATE">
+                                        <Block type={BlockKind.none_with_type_literal}>
+                                            <Value name="TYPE">
+                                                <Block type={BlockKind.key_hash_type} />
+                                            </Value>
+                                        </Block>
+                                    </Value>
+                                </Block>
                             </Category>
                         </Category>
 
