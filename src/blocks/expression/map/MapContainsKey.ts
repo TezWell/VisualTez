@@ -3,6 +3,7 @@ import { MapContainsKey } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from 'src/blocks/utils/errorHandling';
 
 /**
  * Checks if a given key exists in map or big_map.
@@ -31,6 +32,6 @@ SmartML.addBlock(BlockKind.map_contains_key, {
     toValue: (block: Block) => {
         const KeyExpression = SmartML.toValue(block, 'KEY');
         const mapExpression = SmartML.toValue(block, 'MAP');
-        return MapContainsKey(mapExpression, KeyExpression);
+        return MapContainsKey(mapExpression, KeyExpression, buildErrorInfo(block));
     },
 });

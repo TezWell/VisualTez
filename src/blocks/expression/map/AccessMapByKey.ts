@@ -3,6 +3,7 @@ import { AccessMapByKey } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from 'src/blocks/utils/errorHandling';
 
 const AccessMapByKeyBlock = {
     type: BlockKind.get_map_value,
@@ -28,6 +29,6 @@ SmartML.addBlock(BlockKind.get_map_value, {
     toValue: (block: Block) => {
         const KeyExpression = SmartML.toValue(block, 'KEY');
         const mapExpression = SmartML.toValue(block, 'MAP');
-        return AccessMapByKey(mapExpression, KeyExpression);
+        return AccessMapByKey(mapExpression, KeyExpression, undefined, undefined, buildErrorInfo(block));
     },
 });

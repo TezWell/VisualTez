@@ -289,6 +289,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.get_first_pair_element} />
                                 <Block type={BlockKind.get_second_pair_element} />
                             </Category>
+                            <Category name="List Expressions" categorystyle="logic_category">
+                                <Block type={BlockKind.prepend_to_list} />
+                            </Category>
                         </Category>
 
                         <Category name="Statements" categorystyle="control_statements_category">

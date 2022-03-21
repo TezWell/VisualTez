@@ -3,6 +3,7 @@ import { GetMapEntries } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from 'src/blocks/utils/errorHandling';
 
 const GetMapEntriesBlock = {
     type: BlockKind.get_map_entries,
@@ -24,6 +25,6 @@ Blockly.Blocks[BlockKind.get_map_entries] = {
 SmartML.addBlock(BlockKind.get_map_entries, {
     toValue: (block: Block) => {
         const expression = SmartML.toValue(block, 'FROM');
-        return GetMapEntries(expression);
+        return GetMapEntries(expression, buildErrorInfo(block));
     },
 });
