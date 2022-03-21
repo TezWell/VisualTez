@@ -3,7 +3,7 @@ import Blockly, { Block } from 'blockly';
 import { TContract, TUnknown } from '@tezwell/smartts-sdk/type';
 import { GetSelf } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const GetCurrentContractBlock = {
     type: BlockKind.get_current_contract_block,

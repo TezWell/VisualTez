@@ -9,8 +9,8 @@ import {
     LessThanOrEqual,
     GreaterThanOrEqual,
 } from '@tezwell/smartts-sdk/expression';
-import BlockKind from '../enums/BlockKind';
-import SmartML from '../generators/SmartML';
+import BlockKind from '../../enums/BlockKind';
+import SmartML from '../../generators/SmartML';
 
 const CompareBlock = {
     type: BlockKind.compare_block,
@@ -19,6 +19,7 @@ const CompareBlock = {
         {
             type: 'input_value',
             name: 'A',
+            check: ['Literal', 'Expression'],
         },
         {
             type: 'field_dropdown',
@@ -35,10 +36,11 @@ const CompareBlock = {
         {
             type: 'input_value',
             name: 'B',
+            check: ['Literal', 'Expression'],
         },
     ],
     inputsInline: true,
-    output: 'Boolean',
+    output: ['Expression'],
     colour: 350,
     helpUrl: '%{BKY_LOGIC_COMPARE_HELPURL}',
     extensions: ['logic_compare', 'logic_op_tooltip'],

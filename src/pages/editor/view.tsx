@@ -114,6 +114,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     <Block type={BlockKind.unit_type} />
                                 </Value>
                             </Block>
+                            <Block type={BlockKind.onchain_view}>
+                                {/* Default input type */}
+                                <Value name="TYPE">
+                                    <Block type={BlockKind.unit_type} />
+                                </Value>
+                            </Block>
                             <Block type={BlockKind.value_compilation} />
                             <Block type={BlockKind.type_compilation} />
                         </Category>

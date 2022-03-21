@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 import { TAddress } from '@tezwell/smartts-sdk/type';
 import { GetSender } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const GetSenderBlock = {
     type: BlockKind.get_sender_block,

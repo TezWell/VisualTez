@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 import { TNat } from '@tezwell/smartts-sdk/type';
 import { GetTotalVotingPower } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const GetTotalVotingPowerBlock = {
     type: BlockKind.get_total_voting_power_block,

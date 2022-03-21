@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 import { TTimestamp } from '@tezwell/smartts-sdk/type';
 import { GetTimestamp } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const GetTimestampBlock = {
     type: BlockKind.get_timestamp_block,

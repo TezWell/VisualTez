@@ -63,8 +63,8 @@ Blockly.Blocks[BlockKind.variables_get] = {
  * @alias Blockly.Variables.flyoutCategoryBlocks
  */
 const flyoutCategoryBlocks = (workspace: Workspace) => {
-    const statementBlocks = [BlockKind.variable_declaration_block, BlockKind.variable_setter_block];
-    const persistentVariableTypes = [BlockKind.contract_storage_block, BlockKind.entrypoint_arg_block];
+    const statementBlocks = [BlockKind.variable_declaration_block];
+    const persistentVariableTypes = [BlockKind.contract_storage_block];
 
     const xmlList: Element[] = [];
 
@@ -72,9 +72,27 @@ const flyoutCategoryBlocks = (workspace: Workspace) => {
         const block = Blockly.utils.xml.createElement('block');
         block.setAttribute('type', blockType);
         block.setAttribute('gap', index === statementBlocks.length - 1 ? '24' : '8');
+
         return block;
     });
     xmlList.push(...statements);
+
+    const variableSetterBlock = Blockly.utils.xml.createElement('block');
+    variableSetterBlock.setAttribute('type', BlockKind.variable_setter_block);
+    const variablePlaceholder = Blockly.utils.xml.createElement('value');
+    variablePlaceholder.setAttribute('name', 'VAR');
+    variableSetterBlock.appendChild(variablePlaceholder);
+    const variableGetterBlock = Blockly.utils.xml.createElement('block');
+    variableGetterBlock.setAttribute('type', BlockKind.variables_get);
+    variableGetterBlock.setAttribute('gap', '8');
+    variablePlaceholder.appendChild(variableGetterBlock);
+
+    const variables = workspace.getVariablesOfType('');
+    if (variables.length) {
+        variableGetterBlock.appendChild(Variables.generateVariableFieldDom(variables[0])!);
+    }
+
+    xmlList.push(variableSetterBlock, variableGetterBlock);
 
     const persistentVariables = persistentVariableTypes.map((blockType, index) => {
         const block = Blockly.utils.xml.createElement('block');
@@ -83,25 +101,6 @@ const flyoutCategoryBlocks = (workspace: Workspace) => {
         return block;
     });
     xmlList.push(...persistentVariables);
-
-    const variables = workspace.getVariablesOfType('');
-    if (variables.length) {
-        const block = Blockly.utils.xml.createElement('block');
-        block.setAttribute('type', 'variables_get');
-        block.setAttribute('gap', '8');
-        block.appendChild(Variables.generateVariableFieldDom(variables[0])!);
-        xmlList.push(block);
-    }
-
-    // variables.sort(VariableModel.compareByName);
-    // const dynamicVariables = variables.map((variable) => {
-    //     const block = Blockly.utils.xml.createElement('block');
-    //     block.setAttribute('type', 'variables_get');
-    //     block.setAttribute('gap', '8');
-    //     block.appendChild(Variables.generateVariableFieldDom(variable)!);
-    //     return block;
-    // });
-    // xmlList.push(...dynamicVariables);
 
     return xmlList;
 };

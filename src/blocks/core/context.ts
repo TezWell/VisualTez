@@ -4,6 +4,7 @@ import BlockKind from '../enums/BlockKind';
 export enum ScopeKind {
     Contract,
     Entrypoint,
+    View,
     For,
     Lambda,
     MatchCase,
@@ -14,6 +15,7 @@ export enum VariableKind {
     Iterator,
     LambdaArgument,
     VariantArgument,
+    EntrypointOrViewArgument,
 }
 
 interface IVariable {
@@ -27,7 +29,7 @@ type IScope =
           kind: ScopeKind.Contract;
       }
     | {
-          kind: ScopeKind.Entrypoint | ScopeKind.For | ScopeKind.MatchCase;
+          kind: ScopeKind.Entrypoint | ScopeKind.View | ScopeKind.For | ScopeKind.MatchCase;
           variables: Record<string, IVariable>;
       }
     | {

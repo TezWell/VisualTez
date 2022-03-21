@@ -10,10 +10,6 @@ import './statement';
 import './expression';
 //
 import './overrides';
-//
-import './comparison';
-import './math';
-import './blockchain_operations';
 
 import BlockKind from './enums/BlockKind';
 import Michelson from './generators/Michelson';

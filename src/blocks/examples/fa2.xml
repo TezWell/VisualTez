@@ -1,12 +1,15 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
     <variables>
+        <variable id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</variable>
+        <variable id="[_Z~[@RBQ]#Hh0w_yo`v">view_argument</variable>
+        <variable id="`k09Vf?6:h7:KyKK:|bg">view__balance_of__result</variable>
+        <variable id="hB}d*Vvl6B#W)Q9k8.a+">view__balance_of__request</variable>
         <variable id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</variable>
-        <variable id="{z5+p7EV_HBtlO,^jbg[">mint__balance</variable>
-        <variable id="V5h3ZNe7f=~hao55QFKe">i</variable>
         <variable id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</variable>
+        <variable id="V5h3ZNe7f=~hao55QFKe">i</variable>
         <variable id="iewysOG(G]#f|J)neXYj">mint__token_total_supply</variable>
     </variables>
-    <block type="contract_block" id="V6XnC-$_--YB6BmE/[MZ" x="961" y="-764">
+    <block type="contract_block" id="V6XnC-$_--YB6BmE/[MZ" x="-450" y="-1984">
         <field name="NAME">contract_1</field>
         <value name="TYPE">
             <block type="record_type" id="=sF,`i*?@79T$AX*R88t">
@@ -277,25 +280,239 @@
         <statement name="entry_points">
             <block type="entry_point_block" id="wdG3A+:$]d._4ZoaEfT$">
                 <field name="NAME">transfer</field>
-                <value name="input_type">
-                    <block type="unit_type" id="(4#x1#|#dYLQUAlq76wv"></block>
+                <field name="ARGUMENT" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                <value name="TYPE">
+                    <block type="list_type" id=";]9jZ(NqgqorBjy6dTNL">
+                        <value name="inner_type">
+                            <block type="record_type" id="6-9ce4E;z{:(/X{(``/p">
+                                <field name="LAYOUT">['from_', 'txs']</field>
+                                <statement name="fields">
+                                    <block type="record_variant_field_type" id="J1qku9V{Fzw6}m4Hz[~t">
+                                        <field name="key">from_</field>
+                                        <value name="type">
+                                            <block type="address_type" id="Dl]FY;{+(FiiqBfyO-r-"></block>
+                                        </value>
+                                        <next>
+                                            <block type="record_variant_field_type" id="qx3qTQ+hku_$rqGXHB2c">
+                                                <field name="key">txs</field>
+                                                <value name="type">
+                                                    <block type="list_type" id="}?#N7L=dHL=f|uJHG]Q,">
+                                                        <value name="inner_type">
+                                                            <block type="record_type" id="Bl^NzUUe[=ZJB9z)96]^">
+                                                                <field name="LAYOUT">['to_', ['token_id', 'amount']]</field>
+                                                                <statement name="fields">
+                                                                    <block type="record_variant_field_type" id="Ctmc~WhRFUuy090VXF5f">
+                                                                        <field name="key">to_</field>
+                                                                        <value name="type">
+                                                                            <block type="address_type" id="vu[E#-$knHJbxU(p;:Ny"></block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="record_variant_field_type" id=":ZYywU`,i:a8z@+Y?dIW">
+                                                                                <field name="key">token_id</field>
+                                                                                <value name="type">
+                                                                                    <block type="nat_type" id="mWyj_APfvTDsA*yjeRMx"></block>
+                                                                                </value>
+                                                                                <next>
+                                                                                    <block type="record_variant_field_type" id="W(y}/[bW(mqv[UV5IG97">
+                                                                                        <field name="key">amount</field>
+                                                                                        <value name="type">
+                                                                                            <block type="nat_type" id="K@/$)]*HercISkKP|;-I"></block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </next>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </statement>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                    </block>
                 </value>
                 <next>
                     <block type="entry_point_block" id="7@G(V^KV#,k^w/CWn}cw">
                         <field name="NAME">update_operators</field>
-                        <value name="input_type">
-                            <block type="unit_type" id="^_d{,WI6*6dPPJm1.j9]"></block>
+                        <field name="ARGUMENT" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                        <value name="TYPE">
+                            <block type="list_type" id="LzkKlXc/j,X4LH:u`-HT">
+                                <value name="inner_type">
+                                    <block type="variant_type" id="(Z_|o{fw!?x3bOs[J6Q`">
+                                        <field name="LAYOUT">['add_operator', 'remove_operator']</field>
+                                        <statement name="fields">
+                                            <block type="record_variant_field_type" id="8i0K/@8Od#vf/2`AUvGR">
+                                                <field name="key">add_operator</field>
+                                                <value name="type">
+                                                    <block type="record_type" id="J#x;FdOBT(8{;RTZzG7(">
+                                                        <field name="LAYOUT">['owner', ['operator', 'token_id']]</field>
+                                                        <statement name="fields">
+                                                            <block type="record_variant_field_type" id="ofF0z3N?;ASsYs=~yYq8">
+                                                                <field name="key">owner</field>
+                                                                <value name="type">
+                                                                    <block type="address_type" id="QWN^)c9k:`;#At+SU4LT"></block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="record_variant_field_type" id="jM^goJ3/P=yh=:32TLV5">
+                                                                        <field name="key">operator</field>
+                                                                        <value name="type">
+                                                                            <block type="address_type" id="}G8eK{3RN.{%kJ@kE(#("></block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="record_variant_field_type" id=";wLJe5-Xm)C{.pFkN:+~">
+                                                                                <field name="key">token_id</field>
+                                                                                <value name="type">
+                                                                                    <block type="nat_type" id="vTwAMBK1[o,#6$*bQF!V"></block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </statement>
+                                                    </block>
+                                                </value>
+                                                <next>
+                                                    <block type="record_variant_field_type" id="B~V33fD93C~/?!O`3koZ">
+                                                        <field name="key">remove_operator</field>
+                                                        <value name="type">
+                                                            <block type="record_type" id="5PgXb|xtiTPf(`Q+rM/q">
+                                                                <field name="LAYOUT">['owner', ['operator', 'token_id']]</field>
+                                                                <statement name="fields">
+                                                                    <block type="record_variant_field_type" id="%i}`x~erxKJa-}49mss:">
+                                                                        <field name="key">owner</field>
+                                                                        <value name="type">
+                                                                            <block type="address_type" id="Hpp*Lv}ATSPAy8yIY;d["></block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="record_variant_field_type" id="f|=Ne9%TFl:0|I#qJ=vk">
+                                                                                <field name="key">operator</field>
+                                                                                <value name="type">
+                                                                                    <block type="address_type" id="ai]BH}fQV^zb;dfA74Qc"></block>
+                                                                                </value>
+                                                                                <next>
+                                                                                    <block type="record_variant_field_type" id="]?C0vSI6COh38ORubr}z">
+                                                                                        <field name="key">token_id</field>
+                                                                                        <value name="type">
+                                                                                            <block type="nat_type" id="L!|Wf=~#=hYdbvzkQl.)"></block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </next>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </statement>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </value>
+                            </block>
                         </value>
                         <next>
                             <block type="entry_point_block" id="62ncisAj@+dKX/J6?6lN">
                                 <field name="NAME">balance_of</field>
-                                <value name="input_type">
-                                    <block type="unit_type" id="B8yD_[H}M%)R%l@8ku1^"></block>
+                                <field name="ARGUMENT" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                <value name="TYPE">
+                                    <block type="record_type" id="AGNmvdU?gLL--KeMwHo]">
+                                        <field name="LAYOUT">['requests', 'callback']</field>
+                                        <statement name="fields">
+                                            <block type="record_variant_field_type" id="Om`hwn^Pmu,,VIT#S0u3">
+                                                <field name="key">requests</field>
+                                                <value name="type">
+                                                    <block type="list_type" id="QofKp=MT1x[hX0YgXePS">
+                                                        <value name="inner_type">
+                                                            <block type="record_type" id="xmNo_,]fO{f@?7!sLfut">
+                                                                <field name="LAYOUT">['owner', 'token_id']</field>
+                                                                <statement name="fields">
+                                                                    <block type="record_variant_field_type" id="^_kf?ujJI^]I8mGB+51]">
+                                                                        <field name="key">owner</field>
+                                                                        <value name="type">
+                                                                            <block type="address_type" id="p%Cc,Ow}ajy8HB)BH)x|"></block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="record_variant_field_type" id="k_j$sk9!k/syN;dN55]Y">
+                                                                                <field name="key">token_id</field>
+                                                                                <value name="type">
+                                                                                    <block type="nat_type" id="~s%,:}{fOzj6vi$([z$V"></block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </statement>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                                <next>
+                                                    <block type="record_variant_field_type" id=".RF~P}_sffBa~0UP6GQ%">
+                                                        <field name="key">callback</field>
+                                                        <value name="type">
+                                                            <block type="contract_type" id="PB/rB92Y9}r!uH.l?O;6">
+                                                                <value name="inner_type">
+                                                                    <block type="list_type" id="E_op!_FMjmYPQ/@j3-+@">
+                                                                        <value name="inner_type">
+                                                                            <block type="record_type" id="s)5@RfoKbJ@*Z6!nZ`5^">
+                                                                                <field name="LAYOUT">['request', 'balance']</field>
+                                                                                <statement name="fields">
+                                                                                    <block type="record_variant_field_type" id="JQ]cz]Bz4*F?]`{=[s]A">
+                                                                                        <field name="key">request</field>
+                                                                                        <value name="type">
+                                                                                            <block type="record_type" id="wh7CCc~l5joox*bF?pT/">
+                                                                                                <field name="LAYOUT">['owner', 'token_id']</field>
+                                                                                                <statement name="fields">
+                                                                                                    <block type="record_variant_field_type" id="0qL~~U*[JO!t0VoCrY-^">
+                                                                                                        <field name="key">owner</field>
+                                                                                                        <value name="type">
+                                                                                                            <block type="address_type" id="AV8^#[z:YL|gdp:*bF18"></block>
+                                                                                                        </value>
+                                                                                                        <next>
+                                                                                                            <block type="record_variant_field_type" id=")}8uAuk;aHytJ[e#OzsW">
+                                                                                                                <field name="key">token_id</field>
+                                                                                                                <value name="type">
+                                                                                                                    <block type="nat_type" id=",fye1k0D::G+wV3B?*zf"></block>
+                                                                                                                </value>
+                                                                                                            </block>
+                                                                                                        </next>
+                                                                                                    </block>
+                                                                                                </statement>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                            <block type="record_variant_field_type" id="FrpH]t*4}p@Z;[t1Msq{">
+                                                                                                <field name="key">balance</field>
+                                                                                                <value name="type">
+                                                                                                    <block type="nat_type" id="3H_GQ]CzAFfWyo!;0]+P"></block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </next>
+                                                                                    </block>
+                                                                                </statement>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </statement>
+                                    </block>
                                 </value>
                                 <next>
                                     <block type="entry_point_block" id="Sknn5OMdK$?k9C16JZN:">
                                         <field name="NAME">mint</field>
-                                        <value name="input_type">
+                                        <field name="ARGUMENT" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                        <value name="TYPE">
                                             <block type="record_type" id="MN93DeSlGmqkM!m%=2M1">
                                                 <field name="LAYOUT"></field>
                                                 <statement name="fields">
@@ -339,22 +556,22 @@
                                                 </statement>
                                             </block>
                                         </value>
-                                        <statement name="entry_point_code">
+                                        <statement name="CODE">
                                             <block type="assert_block" id="euoCI@zp-eofiR?[1i{i">
                                                 <value name="assert_condition">
-                                                    <block type="compare_block" id="lgXhf1%T4i;YRniLA@!e">
+                                                    <block type="compare_block" id="%X=f11@(+Gzt!b.H8x3}">
                                                         <field name="OP">EQ</field>
                                                         <value name="A">
-                                                            <block type="get_sender_block" id="^cvfw_I`S_9xTW*lg`DA"></block>
+                                                            <block type="get_sender_block" id="CKV%67sV#fKBYCW:YGED"></block>
                                                         </value>
                                                         <value name="B">
-                                                            <block type="param_access" id="(J^Ors6-AxeouZ}Ihl/+">
+                                                            <block type="param_access" id="vUp,l5{`RC3;$0!tVG)K">
                                                                 <field name="PROP">administrator</field>
-                                                                <value name="FROM">
-                                                                    <block type="param_access" id="!#K=q!}lo+]):ZKbNM-?">
+                                                                <value name="RECORD">
+                                                                    <block type="param_access" id="0Mu7)IJ!s(674P/}R3gY">
                                                                         <field name="PROP">config</field>
-                                                                        <value name="FROM">
-                                                                            <block type="contract_storage_block" id="|)ve~+QfIg?luDu/a#HM"></block>
+                                                                        <value name="RECORD">
+                                                                            <block type="contract_storage_block" id="xzi![_i^7qF[o%zX|7ML"></block>
                                                                         </value>
                                                                     </block>
                                                                 </value>
@@ -375,94 +592,116 @@
                                                                 <value name="left_value">
                                                                     <block type="param_access" id="0(_hGuvLnc)3fJkvE}]~">
                                                                         <field name="PROP">address</field>
-                                                                        <value name="FROM">
-                                                                            <block type="entrypoint_arg_block" id="yXyZvtNxQsJr?,8,q]G."></block>
+                                                                        <value name="RECORD">
+                                                                            <block type="variables_get" id="yO+WL1xCJ0+960*Oj6n5">
+                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                            </block>
                                                                         </value>
                                                                     </block>
                                                                 </value>
                                                                 <value name="right_value">
                                                                     <block type="param_access" id=";PJGLskl7Xbd$FKAJ|g2">
                                                                         <field name="PROP">token_id</field>
-                                                                        <value name="FROM">
-                                                                            <block type="entrypoint_arg_block" id="}~De{rDH_jyj49oGOAL_"></block>
+                                                                        <value name="RECORD">
+                                                                            <block type="variables_get" id="W|XQr;Qijv]2+!_zix/2">
+                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                            </block>
                                                                         </value>
                                                                     </block>
                                                                 </value>
                                                             </block>
                                                         </value>
                                                         <next>
-                                                            <block type="variable_declaration_block" id="$2*r_f9H@yVplvvU^,LS">
-                                                                <field name="VAR" id="{z5+p7EV_HBtlO,^jbg[">mint__balance</field>
-                                                                <value name="VALUE">
-                                                                    <block type="param_access" id="i(svjW?FSonp)GmK]om2">
-                                                                        <field name="PROP">balance</field>
-                                                                        <value name="FROM">
-                                                                            <block type="get_map_value" id="QQ)FJiQBb{iHbgL)SoCE">
-                                                                                <value name="MAP">
-                                                                                    <block type="param_access" id="fEnB-?OYdyTsudRa`sBi">
-                                                                                        <field name="PROP">ledger</field>
-                                                                                        <value name="FROM">
-                                                                                            <block type="param_access" id="imqffwSywe$x2yVazFrA">
-                                                                                                <field name="PROP">assets</field>
-                                                                                                <value name="FROM">
-                                                                                                    <block type="contract_storage_block" id="Zb,sUxG^0MUmjugPj5K6"></block>
-                                                                                                </value>
-                                                                                            </block>
+                                                            <block type="if_block" id="W4+7)[c@np8(`}{Ru!ku">
+                                                                <value name="condition">
+                                                                    <block type="map_contains_key" id="LU$c|RSB.VNSWPd[[zF3">
+                                                                        <value name="MAP">
+                                                                            <block type="param_access" id="xSVnW+|4tgqYVbOc|APZ">
+                                                                                <field name="PROP">ledger</field>
+                                                                                <value name="RECORD">
+                                                                                    <block type="param_access" id="Fy(Sk#tukSDWXJUJX/.S">
+                                                                                        <field name="PROP">assets</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="contract_storage_block" id="/n7{3q-xlhd9}D*_r]r?"></block>
                                                                                         </value>
-                                                                                    </block>
-                                                                                </value>
-                                                                                <value name="KEY">
-                                                                                    <block type="variables_get" id="~A3%{#VS)j?V,5^V#oA9">
-                                                                                        <field name="VAR" id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</field>
                                                                                     </block>
                                                                                 </value>
                                                                             </block>
                                                                         </value>
+                                                                        <value name="KEY">
+                                                                            <block type="variables_get" id="|2?T!`LWdbXr;I/8^NQF">
+                                                                                <field name="VAR" id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</field>
+                                                                            </block>
+                                                                        </value>
                                                                     </block>
                                                                 </value>
-                                                                <next>
-                                                                    <block type="variable_setter_block" id="w2!(`+v~F!0g#/U+G_Q4">
+                                                                <statement name="then_statements">
+                                                                    <block type="variable_setter_block" id="f=BJ!nTl}c@!EYv-]P1s">
                                                                         <value name="VAR">
-                                                                            <block type="get_map_value" id="laR6w*D#=+0)SP4YA`{8">
+                                                                            <block type="get_map_value" id="wNIUL@,{r$%4890ZYklO">
                                                                                 <value name="MAP">
-                                                                                    <block type="param_access" id="mE!^%k3a/X1ZTofjof(}">
+                                                                                    <block type="param_access" id="n#4hJtu!~y}hGW4PH59n">
                                                                                         <field name="PROP">ledger</field>
-                                                                                        <value name="FROM">
-                                                                                            <block type="param_access" id="V@;oGO)ddNV?pN0Eh@%P">
+                                                                                        <value name="RECORD">
+                                                                                            <block type="param_access" id="D^GN4f$i~2|-v{cLV+hc">
                                                                                                 <field name="PROP">assets</field>
-                                                                                                <value name="FROM">
-                                                                                                    <block type="contract_storage_block" id="W[fQSf)v0Pq$!6c.;_n8"></block>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="contract_storage_block" id="zPA5do^{Zjf=G/I[QDFT"></block>
                                                                                                 </value>
                                                                                             </block>
                                                                                         </value>
                                                                                     </block>
                                                                                 </value>
                                                                                 <value name="KEY">
-                                                                                    <block type="variables_get" id="{?[,yHK0l90`?(:[5Ss`">
+                                                                                    <block type="variables_get" id="[`J}Xq.]A{I~iOduJktx">
                                                                                         <field name="VAR" id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</field>
                                                                                     </block>
                                                                                 </value>
                                                                             </block>
                                                                         </value>
                                                                         <value name="VALUE">
-                                                                            <block type="record_literal" id="Sju0`]9?UyxNCaH9ik[]">
+                                                                            <block type="record_literal" id="y`9xMiI[#uMeU]VOm`iv">
                                                                                 <statement name="entries">
-                                                                                    <block type="record_field" id="%s`L$twZR!9IbC:dKjhx">
+                                                                                    <block type="record_field" id="_-k4dUsyN@$$3ac@s|g.">
                                                                                         <field name="field">balance</field>
                                                                                         <value name="value">
-                                                                                            <block type="math_block" id="T)%zL^Iti6f1#HO7x(X~">
+                                                                                            <block type="math_block" id="pxG$JtBKuB!.nR|2w+dL">
                                                                                                 <field name="OP">SUM</field>
                                                                                                 <value name="A">
-                                                                                                    <block type="param_access" id=",.8s@g4Vf~Z[HQIkK!kN">
-                                                                                                        <field name="PROP">amount</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="entrypoint_arg_block" id="}rOzN(N[RV=$avU[0wZG"></block>
+                                                                                                    <block type="param_access" id=",?25onZX]K!N}S!VL[R~">
+                                                                                                        <field name="PROP">balance</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="get_map_value" id="V{madr#8@g#[l^:)+lTU">
+                                                                                                                <value name="MAP">
+                                                                                                                    <block type="param_access" id="#AaQ7It3HT#Asb8Uy,U$">
+                                                                                                                        <field name="PROP">ledger</field>
+                                                                                                                        <value name="RECORD">
+                                                                                                                            <block type="param_access" id="2.EqPrj^9)K|JL1@M9k^">
+                                                                                                                                <field name="PROP">assets</field>
+                                                                                                                                <value name="RECORD">
+                                                                                                                                    <block type="contract_storage_block" id="O~pB@JEbr*8s$^ngf9UI"></block>
+                                                                                                                                </value>
+                                                                                                                            </block>
+                                                                                                                        </value>
+                                                                                                                    </block>
+                                                                                                                </value>
+                                                                                                                <value name="KEY">
+                                                                                                                    <block type="variables_get" id="h=zlZrYC0]7IQ+5VI^f6">
+                                                                                                                        <field name="VAR" id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</field>
+                                                                                                                    </block>
+                                                                                                                </value>
+                                                                                                            </block>
                                                                                                         </value>
                                                                                                     </block>
                                                                                                 </value>
                                                                                                 <value name="B">
-                                                                                                    <block type="variables_get" id="!,m2=u!KRgN4ny{5M6+(">
-                                                                                                        <field name="VAR" id="{z5+p7EV_HBtlO,^jbg[">mint__balance</field>
+                                                                                                    <block type="param_access" id=":``R_E@6ORzCwE3(nst?">
+                                                                                                        <field name="PROP">amount</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="variables_get" id="|[=eJ%/!}{:M|U#sbcb@">
+                                                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                            </block>
+                                                                                                        </value>
                                                                                                     </block>
                                                                                                 </value>
                                                                                             </block>
@@ -471,263 +710,214 @@
                                                                                 </statement>
                                                                             </block>
                                                                         </value>
-                                                                        <next>
-                                                                            <block type="if_block" id="rY]p|wr`rGcL-EWuY`+A">
-                                                                                <value name="condition">
-                                                                                    <block type="map_contains_key" id="O[kZNJb-ZloJP.~4ym]`">
-                                                                                        <value name="MAP">
-                                                                                            <block type="param_access" id="%kL@f:Z8EPgS?(w)nOsp">
-                                                                                                <field name="PROP">token_metadata</field>
-                                                                                                <value name="FROM">
-                                                                                                    <block type="param_access" id="8uOQ*E@ws:P2aG!$|sG+">
-                                                                                                        <field name="PROP">assets</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="contract_storage_block" id="x@5hnJA8Xp@[2GLJVZm$"></block>
-                                                                                                        </value>
-                                                                                                    </block>
-                                                                                                </value>
-                                                                                            </block>
-                                                                                        </value>
-                                                                                        <value name="KEY">
-                                                                                            <block type="param_access" id="bbHu}H$#Nfq2kAp4(1O{">
-                                                                                                <field name="PROP">token_id</field>
-                                                                                                <value name="FROM">
-                                                                                                    <block type="entrypoint_arg_block" id="d4t9H@8Mi-B~7r/)boIv"></block>
+                                                                    </block>
+                                                                </statement>
+                                                                <statement name="else_statements">
+                                                                    <block type="variable_setter_block" id="B`//{4Wl{?-SDEA]%X=J">
+                                                                        <value name="VAR">
+                                                                            <block type="get_map_value" id="nVylkqoCbLtq}O6or(W,">
+                                                                                <value name="MAP">
+                                                                                    <block type="param_access" id="+CQ-9f^~3hsc_7=5GApi">
+                                                                                        <field name="PROP">ledger</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="param_access" id="|vsaTY!zhBOAE(mG=AxV">
+                                                                                                <field name="PROP">assets</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="contract_storage_block" id="^X?uvg1;@qF}d!%(%|!8"></block>
                                                                                                 </value>
                                                                                             </block>
                                                                                         </value>
                                                                                     </block>
                                                                                 </value>
-                                                                                <statement name="then_statements">
-                                                                                    <block type="for_each_block" id="1i:xILgvWvXhjve:~n.r">
-                                                                                        <field name="VAR" id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</field>
-                                                                                        <value name="LIST">
-                                                                                            <block type="get_map_entries" id="u3rzFTb82.IamAx87+?X">
-                                                                                                <value name="FROM">
-                                                                                                    <block type="param_access" id="4epk(Ej^SUfU3nf#2r6[">
-                                                                                                        <field name="PROP">metadata</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="entrypoint_arg_block" id="ln*mn#ngU*JrWHV|kh$u"></block>
-                                                                                                        </value>
+                                                                                <value name="KEY">
+                                                                                    <block type="variables_get" id="IJnue!1Efa4/l46if4G[">
+                                                                                        <field name="VAR" id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="VALUE">
+                                                                            <block type="record_literal" id="|_9NVyDwXVCTe21bh)nu">
+                                                                                <statement name="entries">
+                                                                                    <block type="record_field" id="#b-M.ut+@g}TPApbv8w4">
+                                                                                        <field name="field">balance</field>
+                                                                                        <value name="value">
+                                                                                            <block type="param_access" id="7qeRo8-klP!!{|6/Mv{(">
+                                                                                                <field name="PROP">amount</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="variables_get" id="=%uTcmw%z[(}Xuj6}NeL">
+                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
                                                                                                     </block>
                                                                                                 </value>
                                                                                             </block>
                                                                                         </value>
-                                                                                        <statement name="DO">
-                                                                                            <block type="variable_setter_block" id="yPPH/U(n?l`2F=s4![yy">
-                                                                                                <value name="VAR">
-                                                                                                    <block type="get_map_value" id="q8icotp}/N{.cn#jCqqU">
-                                                                                                        <value name="MAP">
-                                                                                                            <block type="param_access" id="wMUvqH34@T!12~JRYn8$">
-                                                                                                                <field name="PROP">token_info</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="get_map_value" id="{e}6(Msu:qdxw-NDy1aS">
-                                                                                                                        <value name="MAP">
-                                                                                                                            <block type="param_access" id="CKymtquL]hQh:85UXM07">
-                                                                                                                                <field name="PROP">token_metadata</field>
-                                                                                                                                <value name="FROM">
-                                                                                                                                    <block type="param_access" id="o3t*3GGi`^.EHH=PzQ=x">
-                                                                                                                                        <field name="PROP">assets</field>
-                                                                                                                                        <value name="FROM">
-                                                                                                                                            <block type="contract_storage_block" id="TLh_{Tc94unGU^d!EB6L"></block>
-                                                                                                                                        </value>
-                                                                                                                                    </block>
-                                                                                                                                </value>
-                                                                                                                            </block>
-                                                                                                                        </value>
-                                                                                                                        <value name="KEY">
-                                                                                                                            <block type="param_access" id="#8yS!-Rm=VZlRTIyb3q8">
-                                                                                                                                <field name="PROP">token_id</field>
-                                                                                                                                <value name="FROM">
-                                                                                                                                    <block type="entrypoint_arg_block" id="@O,~qo3dT$EUVx@@sd;B"></block>
-                                                                                                                                </value>
-                                                                                                                            </block>
-                                                                                                                        </value>
-                                                                                                                    </block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </value>
-                                                                                                        <value name="KEY">
-                                                                                                            <block type="param_access" id="hpBfz6gbU`Kba3b-Up;D">
-                                                                                                                <field name="PROP">key</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="variables_get" id="BO%[RRAY^.+B_c;~9-H}">
-                                                                                                                        <field name="VAR" id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</field>
-                                                                                                                    </block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </value>
-                                                                                                    </block>
+                                                                                    </block>
+                                                                                </statement>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </statement>
+                                                                <next>
+                                                                    <block type="if_block" id="rY]p|wr`rGcL-EWuY`+A">
+                                                                        <value name="condition">
+                                                                            <block type="map_contains_key" id="O[kZNJb-ZloJP.~4ym]`">
+                                                                                <value name="MAP">
+                                                                                    <block type="param_access" id="%kL@f:Z8EPgS?(w)nOsp">
+                                                                                        <field name="PROP">token_metadata</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="param_access" id="8uOQ*E@ws:P2aG!$|sG+">
+                                                                                                <field name="PROP">assets</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="contract_storage_block" id="x@5hnJA8Xp@[2GLJVZm$"></block>
                                                                                                 </value>
-                                                                                                <value name="VALUE">
-                                                                                                    <block type="param_access" id="i20c.!vf_h)#@*Xd3A`r">
-                                                                                                        <field name="PROP">value</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="variables_get" id="!kW11wU?8vTZc7e{][23">
-                                                                                                                <field name="VAR" id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</field>
-                                                                                                            </block>
-                                                                                                        </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="KEY">
+                                                                                    <block type="param_access" id="bbHu}H$#Nfq2kAp4(1O{">
+                                                                                        <field name="PROP">token_id</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="variables_get" id="3#gD/[EHm^l}vUx$g~(@">
+                                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                        <statement name="then_statements">
+                                                                            <block type="for_each_block" id="1i:xILgvWvXhjve:~n.r">
+                                                                                <field name="VAR" id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</field>
+                                                                                <value name="LIST">
+                                                                                    <block type="get_map_entries" id="u3rzFTb82.IamAx87+?X">
+                                                                                        <value name="FROM">
+                                                                                            <block type="param_access" id="4epk(Ej^SUfU3nf#2r6[">
+                                                                                                <field name="PROP">metadata</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="variables_get" id="x|@hLfds*Gc-{yX.5dL^">
+                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
                                                                                                     </block>
                                                                                                 </value>
                                                                                             </block>
-                                                                                        </statement>
+                                                                                        </value>
                                                                                     </block>
-                                                                                </statement>
-                                                                                <statement name="else_statements">
-                                                                                    <block type="variable_setter_block" id="_*.ycKus68$^*kjE|@Ti">
+                                                                                </value>
+                                                                                <statement name="DO">
+                                                                                    <block type="variable_setter_block" id="yPPH/U(n?l`2F=s4![yy">
                                                                                         <value name="VAR">
-                                                                                            <block type="get_map_value" id="=bi_B!LDQco3tE4Aou0;">
+                                                                                            <block type="get_map_value" id="q8icotp}/N{.cn#jCqqU">
                                                                                                 <value name="MAP">
-                                                                                                    <block type="param_access" id="d6*!;F0v2.(st/Oi,:2w">
-                                                                                                        <field name="PROP">token_metadata</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="param_access" id="fF-fei`@PCN;n|g1X*Hq">
-                                                                                                                <field name="PROP">assets</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="contract_storage_block" id="s@;cjS02)OV2eL(9$.Ug"></block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </value>
-                                                                                                    </block>
-                                                                                                </value>
-                                                                                                <value name="KEY">
-                                                                                                    <block type="param_access" id="AQ)vbX4!W@hbGo{Q9K!{">
-                                                                                                        <field name="PROP">token_id</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="entrypoint_arg_block" id="o^P,~*s*;%9A].Znhs/M"></block>
-                                                                                                        </value>
-                                                                                                    </block>
-                                                                                                </value>
-                                                                                            </block>
-                                                                                        </value>
-                                                                                        <value name="VALUE">
-                                                                                            <block type="record_literal" id=";~k9|TFK|Xn,)H,tx),[">
-                                                                                                <statement name="entries">
-                                                                                                    <block type="record_field" id="uSqbh.4$eEJkG.=9!kH%">
-                                                                                                        <field name="field">token_id</field>
-                                                                                                        <value name="value">
-                                                                                                            <block type="param_access" id="%;%1fjGFrhBlww76hd`%">
-                                                                                                                <field name="PROP">token_id</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="entrypoint_arg_block" id="?db7RT-)J8]OL!WWl2Uv"></block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </value>
-                                                                                                        <next>
-                                                                                                            <block type="record_field" id="V`c@RDSW|r2juGF86UHU">
-                                                                                                                <field name="field">token_info</field>
-                                                                                                                <value name="value">
-                                                                                                                    <block type="param_access" id="Iw!OJ=?{fMu.=V5eKe;s">
-                                                                                                                        <field name="PROP">metadata</field>
-                                                                                                                        <value name="FROM">
-                                                                                                                            <block type="entrypoint_arg_block" id="z-yYOur*CM@+XBb0^^cR"></block>
-                                                                                                                        </value>
-                                                                                                                    </block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </next>
-                                                                                                    </block>
-                                                                                                </statement>
-                                                                                            </block>
-                                                                                        </value>
-                                                                                    </block>
-                                                                                </statement>
-                                                                                <next>
-                                                                                    <block type="if_block" id="|7p]X(/p%FzZ+-F-rj!w">
-                                                                                        <value name="condition">
-                                                                                            <block type="map_contains_key" id="Zju5#Jg_aW$6a,VErf4@">
-                                                                                                <value name="MAP">
-                                                                                                    <block type="param_access" id="T3@{m?tnB`-P+bTgTV3;">
-                                                                                                        <field name="PROP">token_total_supply</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="param_access" id="kD9[KfC:m)XhmPGFh;r(">
-                                                                                                                <field name="PROP">assets</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="contract_storage_block" id="6:${$tlCP4vq*r1uQgv("></block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </value>
-                                                                                                    </block>
-                                                                                                </value>
-                                                                                                <value name="KEY">
-                                                                                                    <block type="param_access" id="Cy:^L3lKEOQ`2pfq94}Z">
-                                                                                                        <field name="PROP">token_id</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="entrypoint_arg_block" id="{Resdy;X4-db96pLj;!l"></block>
-                                                                                                        </value>
-                                                                                                    </block>
-                                                                                                </value>
-                                                                                            </block>
-                                                                                        </value>
-                                                                                        <statement name="then_statements">
-                                                                                            <block type="variable_declaration_block" id="dZAKt(!Y,|#t5B2@)gsQ">
-                                                                                                <field name="VAR" id="iewysOG(G]#f|J)neXYj">mint__token_total_supply</field>
-                                                                                                <value name="VALUE">
-                                                                                                    <block type="get_map_value" id="+.0f9G5=4^4;J*^Zq}oG">
-                                                                                                        <value name="MAP">
-                                                                                                            <block type="param_access" id="0.j?6RDK%f7yrFJYrvFW">
-                                                                                                                <field name="PROP">token_total_supply</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="param_access" id="[LU.2t.aonO;LM6r1iH`">
-                                                                                                                        <field name="PROP">assets</field>
-                                                                                                                        <value name="FROM">
-                                                                                                                            <block type="contract_storage_block" id="*7Kn@Yar+AZdoTaj]q9Y"></block>
-                                                                                                                        </value>
-                                                                                                                    </block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </value>
-                                                                                                        <value name="KEY">
-                                                                                                            <block type="param_access" id="pN!j(#{%qHR1KP*|q||s">
-                                                                                                                <field name="PROP">token_id</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="entrypoint_arg_block" id="GshlPgEkLd^l@^F{ltla"></block>
-                                                                                                                </value>
-                                                                                                            </block>
-                                                                                                        </value>
-                                                                                                    </block>
-                                                                                                </value>
-                                                                                                <next>
-                                                                                                    <block type="variable_setter_block" id="Ppr*H^p+@ACmc0f:S?}H">
-                                                                                                        <value name="VAR">
-                                                                                                            <block type="get_map_value" id="p[ZObc8hq(`fx8!J*^21">
+                                                                                                    <block type="param_access" id="wMUvqH34@T!12~JRYn8$">
+                                                                                                        <field name="PROP">token_info</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="get_map_value" id="{e}6(Msu:qdxw-NDy1aS">
                                                                                                                 <value name="MAP">
-                                                                                                                    <block type="param_access" id="~5{3~7Z_)#}1Kp[2G_v?">
-                                                                                                                        <field name="PROP">token_total_supply</field>
-                                                                                                                        <value name="FROM">
-                                                                                                                            <block type="param_access" id="3+Scu[lmDlKPK__V9m(P">
+                                                                                                                    <block type="param_access" id="CKymtquL]hQh:85UXM07">
+                                                                                                                        <field name="PROP">token_metadata</field>
+                                                                                                                        <value name="RECORD">
+                                                                                                                            <block type="param_access" id="o3t*3GGi`^.EHH=PzQ=x">
                                                                                                                                 <field name="PROP">assets</field>
-                                                                                                                                <value name="FROM">
-                                                                                                                                    <block type="contract_storage_block" id="58E!D,plqBu~I(e3}H]%"></block>
+                                                                                                                                <value name="RECORD">
+                                                                                                                                    <block type="contract_storage_block" id="TLh_{Tc94unGU^d!EB6L"></block>
                                                                                                                                 </value>
                                                                                                                             </block>
                                                                                                                         </value>
                                                                                                                     </block>
                                                                                                                 </value>
                                                                                                                 <value name="KEY">
-                                                                                                                    <block type="param_access" id="yg@O[l%nG`@/PVlgMXLT">
+                                                                                                                    <block type="param_access" id="#8yS!-Rm=VZlRTIyb3q8">
                                                                                                                         <field name="PROP">token_id</field>
-                                                                                                                        <value name="FROM">
-                                                                                                                            <block type="entrypoint_arg_block" id="WvD-L=6Y;L4!G$Z?+TGB"></block>
+                                                                                                                        <value name="RECORD">
+                                                                                                                            <block type="variables_get" id="8Sp2URwURP!f~!bdt$A{">
+                                                                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                                            </block>
                                                                                                                         </value>
                                                                                                                     </block>
                                                                                                                 </value>
                                                                                                             </block>
                                                                                                         </value>
-                                                                                                        <value name="VALUE">
-                                                                                                            <block type="math_block" id="EXJ}#K3{v=*/q|35M*qa">
-                                                                                                                <field name="OP">SUM</field>
-                                                                                                                <value name="A">
-                                                                                                                    <block type="variables_get" id="q`Y_,SBp?Bn;^VqmBl!8">
-                                                                                                                        <field name="VAR" id="iewysOG(G]#f|J)neXYj">mint__token_total_supply</field>
-                                                                                                                    </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                    <block type="param_access" id="%kpI%*b0$zz^Ic7{A]-c">
-                                                                                                                        <field name="PROP">amount</field>
-                                                                                                                        <value name="FROM">
-                                                                                                                            <block type="entrypoint_arg_block" id="wrXVl:xz!wa[5Gz,BWLf"></block>
-                                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                                <value name="KEY">
+                                                                                                    <block type="param_access" id="hpBfz6gbU`Kba3b-Up;D">
+                                                                                                        <field name="PROP">key</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="variables_get" id="BO%[RRAY^.+B_c;~9-H}">
+                                                                                                                <field name="VAR" id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</field>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <value name="VALUE">
+                                                                                            <block type="param_access" id="i20c.!vf_h)#@*Xd3A`r">
+                                                                                                <field name="PROP">value</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="variables_get" id="!kW11wU?8vTZc7e{][23">
+                                                                                                        <field name="VAR" id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </statement>
+                                                                            </block>
+                                                                        </statement>
+                                                                        <statement name="else_statements">
+                                                                            <block type="variable_setter_block" id="_*.ycKus68$^*kjE|@Ti">
+                                                                                <value name="VAR">
+                                                                                    <block type="get_map_value" id="=bi_B!LDQco3tE4Aou0;">
+                                                                                        <value name="MAP">
+                                                                                            <block type="param_access" id="d6*!;F0v2.(st/Oi,:2w">
+                                                                                                <field name="PROP">token_metadata</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="param_access" id="fF-fei`@PCN;n|g1X*Hq">
+                                                                                                        <field name="PROP">assets</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="contract_storage_block" id="s@;cjS02)OV2eL(9$.Ug"></block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <value name="KEY">
+                                                                                            <block type="param_access" id="AQ)vbX4!W@hbGo{Q9K!{">
+                                                                                                <field name="PROP">token_id</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="variables_get" id="A@/EKn/YAGFxkG[19buc">
+                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="VALUE">
+                                                                                    <block type="record_literal" id=";~k9|TFK|Xn,)H,tx),[">
+                                                                                        <statement name="entries">
+                                                                                            <block type="record_field" id="uSqbh.4$eEJkG.=9!kH%">
+                                                                                                <field name="field">token_id</field>
+                                                                                                <value name="value">
+                                                                                                    <block type="param_access" id="%;%1fjGFrhBlww76hd`%">
+                                                                                                        <field name="PROP">token_id</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="variables_get" id="~+xZ5D)UzK!|tj@|3cz;">
+                                                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                                <next>
+                                                                                                    <block type="record_field" id="V`c@RDSW|r2juGF86UHU">
+                                                                                                        <field name="field">token_info</field>
+                                                                                                        <value name="value">
+                                                                                                            <block type="param_access" id="Iw!OJ=?{fMu.=V5eKe;s">
+                                                                                                                <field name="PROP">metadata</field>
+                                                                                                                <value name="RECORD">
+                                                                                                                    <block type="variables_get" id="#9ZJQdL0lQND#Gcy@O!o">
+                                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
                                                                                                                     </block>
                                                                                                                 </value>
                                                                                                             </block>
@@ -736,45 +926,163 @@
                                                                                                 </next>
                                                                                             </block>
                                                                                         </statement>
-                                                                                        <statement name="else_statements">
-                                                                                            <block type="variable_setter_block" id="bT+`cJu9@92KcltJ(~69">
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </statement>
+                                                                        <next>
+                                                                            <block type="if_block" id="|7p]X(/p%FzZ+-F-rj!w">
+                                                                                <value name="condition">
+                                                                                    <block type="map_contains_key" id="Zju5#Jg_aW$6a,VErf4@">
+                                                                                        <value name="MAP">
+                                                                                            <block type="param_access" id="T3@{m?tnB`-P+bTgTV3;">
+                                                                                                <field name="PROP">token_total_supply</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="param_access" id="kD9[KfC:m)XhmPGFh;r(">
+                                                                                                        <field name="PROP">assets</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="contract_storage_block" id="6:${$tlCP4vq*r1uQgv("></block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <value name="KEY">
+                                                                                            <block type="param_access" id="Cy:^L3lKEOQ`2pfq94}Z">
+                                                                                                <field name="PROP">token_id</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="variables_get" id="7WGY^C!JholkPsbMeR_M">
+                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <statement name="then_statements">
+                                                                                    <block type="variable_declaration_block" id="dZAKt(!Y,|#t5B2@)gsQ">
+                                                                                        <field name="VAR" id="iewysOG(G]#f|J)neXYj">mint__token_total_supply</field>
+                                                                                        <value name="VALUE">
+                                                                                            <block type="get_map_value" id="+.0f9G5=4^4;J*^Zq}oG">
+                                                                                                <value name="MAP">
+                                                                                                    <block type="param_access" id="0.j?6RDK%f7yrFJYrvFW">
+                                                                                                        <field name="PROP">token_total_supply</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="param_access" id="[LU.2t.aonO;LM6r1iH`">
+                                                                                                                <field name="PROP">assets</field>
+                                                                                                                <value name="RECORD">
+                                                                                                                    <block type="contract_storage_block" id="*7Kn@Yar+AZdoTaj]q9Y"></block>
+                                                                                                                </value>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                                <value name="KEY">
+                                                                                                    <block type="param_access" id="pN!j(#{%qHR1KP*|q||s">
+                                                                                                        <field name="PROP">token_id</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="variables_get" id="2=^!Vwidm8J2(pVs*ipl">
+                                                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                            <block type="variable_setter_block" id="Ppr*H^p+@ACmc0f:S?}H">
                                                                                                 <value name="VAR">
-                                                                                                    <block type="get_map_value" id="r!Wye};0LSA^Q-mr:kot">
+                                                                                                    <block type="get_map_value" id="p[ZObc8hq(`fx8!J*^21">
                                                                                                         <value name="MAP">
-                                                                                                            <block type="param_access" id="3W7(36SwVHXhot2W}Q1x">
+                                                                                                            <block type="param_access" id="~5{3~7Z_)#}1Kp[2G_v?">
                                                                                                                 <field name="PROP">token_total_supply</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="param_access" id="@D9I:8j7_W/[Q|;Uo;tI">
+                                                                                                                <value name="RECORD">
+                                                                                                                    <block type="param_access" id="3+Scu[lmDlKPK__V9m(P">
                                                                                                                         <field name="PROP">assets</field>
-                                                                                                                        <value name="FROM">
-                                                                                                                            <block type="contract_storage_block" id="V|Np5eq83nG`J*k;:Qa("></block>
+                                                                                                                        <value name="RECORD">
+                                                                                                                            <block type="contract_storage_block" id="58E!D,plqBu~I(e3}H]%"></block>
                                                                                                                         </value>
                                                                                                                     </block>
                                                                                                                 </value>
                                                                                                             </block>
                                                                                                         </value>
                                                                                                         <value name="KEY">
-                                                                                                            <block type="param_access" id="J,MSKG5{D*8C:k.,;WR0">
+                                                                                                            <block type="param_access" id="yg@O[l%nG`@/PVlgMXLT">
                                                                                                                 <field name="PROP">token_id</field>
-                                                                                                                <value name="FROM">
-                                                                                                                    <block type="entrypoint_arg_block" id="8*/)rT(R|GitECz7JPf#"></block>
+                                                                                                                <value name="RECORD">
+                                                                                                                    <block type="variables_get" id="/5xz](CC9R5aj,b3m=G{">
+                                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                                    </block>
                                                                                                                 </value>
                                                                                                             </block>
                                                                                                         </value>
                                                                                                     </block>
                                                                                                 </value>
                                                                                                 <value name="VALUE">
-                                                                                                    <block type="param_access" id="qOUS#Lkhdxi?@8EfPQq:">
-                                                                                                        <field name="PROP">amount</field>
-                                                                                                        <value name="FROM">
-                                                                                                            <block type="entrypoint_arg_block" id="e^lJPP-}Wz?5Oif1FPU5"></block>
+                                                                                                    <block type="math_block" id="EXJ}#K3{v=*/q|35M*qa">
+                                                                                                        <field name="OP">SUM</field>
+                                                                                                        <value name="A">
+                                                                                                            <block type="variables_get" id="q`Y_,SBp?Bn;^VqmBl!8">
+                                                                                                                <field name="VAR" id="iewysOG(G]#f|J)neXYj">mint__token_total_supply</field>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                        <value name="B">
+                                                                                                            <block type="param_access" id="%kpI%*b0$zz^Ic7{A]-c">
+                                                                                                                <field name="PROP">amount</field>
+                                                                                                                <value name="RECORD">
+                                                                                                                    <block type="variables_get" id="D!!Ez3gyA=7x*l5R(no4">
+                                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                                    </block>
+                                                                                                                </value>
+                                                                                                            </block>
                                                                                                         </value>
                                                                                                     </block>
                                                                                                 </value>
                                                                                             </block>
-                                                                                        </statement>
+                                                                                        </next>
                                                                                     </block>
-                                                                                </next>
+                                                                                </statement>
+                                                                                <statement name="else_statements">
+                                                                                    <block type="variable_setter_block" id="bT+`cJu9@92KcltJ(~69">
+                                                                                        <value name="VAR">
+                                                                                            <block type="get_map_value" id="r!Wye};0LSA^Q-mr:kot">
+                                                                                                <value name="MAP">
+                                                                                                    <block type="param_access" id="3W7(36SwVHXhot2W}Q1x">
+                                                                                                        <field name="PROP">token_total_supply</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="param_access" id="@D9I:8j7_W/[Q|;Uo;tI">
+                                                                                                                <field name="PROP">assets</field>
+                                                                                                                <value name="RECORD">
+                                                                                                                    <block type="contract_storage_block" id="V|Np5eq83nG`J*k;:Qa("></block>
+                                                                                                                </value>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                                <value name="KEY">
+                                                                                                    <block type="param_access" id="J,MSKG5{D*8C:k.,;WR0">
+                                                                                                        <field name="PROP">token_id</field>
+                                                                                                        <value name="RECORD">
+                                                                                                            <block type="variables_get" id="hZ/S(U?iqt3-U3yq3]%9">
+                                                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <value name="VALUE">
+                                                                                            <block type="param_access" id="qOUS#Lkhdxi?@8EfPQq:">
+                                                                                                <field name="PROP">amount</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="variables_get" id="GC*xTXVp:0#NI-MD?0FX">
+                                                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </statement>
                                                                             </block>
                                                                         </next>
                                                                     </block>
@@ -788,25 +1096,26 @@
                                         <next>
                                             <block type="entry_point_block" id="oxV6#G7PIJRR$6nX733i">
                                                 <field name="NAME">update_administrator</field>
-                                                <value name="input_type">
+                                                <field name="ARGUMENT" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                <value name="TYPE">
                                                     <block type="address_type" id="cA{)5nalkaSxK}}~}J^E"></block>
                                                 </value>
-                                                <statement name="entry_point_code">
+                                                <statement name="CODE">
                                                     <block type="assert_block" id="et4z.b)b%I^^HisQm8=X">
                                                         <value name="assert_condition">
-                                                            <block type="compare_block" id="*.v`BJ4p3Qlu*)H{99x]">
+                                                            <block type="compare_block" id="Im|-X}Qf)p8O;Y!*fC=j">
                                                                 <field name="OP">EQ</field>
                                                                 <value name="A">
-                                                                    <block type="get_sender_block" id="AGu:t:7HP;gll~]1d3F2"></block>
+                                                                    <block type="get_sender_block" id=":)gl.hyu4yv6?DITXN[]"></block>
                                                                 </value>
                                                                 <value name="B">
-                                                                    <block type="param_access" id="`ZwG:56Fa4:OBJo9xmOq">
+                                                                    <block type="param_access" id="SkwDz!udig_?Ej:;Z`yq">
                                                                         <field name="PROP">administrator</field>
-                                                                        <value name="FROM">
-                                                                            <block type="param_access" id="s0e{;2%tO^d+!y]~44W:">
+                                                                        <value name="RECORD">
+                                                                            <block type="param_access" id="OwO(L[t*pqjo3H]0ZM|C">
                                                                                 <field name="PROP">config</field>
-                                                                                <value name="FROM">
-                                                                                    <block type="contract_storage_block" id="i6jIvcpL{wrjbi(*Q/sj"></block>
+                                                                                <value name="RECORD">
+                                                                                    <block type="contract_storage_block" id="rf8h9?f2gTT37B8J`5P/"></block>
                                                                                 </value>
                                                                             </block>
                                                                         </value>
@@ -824,10 +1133,10 @@
                                                                 <value name="VAR">
                                                                     <block type="param_access" id="T]p!,0?[Z:z1mZNld?ZL">
                                                                         <field name="PROP">administrator</field>
-                                                                        <value name="FROM">
+                                                                        <value name="RECORD">
                                                                             <block type="param_access" id="b|WP1;skI!a$aA+c/Qdr">
                                                                                 <field name="PROP">config</field>
-                                                                                <value name="FROM">
+                                                                                <value name="RECORD">
                                                                                     <block type="contract_storage_block" id="-CF:kLie!E7*md8?(,wh"></block>
                                                                                 </value>
                                                                             </block>
@@ -835,7 +1144,9 @@
                                                                     </block>
                                                                 </value>
                                                                 <value name="VALUE">
-                                                                    <block type="entrypoint_arg_block" id="GSf(kC$bE0oXj9djdK(#"></block>
+                                                                    <block type="variables_get" id="F(1Fu,*,RG/c~xv+++no">
+                                                                        <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                    </block>
                                                                 </value>
                                                             </block>
                                                         </next>
@@ -844,25 +1155,26 @@
                                                 <next>
                                                     <block type="entry_point_block" id="FB=T6ZkqFv4iN@b#Tvy+">
                                                         <field name="NAME">updated_paused</field>
-                                                        <value name="input_type">
+                                                        <field name="ARGUMENT" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                        <value name="TYPE">
                                                             <block type="boolean_type" id="`u6yj[5R;DJ]tV)/ZS.q"></block>
                                                         </value>
-                                                        <statement name="entry_point_code">
+                                                        <statement name="CODE">
                                                             <block type="assert_block" id="9;U}Qz[mD%@o8u:rwtWx">
                                                                 <value name="assert_condition">
-                                                                    <block type="compare_block" id="vP5Xb5m`coDDgT:ZY%k/">
+                                                                    <block type="compare_block" id="2iBJc(DyP|9`,sIMqQF3">
                                                                         <field name="OP">EQ</field>
                                                                         <value name="A">
-                                                                            <block type="get_sender_block" id="UT-GXn%K:[Yg_nL{+Mti"></block>
+                                                                            <block type="get_sender_block" id="~najYo+|WbHJ~/{#3,!2"></block>
                                                                         </value>
                                                                         <value name="B">
-                                                                            <block type="param_access" id="Yq7QbblV^{/4R:!n?9$[">
+                                                                            <block type="param_access" id="2tF`-.;M=sETUIDaAWxv">
                                                                                 <field name="PROP">administrator</field>
-                                                                                <value name="FROM">
-                                                                                    <block type="param_access" id="(|z3fgj:?mYhKILiLQQ4">
+                                                                                <value name="RECORD">
+                                                                                    <block type="param_access" id="YPFmh]B6LpwP-oW4!lDg">
                                                                                         <field name="PROP">config</field>
-                                                                                        <value name="FROM">
-                                                                                            <block type="contract_storage_block" id="sJ%Fy_Ts[;RaSICU`v0`"></block>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="contract_storage_block" id="G?7JL^hu^v9P8m{Av@(H"></block>
                                                                                         </value>
                                                                                     </block>
                                                                                 </value>
@@ -880,10 +1192,10 @@
                                                                         <value name="VAR">
                                                                             <block type="param_access" id="UB=;et}_0;(J^4_#=s[M">
                                                                                 <field name="PROP">paused</field>
-                                                                                <value name="FROM">
+                                                                                <value name="RECORD">
                                                                                     <block type="param_access" id="aZFCaVmE?*9gB:9LD(t{">
                                                                                         <field name="PROP">config</field>
-                                                                                        <value name="FROM">
+                                                                                        <value name="RECORD">
                                                                                             <block type="contract_storage_block" id="3dATN@oJ_;E.!GXv?XON"></block>
                                                                                         </value>
                                                                                     </block>
@@ -891,7 +1203,9 @@
                                                                             </block>
                                                                         </value>
                                                                         <value name="VALUE">
-                                                                            <block type="entrypoint_arg_block" id=".+AV-~9z2spTl0S@Uucq"></block>
+                                                                            <block type="variables_get" id="V!10%:;6r-Gp{`$-,/6W">
+                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                            </block>
                                                                         </value>
                                                                     </block>
                                                                 </next>
@@ -900,7 +1214,8 @@
                                                         <next>
                                                             <block type="entry_point_block" id="~gau:u)r.H5=9QhcPO_r">
                                                                 <field name="NAME">update_metadata</field>
-                                                                <value name="input_type">
+                                                                <field name="ARGUMENT" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                <value name="TYPE">
                                                                     <block type="map_type" id="#nOf2`W+-oh+Z?$|n;UA">
                                                                         <value name="key_type">
                                                                             <block type="string_type" id="5MGcegZ0$vt5f1?hI:x;"></block>
@@ -910,22 +1225,22 @@
                                                                         </value>
                                                                     </block>
                                                                 </value>
-                                                                <statement name="entry_point_code">
+                                                                <statement name="CODE">
                                                                     <block type="assert_block" id="|s8nf1;fuvY{zKg:;ERw">
                                                                         <value name="assert_condition">
-                                                                            <block type="compare_block" id="ywq^EK|Z#NASityiOrH6">
+                                                                            <block type="compare_block" id="v1o5h5Ar(MDWF`0Em?|[">
                                                                                 <field name="OP">EQ</field>
                                                                                 <value name="A">
-                                                                                    <block type="get_sender_block" id="mZ46V)NpOof1$6ua!xtv"></block>
+                                                                                    <block type="get_sender_block" id="wz^ne.qhO(-6v]Lu{5rK"></block>
                                                                                 </value>
                                                                                 <value name="B">
-                                                                                    <block type="param_access" id="E84j(74o$.OpR*HYZpEj">
+                                                                                    <block type="param_access" id="{9y7}IE(#/L#Lx2#HGkd">
                                                                                         <field name="PROP">administrator</field>
-                                                                                        <value name="FROM">
-                                                                                            <block type="param_access" id="AZa9K%6jV/f3b@`=vE;S">
+                                                                                        <value name="RECORD">
+                                                                                            <block type="param_access" id="65e%Cf19p)E`aa/HsB{T">
                                                                                                 <field name="PROP">config</field>
-                                                                                                <value name="FROM">
-                                                                                                    <block type="contract_storage_block" id="z}+$K]B%x=F-bbCDX/NW"></block>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="contract_storage_block" id=".[qTs~@ggPY_YSzV9_*Z"></block>
                                                                                                 </value>
                                                                                             </block>
                                                                                         </value>
@@ -944,7 +1259,9 @@
                                                                                 <value name="LIST">
                                                                                     <block type="get_map_entries" id="AIn180Xhv9C9D-`faX`[">
                                                                                         <value name="FROM">
-                                                                                            <block type="entrypoint_arg_block" id=";LJk)wTeUi{y_/t_)FJu"></block>
+                                                                                            <block type="variables_get" id="bFaum8VEAXAj,EkO`b!2">
+                                                                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                                                                            </block>
                                                                                         </value>
                                                                                     </block>
                                                                                 </value>
@@ -955,7 +1272,7 @@
                                                                                                 <value name="MAP">
                                                                                                     <block type="param_access" id="m4Ubkl%:e9Tv@Wni?a~V">
                                                                                                         <field name="PROP">metadata</field>
-                                                                                                        <value name="FROM">
+                                                                                                        <value name="RECORD">
                                                                                                             <block type="contract_storage_block" id="(=VE0$BxS4nT_8$]{S!*"></block>
                                                                                                         </value>
                                                                                                     </block>
@@ -963,7 +1280,7 @@
                                                                                                 <value name="KEY">
                                                                                                     <block type="param_access" id="#cS|{FL.9AWmVIW_[S+V">
                                                                                                         <field name="PROP">key</field>
-                                                                                                        <value name="FROM">
+                                                                                                        <value name="RECORD">
                                                                                                             <block type="variables_get" id="l*JH$z`:j3YTOD%CzhDh">
                                                                                                                 <field name="VAR" id="V5h3ZNe7f=~hao55QFKe">i</field>
                                                                                                             </block>
@@ -975,7 +1292,7 @@
                                                                                         <value name="VALUE">
                                                                                             <block type="param_access" id="5NS+xgCO,h@@NOk_-;N#">
                                                                                                 <field name="PROP">value</field>
-                                                                                                <value name="FROM">
+                                                                                                <value name="RECORD">
                                                                                                     <block type="variables_get" id="}Nh=EmwT_cE?-e,qf;0)">
                                                                                                         <field name="VAR" id="V5h3ZNe7f=~hao55QFKe">i</field>
                                                                                                     </block>
@@ -1000,6 +1317,169 @@
                         </next>
                     </block>
                 </next>
+            </block>
+        </statement>
+        <statement name="ONCHAIN_VIEWS">
+            <block type="onchain_view" id=".M`eL*6!ksrfs-?uOR)`">
+                <field name="NAME">balance_of</field>
+                <field name="ARGUMENT" id="[_Z~[@RBQ]#Hh0w_yo`v">view_argument</field>
+                <value name="TYPE">
+                    <block type="list_type" id="FD,xUNyS5;:]VH,lDtC.">
+                        <value name="inner_type">
+                            <block type="record_type" id="EV1}RJ@2O21/)v6/JY1x">
+                                <field name="LAYOUT">['owner', 'token_id']</field>
+                                <statement name="fields">
+                                    <block type="record_variant_field_type" id="wYn*;pRAq)K}0[sBEDn2">
+                                        <field name="key">owner</field>
+                                        <value name="type">
+                                            <block type="address_type" id="7gev5CU-TI*}`Kh`4J0P"></block>
+                                        </value>
+                                        <next>
+                                            <block type="record_variant_field_type" id="cqa{Q,d#;Mcu,E)65--9">
+                                                <field name="key">token_id</field>
+                                                <value name="type">
+                                                    <block type="nat_type" id="vM}~lat#8/ILtF?+?PDE"></block>
+                                                </value>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                    </block>
+                </value>
+                <statement name="CODE">
+                    <block type="assert_block" id="Wj6Yo|h(L?Sa^_=nquAp">
+                        <value name="assert_condition">
+                            <block type="not" id="x/7_yj+cRBA#G,J@.AH2">
+                                <value name="VALUE">
+                                    <block type="param_access" id="Q%Tp$x]}jM%Lb.r4/mHV">
+                                        <field name="PROP">paused</field>
+                                        <value name="RECORD">
+                                            <block type="param_access" id="_~Z3x6Gdmd1#+[@YSAuO">
+                                                <field name="PROP">config</field>
+                                                <value name="RECORD">
+                                                    <block type="contract_storage_block" id="=`YVZ4U`NeESn;]iw*;l"></block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                            </block>
+                        </value>
+                        <value name="error_message">
+                            <block type="string_literal" id="qS}k:B-3ET-m;#Emb/|H">
+                                <field name="string_literal">FA2__PAUSED</field>
+                            </block>
+                        </value>
+                        <next>
+                            <block type="variable_declaration_block" id="HA?z42Wl/Ej}8?,!`lHD">
+                                <field name="VAR" id="`k09Vf?6:h7:KyKK:|bg">view__balance_of__result</field>
+                                <value name="VALUE">
+                                    <block type="as_type" id="1eC-L]|=%1Qn5J/lpq_Z">
+                                        <value name="VALUE">
+                                            <block type="list_literal" id="f{[AAR|^cuG4K09R}5%`"></block>
+                                        </value>
+                                        <value name="TYPE">
+                                            <block type="list_type" id="dzB2iC,kDOJ4`Kq;}C#y">
+                                                <value name="inner_type">
+                                                    <block type="record_type" id="#{Ox`I=0O3#5|Vm3w+je">
+                                                        <field name="LAYOUT">['request', 'balance']</field>
+                                                        <statement name="fields">
+                                                            <block type="record_variant_field_type" id="}Dw$;tx|Vyp6fO?j{T_S">
+                                                                <field name="key">request</field>
+                                                                <value name="type">
+                                                                    <block type="record_type" id="u~S!-X8jbqjqJQFO!#pv">
+                                                                        <field name="LAYOUT">['owner', 'token_id']</field>
+                                                                        <statement name="fields">
+                                                                            <block type="record_variant_field_type" id="EK`6b@_Nsd*DDf^lS,Y3">
+                                                                                <field name="key">owner</field>
+                                                                                <value name="type">
+                                                                                    <block type="address_type" id="2gCE%{J5s[Rgbbf(_J~M"></block>
+                                                                                </value>
+                                                                                <next>
+                                                                                    <block type="record_variant_field_type" id="Chqrvxh)R!sv:./TEe9?">
+                                                                                        <field name="key">token_id</field>
+                                                                                        <value name="type">
+                                                                                            <block type="nat_type" id="5eyTb?CcM:OPITwXeyj_"></block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </next>
+                                                                            </block>
+                                                                        </statement>
+                                                                    </block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="record_variant_field_type" id="=No{Y9NsK2_=P|DWOrO8">
+                                                                        <field name="key">balance</field>
+                                                                        <value name="type">
+                                                                            <block type="nat_type" id="+:c=^Vo1c/aYuiO.opm?"></block>
+                                                                        </value>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </statement>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <next>
+                                    <block type="for_each_block" id="iC0RNFQp`i[M:vr|1)z[">
+                                        <field name="VAR" id="hB}d*Vvl6B#W)Q9k8.a+">view__balance_of__request</field>
+                                        <value name="LIST">
+                                            <block type="variables_get" id="L5bkL2qobA2X[cS@-Y||">
+                                                <field name="VAR" id="[_Z~[@RBQ]#Hh0w_yo`v">view_argument</field>
+                                            </block>
+                                        </value>
+                                        <statement name="DO">
+                                            <block type="assert_block" id="AM[_gPm|/k}q]5sO-ASG">
+                                                <value name="assert_condition">
+                                                    <block type="map_contains_key" id="3GzQd_mH1]nQDw*%$+v3">
+                                                        <value name="MAP">
+                                                            <block type="param_access" id="`RHQ0IAq(@mAhSmO*eE+">
+                                                                <field name="PROP">token_total_supply</field>
+                                                                <value name="RECORD">
+                                                                    <block type="param_access" id=".C5wXP~8wF{,A7dBB6V;">
+                                                                        <field name="PROP">assets</field>
+                                                                        <value name="RECORD">
+                                                                            <block type="contract_storage_block" id="sOdUq|vZ+BHMuX9/ahlb"></block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                        <value name="KEY">
+                                                            <block type="param_access" id="-eDLSw*Z8IyMf(u**Z`S">
+                                                                <field name="PROP">token_id</field>
+                                                                <value name="RECORD">
+                                                                    <block type="variables_get" id="$o(CHA;6ASYk.Lp{rFO/">
+                                                                        <field name="VAR" id="hB}d*Vvl6B#W)Q9k8.a+">view__balance_of__request</field>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                                <value name="error_message">
+                                                    <block type="string_literal" id="=$fIwj$jiFjdQ$jtx=t;">
+                                                        <field name="string_literal">FA2__TOKEN_UNDEFINED</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </statement>
+                <value name="RETURN">
+                    <block type="variables_get" id="nlA[kwPqdwe+e=_|J*+C">
+                        <field name="VAR" id="`k09Vf?6:h7:KyKK:|bg">view__balance_of__result</field>
+                    </block>
+                </value>
             </block>
         </statement>
     </block>

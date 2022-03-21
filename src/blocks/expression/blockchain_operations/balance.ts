@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 import { TMutez } from '@tezwell/smartts-sdk/type';
 import { GetBalance } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const GetBalanceBlock = {
     type: BlockKind.get_balance_block,

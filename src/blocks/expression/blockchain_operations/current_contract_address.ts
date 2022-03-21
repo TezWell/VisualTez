@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 import { TAddress } from '@tezwell/smartts-sdk/type';
 import { GetSelfAddress } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const Block = {
     type: BlockKind.get_current_contract_address_block,

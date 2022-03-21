@@ -2,9 +2,9 @@ import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
 import { Add, Divide, Multiply, Subtract } from '@tezwell/smartts-sdk/expression';
-import BlockKind from '../enums/BlockKind';
-import SmartML from '../generators/SmartML';
-import { buildErrorInfo } from '../utils/errorHandling';
+import BlockKind from '../../enums/BlockKind';
+import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from '../../utils/errorHandling';
 
 const MathBlock = {
     type: BlockKind.math_block,
@@ -13,6 +13,7 @@ const MathBlock = {
         {
             type: 'input_value',
             name: 'A',
+            check: ['Literal', 'Expression'],
         },
         {
             type: 'field_dropdown',
@@ -27,6 +28,7 @@ const MathBlock = {
         {
             type: 'input_value',
             name: 'B',
+            check: ['Literal', 'Expression'],
         },
     ],
     inputsInline: true,

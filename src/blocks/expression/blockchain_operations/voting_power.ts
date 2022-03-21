@@ -3,9 +3,8 @@ import Blockly, { Block } from 'blockly';
 import { TNat } from '@tezwell/smartts-sdk/type';
 import { GetVotingPower } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 import { ILiteral } from '@tezwell/smartts-sdk/typings/literal';
-import { TypeAtom } from '@tezwell/smartts-sdk/core/enums/type';
 import ValueAtom from '@tezwell/smartts-sdk/core/enums/literal';
 
 const GetVotingPowerBlock = {

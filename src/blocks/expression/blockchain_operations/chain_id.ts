@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 import { TChain_id } from '@tezwell/smartts-sdk/type';
 import { GetChain_id } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const GetChainIdBlock = {
     type: BlockKind.get_chain_id_block,

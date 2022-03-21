@@ -24,22 +24,6 @@ SmartML.addBlock(BlockKind.contract_storage_block, {
     },
 });
 
-Blockly.Blocks[BlockKind.entrypoint_arg_block] = {
-    init: function () {
-        this.jsonInit({
-            type: BlockKind.entrypoint_arg_block,
-            message0: 'Entrypoint Argument',
-            output: 'Expression',
-            colour: 80,
-        });
-    },
-};
-SmartML.addBlock(BlockKind.entrypoint_arg_block, {
-    toValue: () => {
-        return MethodArgument();
-    },
-});
-
 SmartML.addBlock(BlockKind.variables_get, {
     toValue: (block: Block) => {
         const variableName = extractVariableName(block, 'VAR');
@@ -47,6 +31,15 @@ SmartML.addBlock(BlockKind.variables_get, {
 
         for (const scope of Context.main.scopes) {
             switch (scope.kind) {
+                case ScopeKind.View:
+                case ScopeKind.Entrypoint:
+                    if (variableName in scope.variables) {
+                        switch (scope.variables[variableName].kind) {
+                            case VariableKind.EntrypointOrViewArgument:
+                                return MethodArgument(line);
+                        }
+                    }
+                    break;
                 case ScopeKind.For:
                     if (variableName in scope.variables) {
                         switch (scope.variables[variableName].kind) {

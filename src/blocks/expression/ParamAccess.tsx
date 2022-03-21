@@ -14,7 +14,7 @@ const ParamAccessBlock = {
             text: '',
             check: 'String',
         },
-        { type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] },
+        { type: 'input_value', name: 'RECORD', check: ['Literal', 'Expression'] },
     ],
     colour: 123,
     inputsInline: true,
@@ -32,7 +32,7 @@ Blockly.Blocks[BlockKind.param_access] = {
 SmartML.addBlock(BlockKind.param_access, {
     toValue: (block: Block) => {
         const propertyName = block.getFieldValue('PROP');
-        const ofExpression = SmartML.toValue(block, 'FROM');
+        const ofExpression = SmartML.toValue(block, 'RECORD');
         return GetProperty(ofExpression, propertyName, buildErrorInfo(block));
     },
 });

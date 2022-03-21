@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 import { TNat } from '@tezwell/smartts-sdk/type';
 import { GetLevel } from '@tezwell/smartts-sdk';
 import SmartML from 'src/blocks/generators/SmartML';
-import BlockKind from '../enums/BlockKind';
+import BlockKind from '../../enums/BlockKind';
 
 const BlockLevel = {
     type: BlockKind.get_level_block,

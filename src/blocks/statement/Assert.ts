@@ -14,7 +14,7 @@ const AssertBlock = {
         {
             type: 'input_value',
             name: 'assert_condition',
-            check: 'Boolean',
+            check: ['Expression'],
         },
         { type: 'input_value', name: 'error_message' },
     ],
