@@ -7,6 +7,7 @@ import {
     ChevronDownIcon,
     ExternalLinkIcon,
     DownloadIcon,
+    UploadIcon,
 } from '@heroicons/react/outline';
 
 import Button from 'src/components/common/Button';
@@ -16,6 +17,8 @@ import { buildClassName } from 'src/utils/className';
 import Modal from 'src/components/common/Modal';
 import { IEditorWorkspace } from 'src/context/Editor';
 import { downloadFile } from 'src/utils/download_upload';
+import FileDropZone from 'src/components/common/FileDropZone';
+import ConditionalRender from 'src/components/common/ConditionalRender';
 
 interface DeleteWorkspaceModalProps {
     workspace: IEditorWorkspace;
@@ -205,14 +208,31 @@ const UpdateWorkspaceModal: React.FC<UpdateWorkspaceModalProps> = ({ workspace, 
 interface StorageDrawerProps {}
 
 const StorageDrawer: React.FC<StorageDrawerProps> = () => {
-    const { state, workspace, updateEditorState } = useEditor();
+    const { state, workspace, updateEditorState, updateError, updateVolatileWorkspace } = useEditor();
     const [createWorkspaceModal, setCreateWorkspaceModal] = React.useState(false);
     const [deleteWorkspaceModal, setDeleteWorkspaceModal] = React.useState<IEditorWorkspace>();
     const [updateWorkspaceModal, setUpdateWorkspaceModal] = React.useState<IEditorWorkspace>();
+    const [openImportModal, setOpenImportModal] = React.useState(false);
 
     const downloadWorkspace = () => {
         const fileName = `${workspace.name.replace(/\s/g, '_').toLowerCase()}.xml`;
         downloadFile(fileName, workspace.xml);
+    };
+
+    const handleImportComplete = (file: File) => {
+        setOpenImportModal(false);
+        const reader = new FileReader();
+
+        const fail = () => {
+            updateError('Could not import workspace.');
+        };
+
+        reader.onabort = fail;
+        reader.onerror = fail;
+        reader.onload = () => {
+            updateVolatileWorkspace(reader.result as string);
+        };
+        reader.readAsText(file);
     };
 
     return (
@@ -265,7 +285,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                             className="flex justify-between items-center w-full bg-indigo-500 hover:bg-indigo-400 border-indigo-700 hover:border-indigo-500 p-1 px-5"
                                         >
                                             <DownloadIcon className="block" width={16} height={16} />
-                                            <span className="text-sm">Download</span>
+                                            <span className="text-sm">Export Workplace (.xml)</span>
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
                                         <Button
@@ -293,26 +313,43 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
 
             <div className="p-5">
                 <Button
+                    onClick={() => setOpenImportModal(true)}
+                    className="flex justify-between items-center w-full bg-indigo-500 hover:bg-indigo-400 border-indigo-700 hover:border-indigo-500 p-2"
+                >
+                    <UploadIcon className="block" width={32} height={32} />
+                    Import Workplace (.xml)
+                </Button>
+                <Button
                     onClick={() => setCreateWorkspaceModal(true)}
-                    className="flex justify-center items-center w-full bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
+                    className="flex justify-between items-center w-full bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2 mt-2"
                 >
                     <DocumentAddIcon className="block" width={32} height={32} />
                     New Workplace
                 </Button>
             </div>
 
-            {!!deleteWorkspaceModal ? (
-                <DeleteWorkspaceModal
-                    workspace={deleteWorkspaceModal}
-                    onClose={() => setDeleteWorkspaceModal(undefined)}
-                />
-            ) : null}
-            {updateWorkspaceModal ? (
-                <UpdateWorkspaceModal
-                    workspace={updateWorkspaceModal}
-                    onClose={() => setUpdateWorkspaceModal(undefined)}
-                />
-            ) : null}
+            <FileDropZone
+                open={openImportModal}
+                title="Import Workspace"
+                onComplete={handleImportComplete}
+                onClose={() => setOpenImportModal(false)}
+                accept=".xml, text/xml"
+            />
+
+            <ConditionalRender
+                props={{
+                    workspace: deleteWorkspaceModal,
+                }}
+            >
+                {(props) => <DeleteWorkspaceModal onClose={() => setDeleteWorkspaceModal(undefined)} {...props} />}
+            </ConditionalRender>
+            <ConditionalRender
+                props={{
+                    workspace: updateWorkspaceModal,
+                }}
+            >
+                {(props) => <UpdateWorkspaceModal onClose={() => setDeleteWorkspaceModal(undefined)} {...props} />}
+            </ConditionalRender>
             {createWorkspaceModal ? <CreateWorkspaceModal onClose={() => setCreateWorkspaceModal(false)} /> : null}
         </div>
     );

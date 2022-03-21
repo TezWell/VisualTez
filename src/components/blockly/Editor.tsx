@@ -20,7 +20,7 @@ interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     move?: {
         scrollbars?: boolean;
         drag?: boolean;
-        wheel: boolean;
+        wheel?: boolean;
     };
     comments?: boolean;
     grid?: {

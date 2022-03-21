@@ -9,14 +9,12 @@ import { generateRandomString } from 'src/utils/rand';
 
 interface SharedWorkspaceProps {
     mainWorkspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
-    xml: string;
-    onClose: () => void;
 }
 
-const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml, onClose }) => {
+const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
     const [name, setName] = React.useState(`Workspace_${generateRandomString()}`);
-    const { createWorkspace } = useEditor();
+    const { volatileWorkspace, updateVolatileWorkspace, createWorkspace } = useEditor();
 
     const updateName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -24,15 +22,15 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml
 
     const importWorkspace = React.useCallback(() => {
         if (mainWorkspaceRef.current) {
-            createWorkspace(name, xml);
-            onClose();
+            createWorkspace(name, volatileWorkspace);
+            updateVolatileWorkspace(undefined);
         }
-    }, [createWorkspace, mainWorkspaceRef, name, onClose, xml]);
+    }, [createWorkspace, mainWorkspaceRef, name, updateVolatileWorkspace, volatileWorkspace]);
 
     return (
         <Modal
-            open={true}
-            onClose={onClose}
+            open={!!volatileWorkspace}
+            onClose={() => updateVolatileWorkspace(undefined)}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
                     Import Workspace
@@ -48,7 +46,7 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml
                 </Button>,
                 <Button
                     key="close"
-                    onClick={onClose}
+                    onClick={() => updateVolatileWorkspace(undefined)}
                     className="bg-gray-400 hover:bg-gray-300 border-gray-700 hover:border-gray-600 p-2"
                 >
                     Close
@@ -68,18 +66,22 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef, xml
                 </div>
                 <div className="relative grow">
                     <BlocklyEditor
-                        currentXML={xml}
-                        noToolbox
+                        currentXML={volatileWorkspace}
                         workspaceRef={workspaceRef}
+                        noToolbox
                         trashcan={false}
                         readOnly
                         zoom={{
                             controls: true,
                             wheel: true,
-                            startScale: 0.4,
-                            maxScale: 1,
-                            minScale: 0.1,
+                            startScale: 0.1,
+                            maxScale: 2,
+                            minScale: 0.01,
                             scaleSpeed: 1.1,
+                        }}
+                        move={{
+                            scrollbars: true,
+                            drag: true,
                         }}
                     />
                 </div>

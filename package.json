@@ -45,6 +45,7 @@
     "prettier": "2.5.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-dropzone": "^12.0.4",
     "react-helmet-async": "1.2.3",
     "react-markdown": "8.0.0",
     "react-router-dom": "6.2.1",
@@ -78,7 +79,6 @@
       "@tezwell/michelson-sdk/converter": "@tezwell/michelson-sdk/converter/index.cjs",
       "@tezwell/michelson-sdk/literal": "@tezwell/michelson-sdk/literal.cjs",
       "@tezwell/michelson-sdk/type": "@tezwell/michelson-sdk/type.cjs"
-
     }
   },
   "eslintConfig": {

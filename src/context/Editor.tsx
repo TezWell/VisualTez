@@ -1,7 +1,11 @@
-import React, { createContext } from 'react';
+import React, { createContext, Dispatch, SetStateAction } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import type { Compilation } from 'src/blocks';
 import settings from 'src/settings.json';
+import { AES } from 'src/utils/crypto';
+import Http from 'src/utils/http';
+import Logger from 'src/utils/logger';
 import { generateRandomString } from 'src/utils/rand';
 
 export enum DrawerKind {
@@ -55,6 +59,9 @@ export interface IEditorContext {
 
     compilations: Compilation[];
     updateCompilations: (compilations: Compilation[]) => void;
+
+    volatileWorkspace?: string;
+    updateVolatileWorkspace: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const contextStub: IEditorContext = {
@@ -93,6 +100,21 @@ const contextStub: IEditorContext = {
     updateCompilations: () => {
         // stub
     },
+    updateVolatileWorkspace: () => {
+        // stub
+    },
+};
+
+const extractWorkspaceFromPermalink = async (hash: string, passPhrase: string) => {
+    try {
+        const { data } = await Http.get<{ content: string }>(`${settings.storage_api}/sharings/${hash}`, {
+            timeout: 5000,
+        });
+
+        return AES.decrypt(data.content, passPhrase);
+    } catch (e) {
+        Logger.debug(e);
+    }
 };
 
 const Context = createContext<IEditorContext>(contextStub);
@@ -132,10 +154,8 @@ const Provider: React.FC = (props) => {
     const [drawer, setDrawer] = React.useState<DrawerKind | null>(null);
     const [error, setError] = React.useState<string>();
     const [compilations, setCompilations] = React.useState<Compilation[]>([]);
-
-    React.useEffect(() => {
-        saveEditorState(state);
-    }, [state]);
+    const [volatileWorkspace, updateVolatileWorkspace] = React.useState<string>();
+    const [searchParams] = useSearchParams();
 
     const updateEditorState = React.useCallback(
         (args: {
@@ -223,6 +243,24 @@ const Provider: React.FC = (props) => {
         return createWorkspace('Default Workspace');
     }, [createWorkspace, state.currentWorkspace, state.workspaces]);
 
+    React.useEffect(() => {
+        saveEditorState(state);
+    }, [state]);
+
+    React.useEffect(
+        () => {
+            const hash = searchParams.get('h');
+            const passPhrase = searchParams.get('k');
+            if (hash && passPhrase) {
+                extractWorkspaceFromPermalink(hash, passPhrase).then(updateVolatileWorkspace);
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [
+            /* ONLY ON MOUNT */
+        ],
+    );
+
     return (
         <Context.Provider
             value={{
@@ -239,6 +277,8 @@ const Provider: React.FC = (props) => {
                 updateError,
                 compilations,
                 updateCompilations,
+                volatileWorkspace,
+                updateVolatileWorkspace,
             }}
         >
             {props.children}
