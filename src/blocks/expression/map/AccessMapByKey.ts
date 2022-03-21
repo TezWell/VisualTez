@@ -1,10 +1,10 @@
 import Blockly, { Block } from 'blockly';
-import { GetMapValue } from '@tezwell/smartts-sdk';
+import { AccessMapByKey } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
 
-const GetMapValueBlock = {
+const AccessMapByKeyBlock = {
     type: BlockKind.get_map_value,
     message0: 'Access map %1 by key %2',
     args0: [
@@ -18,7 +18,7 @@ const GetMapValueBlock = {
 
 Blockly.Blocks[BlockKind.get_map_value] = {
     init: function () {
-        this.jsonInit(GetMapValueBlock);
+        this.jsonInit(AccessMapByKeyBlock);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
@@ -28,6 +28,6 @@ SmartML.addBlock(BlockKind.get_map_value, {
     toValue: (block: Block) => {
         const KeyExpression = SmartML.toValue(block, 'KEY');
         const mapExpression = SmartML.toValue(block, 'MAP');
-        return GetMapValue(mapExpression, KeyExpression);
+        return AccessMapByKey(mapExpression, KeyExpression);
     },
 });

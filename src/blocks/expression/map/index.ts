@@ -1,3 +1,3 @@
 import './GetMapEntries';
-import './GetMapValue';
+import './AccessMapByKey';
 import './MapContainsKey';
