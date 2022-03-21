@@ -34,7 +34,7 @@ Blockly.Blocks[BlockKind.contract_block] = {
             .setAlign(Blockly.ALIGN_LEFT);
         this.appendStatementInput('ONCHAIN_VIEWS')
             .setCheck(['View'])
-            .appendField('On-Chain View')
+            .appendField('On-Chain Views')
             .setAlign(Blockly.ALIGN_LEFT);
         this.setTooltip('A block that represents a contract');
         this.setColour(200);

@@ -32,7 +32,6 @@ const ForEachBlock = {
         },
     ],
     colour: 180,
-    helpUrl: '%{BKY_CONTROLS_FOREACH_HELPURL}',
     extensions: ['contextMenu_newGetVariableBlock', 'controls_forEach_tooltip'],
 };
 

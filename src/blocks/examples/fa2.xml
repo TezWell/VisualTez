@@ -2,14 +2,15 @@
     <variables>
         <variable id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</variable>
         <variable id="[_Z~[@RBQ]#Hh0w_yo`v">view_argument</variable>
-        <variable id="`k09Vf?6:h7:KyKK:|bg">view__balance_of__result</variable>
-        <variable id="hB}d*Vvl6B#W)Q9k8.a+">view__balance_of__request</variable>
+        <variable id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</variable>
+        <variable id="e390mlLP||E^?d!LJvo?">view__balance_of__request</variable>
         <variable id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</variable>
+        <variable id="sCNh`^7dm5CJjS.1?2[l">view__balance_of__ledger_key</variable>
         <variable id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</variable>
         <variable id="V5h3ZNe7f=~hao55QFKe">i</variable>
         <variable id="iewysOG(G]#f|J)neXYj">mint__token_total_supply</variable>
     </variables>
-    <block type="contract_block" id="V6XnC-$_--YB6BmE/[MZ" x="-450" y="-1984">
+    <block type="contract_block" id="V6XnC-$_--YB6BmE/[MZ" x="-333" y="-1884">
         <field name="NAME">contract_1</field>
         <value name="TYPE">
             <block type="record_type" id="=sF,`i*?@79T$AX*R88t">
@@ -1373,35 +1374,35 @@
                             </block>
                         </value>
                         <next>
-                            <block type="variable_declaration_block" id="HA?z42Wl/Ej}8?,!`lHD">
-                                <field name="VAR" id="`k09Vf?6:h7:KyKK:|bg">view__balance_of__result</field>
+                            <block type="variable_declaration_block" id="alEkQ$nPK2]{S247;rGn">
+                                <field name="VAR" id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</field>
                                 <value name="VALUE">
-                                    <block type="as_type" id="1eC-L]|=%1Qn5J/lpq_Z">
+                                    <block type="as_type" id="NC*a#)1@2HVxVk4#F@zZ">
                                         <value name="VALUE">
-                                            <block type="list_literal" id="f{[AAR|^cuG4K09R}5%`"></block>
+                                            <block type="list_literal" id="t[c0?:!|jdN1#7K-x=b]"></block>
                                         </value>
                                         <value name="TYPE">
-                                            <block type="list_type" id="dzB2iC,kDOJ4`Kq;}C#y">
+                                            <block type="list_type" id="?.ghfTto:LRk,:e3es$0">
                                                 <value name="inner_type">
-                                                    <block type="record_type" id="#{Ox`I=0O3#5|Vm3w+je">
+                                                    <block type="record_type" id="0|tG0bytX0~hy2q?0~1s">
                                                         <field name="LAYOUT">['request', 'balance']</field>
                                                         <statement name="fields">
-                                                            <block type="record_variant_field_type" id="}Dw$;tx|Vyp6fO?j{T_S">
+                                                            <block type="record_variant_field_type" id="eY(Y|2{+ZNW0_m/TPB}e">
                                                                 <field name="key">request</field>
                                                                 <value name="type">
-                                                                    <block type="record_type" id="u~S!-X8jbqjqJQFO!#pv">
+                                                                    <block type="record_type" id="7ArV#`.9D}1oSiTMGPl=">
                                                                         <field name="LAYOUT">['owner', 'token_id']</field>
                                                                         <statement name="fields">
-                                                                            <block type="record_variant_field_type" id="EK`6b@_Nsd*DDf^lS,Y3">
+                                                                            <block type="record_variant_field_type" id="p=m7r9EsfQn9ickUe]W{">
                                                                                 <field name="key">owner</field>
                                                                                 <value name="type">
-                                                                                    <block type="address_type" id="2gCE%{J5s[Rgbbf(_J~M"></block>
+                                                                                    <block type="address_type" id="Y%7^06KmZ]C21/7+8NuP"></block>
                                                                                 </value>
                                                                                 <next>
-                                                                                    <block type="record_variant_field_type" id="Chqrvxh)R!sv:./TEe9?">
+                                                                                    <block type="record_variant_field_type" id="slGZ/a8}7t(.i3(1va`a">
                                                                                         <field name="key">token_id</field>
                                                                                         <value name="type">
-                                                                                            <block type="nat_type" id="5eyTb?CcM:OPITwXeyj_"></block>
+                                                                                            <block type="nat_type" id="E:Uv`=*{[UyEjK3DN+YR"></block>
                                                                                         </value>
                                                                                     </block>
                                                                                 </next>
@@ -1410,10 +1411,10 @@
                                                                     </block>
                                                                 </value>
                                                                 <next>
-                                                                    <block type="record_variant_field_type" id="=No{Y9NsK2_=P|DWOrO8">
+                                                                    <block type="record_variant_field_type" id="*P;pNXl6?Nni}lMlTH`F">
                                                                         <field name="key">balance</field>
                                                                         <value name="type">
-                                                                            <block type="nat_type" id="+:c=^Vo1c/aYuiO.opm?"></block>
+                                                                            <block type="nat_type" id="3UY5+GFpVgA-si5WDkbp"></block>
                                                                         </value>
                                                                     </block>
                                                                 </next>
@@ -1426,36 +1427,36 @@
                                     </block>
                                 </value>
                                 <next>
-                                    <block type="for_each_block" id="iC0RNFQp`i[M:vr|1)z[">
-                                        <field name="VAR" id="hB}d*Vvl6B#W)Q9k8.a+">view__balance_of__request</field>
+                                    <block type="for_each_block" id="J}u;YVal5E}dhGGIHbI(">
+                                        <field name="VAR" id="e390mlLP||E^?d!LJvo?">view__balance_of__request</field>
                                         <value name="LIST">
-                                            <block type="variables_get" id="L5bkL2qobA2X[cS@-Y||">
+                                            <block type="variables_get" id="9X2FDVBFT`b#w(RPPeaH">
                                                 <field name="VAR" id="[_Z~[@RBQ]#Hh0w_yo`v">view_argument</field>
                                             </block>
                                         </value>
                                         <statement name="DO">
-                                            <block type="assert_block" id="AM[_gPm|/k}q]5sO-ASG">
+                                            <block type="assert_block" id="dhXO2$G)IXEIFam?pQR*">
                                                 <value name="assert_condition">
-                                                    <block type="map_contains_key" id="3GzQd_mH1]nQDw*%$+v3">
+                                                    <block type="map_contains_key" id="@33w%M%b!7]0J-5*~68O">
                                                         <value name="MAP">
-                                                            <block type="param_access" id="`RHQ0IAq(@mAhSmO*eE+">
+                                                            <block type="param_access" id="eq(ES9QPbjh62]YNgvb?">
                                                                 <field name="PROP">token_total_supply</field>
                                                                 <value name="RECORD">
-                                                                    <block type="param_access" id=".C5wXP~8wF{,A7dBB6V;">
+                                                                    <block type="param_access" id="ObqXv:0_EIN8PF^g#X4G">
                                                                         <field name="PROP">assets</field>
                                                                         <value name="RECORD">
-                                                                            <block type="contract_storage_block" id="sOdUq|vZ+BHMuX9/ahlb"></block>
+                                                                            <block type="contract_storage_block" id="4Z%yC2Xc=Qzaoffa|+u{"></block>
                                                                         </value>
                                                                     </block>
                                                                 </value>
                                                             </block>
                                                         </value>
                                                         <value name="KEY">
-                                                            <block type="param_access" id="-eDLSw*Z8IyMf(u**Z`S">
+                                                            <block type="param_access" id="|j!`xEdyDf+0dl^$/BG9">
                                                                 <field name="PROP">token_id</field>
                                                                 <value name="RECORD">
-                                                                    <block type="variables_get" id="$o(CHA;6ASYk.Lp{rFO/">
-                                                                        <field name="VAR" id="hB}d*Vvl6B#W)Q9k8.a+">view__balance_of__request</field>
+                                                                    <block type="variables_get" id="V`R,TKxHM]{0e!65;Si1">
+                                                                        <field name="VAR" id="e390mlLP||E^?d!LJvo?">view__balance_of__request</field>
                                                                     </block>
                                                                 </value>
                                                             </block>
@@ -1463,10 +1464,171 @@
                                                     </block>
                                                 </value>
                                                 <value name="error_message">
-                                                    <block type="string_literal" id="=$fIwj$jiFjdQ$jtx=t;">
+                                                    <block type="string_literal" id="c?wmD993$8;+9!`Uu.@_">
                                                         <field name="string_literal">FA2__TOKEN_UNDEFINED</field>
                                                     </block>
                                                 </value>
+                                                <next>
+                                                    <block type="variable_declaration_block" id="{](:WL?%-4wi5D4*.1lz">
+                                                        <field name="VAR" id="sCNh`^7dm5CJjS.1?2[l">view__balance_of__ledger_key</field>
+                                                        <value name="VALUE">
+                                                            <block type="pair_literal" id="hvSP/l;QB-@$tw_F!#I.">
+                                                                <value name="left_value">
+                                                                    <block type="param_access" id=",K#.O:R!8DGs[H~qe~BU">
+                                                                        <field name="PROP">owner</field>
+                                                                        <value name="RECORD">
+                                                                            <block type="variables_get" id="])@pFVJa$i4Qbbh#wd)Q">
+                                                                                <field name="VAR" id="e390mlLP||E^?d!LJvo?">view__balance_of__request</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                                <value name="right_value">
+                                                                    <block type="param_access" id=",lz)T:!5Xpk*O|s03[i=">
+                                                                        <field name="PROP">token_id</field>
+                                                                        <value name="RECORD">
+                                                                            <block type="variables_get" id="8b%IM/F{2X,C)0OSBvwV">
+                                                                                <field name="VAR" id="e390mlLP||E^?d!LJvo?">view__balance_of__request</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                        <next>
+                                                            <block type="if_block" id="M!Fo_Kv?P5iD,E!LC}wo">
+                                                                <value name="condition">
+                                                                    <block type="map_contains_key" id="0LHL[P*k,{n[?:nB[s2f">
+                                                                        <value name="MAP">
+                                                                            <block type="param_access" id="0(|#z,EYp/7vK1weAd5L">
+                                                                                <field name="PROP">ledger</field>
+                                                                                <value name="RECORD">
+                                                                                    <block type="param_access" id="~lBT?t|[rMT7TB#~qz5T">
+                                                                                        <field name="PROP">assets</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="contract_storage_block" id="(XZFYu*a]]1k~v3C93A!"></block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="KEY">
+                                                                            <block type="variables_get" id="KKr%d63$el^qKW1$qCHA">
+                                                                                <field name="VAR" id="sCNh`^7dm5CJjS.1?2[l">view__balance_of__ledger_key</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                                <statement name="then_statements">
+                                                                    <block type="variable_setter_block" id=".ayv4_Zxq9Nu2ie?1AVd">
+                                                                        <value name="VAR">
+                                                                            <block type="variables_get" id="A%;$*)C~iCTb(?*]j8i3">
+                                                                                <field name="VAR" id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="VALUE">
+                                                                            <block type="prepend_to_list" id="|,*1FdnP.%0tq1;r5/*b">
+                                                                                <value name="ELEMENT">
+                                                                                    <block type="variables_get" id="1jj^Qb~aN7P-lLAR!@bC">
+                                                                                        <field name="VAR" id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="LIST">
+                                                                                    <block type="record_literal" id="PGWQTax0_R{Re4]p]eoI">
+                                                                                        <statement name="entries">
+                                                                                            <block type="record_field" id="R3(Yx8O27#dKSfU//0o$">
+                                                                                                <field name="field">request</field>
+                                                                                                <value name="value">
+                                                                                                    <block type="variables_get" id="QpwvpT-|E6,{~J$VJb|R">
+                                                                                                        <field name="VAR" id="e390mlLP||E^?d!LJvo?">view__balance_of__request</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                                <next>
+                                                                                                    <block type="record_field" id="Zu[$J,X/}B8s*Gfru:Mv">
+                                                                                                        <field name="field">balance</field>
+                                                                                                        <value name="value">
+                                                                                                            <block type="param_access" id="C8Zhk2f99~*;L@p+7@-z">
+                                                                                                                <field name="PROP">balance</field>
+                                                                                                                <value name="RECORD">
+                                                                                                                    <block type="get_map_value" id="^G|)kCw;Q|3Rc:|o355u">
+                                                                                                                        <value name="MAP">
+                                                                                                                            <block type="param_access" id="pD8sBGTAfRoMBA){R^3h">
+                                                                                                                                <field name="PROP">ledger</field>
+                                                                                                                                <value name="RECORD">
+                                                                                                                                    <block type="param_access" id="Lq_UhNHkwHNh47oJ:b~N">
+                                                                                                                                        <field name="PROP">assets</field>
+                                                                                                                                        <value name="RECORD">
+                                                                                                                                            <block type="contract_storage_block" id="]4$F7t1B|hl*qC7|%.#m"></block>
+                                                                                                                                        </value>
+                                                                                                                                    </block>
+                                                                                                                                </value>
+                                                                                                                            </block>
+                                                                                                                        </value>
+                                                                                                                        <value name="KEY">
+                                                                                                                            <block type="variables_get" id="LMSqceKY/-.VgHedxv!3">
+                                                                                                                                <field name="VAR" id="sCNh`^7dm5CJjS.1?2[l">view__balance_of__ledger_key</field>
+                                                                                                                            </block>
+                                                                                                                        </value>
+                                                                                                                    </block>
+                                                                                                                </value>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </next>
+                                                                                            </block>
+                                                                                        </statement>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </statement>
+                                                                <statement name="else_statements">
+                                                                    <block type="variable_setter_block" id="h_Ab*6QB~{O}7iC$?i?;">
+                                                                        <value name="VAR">
+                                                                            <block type="variables_get" id="/W~64f~eShua)0Z%YNRG">
+                                                                                <field name="VAR" id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="VALUE">
+                                                                            <block type="prepend_to_list" id="04$p_Gf*`G}5V#|q(J7f">
+                                                                                <value name="ELEMENT">
+                                                                                    <block type="variables_get" id="Kf;8oumPz=O0+cuX*uD0">
+                                                                                        <field name="VAR" id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="LIST">
+                                                                                    <block type="record_literal" id="]_V=F@AT/Gy.iBqd5Ppd">
+                                                                                        <statement name="entries">
+                                                                                            <block type="record_field" id="C]`l|}]SuXD-?+_Nw.2H">
+                                                                                                <field name="field">request</field>
+                                                                                                <value name="value">
+                                                                                                    <block type="variables_get" id="-=8.RO=3,6Wc5(F0QEhV">
+                                                                                                        <field name="VAR" id="e390mlLP||E^?d!LJvo?">view__balance_of__request</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                                <next>
+                                                                                                    <block type="record_field" id="*lUtzf-wmgr6d#fWg^{N">
+                                                                                                        <field name="field">balance</field>
+                                                                                                        <value name="value">
+                                                                                                            <block type="nat_literal" id="_ht.(%Yw6F3?cbjM{-{A">
+                                                                                                                <field name="nat_value">0</field>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </next>
+                                                                                            </block>
+                                                                                        </statement>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </statement>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </next>
                                             </block>
                                         </statement>
                                     </block>
@@ -1476,11 +1638,12 @@
                     </block>
                 </statement>
                 <value name="RETURN">
-                    <block type="variables_get" id="nlA[kwPqdwe+e=_|J*+C">
-                        <field name="VAR" id="`k09Vf?6:h7:KyKK:|bg">view__balance_of__result</field>
+                    <block type="variables_get" id="4B~MmKNf1B$od?Pi=OQ7">
+                        <field name="VAR" id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</field>
                     </block>
                 </value>
             </block>
         </statement>
     </block>
+    <block type="address_type" id="0_-i?XQya1}M2Rp;NE|4" x="788" y="1979"></block>
 </xml>
