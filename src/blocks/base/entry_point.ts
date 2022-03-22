@@ -15,7 +15,7 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
         nameField.setSpellcheck(false);
         const variableField = new FieldVariable(`entrypoint_argument`);
         this.appendDummyInput()
-            .appendField('View')
+            .appendField('Entryoint')
             .appendField(nameField, 'NAME')
             .appendField('with argument')
             .appendField(variableField, 'ARGUMENT');
