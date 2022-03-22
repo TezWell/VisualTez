@@ -21,9 +21,6 @@ const VariableSetterBlock = {
     ],
     colour: 20,
     inputsInline: true,
-    tooltip: '%{BKY_VARIABLES_SET_TOOLTIP}',
-    helpUrl: '%{BKY_VARIABLES_SET_HELPURL}',
-    extensions: ['contextMenu_variableSetterGetter'],
 };
 
 Blockly.Blocks[BlockKind.variable_setter_block] = {
