@@ -4,10 +4,13 @@
         <variable id="[_Z~[@RBQ]#Hh0w_yo`v">view_argument</variable>
         <variable id="kpu)Q!7*zC*{hG|o1XI/">view__balance_of_results</variable>
         <variable id="e390mlLP||E^?d!LJvo?">view__balance_of__request</variable>
+        <variable id="R`B!O|3jV(p@7_,9++C]">entrypoint__update_operators__action</variable>
         <variable id=":jV2nQ8TfgVkjxX]Sy$1">entrypoint__balance_of__results</variable>
         <variable id="sCNh`^7dm5CJjS.1?2[l">view__balance_of__ledger_key</variable>
-        <variable id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</variable>
+        <variable id="a)gWVNM)lKOsucF]6?RQ">entrypoint__update_operators__add__payload</variable>
         <variable id="elZKKlL2;rknf1dPu@Hi">entrypoint__balance_of__request</variable>
+        <variable id="u,=Q%32ZPmP(PVASEmvw">mint__ledger_key</variable>
+        <variable id="#F=@2%%k42zj_n3(|;iT">entrypoint__update_operators__remove__payload</variable>
         <variable id="*=EC43PlV[)N{$|HlX$6">entrypoint__balance_of__ledger_key</variable>
         <variable id="Fyo~vjqy!UV[[wcG7;rk">mint__metadata_entry</variable>
         <variable id="V5h3ZNe7f=~hao55QFKe">i</variable>
@@ -421,6 +424,168 @@
                                 </value>
                             </block>
                         </value>
+                        <statement name="CODE">
+                            <block type="assert_block" id="lPW?^Qo+_dn~}![[k`x:">
+                                <value name="assert_condition">
+                                    <block type="not" id="4!=uR)V5dnIr9K^IFUY6">
+                                        <value name="VALUE">
+                                            <block type="param_access" id="i5Ah_*[5gULFwoyfb=0]">
+                                                <field name="PROP">paused</field>
+                                                <value name="RECORD">
+                                                    <block type="param_access" id="l+SIZ:a0EtvjvIAuFhxP">
+                                                        <field name="PROP">config</field>
+                                                        <value name="RECORD">
+                                                            <block type="contract_storage_block" id="uPjV]%uPqoiX~WePH6{n"></block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <value name="error_message">
+                                    <block type="string_literal" id="{T79^*X{fWws9lMAeiZ7">
+                                        <field name="string_literal">FA2__PAUSED</field>
+                                    </block>
+                                </value>
+                                <next>
+                                    <block type="for_each_block" id="[2ZUov^h/R3}ThUrIcrC">
+                                        <field name="VAR" id="R`B!O|3jV(p@7_,9++C]">entrypoint__update_operators__action</field>
+                                        <value name="LIST">
+                                            <block type="variables_get" id="/5vRK/-s~v+m4:|)(y;+">
+                                                <field name="VAR" id=".SXk=g4?)AeQe-W]^SUc">entrypoint_argument</field>
+                                            </block>
+                                        </value>
+                                        <statement name="DO">
+                                            <block type="match_variant" id="q8jK{f?]?zaOrMw;(A0b">
+                                                <value name="VALUE">
+                                                    <block type="variables_get" id="^e3[{`:L[}NA.UJ/+rqH">
+                                                        <field name="VAR" id="R`B!O|3jV(p@7_,9++C]">entrypoint__update_operators__action</field>
+                                                    </block>
+                                                </value>
+                                                <statement name="CASES">
+                                                    <block type="match_variant_case" id=".dd3d3NMq{$Gv+XU5%gz">
+                                                        <field name="CASE">add_operator</field>
+                                                        <field name="VAR" id="a)gWVNM)lKOsucF]6?RQ">entrypoint__update_operators__add__payload</field>
+                                                        <statement name="DO">
+                                                            <block type="assert_block" id="h/o-VrIFKlPL;e@{r@|$">
+                                                                <value name="assert_condition">
+                                                                    <block type="compare_block" id="Sj/1[aW9e?2K@iA._Q(T">
+                                                                        <field name="OP">EQ</field>
+                                                                        <value name="A">
+                                                                            <block type="get_sender_block" id="Gq_MLc;h?{C%:ky_x^5:"></block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                            <block type="param_access" id="pd.6}f%)p*zwuxWh8Q|N">
+                                                                                <field name="PROP">owner</field>
+                                                                                <value name="RECORD">
+                                                                                    <block type="variables_get" id="7K?5y6YPWt3VhK,,f?XN">
+                                                                                        <field name="VAR" id="a)gWVNM)lKOsucF]6?RQ">entrypoint__update_operators__add__payload</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </value>
+                                                                <value name="error_message">
+                                                                    <block type="string_literal" id="UR?NT*e,PUr%^Ov0k8ng">
+                                                                        <field name="string_literal">FA2__NOT_OWNER</field>
+                                                                    </block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="variable_setter_block" id="MFx)2N+{KqyyRiR:~@m*">
+                                                                        <value name="VAR">
+                                                                            <block type="get_map_value" id="@f+;jd;|tynSOqr#`sLr">
+                                                                                <value name="MAP">
+                                                                                    <block type="param_access" id="m_5eMp~fXb[wUsDB?qYF">
+                                                                                        <field name="PROP">operators</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="param_access" id="]_VC/yM,U7{T:kIRKkmQ">
+                                                                                                <field name="PROP">assets</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="contract_storage_block" id="I,b(IHh3ZHJ#1xNdTI@n"></block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="KEY">
+                                                                                    <block type="variables_get" id="]MK|I*psP+dJ1Z=bs(U]">
+                                                                                        <field name="VAR" id="a)gWVNM)lKOsucF]6?RQ">entrypoint__update_operators__add__payload</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="VALUE">
+                                                                            <block type="unit_literal" id="nNmn^%[l}5iN-]9oQL15"></block>
+                                                                        </value>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </statement>
+                                                        <next>
+                                                            <block type="match_variant_case" id="q+Z^@OvdLOY(oXf1gzrN">
+                                                                <field name="CASE">remove_operator</field>
+                                                                <field name="VAR" id="#F=@2%%k42zj_n3(|;iT">entrypoint__update_operators__remove__payload</field>
+                                                                <statement name="DO">
+                                                                    <block type="assert_block" id="0NM^oRV^vG:!Tn[HV4t[">
+                                                                        <value name="assert_condition">
+                                                                            <block type="compare_block" id="_m=?]4fHHQnv$H6]@^M(">
+                                                                                <field name="OP">EQ</field>
+                                                                                <value name="A">
+                                                                                    <block type="get_sender_block" id="LtX%J=fj;!^V81ZaTy!2"></block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                    <block type="param_access" id="/EDKF}vliK48i+}eJ^;l">
+                                                                                        <field name="PROP">owner</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="variables_get" id="Z@y1TpVAFd8r0N;{NpS]">
+                                                                                                <field name="VAR" id="#F=@2%%k42zj_n3(|;iT">entrypoint__update_operators__remove__payload</field>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="error_message">
+                                                                            <block type="string_literal" id="/2Ro*W|Vs,AMIf(UTjM=">
+                                                                                <field name="string_literal">FA2__NOT_OWNER</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="delete_map_entry" id="*y-o+rCQ|wcOW3Kyo7r5">
+                                                                                <value name="KEY">
+                                                                                    <block type="variables_get" id="q}:8fbciUge)P2%FZk}c">
+                                                                                        <field name="VAR" id="#F=@2%%k42zj_n3(|;iT">entrypoint__update_operators__remove__payload</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <value name="MAP">
+                                                                                    <block type="param_access" id="42go[3hN@_Y@(0OP)g.H">
+                                                                                        <field name="PROP">operators</field>
+                                                                                        <value name="RECORD">
+                                                                                            <block type="param_access" id="-*rlvS3}V^CM{qJxRDLU">
+                                                                                                <field name="PROP">assets</field>
+                                                                                                <value name="RECORD">
+                                                                                                    <block type="contract_storage_block" id="V(#cRK-?AFfNKJOs[u_$"></block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </statement>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </statement>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </next>
+                            </block>
+                        </statement>
                         <next>
                             <block type="entry_point_block" id="62ncisAj@+dKX/J6?6lN">
                                 <field name="NAME">balance_of</field>
