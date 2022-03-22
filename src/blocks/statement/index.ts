@@ -12,3 +12,4 @@ import './VariableSetter';
 import './Return';
 
 import './operations';
+import './map';

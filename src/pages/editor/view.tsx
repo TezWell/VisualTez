@@ -353,6 +353,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Value>
                                 </Block>
                             </Category>
+
+                            <Category name="Map Statements" categorystyle="logic_category">
+                                <Block type={BlockKind.delete_map_entry} />
+                            </Category>
                         </Category>
 
                         <Category name="Blockchain Properties" categorystyle="blockchain_category">
