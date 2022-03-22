@@ -38,8 +38,19 @@ const DeploymentResults = () => {
                         The contract was successfully deployed!
                     </p>
                 </div>
-                <div className="flex items-center justify-center p-2 rounded-full border-2 border-amber-500 dark:border-amber-400">
-                    <Avatar value={state.result.address} size={64} />
+
+                <div className="flex items-center justify-center w-full mt-2">
+                    <div className="flex items-center justify-center p-2 rounded-full border-2 border-amber-500 dark:border-amber-400">
+                        <Avatar value={state.result.address} size={64} />
+                    </div>
+                    <div className="ml-4">
+                        <span className="h-10 px-3 inline-flex items-center rounded-l-md border-2 border-black dark:border-amber-400 text-sm font-bold">
+                            Confirmations
+                        </span>
+                        <span className="h-10 px-3 inline-flex items-center rounded-r-md border-2 border-l-0 border-black dark:border-amber-400 text-sm font-bold">
+                            {state.result.confirmations}
+                        </span>
+                    </div>
                 </div>
                 <div className="mt-4 flex flex-col w-full">
                     <div className="flex shadow-sm w-full">

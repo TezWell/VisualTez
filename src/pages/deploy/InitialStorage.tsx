@@ -10,6 +10,7 @@ import useDeployment from 'src/context/hooks/useDeployment';
 import Label from 'src/components/blockly/Label';
 import Value from 'src/components/blockly/Value';
 import { DeploymentActionKind } from 'src/context/Deployment';
+import ConditionalRender from 'src/components/common/ConditionalRender';
 
 interface InitialStorageProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -47,93 +48,99 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                 <label className="block text-sm font-medium">Initial Storage</label>
             </div>
             <div className="relative w-full" style={{ height: 'calc(100% - 24px)' }}>
-                {state.storageXML ? (
-                    <BlocklyEditor
-                        currentXML={state.storageXML}
-                        workspaceRef={workspaceRef}
-                        trashcan={false}
-                        comments={true}
-                        grid={{
-                            spacing: 50,
-                            length: 3,
-                            colour: '#ccc',
-                        }}
-                        zoom={{
-                            controls: true,
-                            wheel: false,
-                            startScale: 0.8,
-                            maxScale: 4,
-                            minScale: 0.25,
-                            scaleSpeed: 1.1,
-                        }}
-                        onChange={onChange}
-                    >
-                        <Block type={BlockKind.nat_literal} />
-                        <Block type={BlockKind.int_literal} />
-                        <Block type={BlockKind.mutez_literal} />
-                        <Block type={BlockKind.timestamp_literal} />
-                        <Block type={BlockKind.unit_literal} />
-                        <Block type={BlockKind.boolean_literal} />
-                        <Block type={BlockKind.string_literal} />
-                        <Block type={BlockKind.address_literal} />
-                        <Block type={BlockKind.bytes_literal} />
-                        <Block type={BlockKind.chain_id_literal} />
-                        <Block type={BlockKind.key_literal} />
-                        <Block type={BlockKind.key_hash_literal} />
-                        <Block type={BlockKind.signature_literal} />
-                        <Block type={BlockKind.bls12_381_fr_literal} />
-                        <Block type={BlockKind.bls12_381_g1_literal} />
-                        <Block type={BlockKind.bls12_381_g2_literal} />
+                <ConditionalRender props={{ storageXML: state.storageXML }}>
+                    {({ storageXML }) => (
+                        <BlocklyEditor
+                            currentXML={storageXML}
+                            workspaceRef={workspaceRef}
+                            trashcan={false}
+                            comments={true}
+                            grid={{
+                                spacing: 50,
+                                length: 3,
+                                colour: '#ccc',
+                            }}
+                            zoom={{
+                                controls: true,
+                                wheel: false,
+                                startScale: 0.8,
+                                maxScale: 4,
+                                minScale: 0.25,
+                                scaleSpeed: 1.1,
+                            }}
+                            move={{
+                                drag: true,
+                                scrollbars: true,
+                            }}
+                            onChange={onChange}
+                        >
+                            <Block type={BlockKind.nat_literal} />
+                            <Block type={BlockKind.int_literal} />
+                            <Block type={BlockKind.mutez_literal} />
+                            <Block type={BlockKind.timestamp_literal} />
+                            <Block type={BlockKind.unit_literal} />
+                            <Block type={BlockKind.boolean_literal} />
+                            <Block type={BlockKind.string_literal} />
+                            <Block type={BlockKind.address_literal} />
+                            <Block type={BlockKind.bytes_literal} />
+                            <Block type={BlockKind.chain_id_literal} />
+                            <Block type={BlockKind.key_literal} />
+                            <Block type={BlockKind.key_hash_literal} />
+                            <Block type={BlockKind.signature_literal} />
+                            <Block type={BlockKind.bls12_381_fr_literal} />
+                            <Block type={BlockKind.bls12_381_g1_literal} />
+                            <Block type={BlockKind.bls12_381_g2_literal} />
 
-                        <Separator gap={40} />
-                        <Block type={BlockKind.pair_literal} />
-                        <Separator gap={40} />
+                            <Separator gap={40} />
+                            <Block type={BlockKind.pair_literal} />
+                            <Separator gap={40} />
 
-                        <Label text="-- Option --" web-class="defaultLabel" />
-                        <Block type={BlockKind.some_literal} />
-                        <Block type={BlockKind.none_literal} />
+                            <Label text="-- Option --" web-class="defaultLabel" />
+                            <Block type={BlockKind.some_literal} />
+                            <Block type={BlockKind.none_literal} />
 
-                        <Label text="-- Sequences --" web-class="defaultLabel" />
+                            <Label text="-- Sequences --" web-class="defaultLabel" />
 
-                        <Block type={BlockKind.list_literal}>
-                            <Value name="items">
-                                <Block type={BlockKind.sequence_item} />
-                            </Value>
-                        </Block>
-                        <Block type={BlockKind.set_literal}>
-                            <Value name="items">
-                                <Block type={BlockKind.sequence_item} />
-                            </Value>
-                        </Block>
-                        <Block type={BlockKind.sequence_item} />
+                            <Block type={BlockKind.list_literal}>
+                                <Value name="items">
+                                    <Block type={BlockKind.sequence_item} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.set_literal}>
+                                <Value name="items">
+                                    <Block type={BlockKind.sequence_item} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.sequence_item} />
 
-                        <Label text="-- Maps --" web-class="defaultLabel" />
+                            <Label text="-- Maps --" web-class="defaultLabel" />
 
-                        <Block type={BlockKind.map_literal}>
-                            <Value name="entries">
-                                <Block type={BlockKind.map_entry} />
-                            </Value>
-                        </Block>
-                        <Block type={BlockKind.big_map_literal}>
-                            <Value name="entries">
-                                <Block type={BlockKind.map_entry} />
-                            </Value>
-                        </Block>
-                        <Block type={BlockKind.map_entry} />
+                            <Block type={BlockKind.map_literal}>
+                                <Value name="entries">
+                                    <Block type={BlockKind.map_entry} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.big_map_literal}>
+                                <Value name="entries">
+                                    <Block type={BlockKind.map_entry} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.map_entry} />
 
-                        <Label text="-- Record --" web-class="defaultLabel" />
+                            <Label text="-- Record --" web-class="defaultLabel" />
 
-                        <Block type={BlockKind.record_literal}>
-                            <Value name="entries">
-                                <Block type={BlockKind.record_field} />
-                            </Value>
-                            <Value name="entries">
-                                <Block type={BlockKind.record_field} />
-                            </Value>
-                        </Block>
-                        <Block type={BlockKind.record_field} />
-                    </BlocklyEditor>
-                ) : null}
+                            <Block type={BlockKind.record_literal}>
+                                <Value name="entries">
+                                    <Block type={BlockKind.record_field} />
+                                </Value>
+                                <Value name="entries">
+                                    <Block type={BlockKind.record_field} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.record_field} />
+                        </BlocklyEditor>
+                    )}
+                </ConditionalRender>
             </div>
         </div>
     );

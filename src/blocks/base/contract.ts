@@ -24,10 +24,6 @@ Blockly.Blocks[BlockKind.contract_block] = {
         nameField.setSpellcheck(false);
         this.appendDummyInput().appendField('Contract compilation').appendField(nameField, 'NAME');
         this.appendValueInput('TYPE').setCheck(['Type']).appendField('with storage type').setAlign(Blockly.ALIGN_LEFT);
-        this.appendValueInput('initial_storage')
-            .setCheck(['Literal'])
-            .appendField('and initial storage')
-            .setAlign(Blockly.ALIGN_LEFT);
         this.appendStatementInput('entry_points')
             .setCheck(['Entrypoint'])
             .appendField('Entry points')
@@ -35,6 +31,10 @@ Blockly.Blocks[BlockKind.contract_block] = {
         this.appendStatementInput('ONCHAIN_VIEWS')
             .setCheck(['View'])
             .appendField('On-Chain Views')
+            .setAlign(Blockly.ALIGN_LEFT);
+        this.appendValueInput('initial_storage')
+            .setCheck(['Literal'])
+            .appendField('Initial Storage (Optional)')
             .setAlign(Blockly.ALIGN_LEFT);
         this.setTooltip('A block that represents a contract');
         this.setColour(200);

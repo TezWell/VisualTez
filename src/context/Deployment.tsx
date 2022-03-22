@@ -27,6 +27,7 @@ interface IDeploymentState {
     result: {
         address: string;
         operationHash: string;
+        confirmations: number;
     };
 }
 
@@ -45,6 +46,10 @@ type DeploymentReducerAction =
               address?: string;
               operationHash?: string;
           };
+      }
+    | {
+          type: DeploymentActionKind.UPDATE_CONFIRMATIONS;
+          payload: number;
       };
 
 interface IDeploymentContext {
@@ -56,6 +61,7 @@ export enum DeploymentActionKind {
     UPDATE_PARAMETERS = 'DEPLOY__UPDATE_PARAMETERS__ACTION',
     UPDATE_STATE = 'DEPLOY__UPDATE_STATE__ACTION',
     UPDATE_RESULT = 'DEPLOY__UPDATE_RESULT__ACTION',
+    UPDATE_CONFIRMATIONS = 'DEPLOY__UPDATE_CONFIRMATIONS__ACTION',
 }
 
 export enum Field {
@@ -82,6 +88,7 @@ const contextStub: IDeploymentContext = {
         result: {
             address: '',
             operationHash: '',
+            confirmations: 0,
         },
     },
     dispatch: () => {
@@ -139,6 +146,15 @@ const reducer = (state: IDeploymentState, action: DeploymentReducerAction): IDep
                 result: {
                     ...state.result,
                     ...action.payload,
+                    confirmations: 0,
+                },
+            };
+        case DeploymentActionKind.UPDATE_CONFIRMATIONS:
+            return {
+                ...state,
+                result: {
+                    ...state.result,
+                    confirmations: action.payload,
                 },
             };
         case DeploymentActionKind.UPDATE_STATE:

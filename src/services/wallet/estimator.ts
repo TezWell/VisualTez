@@ -2,7 +2,7 @@ import { TezosToolkit } from '@taquito/taquito';
 
 export const DEFAULT_ORIGINATION_COSTS = {
     Fee: 1_266,
-    Gas_limit: 1_040_000,
+    Gas_limit: 10_600,
     Storage_limit: 496,
 };
 
@@ -38,7 +38,7 @@ export const estimateOrigination = async (
     return {
         fee: estimate.estimatedFee / 1_000_000,
         gasLimit: estimate.gas,
-        storageLimit: estimate?.storageCost,
+        storageLimit: estimate.storageCost,
     };
 };
 
@@ -95,6 +95,8 @@ const estimateOperation = async (
                         storageCost += 257;
                     }
                 }
+
+                storageCost += 300;
         }
     }
 

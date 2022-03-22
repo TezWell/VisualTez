@@ -1,7 +1,6 @@
 import React, { createContext } from 'react';
-import { TezosToolkit } from '@taquito/taquito';
-import { connect } from 'src/services/wallet';
 
+import { connect, TezosWallet } from 'src/services/wallet';
 import settings from 'src/settings.json';
 import Logger from 'src/utils/logger';
 
@@ -46,7 +45,7 @@ type ITezosWalletStatus = {
 
 export interface ITezosContext {
     state: ITezosStorage;
-    client: React.MutableRefObject<TezosToolkit | undefined>;
+    client: React.MutableRefObject<TezosWallet | undefined>;
     walletStatus: ITezosWalletStatus;
     connectWallet: (tryReconnection?: boolean) => void;
     changeNetwork: (network: NetworkKind) => void;
@@ -59,7 +58,7 @@ const contextStub: ITezosContext = {
         rpc: DEFAULT_RPC[NetworkKind.Mainnet],
     },
     client: {
-        current: {} as any,
+        current: undefined,
     },
     walletStatus: {
         connected: false,
@@ -108,7 +107,7 @@ const Provider: React.FC = (props) => {
         connected: false,
         connecting: false,
     });
-    const client = React.useRef<TezosToolkit>();
+    const client = React.useRef<TezosWallet>();
 
     const connectWallet = React.useCallback(
         async (tryReconnection = false) => {
@@ -118,7 +117,7 @@ const Provider: React.FC = (props) => {
             });
             try {
                 client.current = await connect(state.rpc, state.network, tryReconnection);
-                const address = await client.current.wallet.pkh();
+                const address = await client.current.taquito.wallet.pkh();
                 setWalletStatus({
                     address,
                     balance: 0,
@@ -144,7 +143,7 @@ const Provider: React.FC = (props) => {
             network,
             rpc: DEFAULT_RPC[network],
         }));
-        client.current?.setRpcProvider(DEFAULT_RPC[network]);
+        client.current?.taquito.setRpcProvider(DEFAULT_RPC[network]);
         setWalletStatus((prev) => ({
             ...prev,
             error: '',
@@ -157,7 +156,7 @@ const Provider: React.FC = (props) => {
             network: NETWORK_OF_RPC[rpc] || 'CUSTOM',
             rpc,
         }));
-        client.current?.setRpcProvider(rpc);
+        client.current?.taquito.setRpcProvider(rpc);
         setWalletStatus((prev) => ({
             ...prev,
             error: '',
@@ -166,7 +165,7 @@ const Provider: React.FC = (props) => {
 
     const updateBalance = React.useCallback(async () => {
         if (client.current && walletStatus.connected) {
-            const balance = (await client.current.rpc.getBalance(walletStatus.address)).toNumber();
+            const balance = (await client.current.taquito.rpc.getBalance(walletStatus.address)).toNumber();
             setWalletStatus((s) => ({
                 ...s,
                 balance,

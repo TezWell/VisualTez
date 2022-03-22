@@ -1,5 +1,6 @@
 import Blockly, { Block } from 'blockly';
 import { PrependToList } from '@tezwell/smartts-sdk';
+import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
@@ -29,7 +30,7 @@ Blockly.Blocks[BlockKind.prepend_to_list] = {
 SmartML.addBlock(BlockKind.prepend_to_list, {
     toValue: (block: Block) => {
         const element = SmartML.toValue(block, 'ELEMENT');
-        const list = SmartML.toValue(block, 'LIST');
+        const list: IExpression<any> = SmartML.toValue(block, 'LIST');
         return PrependToList(list, element, buildErrorInfo(block));
     },
 });

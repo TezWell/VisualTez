@@ -1,5 +1,6 @@
 import type { WalletOriginateParams } from '@taquito/taquito';
 import type { Workspace, WorkspaceSvg } from 'blockly';
+import type { Subscription } from 'rxjs';
 import React from 'react';
 
 import { extractBlocks } from 'src/blocks';
@@ -15,9 +16,13 @@ import DeployView from './view';
 const DeployContainer = () => {
     const { client, walletStatus } = useTezos();
     const { state, dispatch } = useDeployment();
+    const subscription = React.useRef<Subscription>();
     const workspaceRef = React.useRef<WorkspaceSvg>();
 
     const deploy = React.useCallback(async () => {
+        if (subscription.current) {
+            subscription.current.unsubscribe();
+        }
         if (workspaceRef.current && client.current) {
             // Start deployment
             dispatch({
@@ -53,6 +58,13 @@ const DeployContainer = () => {
                 }
 
                 const result = await deployContract(client.current, params);
+                result.watcher.forEach((confirmation) => {
+                    dispatch({
+                        type: DeploymentActionKind.UPDATE_CONFIRMATIONS,
+                        payload: confirmation,
+                    });
+                });
+                subscription.current = result.watcher.subscribe();
 
                 dispatch({
                     type: DeploymentActionKind.UPDATE_RESULT,

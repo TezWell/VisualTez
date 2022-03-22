@@ -81,6 +81,7 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) =
                         }}
                         move={{
                             drag: true,
+                            scrollbars: true,
                         }}
                     />
                 </div>

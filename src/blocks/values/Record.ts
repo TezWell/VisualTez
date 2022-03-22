@@ -1,4 +1,4 @@
-import type { Block } from 'blockly';
+import { Block, FieldTextInput } from 'blockly';
 import Blockly from 'blockly';
 
 import { TRecord as ST_TRecord } from '@tezwell/smartts-sdk/type';
@@ -21,6 +21,9 @@ Blockly.Blocks[BlockKind.record_literal] = {
             outputShape: 3,
             colour: 100,
         });
+        const layoutField = new FieldTextInput('');
+        layoutField.setTooltip('Default: Right combs\n---\nExample: ["prop1", ["prop2", "props3"]]');
+        this.appendDummyInput().appendField('Layout').appendField(layoutField, 'LAYOUT').setAlign(Blockly.ALIGN_RIGHT);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
@@ -43,7 +46,18 @@ SmartML.addBlock(BlockKind.record_literal, {
             fields.push(toFieldBlock(targetBlock));
         } while ((targetBlock = targetBlock.getNextBlock()));
 
-        return ST_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}));
+        const layout = block.getFieldValue('LAYOUT');
+        let layoutArray = undefined;
+        try {
+            layoutArray = layout ? JSON.parse(layout) : undefined;
+        } catch {
+            /* Ignore parsing error */
+        }
+
+        return ST_TRecord(
+            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: SmartML.toType(block, 'value') }), {}),
+            layoutArray,
+        );
     },
     toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('entries');
@@ -79,7 +93,18 @@ Michelson.addBlock(BlockKind.record_literal, {
             throw new Error('Each record must contain at least two(2) entries.');
         }
 
-        return M_TRecord(fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}));
+        const layout = block.getFieldValue('LAYOUT');
+        let layoutArray = undefined;
+        try {
+            layoutArray = layout ? JSON.parse(layout) : undefined;
+        } catch {
+            /* Ignore parsing error */
+        }
+
+        return M_TRecord(
+            fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'value') }), {}),
+            layoutArray,
+        );
     },
     toMichelson: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('entries');
@@ -96,8 +121,17 @@ Michelson.addBlock(BlockKind.record_literal, {
             throw new Error('Each record must contain at least two(2) entries.');
         }
 
+        const layout = block.getFieldValue('LAYOUT');
+        let layoutArray = undefined;
+        try {
+            layoutArray = layout ? JSON.parse(layout) : undefined;
+        } catch {
+            /* Ignore parsing error */
+        }
+
         return M_Record(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toMichelson(block, 'value') }), {}),
+            layoutArray,
         );
     },
 });

@@ -1,12 +1,20 @@
 import { TezosToolkit, WalletOriginateParams } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
+import { localForger } from '@taquito/local-forging';
+import TezMonitor from '@tezwell/tezmonitor';
 
 import { NetworkKind } from 'src/context/Tezos';
+import * as Beacon from './beacon';
+
+export interface TezosWallet {
+    taquito: TezosToolkit;
+    beacon: BeaconWallet;
+}
 
 enum NetworkType {
     MAINNET = 'mainnet',
     HANGZHOUNET = 'hangzhounet',
-    IDIAZABALNET = 'idiazabalnet',
+    ITHACANET = 'ithacanet',
     CUSTOM = 'custom',
 }
 
@@ -41,7 +49,7 @@ export const connect = async (
     network: NetworkKind,
     tryRecover = false,
     networkType = getNetwork(network),
-) => {
+): Promise<TezosWallet> => {
     const tezos = new TezosToolkit(rpc);
 
     const options = {
@@ -69,7 +77,7 @@ export const connect = async (
         });
     }
 
-    return tezos;
+    return { taquito: tezos, beacon: wallet };
 };
 
 /**
@@ -77,57 +85,52 @@ export const connect = async (
  *
  * @param client Tezos client
  * @param params Origination arguments
+ *
  * @returns The originated contract address and a confirmation promise.
  */
-export const deployContract = async (client: TezosToolkit, params: WalletOriginateParams) => {
-    // DO NOT REMOVE THE COMMENTS BELLOW
+export const deployContract = async (client: TezosWallet, params: WalletOriginateParams) => {
+    const pkh = await client.taquito.wallet.pkh();
+    const counter = Number((await client.taquito.rpc.getContract(pkh)).counter || 0);
+    const blockHeader = await client.taquito.rpc.getBlockHeader();
+    const operation: any = {
+        kind: 'origination',
+        counter: String(counter + 1),
+        source: pkh,
+        fee: String((params.fee || 0) * 1_000_000),
+        balance: String(params.balance),
+        gas_limit: String(params.gasLimit),
+        storage_limit: String(params.storageLimit),
+        script: {
+            code: params.code,
+            storage: params.init,
+        },
+        delegate: params.delegate || undefined,
+    };
+    const bytes = await localForger.forge({
+        branch: blockHeader.hash,
+        contents: [operation],
+    });
+    const signingResult = await Beacon.sign(client.beacon, bytes);
 
-    // const pkh = await client.wallet.pkh();
-    // const counter = Number((await client.rpc.getContract(pkh)).counter || 0);
-    // const blockHeader = await client.rpc.getBlockHeader();
-    // const operation: any = {
-    //     kind: 'origination',
-    //     counter: String(counter + 1),
-    //     source: pkh,
-    //     fee: String((params.fee || 0) * 1_000_000),
-    //     balance: String(params.balance),
-    //     gas_limit: String(params.gasLimit),
-    //     storage_limit: String(params.storageLimit),
-    //     script: {
-    //         code: params.code,
-    //         storage: params.init,
-    //     },
-    //     delegate: params.delegate || undefined,
-    // };
-    // const bytes = await localForger.forge({
-    //     branch: blockHeader.hash,
-    //     contents: [operation],
-    // });
-    // const bytesHex = Buffer.from(bytes, 'hex');
-    // console.error(bytes, bytesHex);
+    const preApplyResults = await client.taquito.rpc.preapplyOperations([
+        {
+            branch: blockHeader.hash,
+            protocol: blockHeader.protocol,
+            contents: [operation],
+            signature: signingResult.prefixSig,
+        },
+    ]);
+    const address = (preApplyResults?.[0]?.contents?.[0] as any)?.metadata?.operation_result?.originated_contracts?.[0];
 
-    // const signingResult = await (client.wallet as any).beacon.client.requestSignPayload({
-    //     payload: bytes,
-    //     signingType: SigningType.RAW,
-    // });
-    // console.error(signingResult);
+    if (!address) {
+        throw new Error('Could not originate contract.');
+    }
 
-    // const signed = { bytes: bytesHex, signature: signingResult.signature };
+    const operationHash = await client.taquito.rpc.injectOperation(signingResult.sbytes);
 
-    // console.error(
-    //     client.rpc.preapplyOperations([
-    //         {
-    //             branch: blockHeader.hash,
-    //             protocol: blockHeader.protocol,
-    //             contents: [operation],
-    //             signature: signingResult.signature,
-    //         },
-    //     ]),
-    // );
-
-    const result = await client.wallet.originate(params).send();
     return {
-        address: (await result.contract()).address,
-        operationHash: result.opHash,
+        operationHash,
+        address,
+        watcher: TezMonitor.operationConfirmations(client.taquito.rpc.getRpcUrl(), operationHash, 10),
     };
 };
