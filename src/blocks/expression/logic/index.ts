@@ -1,2 +1,2 @@
-export * from './And';
-export * from './Or';
+import './And';
+import './Or';

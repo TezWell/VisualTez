@@ -104,6 +104,8 @@ export enum BlockKind {
     as_type = 'as_type',
     and = 'and',
     or = 'or',
+    nat_of_int = 'nat_of_int',
+    int_of_nat = 'int_of_nat',
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',

@@ -1,1 +1,1 @@
-export * from './arithmetic';
+import './arithmetic';

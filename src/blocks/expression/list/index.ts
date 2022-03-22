@@ -1,1 +1,1 @@
-export * from './PrependToList';
+import './PrependToList';

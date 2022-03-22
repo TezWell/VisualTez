@@ -1,9 +1,9 @@
 import Blockly, { Block } from 'blockly';
 import { AsType } from '@tezwell/smartts-sdk';
 
-import BlockKind from '../enums/BlockKind';
-import SmartML from '../generators/SmartML';
-import { buildErrorInfo } from '../utils/errorHandling';
+import BlockKind from '../../enums/BlockKind';
+import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from '../../utils/errorHandling';
 
 const AsTypeBlock = {
     type: BlockKind.as_type,

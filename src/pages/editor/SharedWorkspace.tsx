@@ -80,7 +80,6 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) =
                             scaleSpeed: 1.1,
                         }}
                         move={{
-                            scrollbars: true,
                             drag: true,
                         }}
                     />
