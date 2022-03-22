@@ -102,6 +102,8 @@ export enum BlockKind {
     pack = 'pack',
     unpack = 'unpack',
     as_type = 'as_type',
+    and = 'and',
+    or = 'or',
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',

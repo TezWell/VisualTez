@@ -10,3 +10,4 @@ import './serialization';
 import './comparison';
 import './math';
 import './blockchain_operations';
+import './logic';

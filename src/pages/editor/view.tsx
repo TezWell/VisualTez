@@ -270,8 +270,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Category name="Typing" categorystyle="logic_category">
                                 <Block type={BlockKind.as_type} />
                             </Category>
-                            <Category name="Equality & Comparison" categorystyle="logic_category">
+                            <Category name="Equality & Comparison & Logic" categorystyle="logic_category">
                                 <Block type={BlockKind.compare_block} />
+                                <Block type={BlockKind.and} />
+                                <Block type={BlockKind.or} />
                             </Category>
                             <Category name="Arithmetic" categorystyle="logic_category">
                                 <Block type={BlockKind.math_block} />
