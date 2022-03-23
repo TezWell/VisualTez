@@ -42,8 +42,6 @@ const CompareBlock = {
     inputsInline: true,
     output: ['Expression'],
     colour: 350,
-    helpUrl: '%{BKY_LOGIC_COMPARE_HELPURL}',
-    extensions: ['logic_compare', 'logic_op_tooltip'],
 };
 
 Blockly.Blocks[CompareBlock.type] = {

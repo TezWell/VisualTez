@@ -34,11 +34,9 @@ const MathBlock = {
     inputsInline: true,
     output: ['Expression'],
     colour: 350,
-    helpUrl: '%{BKY_LOGIC_COMPARE_HELPURL}',
-    extensions: ['logic_compare', 'logic_op_tooltip'],
 };
 
-Blockly.Blocks[MathBlock.type] = {
+Blockly.Blocks[BlockKind.math_block] = {
     init: function () {
         this.jsonInit(MathBlock);
         this.setPreviousStatement(false);
@@ -46,21 +44,24 @@ Blockly.Blocks[MathBlock.type] = {
     },
 };
 
-SmartML.addBlock(MathBlock.type, {
+SmartML.addBlock(BlockKind.math_block, {
     toValue: (block: Block) => {
+        const line = buildErrorInfo(block);
         const left = SmartML.toValue(block, 'A');
         const right = SmartML.toValue(block, 'B');
         const operator = block.getFieldValue('OP');
+
         switch (operator) {
             case 'SUM':
-                return Add(left, right, buildErrorInfo(block));
+                return Add(left, right, line);
             case 'SUB':
-                return Subtract(left, right, buildErrorInfo(block));
+                return Subtract(left, right, line);
             case 'MUL':
-                return Multiply(left, right, buildErrorInfo(block));
+                return Multiply(left, right, line);
             case 'DIV':
-                return Divide(left, right, buildErrorInfo(block));
+                return Divide(left, right, line);
         }
+
         throw new Error(`Unexpected operator ${operator}.`);
     },
 });
