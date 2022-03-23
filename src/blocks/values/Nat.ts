@@ -9,7 +9,7 @@ import { Nat as ST_Nat } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
-import { buildErrorInfo } from '../utils/errorHandling';
+import { buildBlockErrorString, buildErrorInfo, updateErrorInfo } from '../utils/errorHandling';
 
 const NatBlock = {
     type: BlockKind.nat_literal,
@@ -38,7 +38,7 @@ SmartML.addBlock(BlockKind.nat_literal, {
         return ST_TNat();
     },
     toValue: (block: Block) => {
-        return ST_Nat(block.getFieldValue('nat_value'), buildErrorInfo(block));
+        return ST_Nat(validate(block), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.nat_literal, {
@@ -46,6 +46,14 @@ Michelson.addBlock(BlockKind.nat_literal, {
         return M_TNat();
     },
     toMichelson: (block: Block) => {
-        return M_Nat(block.getFieldValue('nat_value'));
+        return M_Nat(validate(block));
     },
 });
+
+const validate = (block: Block) => {
+    const number = Number(block.getFieldValue('nat_value'));
+    if (number < 0) {
+        throw new Error(`Cannot take negative values. ${buildBlockErrorString(block)}`);
+    }
+    return number;
+};

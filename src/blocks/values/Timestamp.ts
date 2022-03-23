@@ -8,7 +8,7 @@ import { Timestamp as ST_Timestamp } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
-import { buildErrorInfo } from '../utils/errorHandling';
+import { buildBlockErrorString, buildErrorInfo } from '../utils/errorHandling';
 
 const TimestampBlock = {
     type: BlockKind.timestamp_literal,
@@ -37,7 +37,7 @@ SmartML.addBlock(BlockKind.timestamp_literal, {
         return ST_TTimestamp();
     },
     toValue: (block: Block) => {
-        return ST_Timestamp(block.getFieldValue('value'), buildErrorInfo(block));
+        return ST_Timestamp(validate(block), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.timestamp_literal, {
@@ -45,6 +45,14 @@ Michelson.addBlock(BlockKind.timestamp_literal, {
         return M_TTimestamp();
     },
     toMichelson: (block: Block) => {
-        return M_Timestamp(block.getFieldValue('value'));
+        return M_Timestamp(validate(block));
     },
 });
+
+const validate = (block: Block) => {
+    const number = Number(block.getFieldValue('value'));
+    if (number < 0) {
+        throw new Error(`Cannot take negative values. ${buildBlockErrorString(block)}`);
+    }
+    return number;
+};

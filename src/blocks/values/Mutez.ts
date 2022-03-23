@@ -8,7 +8,7 @@ import { Mutez as ST_Mutez } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
-import { buildErrorInfo } from '../utils/errorHandling';
+import { buildBlockErrorString, buildErrorInfo } from '../utils/errorHandling';
 
 const MutezBlock = {
     type: BlockKind.mutez_literal,
@@ -37,7 +37,7 @@ SmartML.addBlock(BlockKind.mutez_literal, {
         return ST_TMutez();
     },
     toValue: (block: Block) => {
-        return ST_Mutez(block.getFieldValue('value'), buildErrorInfo(block));
+        return ST_Mutez(validate(block), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.mutez_literal, {
@@ -45,6 +45,14 @@ Michelson.addBlock(BlockKind.mutez_literal, {
         return M_TMutez();
     },
     toMichelson: (block: Block) => {
-        return M_Mutez(block.getFieldValue('value'));
+        return M_Mutez(validate(block));
     },
 });
+
+const validate = (block: Block) => {
+    const number = Number(block.getFieldValue('value'));
+    if (number < 0) {
+        throw new Error(`Cannot take negative values. ${buildBlockErrorString(block)}`);
+    }
+    return number;
+};
