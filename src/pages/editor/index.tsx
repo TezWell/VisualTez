@@ -6,22 +6,38 @@ import useEditor from 'src/context/hooks/useEditor';
 import ErrorModal from 'src/components/common/ErrorModal';
 import { notNull } from 'src/utils/guards';
 import Logger from 'src/utils/logger';
+import { updateErrorInfo } from 'src/blocks/utils/errorHandling';
+import { EditorActionKind } from 'src/context/Editor';
 
 import EditorView from './view';
 import SharedWorkspace from './SharedWorkspace';
-import { updateErrorInfo } from 'src/blocks/utils/errorHandling';
 
 const EditorContainer = () => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
-    const { workspace, error, updateError, updateCompilations } = useEditor();
+    const { state, workspace, dispatch } = useEditor();
     const workspaceID = React.useRef(workspace.id);
+
+    const updateError = React.useCallback(
+        (msg?: string) => {
+            dispatch({
+                type: EditorActionKind.UPDATE_ERROR,
+                payload: {
+                    msg,
+                },
+            });
+        },
+        [dispatch],
+    );
 
     const compile = React.useCallback(() => {
         if (workspaceRef.current) {
             try {
                 const blocks = extractBlocks(workspaceRef.current as Workspace);
                 const compilations: Compilation[] = blocks.map(compileBlock).filter(notNull);
-                updateCompilations(compilations);
+                dispatch({
+                    type: EditorActionKind.UPDATE_COMPILATIONS,
+                    payload: compilations,
+                });
             } catch (e: any) {
                 const errorMessage: string = e?.message || e.toString();
                 Logger.debug(errorMessage);
@@ -30,7 +46,7 @@ const EditorContainer = () => {
                 }
             }
         }
-    }, [updateCompilations, updateError]);
+    }, [dispatch, updateError]);
 
     React.useEffect(() => {
         try {
@@ -46,13 +62,13 @@ const EditorContainer = () => {
             Logger.debug(e);
             updateError(e.message || e.toString?.());
         }
-    }, [workspace.id]);
+    }, [dispatch, updateError, workspace.id, workspace.xml]);
 
     return (
         <>
             <EditorView workspaceRef={workspaceRef} compile={compile} onError={updateError} />
-            <ErrorModal title="Editor Error" open={!!error} onClose={() => updateError(undefined)}>
-                {error}
+            <ErrorModal title="Editor Error" open={!!state.error} onClose={() => updateError(undefined)}>
+                {state.error}
             </ErrorModal>
             <SharedWorkspace mainWorkspaceRef={workspaceRef} />
         </>

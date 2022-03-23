@@ -6,6 +6,7 @@ import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
 import useEditor from 'src/context/hooks/useEditor';
 import { generateRandomString } from 'src/utils/rand';
+import { EditorActionKind } from 'src/context/Editor';
 
 interface SharedWorkspaceProps {
     mainWorkspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -14,23 +15,39 @@ interface SharedWorkspaceProps {
 const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
     const [name, setName] = React.useState(`Workspace_${generateRandomString()}`);
-    const { volatileWorkspace, updateVolatileWorkspace, createWorkspace } = useEditor();
+    const { state, dispatch } = useEditor();
 
     const updateName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
     }, []);
 
+    const updateVolatileWorkspace = React.useCallback(
+        (xml?: string) => {
+            dispatch({
+                type: EditorActionKind.UPDATE_VOLATILE_WORKSPACE,
+                payload: xml,
+            });
+        },
+        [dispatch],
+    );
+
     const importWorkspace = React.useCallback(() => {
         if (mainWorkspaceRef.current) {
-            createWorkspace(name, volatileWorkspace);
-            updateVolatileWorkspace(undefined);
+            dispatch({
+                type: EditorActionKind.CREATE_WORKSPACE,
+                payload: {
+                    name,
+                    xml: state.volatileWorkspace,
+                },
+            });
+            updateVolatileWorkspace();
         }
-    }, [createWorkspace, mainWorkspaceRef, name, updateVolatileWorkspace, volatileWorkspace]);
+    }, [dispatch, mainWorkspaceRef, name, state.volatileWorkspace, updateVolatileWorkspace]);
 
     return (
         <Modal
-            open={!!volatileWorkspace}
-            onClose={() => updateVolatileWorkspace(undefined)}
+            open={!!state.volatileWorkspace}
+            onClose={() => updateVolatileWorkspace()}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
                     Import Workspace
@@ -46,7 +63,7 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) =
                 </Button>,
                 <Button
                     key="close"
-                    onClick={() => updateVolatileWorkspace(undefined)}
+                    onClick={() => updateVolatileWorkspace()}
                     className="bg-gray-400 hover:bg-gray-300 border-gray-700 hover:border-gray-600 p-2"
                 >
                     Close
@@ -66,7 +83,7 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) =
                 </div>
                 <div className="relative grow">
                     <BlocklyEditor
-                        currentXML={volatileWorkspace}
+                        currentXML={state.volatileWorkspace}
                         workspaceRef={workspaceRef}
                         noToolbox
                         trashcan={false}

@@ -1,5 +1,6 @@
 import React from 'react';
-import { EditorRenderer } from 'src/context/Editor';
+
+import { EditorActionKind, EditorRenderer } from 'src/context/Editor';
 import useEditor from 'src/context/hooks/useEditor';
 
 import DrawerTitle from './DrawerTitle';
@@ -8,14 +9,17 @@ import DrawerTitle from './DrawerTitle';
 interface SettingsDrawerProps {}
 
 const SettingsDrawer: React.FC<SettingsDrawerProps> = () => {
-    const { updateRenderer, state } = useEditor();
+    const { dispatch, state } = useEditor();
 
     const selectRenderer = React.useCallback(
         (e) => {
-            updateRenderer(e.target.value);
+            dispatch({
+                type: EditorActionKind.UPDATE_RENDERER,
+                payload: e.target.value,
+            });
             window.location.reload();
         },
-        [updateRenderer],
+        [dispatch],
     );
 
     return (

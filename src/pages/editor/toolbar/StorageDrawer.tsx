@@ -12,13 +12,14 @@ import {
 
 import Button from 'src/components/common/Button';
 import useEditor from 'src/context/hooks/useEditor';
-import DrawerTitle from './DrawerTitle';
 import { buildClassName } from 'src/utils/className';
 import Modal from 'src/components/common/Modal';
-import { IEditorWorkspace } from 'src/context/Editor';
+import { EditorActionKind, IEditorWorkspace } from 'src/context/Editor';
 import { downloadFile } from 'src/utils/download_upload';
 import FileDropZone from 'src/components/common/FileDropZone';
 import ConditionalRender from 'src/components/common/ConditionalRender';
+
+import DrawerTitle from './DrawerTitle';
 
 interface DeleteWorkspaceModalProps {
     workspace: IEditorWorkspace;
@@ -26,12 +27,17 @@ interface DeleteWorkspaceModalProps {
 }
 
 const DeleteWorkspaceModal: React.FC<DeleteWorkspaceModalProps> = ({ workspace, onClose }) => {
-    const { deleteWorkspace } = useEditor();
+    const { dispatch } = useEditor();
 
-    const delWorkspace = React.useCallback(() => {
-        deleteWorkspace(workspace.id);
+    const deleteWorkspace = React.useCallback(() => {
+        dispatch({
+            type: EditorActionKind.DELETE_WORKSPACE,
+            payload: {
+                workspaceID: workspace.id,
+            },
+        });
         onClose();
-    }, [deleteWorkspace, onClose, workspace.id]);
+    }, [dispatch, onClose, workspace.id]);
 
     return (
         <Modal
@@ -45,7 +51,7 @@ const DeleteWorkspaceModal: React.FC<DeleteWorkspaceModalProps> = ({ workspace, 
             actions={[
                 <Button
                     key="delete"
-                    onClick={delWorkspace}
+                    onClick={deleteWorkspace}
                     className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
                 >
                     Delete
@@ -74,16 +80,21 @@ interface CreateWorkspaceModalProps {
 
 const CreateWorkspaceModal: React.FC<CreateWorkspaceModalProps> = ({ onClose }) => {
     const [name, setName] = React.useState('');
-    const { createWorkspace } = useEditor();
+    const { dispatch } = useEditor();
 
     const updateName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
 
     const newWorkspace = React.useCallback(() => {
         if (name) {
-            createWorkspace(name);
+            dispatch({
+                type: EditorActionKind.CREATE_WORKSPACE,
+                payload: {
+                    name,
+                },
+            });
             onClose();
         }
-    }, [createWorkspace, name, onClose]);
+    }, [dispatch, name, onClose]);
 
     return (
         <Modal
@@ -141,19 +152,22 @@ interface UpdateWorkspaceModalProps {
 
 const UpdateWorkspaceModal: React.FC<UpdateWorkspaceModalProps> = ({ workspace, onClose }) => {
     const [name, setName] = React.useState(workspace.name);
-    const { updateWorkspace } = useEditor();
+    const { dispatch } = useEditor();
 
     const updateName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
 
     const changeWorkspaceName = React.useCallback(() => {
         if (name) {
-            updateWorkspace({
-                ...workspace,
-                name,
+            dispatch({
+                type: EditorActionKind.UPDATE_WORKSPACE,
+                payload: {
+                    id: workspace.id,
+                    name,
+                },
             });
             onClose();
         }
-    }, [updateWorkspace, workspace, name, onClose]);
+    }, [name, dispatch, workspace.id, onClose]);
 
     return (
         <Modal
@@ -208,11 +222,18 @@ const UpdateWorkspaceModal: React.FC<UpdateWorkspaceModalProps> = ({ workspace, 
 interface StorageDrawerProps {}
 
 const StorageDrawer: React.FC<StorageDrawerProps> = () => {
-    const { state, workspace, updateEditorState, updateError, updateVolatileWorkspace } = useEditor();
+    const { state, workspace, dispatch } = useEditor();
     const [createWorkspaceModal, setCreateWorkspaceModal] = React.useState(false);
     const [deleteWorkspaceModal, setDeleteWorkspaceModal] = React.useState<IEditorWorkspace>();
     const [updateWorkspaceModal, setUpdateWorkspaceModal] = React.useState<IEditorWorkspace>();
     const [openImportModal, setOpenImportModal] = React.useState(false);
+
+    const selectWorkspace = (id: string) => {
+        dispatch({
+            type: EditorActionKind.CHANGE_SELECTED_WORKSPACE,
+            payload: id,
+        });
+    };
 
     const downloadWorkspace = () => {
         const fileName = `${workspace.name.replace(/\s/g, '_').toLowerCase()}.xml`;
@@ -224,13 +245,21 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
         const reader = new FileReader();
 
         const fail = () => {
-            updateError('Could not import workspace.');
+            dispatch({
+                type: EditorActionKind.UPDATE_ERROR,
+                payload: {
+                    msg: 'Could not import workspace.',
+                },
+            });
         };
 
         reader.onabort = fail;
         reader.onerror = fail;
         reader.onload = () => {
-            updateVolatileWorkspace(reader.result as string);
+            dispatch({
+                type: EditorActionKind.UPDATE_VOLATILE_WORKSPACE,
+                payload: reader.result as string,
+            });
         };
         reader.readAsText(file);
     };
@@ -273,7 +302,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                 <Disclosure.Panel>
                                     <div className="mt-2 border rounded border-black dark:border-white p-2">
                                         <Button
-                                            onClick={() => updateEditorState({ currentWorkspace: w.id })}
+                                            onClick={() => selectWorkspace(w.id)}
                                             className="flex justify-between items-center w-full bg-amber-500 hover:bg-amber-400 border-amber-700 hover:border-amber-500 p-1 px-5"
                                         >
                                             <ExternalLinkIcon className="block" width={16} height={16} />
@@ -348,7 +377,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                     workspace: updateWorkspaceModal,
                 }}
             >
-                {(props) => <UpdateWorkspaceModal onClose={() => setDeleteWorkspaceModal(undefined)} {...props} />}
+                {(props) => <UpdateWorkspaceModal onClose={() => setUpdateWorkspaceModal(undefined)} {...props} />}
             </ConditionalRender>
             {createWorkspaceModal ? <CreateWorkspaceModal onClose={() => setCreateWorkspaceModal(false)} /> : null}
         </div>

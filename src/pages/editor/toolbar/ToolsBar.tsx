@@ -4,8 +4,7 @@ import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon } from '@heroicons/react/outl
 import { TemplateIcon } from '@heroicons/react/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
-import { DrawerKind } from 'src/context/Editor';
-import Drawer from './Drawer';
+import { DrawerKind, EditorActionKind } from 'src/context/Editor';
 
 interface ToolsBarProps {
     compile: () => void;
@@ -13,15 +12,22 @@ interface ToolsBarProps {
 }
 
 const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
-    const { updateDrawer } = useEditor();
+    const { state, dispatch } = useEditor();
 
     const onMenuSelection = (drawer?: DrawerKind) => {
-        switch (updateDrawer(drawer)) {
-            case DrawerKind.Compilation:
-                compile();
-        }
+        dispatch({
+            type: EditorActionKind.UPDATE_DRAWER,
+            payload: drawer,
+        });
+
         setTimeout(resizeWorkspace, 100);
     };
+
+    React.useEffect(() => {
+        if (state.drawer === DrawerKind.Compilation) {
+            compile();
+        }
+    }, [state.drawer]);
 
     return (
         <div className="flex flex-col w-24 border-l border-black dark:border-white">

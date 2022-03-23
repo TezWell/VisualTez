@@ -1,9 +1,10 @@
 import React from 'react';
 import { Transition } from '@headlessui/react';
+
 import useEditor from 'src/context/hooks/useEditor';
 import CompilationDrawer from './CompilationDrawer';
 import DoubleArrowRightIcon from 'src/components/common/icons/DoubleArrowRight';
-import { DrawerKind } from 'src/context/Editor';
+import { DrawerKind, EditorActionKind } from 'src/context/Editor';
 import SharingDrawer from './SharingDrawer';
 import StorageDrawer from './StorageDrawer';
 import SettingsDrawer from './SettingsDrawer';
@@ -12,15 +13,17 @@ import TemplatesDrawer from './TemplatesDrawer';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DrawerProps {}
 
-const Drawer: React.FC<DrawerProps> = ({}) => {
-    const { drawer, updateDrawer } = useEditor();
+const Drawer: React.FC<DrawerProps> = () => {
+    const { state, dispatch } = useEditor();
 
     const onClose = () => {
-        updateDrawer();
+        dispatch({
+            type: EditorActionKind.UPDATE_DRAWER,
+        });
     };
 
     const content = React.useMemo(() => {
-        switch (drawer) {
+        switch (state.drawer) {
             case DrawerKind.Compilation:
                 return <CompilationDrawer />;
             case DrawerKind.Share:
@@ -33,14 +36,14 @@ const Drawer: React.FC<DrawerProps> = ({}) => {
                 return <TemplatesDrawer />;
         }
         return null;
-    }, [drawer]);
+    }, [state.drawer]);
 
-    if (!drawer) {
+    if (!state.drawer) {
         return null;
     }
 
     return (
-        <Transition.Root show={!!drawer} as={React.Fragment}>
+        <Transition.Root show={!!state.drawer} as={React.Fragment}>
             <div className="relative h-full w-96 border-l-4 border-black dark:border-white">
                 <div className="absolute h-full w-full flex flex-col">
                     <Transition.Child

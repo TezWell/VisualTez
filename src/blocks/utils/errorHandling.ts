@@ -33,12 +33,7 @@ export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean
 
         // Set RED color
         block.warning?.bubble_.setColour('#ff0000');
-
-        // Scroll to the error bubble
-        // const coords = block.warning?.bubble_.getRelativeToSurfaceXY();
-        // if (coords) {
-        //     workspace.scroll(coords.x, coords.y);
-        // }
+        block.select();
 
         const teardDown = () => {
             block.setWarningText(null);

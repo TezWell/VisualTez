@@ -125,9 +125,11 @@ const persistState = (state: Partial<IDeploymentPersistentState>): void => {
 };
 
 /**
- * @description State reducer
+ * State reducer
+ *
  * @param state Previous state
  * @param action An action to be performed
+ *
  * @returns New state
  */
 const reducer = (state: IDeploymentState, action: DeploymentReducerAction): IDeploymentState => {

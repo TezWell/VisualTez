@@ -10,6 +10,7 @@ import useEditor from 'src/context/hooks/useEditor';
 import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
 import Label from 'src/components/blockly/Label';
+import { EditorActionKind } from 'src/context/Editor';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -18,7 +19,7 @@ interface EditorViewProps {
 }
 
 const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError }) => {
-    const { workspace, updateWorkspace } = useEditor();
+    const { workspace, dispatch } = useEditor();
 
     // const saveSectionSizes = React.useCallback(
     //     (sizes: { editorSize: string; outputSize: string }) => {
@@ -53,14 +54,17 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                     ].includes(event.type)
                 ) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
-                    updateWorkspace({
-                        ...workspace,
-                        xml,
+                    dispatch({
+                        type: EditorActionKind.UPDATE_WORKSPACE,
+                        payload: {
+                            id: workspace.id,
+                            xml,
+                        },
                     });
                 }
             }
         },
-        [updateWorkspace, workspace, workspaceRef],
+        [dispatch, workspace.id, workspaceRef],
     );
 
     return (

@@ -285,22 +285,22 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     const [tab, setTab] = React.useState<CompilationKind | null>();
     const [contractCompilation, setContractCompilation] = React.useState<ContractCompilation>();
     const [typeValueCompilation, setTypeValueCompilation] = React.useState<TypeCompilation | ValueCompilation>();
-    const { compilations } = useEditor();
+    const { state } = useEditor();
     const { dispatch: deploymentDispatch } = useDeployment();
 
     const contractCompilations = React.useMemo(
-        () => compilations.filter(filterCompilationKind<ContractCompilation>(CompilationKind.Contract)),
-        [compilations],
+        () => (state.compilations || []).filter(filterCompilationKind<ContractCompilation>(CompilationKind.Contract)),
+        [state.compilations],
     );
 
     const valueCompilations = React.useMemo(
-        () => compilations.filter(filterCompilationKind<ValueCompilation>(CompilationKind.Value)),
-        [compilations],
+        () => (state.compilations || []).filter(filterCompilationKind<ValueCompilation>(CompilationKind.Value)),
+        [state.compilations],
     );
 
     const typeCompilations = React.useMemo(
-        () => compilations.filter(filterCompilationKind<TypeCompilation>(CompilationKind.Type)),
-        [compilations],
+        () => (state.compilations || []).filter(filterCompilationKind<TypeCompilation>(CompilationKind.Type)),
+        [state.compilations],
     );
 
     const selectedTab = React.useMemo(() => {
