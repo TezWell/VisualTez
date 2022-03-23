@@ -8,7 +8,7 @@ import { Address as ST_Address } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
-import { buildErrorInfo } from '../utils/errorHandling';
+import { buildBlockErrorString, buildErrorInfo } from '../utils/errorHandling';
 
 const AddressBlock = {
     type: BlockKind.address_literal,
@@ -36,7 +36,7 @@ SmartML.addBlock(BlockKind.address_literal, {
         return ST_TAddress();
     },
     toValue: (block: Block) => {
-        return ST_Address(block.getFieldValue('address_value'), buildErrorInfo(block));
+        return ST_Address(validate(block), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.address_literal, {
@@ -44,6 +44,15 @@ Michelson.addBlock(BlockKind.address_literal, {
         return M_TAddress();
     },
     toMichelson: (block: Block) => {
-        return M_Address(block.getFieldValue('address_value'));
+        return M_Address(validate(block));
     },
 });
+
+const validate = (block: Block) => {
+    const expectedPrefix = ['KT1', 'tz1', 'tz2', 'tz3'];
+    const address: string = block.getFieldValue('address_value');
+    if (!expectedPrefix.includes(address.slice(0, 3))) {
+        throw new Error(`The address is invalid. ${buildBlockErrorString(block)}`);
+    }
+    return address;
+};
