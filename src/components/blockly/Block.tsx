@@ -4,7 +4,7 @@ interface BlockProps {
     type: string;
     disabled?: boolean;
     inputs?: any;
-    fields?: any;
+    tags?: string[];
 }
 
 export const Block: React.FC<BlockProps> = ({ children, ...props }) => {

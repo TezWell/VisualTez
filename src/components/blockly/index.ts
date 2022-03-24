@@ -1,3 +1,6 @@
+import './search';
+
+export * from './ToolboxSearch';
 export * from './Block';
 export * from './Category';
 export * from './Field';

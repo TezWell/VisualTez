@@ -22,8 +22,8 @@
         <variable id="Pd?;}@9]0f91m8%kOw5v">entrypoint__transfer__recipient_ledger_key</variable>
         <variable id="!sFb@gq%)Zx4ovkS-.p:">entrypoint__transfer__recipient_balance</variable>
     </variables>
-    <block type="contract_block" id="V6XnC-$_--YB6BmE/[MZ" x="-333" y="-1884">
-        <field name="NAME">contract_1</field>
+    <block type="contract_block" id="V6XnC-$_--YB6BmE/[MZ" x="-124" y="-3465">
+        <field name="NAME">FA2</field>
         <value name="TYPE">
             <block type="record_type" id="=sF,`i*?@79T$AX*R88t">
                 <field name="LAYOUT"></field>
@@ -210,17 +210,19 @@
         </value>
         <value name="initial_storage">
             <block type="record_literal" id="*!Y^$#o^Dv=BA,=Kv01q">
+                <field name="LAYOUT"></field>
                 <statement name="entries">
                     <block type="record_field" id=";Gc^QSLjqN90]Z|O7v50">
                         <field name="field">config</field>
                         <value name="value">
                             <block type="record_literal" id="CC3:0/4_Cp8k.|Pu@y9s">
+                                <field name="LAYOUT"></field>
                                 <statement name="entries">
                                     <block type="record_field" id="Ook0t+dm3B0sXz#{1qb9">
                                         <field name="field">administrator</field>
                                         <value name="value">
                                             <block type="address_literal" id="epW.,=sI3z0QPs~W-ElI">
-                                                <field name="address_value">tz1</field>
+                                                <field name="address_value">tz1f2k9M3ztqtbCTk5EmEepboEJxksXvafaU</field>
                                             </block>
                                         </value>
                                         <next>
@@ -242,6 +244,7 @@
                                 <field name="field">assets</field>
                                 <value name="value">
                                     <block type="record_literal" id="T6Cl26{YmZd5^-:~PBk=">
+                                        <field name="LAYOUT"></field>
                                         <statement name="entries">
                                             <block type="record_field" id="S6.).?#d:tHAOaex:PCX">
                                                 <field name="field">ledger</field>
@@ -472,6 +475,7 @@
                                                                         </value>
                                                                         <value name="KEY">
                                                                             <block type="record_literal" id="rk)GaB6r.utzUc~Sxtf.">
+                                                                                <field name="LAYOUT"></field>
                                                                                 <statement name="entries">
                                                                                     <block type="record_field" id="{LHxEv`?A.T9[4ge:FO.">
                                                                                         <field name="field">owner</field>
@@ -610,7 +614,7 @@
                                                                                 </value>
                                                                                 <next>
                                                                                     <block type="variable_setter_block" id="I4jzPOCmQRmh]MMS:}NB">
-                                                                                        <comment pinned="false" h="94.006591796875" w="179.84259033203125">Decrement balance from the source address.</comment>
+                                                                                        <comment pinned="false" h="94" w="179">Decrement balance from the source address.</comment>
                                                                                         <value name="VAR">
                                                                                             <block type="get_map_value" id="?Tvn$S8)azI@t!2I*x1e">
                                                                                                 <value name="MAP">
@@ -635,6 +639,7 @@
                                                                                         </value>
                                                                                         <value name="VALUE">
                                                                                             <block type="record_literal" id="*%Tza3rIAj#FLmJIHbb#">
+                                                                                                <field name="LAYOUT"></field>
                                                                                                 <statement name="entries">
                                                                                                     <block type="record_field" id="E^:,)fz$)slt.OyK`.u]">
                                                                                                         <field name="field">balance</field>
@@ -700,7 +705,7 @@
                                                                                                 </value>
                                                                                                 <next>
                                                                                                     <block type="if_block" id="h~AvFCZ]qVX^zL2y)B@$">
-                                                                                                        <comment pinned="false" h="81.934326171875" w="316.6807861328125">Increment balance to the recipient address.</comment>
+                                                                                                        <comment pinned="false" h="81" w="316">Increment balance to the recipient address.</comment>
                                                                                                         <value name="condition">
                                                                                                             <block type="map_contains_key" id="_Y*}.kNL/Q3w}AjpR-@B">
                                                                                                                 <value name="MAP">
@@ -779,6 +784,7 @@
                                                                                                                         </value>
                                                                                                                         <value name="VALUE">
                                                                                                                             <block type="record_literal" id="mFt.M1x^lKvbrDt7TMO8">
+                                                                                                                                <field name="LAYOUT"></field>
                                                                                                                                 <statement name="entries">
                                                                                                                                     <block type="record_field" id="0v~9%+H%p{du(W3X1]+r">
                                                                                                                                         <field name="field">balance</field>
@@ -836,6 +842,7 @@
                                                                                                                 </value>
                                                                                                                 <value name="VALUE">
                                                                                                                     <block type="record_literal" id="dx`T:tLDZXPWk/(@fNQ)">
+                                                                                                                        <field name="LAYOUT"></field>
                                                                                                                         <statement name="entries">
                                                                                                                             <block type="record_field" id="1eup4n_VG=ASO.Id0T|d">
                                                                                                                                 <field name="field">balance</field>
@@ -1397,6 +1404,7 @@
                                                                                             <block type="prepend_to_list" id="AChB*USdSs(0e%JSL%_s">
                                                                                                 <value name="ELEMENT">
                                                                                                     <block type="record_literal" id="0:943.C*I%yY}z.15;+Y">
+                                                                                                        <field name="LAYOUT"></field>
                                                                                                         <statement name="entries">
                                                                                                             <block type="record_field" id="c/:*g{9|YI1~yU8K/9wU">
                                                                                                                 <field name="field">request</field>
@@ -1461,6 +1469,7 @@
                                                                                             <block type="prepend_to_list" id="uQt%+7*j37O7o:w0o@5_">
                                                                                                 <value name="ELEMENT">
                                                                                                     <block type="record_literal" id="jWQ=8+VQVy;{A--EWdDw">
+                                                                                                        <field name="LAYOUT"></field>
                                                                                                         <statement name="entries">
                                                                                                             <block type="record_field" id="O%Yf_)k+s!*TSa.4UX}a">
                                                                                                                 <field name="field">request</field>
@@ -1681,6 +1690,7 @@
                                                                         </value>
                                                                         <value name="VALUE">
                                                                             <block type="record_literal" id="y`9xMiI[#uMeU]VOm`iv">
+                                                                                <field name="LAYOUT"></field>
                                                                                 <statement name="entries">
                                                                                     <block type="record_field" id="_-k4dUsyN@$$3ac@s|g.">
                                                                                         <field name="field">balance</field>
@@ -1758,6 +1768,7 @@
                                                                         </value>
                                                                         <value name="VALUE">
                                                                             <block type="record_literal" id="|_9NVyDwXVCTe21bh)nu">
+                                                                                <field name="LAYOUT"></field>
                                                                                 <statement name="entries">
                                                                                     <block type="record_field" id="#b-M.ut+@g}TPApbv8w4">
                                                                                         <field name="field">balance</field>
@@ -1916,6 +1927,7 @@
                                                                                 </value>
                                                                                 <value name="VALUE">
                                                                                     <block type="record_literal" id=";~k9|TFK|Xn,)H,tx),[">
+                                                                                        <field name="LAYOUT"></field>
                                                                                         <statement name="entries">
                                                                                             <block type="record_field" id="uSqbh.4$eEJkG.=9!kH%">
                                                                                                 <field name="field">token_id</field>
@@ -2376,6 +2388,49 @@
                                 <value name="VALUE">
                                     <block type="list_literal" id="t[c0?:!|jdN1#7K-x=b]"></block>
                                 </value>
+                                <value name="TYPE">
+                                    <block type="list_type" id="?.ghfTto:LRk,:e3es$0">
+                                        <value name="inner_type">
+                                            <block type="record_type" id="0|tG0bytX0~hy2q?0~1s">
+                                                <field name="LAYOUT">['request', 'balance']</field>
+                                                <statement name="fields">
+                                                    <block type="record_variant_field_type" id="eY(Y|2{+ZNW0_m/TPB}e">
+                                                        <field name="key">request</field>
+                                                        <value name="type">
+                                                            <block type="record_type" id="7ArV#`.9D}1oSiTMGPl=">
+                                                                <field name="LAYOUT">['owner', 'token_id']</field>
+                                                                <statement name="fields">
+                                                                    <block type="record_variant_field_type" id="p=m7r9EsfQn9ickUe]W{">
+                                                                        <field name="key">owner</field>
+                                                                        <value name="type">
+                                                                            <block type="address_type" id="Y%7^06KmZ]C21/7+8NuP"></block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="record_variant_field_type" id="slGZ/a8}7t(.i3(1va`a">
+                                                                                <field name="key">token_id</field>
+                                                                                <value name="type">
+                                                                                    <block type="nat_type" id="E:Uv`=*{[UyEjK3DN+YR"></block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </statement>
+                                                            </block>
+                                                        </value>
+                                                        <next>
+                                                            <block type="record_variant_field_type" id="*P;pNXl6?Nni}lMlTH`F">
+                                                                <field name="key">balance</field>
+                                                                <value name="type">
+                                                                    <block type="nat_type" id="3UY5+GFpVgA-si5WDkbp"></block>
+                                                                </value>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </statement>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
                             </block>
                         </value>
                         <next>
@@ -2487,6 +2542,7 @@
                                                                         </value>
                                                                         <value name="LIST">
                                                                             <block type="record_literal" id="PGWQTax0_R{Re4]p]eoI">
+                                                                                <field name="LAYOUT"></field>
                                                                                 <statement name="entries">
                                                                                     <block type="record_field" id="R3(Yx8O27#dKSfU//0o$">
                                                                                         <field name="field">request</field>
@@ -2551,6 +2607,7 @@
                                                                         </value>
                                                                         <value name="LIST">
                                                                             <block type="record_literal" id="]_V=F@AT/Gy.iBqd5Ppd">
+                                                                                <field name="LAYOUT"></field>
                                                                                 <statement name="entries">
                                                                                     <block type="record_field" id="C]`l|}]SuXD-?+_Nw.2H">
                                                                                         <field name="field">request</field>

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 
-import { Block, Category, Value } from 'src/components/blockly';
+import { Block, Category, ToolboxSearch, Value } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
 import BlockKind from 'src/blocks/enums/BlockKind';
 
@@ -11,6 +11,10 @@ import ToolsBar from './toolbar/ToolsBar';
 import Drawer from './toolbar/Drawer';
 import Label from 'src/components/blockly/Label';
 import { EditorActionKind } from 'src/context/Editor';
+import Entrypoint from 'src/components/blockly/blocks/Entrypoint';
+import OnChainView from 'src/components/blockly/blocks/OnChainView';
+import Contract from 'src/components/blockly/blocks/Contract';
+import { IntLiteral, NatLiteral } from 'src/components/blockly/blocks/literals';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -92,45 +96,86 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         onError={onError}
                         onChange={onChange}
                     >
+                        <ToolboxSearch>
+                            <Contract />
+                            <Entrypoint />
+                            <OnChainView />
+                            {/* Literals */}
+                            <NatLiteral />
+                            <IntLiteral />
+                        </ToolboxSearch>
                         <Category name="Bootstrap Blocks" categorystyle="class_category">
-                            <Block type={BlockKind.contract_block}>
-                                {/* Default storage type */}
-                                <Value name="TYPE">
-                                    <Block type={BlockKind.unit_type} />
-                                </Value>
-                                {/* Default storage value */}
-                                <Value name="initial_storage">
+                            <Contract />
+                            <Entrypoint />
+                            <OnChainView />
+                            <Block type={BlockKind.value_compilation} />
+                            <Block type={BlockKind.type_compilation} />
+                        </Category>
+
+                        <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
+                        <Category name="Logic (If, Assert, ...)" categorystyle="logic_category">
+                            <Block type="assert_block">
+                                {/* Default error message */}
+                                <Value name="error_message">
                                     <Block type={BlockKind.unit_literal} />
                                 </Value>
-                                {/* Default empty entry point */}
-                                <Value name="entry_points">
-                                    <Block type={BlockKind.entry_point_block}>
-                                        {/* Default input type */}
-                                        <Value name="input_type">
-                                            <Block type={BlockKind.unit_type} />
+                            </Block>
+                            <Block type={BlockKind.if_block} />
+                            <Block type={BlockKind.match_variant}>
+                                <Value name="CASES">
+                                    <Block type={BlockKind.match_variant_case} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.match_variant_case} />
+                        </Category>
+                        <Category name="Loops" categorystyle="control_statements_category">
+                            <Block type={BlockKind.for_block}>
+                                <Value name="FROM">
+                                    <Block type={BlockKind.nat_literal} />
+                                </Value>
+                                <Value name="TO">
+                                    <Block type={BlockKind.nat_literal} />
+                                </Value>
+                                <Value name="BY">
+                                    <Block type={BlockKind.nat_literal} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.for_each_block} />
+                            <Block type={BlockKind.while_block} />
+                        </Category>
+
+                        <Category name="Transfer, Delegate, ..." categorystyle="operation_statements_category">
+                            <Block type={BlockKind.transfer_statement}>
+                                <Value name="AMOUNT">
+                                    <Block type={BlockKind.mutez_literal} />
+                                </Value>
+                                <Value name="ADDRESS">
+                                    <Block type={BlockKind.address_literal} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.call_contract_statement}>
+                                <Value name="AMOUNT">
+                                    <Block type={BlockKind.mutez_literal} />
+                                </Value>
+                                <Value name="ARGUMENT">
+                                    <Block type={BlockKind.unit_literal} />
+                                </Value>
+                            </Block>
+                            <Block type={BlockKind.delegate_statement}>
+                                <Value name="DELEGATE">
+                                    <Block type={BlockKind.none_with_type_literal}>
+                                        <Value name="TYPE">
+                                            <Block type={BlockKind.key_hash_type} />
                                         </Value>
                                     </Block>
                                 </Value>
                             </Block>
-                            <Block type={BlockKind.entry_point_block}>
-                                {/* Default input type */}
-                                <Value name="input_type">
-                                    <Block type={BlockKind.unit_type} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.onchain_view}>
-                                {/* Default input type */}
-                                <Value name="TYPE">
-                                    <Block type={BlockKind.unit_type} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.value_compilation} />
-                            <Block type={BlockKind.type_compilation} />
                         </Category>
+
                         <Category name="Values" categorystyle="literal_category">
                             <Category name="Simple" categorystyle="simple_literal_category">
-                                <Block type={BlockKind.nat_literal} />
-                                <Block type={BlockKind.int_literal} />
+                                <NatLiteral />
+                                <IntLiteral />
                                 <Block type={BlockKind.mutez_literal} />
                                 <Block type={BlockKind.timestamp_literal} />
                                 <Block type={BlockKind.unit_literal} />
@@ -303,65 +348,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         <Category name="Statements" categorystyle="control_statements_category">
-                            <Category name="Logic" categorystyle="logic_category">
-                                <Block type="assert_block">
-                                    {/* Default error message */}
-                                    <Value name="error_message">
-                                        <Block type={BlockKind.unit_literal} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.if_block} />
-                                <Block type={BlockKind.match_variant}>
-                                    <Value name="CASES">
-                                        <Block type={BlockKind.match_variant_case} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.match_variant_case} />
-                            </Category>
-                            <Category name="Loops" categorystyle="control_statements_category">
-                                <Block type={BlockKind.for_block}>
-                                    <Value name="FROM">
-                                        <Block type={BlockKind.nat_literal} />
-                                    </Value>
-                                    <Value name="TO">
-                                        <Block type={BlockKind.nat_literal} />
-                                    </Value>
-                                    <Value name="BY">
-                                        <Block type={BlockKind.nat_literal} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.for_each_block} />
-                                <Block type={BlockKind.while_block} />
-                            </Category>
-
-                            <Category name="Transfer, Delegate, ..." categorystyle="operation_statements_category">
-                                <Block type={BlockKind.transfer_statement}>
-                                    <Value name="AMOUNT">
-                                        <Block type={BlockKind.mutez_literal} />
-                                    </Value>
-                                    <Value name="ADDRESS">
-                                        <Block type={BlockKind.address_literal} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.call_contract_statement}>
-                                    <Value name="AMOUNT">
-                                        <Block type={BlockKind.mutez_literal} />
-                                    </Value>
-                                    <Value name="ARGUMENT">
-                                        <Block type={BlockKind.unit_literal} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.delegate_statement}>
-                                    <Value name="DELEGATE">
-                                        <Block type={BlockKind.none_with_type_literal}>
-                                            <Value name="TYPE">
-                                                <Block type={BlockKind.key_hash_type} />
-                                            </Value>
-                                        </Block>
-                                    </Value>
-                                </Block>
-                            </Category>
-
                             <Category name="Map Statements" categorystyle="logic_category">
                                 <Block type={BlockKind.delete_map_entry} />
                             </Category>
@@ -384,8 +370,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.get_source_block} />
                             </Category>
                         </Category>
-
-                        <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
 
                         <Category name="Various" categorystyle="logic_category">
                             <Block type={BlockKind.param_access} />
