@@ -52,6 +52,8 @@ import {
 } from 'src/components/blockly/blocks/types';
 import NeverType from 'src/components/blockly/blocks/types/NeverType';
 import OperationType from 'src/components/blockly/blocks/types/OperationType';
+import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
+import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -174,12 +176,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <OperationType />
                             <NeverType />
                         </ToolboxSearch>
+
                         <Category name="Bootstrap Blocks" categorystyle="class_category">
                             <Contract />
                             <Entrypoint />
                             <OnChainView />
-                            <Block type={BlockKind.value_compilation} />
-                            <Block type={BlockKind.type_compilation} />
+                            <ValueCompilation />
+                            <TypeCompilation />
                         </Category>
 
                         <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
