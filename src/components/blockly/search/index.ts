@@ -32,7 +32,7 @@ class ToolboxSearch extends Blockly.ToolboxCategory {
         this.input.type = 'text';
         this.input.placeholder = 'Search...';
         this.input.className =
-            'font-mono text-black rounded-l-md border-0 border-b-4 border-yellow-700 hover:border-yellow-500';
+            'focus:ring-0 font-mono text-black rounded-l-md border-0 border-b-4 border-yellow-700 focus:border-yellow-500';
 
         this.input.onkeydown = async () => {
             await new Promise((r) => setTimeout(r, 200));
@@ -98,7 +98,7 @@ class ToolboxSearch extends Blockly.ToolboxCategory {
         const query = this.input?.value || '';
         const filter = (block: { tags: string }) => {
             const tags = block.tags.split(',');
-            return tags.some((tag) => tag.includes(query));
+            return tags.some((tag) => tag.startsWith(query));
         };
         return this.flyoutItems_.filter(filter);
     }

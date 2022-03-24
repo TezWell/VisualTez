@@ -14,7 +14,44 @@ import { EditorActionKind } from 'src/context/Editor';
 import Entrypoint from 'src/components/blockly/blocks/Entrypoint';
 import OnChainView from 'src/components/blockly/blocks/OnChainView';
 import Contract from 'src/components/blockly/blocks/Contract';
-import { IntLiteral, NatLiteral } from 'src/components/blockly/blocks/literals';
+import {
+    BooleanLiteral,
+    IntLiteral,
+    NatLiteral,
+    MutezLiteral,
+    TimestampLiteral,
+    UnitLiteral,
+    StringLiteral,
+    AddressLiteral,
+    BytesLiteral,
+    ChainIdLiteral,
+    KeyLiteral,
+    KeyHashLiteral,
+    SignatureLiteral,
+    Bls12_381_FrLiteral,
+    Bls12_381_G1Literal,
+    Bls12_381_G2Literal,
+} from 'src/components/blockly/blocks/literals';
+import {
+    AddressType,
+    Bls12_381_FrType,
+    Bls12_381_G1Type,
+    Bls12_381_G2Type,
+    BooleanType,
+    BytesType,
+    ChainIdType,
+    IntType,
+    KeyHashType,
+    KeyType,
+    MutezType,
+    NatType,
+    SignatureType,
+    StringType,
+    TimestampType,
+    UnitType,
+} from 'src/components/blockly/blocks/types';
+import NeverType from 'src/components/blockly/blocks/types/NeverType';
+import OperationType from 'src/components/blockly/blocks/types/OperationType';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -103,6 +140,39 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             {/* Literals */}
                             <NatLiteral />
                             <IntLiteral />
+                            <MutezLiteral />
+                            <TimestampLiteral />
+                            <UnitLiteral />
+                            <BooleanLiteral />
+                            <StringLiteral />
+                            <AddressLiteral />
+                            <BytesLiteral />
+                            <ChainIdLiteral />
+                            <KeyLiteral />
+                            <KeyHashLiteral />
+                            <SignatureLiteral />
+                            <Bls12_381_FrLiteral />
+                            <Bls12_381_G1Literal />
+                            <Bls12_381_G2Literal />
+                            {/* Types */}
+                            <NatType />
+                            <IntType />
+                            <MutezType />
+                            <TimestampType />
+                            <UnitType />
+                            <BooleanType />
+                            <StringType />
+                            <AddressType />
+                            <BytesType />
+                            <ChainIdType />
+                            <KeyType />
+                            <KeyHashType />
+                            <SignatureType />
+                            <Bls12_381_FrType />
+                            <Bls12_381_G1Type />
+                            <Bls12_381_G2Type />
+                            <OperationType />
+                            <NeverType />
                         </ToolboxSearch>
                         <Category name="Bootstrap Blocks" categorystyle="class_category">
                             <Contract />
@@ -176,20 +246,20 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Category name="Simple" categorystyle="simple_literal_category">
                                 <NatLiteral />
                                 <IntLiteral />
-                                <Block type={BlockKind.mutez_literal} />
-                                <Block type={BlockKind.timestamp_literal} />
-                                <Block type={BlockKind.unit_literal} />
-                                <Block type={BlockKind.boolean_literal} />
-                                <Block type={BlockKind.string_literal} />
-                                <Block type={BlockKind.address_literal} />
-                                <Block type={BlockKind.bytes_literal} />
-                                <Block type={BlockKind.chain_id_literal} />
-                                <Block type={BlockKind.key_literal} />
-                                <Block type={BlockKind.key_hash_literal} />
-                                <Block type={BlockKind.signature_literal} />
-                                <Block type={BlockKind.bls12_381_fr_literal} />
-                                <Block type={BlockKind.bls12_381_g1_literal} />
-                                <Block type={BlockKind.bls12_381_g2_literal} />
+                                <MutezLiteral />
+                                <TimestampLiteral />
+                                <UnitLiteral />
+                                <BooleanLiteral />
+                                <StringLiteral />
+                                <AddressLiteral />
+                                <BytesLiteral />
+                                <ChainIdLiteral />
+                                <KeyLiteral />
+                                <KeyHashLiteral />
+                                <SignatureLiteral />
+                                <Bls12_381_FrLiteral />
+                                <Bls12_381_G1Literal />
+                                <Bls12_381_G2Literal />
                             </Category>
 
                             <Category name="Sequences" categorystyle="sequence_literal_category">
@@ -260,24 +330,24 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
                         <Category name="Types" categorystyle="type_category">
                             <Category name="Singleton Types" categorystyle="type_category">
-                                <Block type={BlockKind.nat_type} />
-                                <Block type={BlockKind.int_type} />
-                                <Block type={BlockKind.mutez_type} />
-                                <Block type={BlockKind.timestamp_type} />
-                                <Block type={BlockKind.unit_type} />
-                                <Block type={BlockKind.boolean_type} />
-                                <Block type={BlockKind.string_type} />
-                                <Block type={BlockKind.address_type} />
-                                <Block type={BlockKind.bytes_type} />
-                                <Block type={BlockKind.chain_id_type} />
-                                <Block type={BlockKind.key_type} />
-                                <Block type={BlockKind.key_hash_type} />
-                                <Block type={BlockKind.signature_type} />
-                                <Block type={BlockKind.bls12_381_fr_type} />
-                                <Block type={BlockKind.bls12_381_g1_type} />
-                                <Block type={BlockKind.bls12_381_g2_type} />
-                                <Block type={BlockKind.operation_type} />
-                                <Block type={BlockKind.never_type} />
+                                <NatType />
+                                <IntType />
+                                <MutezType />
+                                <TimestampType />
+                                <UnitType />
+                                <BooleanType />
+                                <StringType />
+                                <AddressType />
+                                <BytesType />
+                                <ChainIdType />
+                                <KeyType />
+                                <KeyHashType />
+                                <SignatureType />
+                                <Bls12_381_FrType />
+                                <Bls12_381_G1Type />
+                                <Bls12_381_G2Type />
+                                <OperationType />
+                                <NeverType />
                             </Category>
 
                             <Category name="Container Types" categorystyle="type_category">
