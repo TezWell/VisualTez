@@ -54,6 +54,8 @@ import NeverType from 'src/components/blockly/blocks/types/NeverType';
 import OperationType from 'src/components/blockly/blocks/types/OperationType';
 import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
+import CategoryIcon from 'src/components/blockly/CategoryIcon';
+import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -177,7 +179,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <NeverType />
                         </ToolboxSearch>
 
-                        <Category name="Bootstrap Blocks" categorystyle="class_category">
+                        <Category name="Main Blocks" categorystyle="class_category">
+                            <CategoryIcon>
+                                <PuzzleIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
                             <Contract />
                             <Entrypoint />
                             <OnChainView />
@@ -185,8 +190,26 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <TypeCompilation />
                         </Category>
 
-                        <Category name="Variables" custom="VARIABLE" categorystyle="variables_category" />
+                        <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
+                            <CategoryIcon>
+                                <DatabaseIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                        </Category>
                         <Category name="Logic (If, Assert, ...)" categorystyle="logic_category">
+                            <CategoryIcon>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="block h-6 w-6 mr-2"
+                                    stroke="currentColor"
+                                    fill="currentColor"
+                                    viewBox="120 120 500 500"
+                                >
+                                    <g>
+                                        <path d="m505.96 316.8h-327.28v-39.465h327.28l-25.512-25.512 27.906-27.906 73.152 73.152-73.152 73.148-27.906-27.906z" />
+                                        <path d="m505.96 454.93-25.512-25.508 27.906-27.906 73.152 73.152-73.152 73.148-27.906-27.906 25.512-25.512h-119.88l-122.78-157.86h49.996l92.086 118.39z" />
+                                    </g>
+                                </svg>
+                            </CategoryIcon>
                             <Block type="assert_block">
                                 {/* Default error message */}
                                 <Value name="error_message">
@@ -202,6 +225,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Block type={BlockKind.match_variant_case} />
                         </Category>
                         <Category name="Loops" categorystyle="control_statements_category">
+                            <CategoryIcon>
+                                <RefreshIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
                             <Block type={BlockKind.for_block}>
                                 <Value name="FROM">
                                     <Block type={BlockKind.nat_literal} />
@@ -218,6 +244,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         <Category name="Transfer, Delegate, ..." categorystyle="operation_statements_category">
+                            <CategoryIcon>
+                                <ScaleIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
                             <Block type={BlockKind.transfer_statement}>
                                 <Value name="AMOUNT">
                                     <Block type={BlockKind.mutez_literal} />

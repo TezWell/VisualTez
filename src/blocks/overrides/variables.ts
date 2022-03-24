@@ -1,5 +1,5 @@
 import type { Workspace } from 'blockly';
-import Blockly, { VariableModel, Variables } from 'blockly';
+import Blockly, { Variables } from 'blockly';
 
 import BlockKind from '../enums/BlockKind';
 
@@ -101,7 +101,7 @@ const flyoutCategoryBlocks = (workspace: Workspace) => {
         return block;
     });
     xmlList.push(...persistentVariables);
-
+    console.error(xmlList);
     return xmlList;
 };
 Blockly.Variables.flyoutCategoryBlocks = flyoutCategoryBlocks;

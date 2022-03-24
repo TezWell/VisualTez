@@ -15,6 +15,12 @@
     margin-top: 3px;
     border-radius: 4px;
 }
+.blocklyTreeRowContentContainer {
+    margin-left: 10px;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+}
 
 .blocklyTreeLabel {
     font-weight: bold;

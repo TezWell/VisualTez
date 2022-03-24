@@ -2,8 +2,6 @@ import React from 'react';
 
 interface BlockProps {
     type: string;
-    disabled?: boolean;
-    inputs?: any;
     tags?: string[];
 }
 

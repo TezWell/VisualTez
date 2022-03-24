@@ -1,42 +1,98 @@
 import Blockly from 'blockly';
 
+enum ItemKind {
+    CATEGORYICON = 'CATEGORYICON',
+}
+
 class VisualTezCategory extends Blockly.ToolboxCategory {
+    icon?: SVGSVGElement;
+
     /**
-     * Constructor for a custom category.
      * @override
      */
     constructor(categoryDef: any, toolbox: any, opt_parent: any) {
         super(categoryDef, toolbox, opt_parent);
+
+        this.icon = this.createIconDom(categoryDef.contents);
+    }
+
+    createIconDom(contents: any[]) {
+        const buildContents = (contents: any[]) => {
+            return contents.map((content) => {
+                const children = buildContents(content.contents || []);
+                const element = document.createElementNS('http://www.w3.org/2000/svg', content.kind.toLowerCase());
+                Object.keys(content)
+                    .filter((prop) => !['kind', 'contents'].includes(prop))
+                    .forEach((prop) => {
+                        element.setAttribute(prop, content[prop]);
+                    });
+                element.append(...children);
+                return element;
+            });
+        };
+
+        const iconItem = [...(contents || [])].find(({ kind }: any) => kind === ItemKind.CATEGORYICON);
+        if (iconItem) {
+            const [svg] = iconItem.contents;
+            const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            Object.keys(svg)
+                .filter((prop) => !['kind', 'contents', 'xmlns'].includes(prop))
+                .forEach((prop) => {
+                    icon.setAttribute(prop, svg[prop]);
+                });
+            icon.append(...buildContents(svg.contents));
+            return icon;
+        }
+    }
+
+    /** @override */
+    createDom_() {
+        this.htmlDiv_ = this.createContainer_();
+        Blockly.utils.aria.setRole(this.htmlDiv_, Blockly.utils.aria.Role.TREEITEM);
+        Blockly.utils.aria.setState(this.htmlDiv_, Blockly.utils.aria.State.SELECTED, false);
+        Blockly.utils.aria.setState(this.htmlDiv_, Blockly.utils.aria.State.LEVEL, this.level_);
+
+        this.rowDiv_ = this.createRowContainer_();
+        (this.rowDiv_ as any).style.pointerEvents = 'auto';
+        this.htmlDiv_.appendChild(this.rowDiv_);
+
+        this.rowContents_ = this.createRowContentsContainer_();
+        (this.rowContents_ as any).style.pointerEvents = 'none';
+        this.rowDiv_.appendChild(this.rowContents_);
+
+        // Add icon to the DOM (If provided)
+        if (this.icon) {
+            this.rowContents_?.appendChild(this.icon);
+        }
+
+        this.labelDom_ = this.createLabelDom_(this.name_);
+        this.labelDom_.classList.add('font-bold', 'text-lg');
+        this.rowContents_.appendChild(this.labelDom_);
+        Blockly.utils.aria.setState(
+            this.htmlDiv_,
+            Blockly.utils.aria.State.LABELLEDBY,
+            this.labelDom_.getAttribute('id')!,
+        );
+
+        this.addColourBorder_(this.colour_);
+
+        return this.htmlDiv_;
     }
 
     /** @override */
     addColourBorder_(colour: string) {
-        const self = this as any;
-        self.rowDiv_.style.backgroundColor = colour;
+        (this.rowDiv_ as any).style.border = '2px solid ' + (colour || '#ddd');
     }
 
     /** @override */
     setSelected(isSelected: boolean) {
-        const self = this as any;
-        // We do not store the label span on the category, so use getElementsByClassName.
-        const labelDom = self.rowDiv_.getElementsByClassName('blocklyTreeLabel')[0];
         if (isSelected) {
-            // Change the background color of the div to white.
-            self.rowDiv_.style.backgroundColor = 'white';
-            // Set the colour of the text to the colour of the category.
-            labelDom.style.color = this.colour_;
+            this.rowDiv_?.classList.add('ring-4');
         } else {
-            // Set the background back to the original colour.
-            self.rowDiv_.style.backgroundColor = this.colour_;
-            // Set the text back to white.
-            labelDom.style.color = 'white';
+            this.rowDiv_?.classList.remove('ring-4');
         }
         // This is used for accessibility purposes.
-        Blockly.utils.aria.setState(
-            /** @type {!Element} */ self.htmlDiv_,
-            Blockly.utils.aria.State.SELECTED,
-            isSelected,
-        );
+        Blockly.utils.aria.setState(this.htmlDiv_!, Blockly.utils.aria.State.SELECTED, isSelected);
     }
 }
 

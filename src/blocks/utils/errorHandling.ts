@@ -46,6 +46,5 @@ export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean
 
         return false;
     }
-    console.error(error.match(regex), error);
     return true;
 };
