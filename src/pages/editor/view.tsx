@@ -56,6 +56,7 @@ import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
 import CategoryIcon from 'src/components/blockly/CategoryIcon';
 import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
+import { TableIcon } from '@heroicons/react/outline';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -129,7 +130,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         zoom={{
                             controls: true,
                             wheel: true,
-                            startScale: 0.4,
+                            startScale: 0.6,
                             maxScale: 2,
                             minScale: 0.01,
                             scaleSpeed: 1.1,
@@ -272,6 +273,27 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Block>
                                 </Value>
                             </Block>
+                        </Category>
+
+                        <Category name="Block/Tx Properties" categorystyle="blockchain_category">
+                            <CategoryIcon>
+                                <TableIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            {/* <Category name="Block" categorystyle="block_properties_category"> */}
+                            <Block type={BlockKind.get_chain_id_block} />
+                            <Block type={BlockKind.get_level_block} />
+                            <Block type={BlockKind.get_timestamp_block} />
+                            <Block type={BlockKind.get_total_voting_power_block} />
+                            <Block type={BlockKind.get_voting_power} />
+                            {/* </Category>
+                            <Category name="Transaction" categorystyle="transaction_properties_category"> */}
+                            <Block type={BlockKind.get_amount_block} />
+                            <Block type={BlockKind.get_balance_block} />
+                            <Block type={BlockKind.get_current_contract_block} />
+                            <Block type={BlockKind.get_current_contract_address_block} />
+                            <Block type={BlockKind.get_sender_block} />
+                            <Block type={BlockKind.get_source_block} />
+                            {/* </Category> */}
                         </Category>
 
                         <Category name="Values" categorystyle="literal_category">
@@ -435,6 +457,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.pack} />
                                 <Block type={BlockKind.unpack} />
                             </Category>
+                            <Category name="Record Expressions" categorystyle="logic_category">
+                                <Block type={BlockKind.param_access} />
+                            </Category>
                             <Category name="Map Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.get_map_entries} />
                                 <Block type={BlockKind.get_map_value} />
@@ -447,35 +472,15 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Category name="List Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.prepend_to_list} />
                             </Category>
+                            <Category name="Boolean Expressions" categorystyle="logic_category">
+                                <Block type={BlockKind.not} />
+                            </Category>
                         </Category>
 
                         <Category name="Statements" categorystyle="control_statements_category">
                             <Category name="Map Statements" categorystyle="logic_category">
                                 <Block type={BlockKind.delete_map_entry} />
                             </Category>
-                        </Category>
-
-                        <Category name="Blockchain Properties" categorystyle="blockchain_category">
-                            <Category name="Block" categorystyle="block_properties_category">
-                                <Block type={BlockKind.get_chain_id_block} />
-                                <Block type={BlockKind.get_level_block} />
-                                <Block type={BlockKind.get_timestamp_block} />
-                                <Block type={BlockKind.get_total_voting_power_block} />
-                                <Block type={BlockKind.get_voting_power} />
-                            </Category>
-                            <Category name="Transaction" categorystyle="transaction_properties_category">
-                                <Block type={BlockKind.get_amount_block} />
-                                <Block type={BlockKind.get_balance_block} />
-                                <Block type={BlockKind.get_current_contract_block} />
-                                <Block type={BlockKind.get_current_contract_address_block} />
-                                <Block type={BlockKind.get_sender_block} />
-                                <Block type={BlockKind.get_source_block} />
-                            </Category>
-                        </Category>
-
-                        <Category name="Various" categorystyle="logic_category">
-                            <Block type={BlockKind.param_access} />
-                            <Block type={BlockKind.not} />
                         </Category>
                     </BlocklyEditor>
                 </div>
