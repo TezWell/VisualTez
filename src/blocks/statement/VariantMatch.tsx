@@ -83,7 +83,7 @@ const getMatchCase = (block: Block): [string, string, IStatement[]] => {
     Context.main.enterScope({
         kind: ScopeKind.MatchCase,
         variables: {
-            [variant]: {
+            [variantArgumentName]: {
                 kind: VariableKind.VariantArgument,
                 name: variantArgumentName,
             },

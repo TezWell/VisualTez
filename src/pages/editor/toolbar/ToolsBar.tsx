@@ -19,14 +19,13 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
             type: EditorActionKind.UPDATE_DRAWER,
             payload: drawer,
         });
-
-        setTimeout(resizeWorkspace, 100);
     };
 
     React.useEffect(() => {
         if (state.drawer === DrawerKind.Compilation) {
             compile();
         }
+        setTimeout(resizeWorkspace, 100);
     }, [state.drawer]);
 
     return (

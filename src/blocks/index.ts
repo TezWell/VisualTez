@@ -99,7 +99,7 @@ export const compileBlock = (block: Block): Compilation | null => {
 
             const compilation = Compiler.compileContract(code);
 
-            console.error(compilation);
+            console.error(code[Symbol.toPrimitive]());
 
             return {
                 kind: CompilationKind.Contract,
