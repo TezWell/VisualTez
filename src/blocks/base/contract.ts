@@ -22,20 +22,18 @@ Blockly.Blocks[BlockKind.contract_block] = {
         const initName = findName('contract', this.workspace, BlockKind.contract_block);
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
-        this.appendDummyInput().appendField('Contract compilation').appendField(nameField, 'NAME');
-        this.appendValueInput('TYPE').setCheck(['Type']).appendField('Storage Type').setAlign(Blockly.ALIGN_LEFT);
-        this.appendValueInput('initial_storage')
-            .setCheck(['Literal'])
-            .appendField('Initial Storage (Optional)')
-            .setAlign(Blockly.ALIGN_LEFT);
-        this.appendStatementInput('entry_points')
-            .setCheck(['Entrypoint'])
-            .appendField('Entry points')
-            .setAlign(Blockly.ALIGN_LEFT);
-        this.appendStatementInput('ONCHAIN_VIEWS')
-            .setCheck(['View'])
-            .appendField('On-Chain Views')
-            .setAlign(Blockly.ALIGN_LEFT);
+        this.appendDummyInput()
+            .appendField('Contract compilation')
+            .appendField(nameField, 'NAME')
+            .setAlign(Blockly.ALIGN_CENTRE);
+        this.appendDummyInput().appendField('Storage Type').setAlign(Blockly.ALIGN_LEFT);
+        this.appendValueInput('TYPE').setCheck(['Type']).setAlign(Blockly.ALIGN_LEFT);
+        this.appendDummyInput().appendField('Initial Storage (Optional)').setAlign(Blockly.ALIGN_LEFT);
+        this.appendValueInput('initial_storage').setCheck(['Literal']).setAlign(Blockly.ALIGN_LEFT);
+        this.appendDummyInput().appendField('Entry points').setAlign(Blockly.ALIGN_LEFT);
+        this.appendStatementInput('entry_points').setCheck(['Entrypoint']).setAlign(Blockly.ALIGN_LEFT);
+        this.appendDummyInput().appendField('On-Chain Views').setAlign(Blockly.ALIGN_LEFT);
+        this.appendStatementInput('ONCHAIN_VIEWS').setCheck(['View']).setAlign(Blockly.ALIGN_LEFT);
         this.setTooltip('A block that represents a contract');
         this.setColour(200);
         this.setPreviousStatement(false);

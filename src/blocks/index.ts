@@ -8,8 +8,6 @@ import './values';
 import './types';
 import './statement';
 import './expression';
-//
-import './overrides';
 
 import BlockKind from './enums/BlockKind';
 import Michelson from './generators/Michelson';

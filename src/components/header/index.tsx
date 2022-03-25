@@ -1,10 +1,11 @@
 import { Menu, Transition } from '@headlessui/react';
+import { PuzzleIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import ThemeSelection from 'src/components/theme/selection';
-import { isDevelopment } from 'src/utils';
 import { resolvePath } from 'src/utils/path';
+import RouterButton from '../common/RouterButton';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface NavigationProps {}
@@ -45,6 +46,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                                         className="inline-block w-full rounded font-bold no-underline p-2 bg-gray-200 dark:bg-gray-800"
                                         to="/editor"
                                     >
+                                        <PuzzleIcon className="block h-6 w-6" />
                                         Editor
                                     </NavLink>
                                 </Menu.Item>
@@ -62,9 +64,13 @@ const Navigation: React.FC<NavigationProps> = () => {
                 >
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li>
-                            <NavLink className="flex inline-block py-2 px-4 font-bold no-underline" to="/editor">
-                                Editor
-                            </NavLink>
+                            <RouterButton
+                                className="flex items-center bg-black dark:bg-white border-gray-700 hover:border-gray-500 font-bold text-white dark:text-black border-b-4 rounded px-3 py-1"
+                                to="/editor"
+                            >
+                                <PuzzleIcon className="block h-6 w-6 mr-1" />
+                                <p>Editor</p>
+                            </RouterButton>
                         </li>
                         <li className="h-10 border ml-3 mr-3 border-black dark:border-white" />
                         <li className="flex justify-end items-center">

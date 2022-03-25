@@ -63,7 +63,7 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                             zoom={{
                                 controls: true,
                                 wheel: true,
-                                startScale: 0.8,
+                                startScale: 0.4,
                                 maxScale: 4,
                                 minScale: 0.25,
                                 scaleSpeed: 1.1,

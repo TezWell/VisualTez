@@ -1,7 +1,7 @@
 import type { Workspace } from 'blockly';
 import Blockly, { Variables } from 'blockly';
 
-import BlockKind from '../enums/BlockKind';
+import BlockKind from 'src/blocks/enums/BlockKind';
 
 //import Variable from '../enums/Variable';
 // export const createVariable = (name: string, id: string, type = '') => {
@@ -28,10 +28,9 @@ Blockly.Blocks[BlockKind.variables_get] = {
                     variable: '%{BKY_VARIABLES_DEFAULT_NAME}',
                 },
             ],
-            output: null,
-            style: 'variable_blocks',
-            helpUrl: '%{BKY_VARIABLES_GET_HELPURL}',
-            tooltip: '%{BKY_VARIABLES_GET_TOOLTIP}',
+            output: ['Expression'],
+            colour: 80,
+            tooltip: 'Access the variable value.',
             extensions: ['contextMenu_variableSetterGetter'],
         });
         this.setPreviousStatement(false);
@@ -40,21 +39,7 @@ Blockly.Blocks[BlockKind.variables_get] = {
 };
 
 /**
- * @description Override "flyoutCategory" method
- *
- * Construct the elements (blocks and button) required by the flyout for the
- * variable category.
- * @param {!Workspace} workspace The workspace containing variables.
- * @return {!Array<!Element>} Array of XML elements.
- * @alias Blockly.Variables.flyoutCategory
- */
-// const flyoutCategory = function (workspace: Workspace) {
-//     return flyoutCategoryBlocks(workspace);
-// };
-// Blockly.Variables.flyoutCategory = flyoutCategory;
-
-/**
- * @description Override "flyoutCategoryBlocks" method
+ * Override "flyoutCategoryBlocks" method
  *
  * Construct the blocks required by the flyout for the variable category.
  *
@@ -100,8 +85,8 @@ const flyoutCategoryBlocks = (workspace: Workspace) => {
         block.setAttribute('gap', index === persistentVariableTypes.length - 1 ? '24' : '8');
         return block;
     });
+
     xmlList.push(...persistentVariables);
-    console.error(xmlList);
     return xmlList;
 };
 Blockly.Variables.flyoutCategoryBlocks = flyoutCategoryBlocks;

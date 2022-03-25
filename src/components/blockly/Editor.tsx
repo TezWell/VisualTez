@@ -6,8 +6,8 @@ import Blockly from 'blockly';
 import DarkTheme from './themes/dark';
 import LightTheme from './themes/light';
 
-import 'src/blocks';
 import './overrides';
+import 'src/blocks';
 import './blockly.css';
 import useTheme from 'src/context/hooks/useTheme';
 import Logger from 'src/utils/logger';

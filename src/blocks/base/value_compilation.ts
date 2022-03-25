@@ -18,10 +18,12 @@ Blockly.Blocks[BlockKind.value_compilation] = {
         const initName = findName('value', this.workspace, BlockKind.value_compilation);
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
-        this.appendDummyInput().appendField('Value compilation').appendField(nameField, 'NAME');
-        this.appendValueInput('value').setCheck(['Literal']).setAlign(Blockly.ALIGN_RIGHT);
+        this.appendDummyInput()
+            .appendField('Value compilation')
+            .appendField(nameField, 'NAME')
+            .setAlign(Blockly.ALIGN_CENTRE);
+        this.appendValueInput('value').setCheck(['Literal']).setAlign(Blockly.ALIGN_CENTRE);
         this.setTooltip('A block used to compile a value.');
-        this.setInputsInline(true);
         this.setColour(200);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
