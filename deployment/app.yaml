@@ -4,9 +4,9 @@ threadsafe: true
 
 handlers:
 
-- url: /(.*\.(gif|png|jpg|js|html|css|json|txt|ico|svg))$
+- url: /(.*\.(gif|png|jpg|js|html|css|json|txt|ico|svg|xml))$
   static_files: www/\1
-  upload: www/.*\.(gif|png|jpg|js|html|css|json|txt|ico|svg)$
+  upload: www/.*\.(gif|png|jpg|js|html|css|json|txt|ico|svg|xml)$
 
 - url: /(.*)
   static_files: www/index.html
