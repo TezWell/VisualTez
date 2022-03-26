@@ -56,7 +56,8 @@ import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
 import CategoryIcon from 'src/components/blockly/CategoryIcon';
 import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
-import { TableIcon } from '@heroicons/react/outline';
+import { HashtagIcon, TableIcon } from '@heroicons/react/outline';
+import { Blake2b, Keccak, SHA256, SHA3, SHA512 } from 'src/components/blockly/blocks/expressions/hash';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -178,6 +179,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Bls12_381_G2Type />
                             <OperationType />
                             <NeverType />
+                            {/* Expressions */}
+                            <Blake2b />
+                            <SHA256 />
+                            <SHA512 />
+                            <SHA3 />
+                            <Keccak />
                         </ToolboxSearch>
 
                         <Category name="Main Blocks" categorystyle="class_category">
@@ -273,6 +280,22 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </Block>
                                 </Value>
                             </Block>
+                        </Category>
+
+                        <Category name="Cryptography" categorystyle="cryptography_category">
+                            <CategoryIcon>
+                                <TableIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <Category name="Hashing" categorystyle="cryptography_category">
+                                <CategoryIcon>
+                                    <HashtagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <Blake2b />
+                                <SHA256 />
+                                <SHA512 />
+                                <SHA3 />
+                                <Keccak />
+                            </Category>
                         </Category>
 
                         <Category name="Block/Tx Properties" categorystyle="blockchain_category">

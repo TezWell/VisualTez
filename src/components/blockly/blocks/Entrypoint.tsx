@@ -7,7 +7,7 @@ import Value from '../Value';
 export const Entrypoint = () => (
     <Block type={BlockKind.entry_point_block} tags={['entrypoint']}>
         {/* Default input type */}
-        <Value name="input_type">
+        <Value name="TYPE">
             <Block type={BlockKind.unit_type} />
         </Value>
     </Block>

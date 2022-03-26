@@ -106,6 +106,11 @@ export enum BlockKind {
     or = 'or',
     nat_of_int = 'nat_of_int',
     int_of_nat = 'int_of_nat',
+    blake2b = 'blake2b',
+    sha256 = 'sha256',
+    sha512 = 'sha512',
+    sha3 = 'sha3',
+    keccak = 'keccak',
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',

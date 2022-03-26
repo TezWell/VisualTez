@@ -43,7 +43,7 @@ const DarkTheme = Blockly.Theme.defineTheme('dark', {
         blockchain_category: {
             colour: '#00C34F',
         },
-        block_properties_category: {
+        cryptography_category: {
             colour: '#a55c5b',
         },
         transaction_properties_category: {
