@@ -58,6 +58,18 @@ import CategoryIcon from 'src/components/blockly/CategoryIcon';
 import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
 import { HashtagIcon, TableIcon } from '@heroicons/react/outline';
 import { Blake2b, Keccak, SHA256, SHA3, SHA512 } from 'src/components/blockly/blocks/expressions/hash';
+import {
+    AssertStatement,
+    CallContractStatement,
+    DelegateStatement,
+    ForEachStatement,
+    ForStatement,
+    IfStatement,
+    TransferStatement,
+    VariantMatchCase,
+    VariantMatchStatement,
+    WhileStatement,
+} from 'src/components/blockly/blocks/statements';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -185,6 +197,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <SHA512 />
                             <SHA3 />
                             <Keccak />
+                            {/* Statements */}
+                            <AssertStatement />
+                            <IfStatement />
+                            <VariantMatchStatement />
+                            <VariantMatchCase />
+                            {/* Loops */}
+                            <ForStatement />
+                            <ForEachStatement />
+                            <WhileStatement />
+                            {/* Operations */}
+                            <TransferStatement />
+                            <CallContractStatement />
+                            <DelegateStatement />
                         </ToolboxSearch>
 
                         <Category name="Main Blocks" categorystyle="class_category">
@@ -218,68 +243,27 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     </g>
                                 </svg>
                             </CategoryIcon>
-                            <Block type="assert_block">
-                                {/* Default error message */}
-                                <Value name="error_message">
-                                    <Block type={BlockKind.unit_literal} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.if_block} />
-                            <Block type={BlockKind.match_variant}>
-                                <Value name="CASES">
-                                    <Block type={BlockKind.match_variant_case} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.match_variant_case} />
+                            <AssertStatement />
+                            <IfStatement />
+                            <VariantMatchStatement />
+                            <VariantMatchCase />
                         </Category>
                         <Category name="Loops" categorystyle="control_statements_category">
                             <CategoryIcon>
                                 <RefreshIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
-                            <Block type={BlockKind.for_block}>
-                                <Value name="FROM">
-                                    <Block type={BlockKind.nat_literal} />
-                                </Value>
-                                <Value name="TO">
-                                    <Block type={BlockKind.nat_literal} />
-                                </Value>
-                                <Value name="BY">
-                                    <Block type={BlockKind.nat_literal} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.for_each_block} />
-                            <Block type={BlockKind.while_block} />
+                            <ForStatement />
+                            <ForEachStatement />
+                            <WhileStatement />
                         </Category>
 
                         <Category name="Transfer, Delegate, ..." categorystyle="operation_statements_category">
                             <CategoryIcon>
                                 <ScaleIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
-                            <Block type={BlockKind.transfer_statement}>
-                                <Value name="AMOUNT">
-                                    <Block type={BlockKind.mutez_literal} />
-                                </Value>
-                                <Value name="ADDRESS">
-                                    <Block type={BlockKind.address_literal} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.call_contract_statement}>
-                                <Value name="AMOUNT">
-                                    <Block type={BlockKind.mutez_literal} />
-                                </Value>
-                                <Value name="ARGUMENT">
-                                    <Block type={BlockKind.unit_literal} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.delegate_statement}>
-                                <Value name="DELEGATE">
-                                    <Block type={BlockKind.none_with_type_literal}>
-                                        <Value name="TYPE">
-                                            <Block type={BlockKind.key_hash_type} />
-                                        </Value>
-                                    </Block>
-                                </Value>
-                            </Block>
+                            <TransferStatement />
+                            <CallContractStatement />
+                            <DelegateStatement />
                         </Category>
 
                         <Category name="Cryptography" categorystyle="cryptography_category">
