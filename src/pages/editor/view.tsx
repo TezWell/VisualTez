@@ -1,6 +1,8 @@
 import React from 'react';
 import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
+import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
+import { HashtagIcon, TableIcon } from '@heroicons/react/outline';
 
 import { Block, Category, ToolboxSearch, Value } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
@@ -55,9 +57,6 @@ import OperationType from 'src/components/blockly/blocks/types/OperationType';
 import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
 import CategoryIcon from 'src/components/blockly/CategoryIcon';
-import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
-import { HashtagIcon, TableIcon } from '@heroicons/react/outline';
-import { Blake2b, Keccak, SHA256, SHA3, SHA512 } from 'src/components/blockly/blocks/expressions/hash';
 import {
     AssertStatement,
     CallContractStatement,
@@ -70,6 +69,24 @@ import {
     VariantMatchStatement,
     WhileStatement,
 } from 'src/components/blockly/blocks/statements';
+import {
+    GetAmountExpression,
+    GetBalanceExpression,
+    GetChainIdExpression,
+    GetCurrentContractAddressExpression,
+    GetCurrentContractExpression,
+    GetLevelExpression,
+    GetSenderExpression,
+    GetSourceExpression,
+    GetTimestampExpression,
+    GetTotalVotingPowerExpression,
+    GetVotingPowerExpression,
+    Blake2b,
+    Keccak,
+    SHA256,
+    SHA3,
+    SHA512,
+} from 'src/components/blockly/blocks/expressions';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -197,6 +214,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <SHA512 />
                             <SHA3 />
                             <Keccak />
+
+                            <GetChainIdExpression />
+                            <GetLevelExpression />
+                            <GetTimestampExpression />
+                            <GetTotalVotingPowerExpression />
+                            <GetVotingPowerExpression />
+                            <GetAmountExpression />
+                            <GetBalanceExpression />
+                            <GetCurrentContractExpression />
+                            <GetCurrentContractAddressExpression />
+                            <GetSenderExpression />
+                            <GetSourceExpression />
+
                             {/* Statements */}
                             <AssertStatement />
                             <IfStatement />
@@ -286,21 +316,17 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <CategoryIcon>
                                 <TableIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
-                            {/* <Category name="Block" categorystyle="block_properties_category"> */}
-                            <Block type={BlockKind.get_chain_id_block} />
-                            <Block type={BlockKind.get_level_block} />
-                            <Block type={BlockKind.get_timestamp_block} />
-                            <Block type={BlockKind.get_total_voting_power_block} />
-                            <Block type={BlockKind.get_voting_power} />
-                            {/* </Category>
-                            <Category name="Transaction" categorystyle="transaction_properties_category"> */}
-                            <Block type={BlockKind.get_amount_block} />
-                            <Block type={BlockKind.get_balance_block} />
-                            <Block type={BlockKind.get_current_contract_block} />
-                            <Block type={BlockKind.get_current_contract_address_block} />
-                            <Block type={BlockKind.get_sender_block} />
-                            <Block type={BlockKind.get_source_block} />
-                            {/* </Category> */}
+                            <GetChainIdExpression />
+                            <GetLevelExpression />
+                            <GetTimestampExpression />
+                            <GetTotalVotingPowerExpression />
+                            <GetVotingPowerExpression />
+                            <GetAmountExpression />
+                            <GetBalanceExpression />
+                            <GetCurrentContractExpression />
+                            <GetCurrentContractAddressExpression />
+                            <GetSenderExpression />
+                            <GetSourceExpression />
                         </Category>
 
                         <Category name="Values" categorystyle="literal_category">
