@@ -17,8 +17,9 @@
 |:-:|
 | [SmartTS SDK](https://github.com/RomarQ/smartts-sdk) |
 | [Michelson SDK](https://github.com/RomarQ/michelson-sdk) |
-| [Infrastructure Automation](https://github.com/RomarQ/VisualTez-infra) |
+| [Infrastructure](https://github.com/RomarQ/VisualTez-infra) |
 | [Permalink Storage](https://github.com/RomarQ/visualtez-storage)
+| [Test Runner (IN Progress)](https://github.com/RomarQ/visualtez-testing)
 
 ## **About**
 
