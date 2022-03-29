@@ -16,7 +16,7 @@ const Navigation: React.FC<NavigationProps> = () => {
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between p-2">
                 <div className="pl-4 flex items-center">
                     <Link to="/">
-                        <img className="h-10 md:h-16" src={resolvePath('/assets/logo.svg')} />
+                        <img alt="logo-header" className="h-10 md:h-16" src={resolvePath('/assets/logo.svg')} />
                     </Link>
                 </div>
                 <div className="flex justify-center items-center lg:hidden pr-4">

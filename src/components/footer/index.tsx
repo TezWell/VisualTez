@@ -15,7 +15,7 @@ const Footer = () => (
             <div className="flex flex-col md:flex-row items-center justify-center">
                 <div className="flex-1 text-black h-32 pb-10 md:pb-0">
                     <Link to="/">
-                        <img className="h-24 md:h-full" src={resolvePath('/assets/logo.svg')} />
+                        <img alt="logo-footer" className="h-24 md:h-full" src={resolvePath('/assets/logo.svg')} />
                     </Link>
                 </div>
                 <div className="w-full flex-1 flex flex-col md:flex-row items-start justify-center text-black dark:text-white">
