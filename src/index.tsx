@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-dom';
+import * as ReactDOMClient from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 
 import './index.css';
@@ -10,7 +10,15 @@ import Tezos from './context/Tezos';
 import Deployment from './context/Deployment';
 import CircularLoading from './components/common/Spinner';
 
-render(
+const container = document.getElementById('root');
+if (!container) {
+    alert('Root <div/> missing!');
+    throw new Error('Root <div/> missing!');
+}
+
+const root = ReactDOMClient.createRoot(container);
+
+root.render(
     <React.StrictMode>
         <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
             <React.Suspense fallback={<CircularLoading />}>
@@ -26,5 +34,4 @@ render(
             </React.Suspense>
         </div>
     </React.StrictMode>,
-    document.getElementById('root'),
 );

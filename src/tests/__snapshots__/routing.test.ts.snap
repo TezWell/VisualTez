@@ -3,7 +3,6 @@
 exports[`Application Routing Test Route VisualTez - 404 1`] = `
 <main
   class="flex flex-col flex-1"
-  style=""
 >
   <div
     class="flex-1 flex justify-center items-center"
@@ -61,7 +60,6 @@ exports[`Application Routing Test Route VisualTez - Contact 1`] = `
 exports[`Application Routing Test Route VisualTez - Nodes 1`] = `
 <main
   class="flex flex-col flex-1"
-  style=""
 >
   <div
     class="flex-1 flex flex-row justify-center items-center p-2 flex-wrap"
@@ -100,7 +98,6 @@ exports[`Application Routing Test Route VisualTez - Terms 1`] = `
 exports[`Application Routing Test Route VisualTez 1`] = `
 <main
   class="flex flex-col flex-1"
-  style=""
 >
   <div
     class="pt-20 pb-20"
@@ -140,6 +137,7 @@ exports[`Application Routing Test Route VisualTez 1`] = `
         class="flex justify-center h-full w-full md:w-2/5 py-6 text-center"
       >
         <img
+          alt="example"
           class="h-full w-full"
           src="/assets/sample.svg"
         />
