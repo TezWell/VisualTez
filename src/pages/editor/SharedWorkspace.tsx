@@ -8,11 +8,10 @@ import useEditor from 'src/context/hooks/useEditor';
 import { generateRandomString } from 'src/utils/rand';
 import { EditorActionKind } from 'src/context/Editor';
 
-interface SharedWorkspaceProps {
-    mainWorkspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface SharedWorkspaceProps {}
 
-const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) => {
+const SharedWorkspace: React.FC<SharedWorkspaceProps> = () => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
     const [name, setName] = React.useState(`Workspace_${generateRandomString()}`);
     const { state, dispatch } = useEditor();
@@ -32,17 +31,15 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = ({ mainWorkspaceRef }) =
     );
 
     const importWorkspace = React.useCallback(() => {
-        if (mainWorkspaceRef.current) {
-            dispatch({
-                type: EditorActionKind.CREATE_WORKSPACE,
-                payload: {
-                    name,
-                    xml: state.volatileWorkspace,
-                },
-            });
-            updateVolatileWorkspace();
-        }
-    }, [dispatch, mainWorkspaceRef, name, state.volatileWorkspace, updateVolatileWorkspace]);
+        dispatch({
+            type: EditorActionKind.CREATE_WORKSPACE,
+            payload: {
+                name,
+                xml: state.volatileWorkspace,
+            },
+        });
+        updateVolatileWorkspace();
+    }, [dispatch, name, state.volatileWorkspace, updateVolatileWorkspace]);
 
     return (
         <Modal

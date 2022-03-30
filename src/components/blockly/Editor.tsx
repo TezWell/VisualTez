@@ -87,6 +87,13 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
                 onError?.(e?.message);
             }
         }
+
+        const container = blocklyDiv.current;
+        return () => {
+            if (container) {
+                container.innerHTML = '';
+            }
+        };
     }, []);
 
     React.useEffect(() => {

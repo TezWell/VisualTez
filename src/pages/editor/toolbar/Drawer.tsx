@@ -1,5 +1,4 @@
 import React from 'react';
-import { Transition } from '@headlessui/react';
 
 import useEditor from 'src/context/hooks/useEditor';
 import CompilationDrawer from './CompilationDrawer';
@@ -43,29 +42,17 @@ const Drawer: React.FC<DrawerProps> = () => {
     }
 
     return (
-        <Transition.Root show={!!state.drawer} as={React.Fragment}>
-            <div className="relative h-full w-96 border-l-4 border-black dark:border-white">
-                <div className="absolute h-full w-full flex flex-col">
-                    <Transition.Child
-                        as={React.Fragment}
-                        enter="transform transition ease-in-out duration-1000"
-                        enterFrom="translate-x-full"
-                        enterTo="translate-x-0"
-                        leave="transform transition ease-in-out duration-100"
-                        leaveFrom="translate-x-0"
-                        leaveTo="translate-x-full"
-                    >
-                        <div className="flex-1 flex flex-col items-center bg-white dark:bg-black">{content}</div>
-                    </Transition.Child>
-                    <button
-                        onClick={onClose}
-                        className="flex items-center font-medium text-lg border-t-4 border-black dark:border-white p-2 hover:text-yellow-500"
-                    >
-                        Close <DoubleArrowRightIcon width={32} height={32} />
-                    </button>
-                </div>
+        <div className="relative h-full w-96 border-l-4 border-black dark:border-white">
+            <div className="absolute h-full w-full flex flex-col">
+                <div className="flex-1 flex flex-col items-center bg-white dark:bg-black">{content}</div>
+                <button
+                    onClick={onClose}
+                    className="flex items-center font-medium text-lg border-t-4 border-black dark:border-white p-2 hover:text-yellow-500"
+                >
+                    Close <DoubleArrowRightIcon width={32} height={32} />
+                </button>
             </div>
-        </Transition.Root>
+        </div>
     );
 };
 

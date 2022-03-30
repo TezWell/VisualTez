@@ -70,7 +70,7 @@ const EditorContainer = () => {
             <ErrorModal title="Editor Error" open={!!state.error} onClose={() => updateError(undefined)}>
                 {state.error}
             </ErrorModal>
-            <SharedWorkspace mainWorkspaceRef={workspaceRef} />
+            <SharedWorkspace />
         </>
     );
 };

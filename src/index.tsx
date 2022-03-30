@@ -19,19 +19,20 @@ if (!container) {
 const root = ReactDOMClient.createRoot(container);
 
 root.render(
-    <React.StrictMode>
-        <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
-            <React.Suspense fallback={<CircularLoading />}>
-                <HelmetProvider>
-                    <Theme.Provider>
-                        <Tezos.Provider>
-                            <Deployment.Provider>
-                                <Router />
-                            </Deployment.Provider>
-                        </Tezos.Provider>
-                    </Theme.Provider>
-                </HelmetProvider>
-            </React.Suspense>
-        </div>
-    </React.StrictMode>,
+    // Re-Enable StrictMode once this gets fixed: https://github.com/tailwindlabs/headlessui/issues/681
+    // <React.StrictMode>
+    <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
+        <React.Suspense fallback={<CircularLoading />}>
+            <HelmetProvider>
+                <Theme.Provider>
+                    <Tezos.Provider>
+                        <Deployment.Provider>
+                            <Router />
+                        </Deployment.Provider>
+                    </Tezos.Provider>
+                </Theme.Provider>
+            </HelmetProvider>
+        </React.Suspense>
+    </div>,
+    // </React.StrictMode>
 );
