@@ -11,12 +11,21 @@ const Landing: React.FC = () => (
                 <p className="leading-normal text-2xl mb-8">
                     A visual programming tool for writing smart contracts in the Tezos blockchain.
                 </p>
-                <RouterButton
-                    to="/editor"
-                    className="mx-auto lg:mx-0 hover:underline bg-black dark:bg-white text-white dark:text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                >
-                    Open Editor
-                </RouterButton>
+                <div className="inline-flex spacing-2">
+                    <RouterButton
+                        to="/editor"
+                        className="h-14 bg-black dark:bg-white text-white dark:text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    >
+                        Open Editor
+                    </RouterButton>
+                    <a
+                        href="/docs"
+                        target="_blank"
+                        className="h-14 bg-black dark:bg-white text-white dark:text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out ml-2"
+                    >
+                        Documentation
+                    </a>
+                </div>
             </div>
             <div className="flex justify-center h-full w-full md:w-2/5 py-6 text-center">
                 <img alt="example" className="h-full w-full" src={resolvePath('/assets/sample.svg')} />

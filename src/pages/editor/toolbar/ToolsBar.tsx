@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon } from '@heroicons/react/outline';
+import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon, BookOpenIcon } from '@heroicons/react/outline';
 import { TemplateIcon } from '@heroicons/react/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
@@ -73,6 +73,15 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     <CogIcon className="block" />
                     <p>Settings</p>
                 </button>
+                <div className="border mt-5 mb-5 w-20" />
+                <a
+                    href="/docs"
+                    target="_blank"
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
+                >
+                    <BookOpenIcon className="block" />
+                    <p>Docs</p>
+                </a>
             </div>
         </div>
     );
