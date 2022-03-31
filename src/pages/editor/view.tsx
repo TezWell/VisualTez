@@ -16,6 +16,7 @@ import { EditorActionKind } from 'src/context/Editor';
 import Entrypoint from 'src/components/blockly/blocks/Entrypoint';
 import OnChainView from 'src/components/blockly/blocks/OnChainView';
 import Contract from 'src/components/blockly/blocks/Contract';
+import CategoryIcon from 'src/components/blockly/CategoryIcon';
 import {
     BooleanLiteral,
     IntLiteral,
@@ -51,12 +52,25 @@ import {
     StringType,
     TimestampType,
     UnitType,
+    NeverType,
+    OperationType,
+    BigMapType,
+    ContractType,
+    LambdaType,
+    ListType,
+    SetType,
+    MapType,
+    OptionType,
+    PairType,
+    SaplingStateType,
+    SaplingTransactionType,
+    TicketType,
+    RecordType,
+    VariantType,
+    RecordVariantTypeEntry,
 } from 'src/components/blockly/blocks/types';
-import NeverType from 'src/components/blockly/blocks/types/NeverType';
-import OperationType from 'src/components/blockly/blocks/types/OperationType';
 import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
-import CategoryIcon from 'src/components/blockly/CategoryIcon';
 import {
     AssertStatement,
     CallContractStatement,
@@ -209,6 +223,23 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Bls12_381_G2Type />
                             <OperationType />
                             <NeverType />
+
+                            <ListType />
+                            <SetType />
+                            <OptionType />
+                            <MapType />
+                            <BigMapType />
+                            <PairType />
+                            <LambdaType />
+                            <ContractType />
+                            <TicketType />
+                            <SaplingStateType />
+                            <SaplingTransactionType />
+
+                            <RecordType />
+                            <VariantType />
+                            <RecordVariantTypeEntry />
+
                             {/* Expressions */}
                             <Blake2b />
                             <SHA256 />
@@ -447,37 +478,23 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Category name="Container Types" categorystyle="type_category">
-                                <Block type={BlockKind.list_type} />
-                                <Block type={BlockKind.set_type} />
-                                <Block type={BlockKind.option_type} />
-                                <Block type={BlockKind.map_type} />
-                                <Block type={BlockKind.big_map_type} />
-                                <Block type={BlockKind.pair_type} />
-                                <Block type={BlockKind.lambda_type} />
-                                <Block type={BlockKind.ticket_type} />
-                                <Block type={BlockKind.contract_type} />
-                                <Block type={BlockKind.sapling_state_type} />
-                                <Block type={BlockKind.sapling_transaction_type} />
+                                <ListType />
+                                <SetType />
+                                <OptionType />
+                                <MapType />
+                                <BigMapType />
+                                <PairType />
+                                <LambdaType />
+                                <ContractType />
+                                <TicketType />
+                                <SaplingStateType />
+                                <SaplingTransactionType />
                             </Category>
 
                             <Category name="Artificial Types" categorystyle="type_category">
-                                <Block type={BlockKind.record_type}>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.variant_type}>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                    <Value name="fields">
-                                        <Block type={BlockKind.record_variant_field_type} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.record_variant_field_type} />
+                                <RecordType />
+                                <VariantType />
+                                <RecordVariantTypeEntry />
                             </Category>
                         </Category>
 
