@@ -2,7 +2,7 @@ import React from 'react';
 import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
-import { HashtagIcon, TableIcon } from '@heroicons/react/outline';
+import { FingerPrintIcon, HashtagIcon, TableIcon } from '@heroicons/react/outline';
 
 import { Block, Category, ToolboxSearch, Value } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
@@ -86,6 +86,7 @@ import {
     SHA256,
     SHA3,
     SHA512,
+    CheckSignatureExpression,
 } from 'src/components/blockly/blocks/expressions';
 
 interface EditorViewProps {
@@ -215,6 +216,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <SHA3 />
                             <Keccak />
 
+                            <CheckSignatureExpression />
+
                             <GetChainIdExpression />
                             <GetLevelExpression />
                             <GetTimestampExpression />
@@ -300,6 +303,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <CategoryIcon>
                                 <TableIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
+                            <Category name="Signature" categorystyle="cryptography_category">
+                                <CategoryIcon>
+                                    <FingerPrintIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <CheckSignatureExpression />
+                            </Category>
                             <Category name="Hashing" categorystyle="cryptography_category">
                                 <CategoryIcon>
                                     <HashtagIcon className="block h-6 w-6 mr-2" />

@@ -1,1 +1,2 @@
 import './hash';
+import './signature';
