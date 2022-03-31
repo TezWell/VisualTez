@@ -2,15 +2,15 @@ import * as React from 'react';
 
 import BlockKind from 'src/blocks/enums/BlockKind';
 import Block from 'src/components/blockly/Block';
-import Value from '../../Value';
+import Value from 'src/components/blockly/Value';
 
 export const ListType = () => <Block type={BlockKind.list_type} tags={['type', 'list', 'array', 'sequence']} />;
 export const SetType = () => <Block type={BlockKind.set_type} tags={['type', 'set', 'array', 'sequence']} />;
 export const OptionType = () => (
     <Block type={BlockKind.option_type} tags={['type', 'option', 'some', 'none', 'optional']} />
 );
-export const MapType = () => <Block type={BlockKind.map_type} tags={['type', 'map', 'sequence']} />;
-export const BigMapType = () => <Block type={BlockKind.big_map_type} tags={['type', 'big_map', 'map', 'sequence']} />;
+export const MapType = () => <Block type={BlockKind.map_type} tags={['type', 'map']} />;
+export const BigMapType = () => <Block type={BlockKind.big_map_type} tags={['type', 'big_map', 'map']} />;
 export const PairType = () => <Block type={BlockKind.pair_type} tags={['type', 'pair', 'tuple']} />;
 export const LambdaType = () => <Block type={BlockKind.lambda_type} tags={['type', 'lambda', 'function']} />;
 export const TicketType = () => <Block type={BlockKind.ticket_type} tags={['type', 'ticket']} />;
@@ -32,7 +32,7 @@ export const RecordType = () => (
     </Block>
 );
 export const VariantType = () => (
-    <Block type={BlockKind.variant_type} tags={['type', 'variant', 'or']}>
+    <Block type={BlockKind.variant_type} tags={['type', 'variant', 'or', 'left', 'right']}>
         <Value name="fields">
             <RecordVariantTypeEntry />
         </Value>

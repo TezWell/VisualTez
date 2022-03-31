@@ -34,6 +34,21 @@ import {
     Bls12_381_FrLiteral,
     Bls12_381_G1Literal,
     Bls12_381_G2Literal,
+    MapLiteral,
+    BigMapLiteral,
+    MapEntry,
+    ListLiteral,
+    SetLiteral,
+    SequenceItem,
+    SomeLiteral,
+    NoneWithTypeLiteral,
+    LambdaLiteral,
+    PairLiteral,
+    RecordLiteral,
+    RecordField,
+    LeftLiteral,
+    RightLiteral,
+    VariantLiteral,
 } from 'src/components/blockly/blocks/literals';
 import {
     AddressType,
@@ -188,6 +203,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Entrypoint />
                             <OnChainView />
                             {/* Literals */}
+
                             <NatLiteral />
                             <IntLiteral />
                             <MutezLiteral />
@@ -204,6 +220,28 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Bls12_381_FrLiteral />
                             <Bls12_381_G1Literal />
                             <Bls12_381_G2Literal />
+
+                            <ListLiteral />
+                            <SetLiteral />
+                            <SequenceItem />
+
+                            <MapLiteral />
+                            <BigMapLiteral />
+                            <MapEntry />
+
+                            <SomeLiteral />
+                            <NoneWithTypeLiteral />
+
+                            <PairLiteral />
+                            <RecordLiteral />
+                            <RecordField />
+
+                            <LambdaLiteral />
+
+                            <LeftLiteral />
+                            <RightLiteral />
+                            <VariantLiteral />
+
                             {/* Types */}
                             <NatType />
                             <IntType />
@@ -390,69 +428,38 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Category name="Sequences" categorystyle="sequence_literal_category">
-                                <Block type={BlockKind.list_literal}>
-                                    <Value name="items">
-                                        <Block type={BlockKind.sequence_item} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.set_literal}>
-                                    <Value name="items">
-                                        <Block type={BlockKind.sequence_item} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.sequence_item} />
+                                <ListLiteral />
+                                <SetLiteral />
+                                <SequenceItem />
                             </Category>
 
                             <Category name="Maps" categorystyle="map_literal_category">
-                                <Block type={BlockKind.map_literal}>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.map_entry} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.big_map_literal}>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.map_entry} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.map_entry} />
+                                <MapLiteral />
+                                <BigMapLiteral />
+                                <MapEntry />
                             </Category>
 
                             <Category name="Option" categorystyle="option_literal_category">
-                                <Block type={BlockKind.some_literal} />
-                                <Block type={BlockKind.none_with_type_literal} />
+                                <SomeLiteral />
+                                <NoneWithTypeLiteral />
                             </Category>
 
                             <Category name="Pair / Record" categorystyle="pair_literal_category">
-                                <Block type={BlockKind.pair_literal} />
+                                <PairLiteral />
 
                                 <Label text="-- Record --" web-class="defaultLabel" />
-
-                                <Block type={BlockKind.record_literal}>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.record_field} />
-                                    </Value>
-                                    <Value name="entries">
-                                        <Block type={BlockKind.record_field} />
-                                    </Value>
-                                </Block>
-                                <Block type={BlockKind.record_field} />
+                                <RecordLiteral />
+                                <RecordField />
                             </Category>
 
                             <Category name="Lambda" categorystyle="blockchain_category">
-                                <Block type={BlockKind.lambda_literal}>
-                                    <Value name="TYPE">
-                                        <Block type={BlockKind.unit_type} />
-                                    </Value>
-                                    <Value name="RETURN">
-                                        <Block type={BlockKind.unit_literal} />
-                                    </Value>
-                                </Block>
+                                <LambdaLiteral />
                             </Category>
 
                             <Category name="Variants" categorystyle="variant_literal_category">
-                                <Block type={BlockKind.left_literal_block} />
-                                <Block type={BlockKind.right_literal_block} />
-                                <Block type={BlockKind.variant_value} />
+                                <LeftLiteral />
+                                <RightLiteral />
+                                <VariantLiteral />
                             </Category>
                         </Category>
                         <Category name="Types" categorystyle="type_category">

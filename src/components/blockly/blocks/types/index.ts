@@ -1,2 +1,2 @@
-export * from './SingletonTypes';
-export * from './ContainerTypes';
+export * from './Singleton';
+export * from './Container';
