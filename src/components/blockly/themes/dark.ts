@@ -19,19 +19,14 @@ const DarkTheme = Blockly.Theme.defineTheme('dark', {
         },
 
         literal_category: {
-            colour: '#D18A55',
-        },
-        simple_literal_category: {
             colour: '#a58c5b',
         },
+
         option_literal_category: {
             colour: '#a55b74',
         },
         sequence_literal_category: {
             colour: '#5b80a5',
-        },
-        map_literal_category: {
-            colour: '#5ba58c',
         },
         pair_literal_category: {
             colour: '#5b99a5',
@@ -58,6 +53,10 @@ const DarkTheme = Blockly.Theme.defineTheme('dark', {
         },
         operation_statements_category: {
             colour: '#5b74a5',
+        },
+
+        testing_category: {
+            colour: '#5ba58c',
         },
     },
     blockStyles: {

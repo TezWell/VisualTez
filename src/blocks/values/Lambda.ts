@@ -40,7 +40,7 @@ Blockly.Blocks[BlockKind.lambda_literal] = {
             inputsInline: true,
             output: ['Literal', 'Lambda'],
             outputShape: 3,
-            colour: 60,
+            colour: 40,
             extensions: ['contextMenu_newGetVariableBlock'],
         });
         this.setPreviousStatement(false);

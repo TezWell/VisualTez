@@ -1,0 +1,60 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="type_compilation" id="gjS7A0fzGhEN{x.7oVN;" x="-5" y="-496">
+        <field name="NAME">fa2_transfer</field>
+        <value name="type">
+            <block type="list_type" id=";]9jZ(NqgqorBjy6dTNL">
+                <value name="inner_type">
+                    <block type="record_type" id="6-9ce4E;z{:(/X{(``/p">
+                        <field name="LAYOUT">['from_', 'txs']</field>
+                        <statement name="fields">
+                            <block type="record_variant_field_type" id="J1qku9V{Fzw6}m4Hz[~t">
+                                <field name="key">from_</field>
+                                <value name="type">
+                                    <block type="address_type" id="Dl]FY;{+(FiiqBfyO-r-"></block>
+                                </value>
+                                <next>
+                                    <block type="record_variant_field_type" id="qx3qTQ+hku_$rqGXHB2c">
+                                        <field name="key">txs</field>
+                                        <value name="type">
+                                            <block type="list_type" id="}?#N7L=dHL=f|uJHG]Q,">
+                                                <value name="inner_type">
+                                                    <block type="record_type" id="Bl^NzUUe[=ZJB9z)96]^">
+                                                        <field name="LAYOUT">['to_', ['token_id', 'amount']]</field>
+                                                        <statement name="fields">
+                                                            <block type="record_variant_field_type" id="Ctmc~WhRFUuy090VXF5f">
+                                                                <field name="key">to_</field>
+                                                                <value name="type">
+                                                                    <block type="address_type" id="vu[E#-$knHJbxU(p;:Ny"></block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="record_variant_field_type" id=":ZYywU`,i:a8z@+Y?dIW">
+                                                                        <field name="key">token_id</field>
+                                                                        <value name="type">
+                                                                            <block type="nat_type" id="mWyj_APfvTDsA*yjeRMx"></block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="record_variant_field_type" id="W(y}/[bW(mqv[UV5IG97">
+                                                                                <field name="key">amount</field>
+                                                                                <value name="type">
+                                                                                    <block type="nat_type" id="K@/$)]*HercISkKP|;-I"></block>
+                                                                                </value>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </statement>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </next>
+                            </block>
+                        </statement>
+                    </block>
+                </value>
+            </block>
+        </value>
+    </block>
+</xml>

@@ -47,7 +47,36 @@ const TemplatesDrawer: React.FC<TemplatesDrawerProps> = () => {
         <div className="flex flex-col w-full h-full p-5">
             <DrawerTitle title="Templates" />
             <div className="mt-5">
-                {Settings.templates.map((template) => (
+                <span className="inline-flex items-center justify-center w-full p-1 border-2 font-bold font-mono mb-3">
+                    Contracts
+                </span>
+                {Settings.templates.contracts.map((template) => (
+                    <Button
+                        key={template.name}
+                        onClick={() => selectTemplate(template.path)}
+                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
+                    >
+                        {template.name}
+                    </Button>
+                ))}
+
+                <span className="inline-flex items-center justify-center w-full p-1 border-2 font-bold font-mono mb-3 mt-3">
+                    Values
+                </span>
+                {Settings.templates.values.map((template) => (
+                    <Button
+                        key={template.name}
+                        onClick={() => selectTemplate(template.path)}
+                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
+                    >
+                        {template.name}
+                    </Button>
+                ))}
+
+                <span className="inline-flex items-center justify-center w-full p-1 border-2 font-bold font-mono mb-3 mt-3">
+                    Types
+                </span>
+                {Settings.templates.types.map((template) => (
                     <Button
                         key={template.name}
                         onClick={() => selectTemplate(template.path)}

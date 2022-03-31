@@ -38,7 +38,7 @@ interface NodesViewProps {
 
 const NodesView: React.FC<NodesViewProps> = ({ nodes }) => {
     return (
-        <div className="flex-1 flex flex-row justify-center items-center p-2 flex-wrap">
+        <div className="flex-1 inline-flex flex-row justify-center items-center flex-wrap container m-auto p-5">
             {nodes.map(({ network, historyMode, online, level, version, timestamp, synchronizing }) => (
                 <div
                     key={network}

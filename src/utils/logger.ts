@@ -1,3 +1,5 @@
+import { isDevelopment } from '.';
+
 type LogLevel = 'info' | 'debug' | 'error' | 'warn';
 type LogLevelMethod = (...d: unknown[]) => void;
 
@@ -9,7 +11,7 @@ type LogLevelMethod = (...d: unknown[]) => void;
 const createLogLevel =
     (level: LogLevel): LogLevelMethod =>
     (...d) => {
-        if (process.env.NODE_ENV === 'development') {
+        if (isDevelopment()) {
             console.trace(`[${level.toUpperCase()}]`, ...d);
         }
     };

@@ -10,10 +10,24 @@
         "max_delay": 180000
     },
     "storage_api": "https://storage.visualtez.com",
-    "templates": [
-        {
-            "name": "FA2 Contract",
-            "path": "/templates/fa2.xml"
-        }
-    ]
+    "templates": {
+        "contracts": [
+            {
+                "name": "FA2 - Contract",
+                "path": "/templates/fa2.xml"
+            }
+        ],
+        "values": [
+            {
+                "name": "FA2 - Transfer",
+                "path": "/templates/value/fa2_transfer.xml"
+            }
+        ],
+        "types": [
+            {
+                "name": "FA2 - Transfer",
+                "path": "/templates/type/fa2_transfer.xml"
+            }
+        ]
+    }
 }

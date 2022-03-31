@@ -5,11 +5,10 @@ import { SunIcon, MoonIcon } from '@heroicons/react/solid';
 import useTheme from 'src/context/hooks/useTheme';
 import { ThemeKind } from 'src/context/Theme';
 
-interface ThemeSelectionProps {
-    onlyIcons?: boolean;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface ThemeSelectionProps {}
 
-const ThemeSelection: React.FC<ThemeSelectionProps> = ({ onlyIcons = false }) => {
+const ThemeSelection: React.FC<ThemeSelectionProps> = () => {
     const { isDark, changeTheme } = useTheme();
 
     return (
@@ -20,15 +19,9 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({ onlyIcons = false }) =>
         >
             <span className="sr-only">Theme Selection</span>
             {isDark ? (
-                <>
-                    <SunIcon className="block h-5 w-5 font-extrabold" aria-hidden="true" />
-                    {!onlyIcons ? <p className="ml-1 font-extrabold">Light</p> : null}
-                </>
+                <SunIcon className="block h-5 w-5 font-extrabold" aria-hidden="true" />
             ) : (
-                <>
-                    <MoonIcon className="block h-5 w-5 font-extrabold" aria-hidden="true" />
-                    {!onlyIcons ? <p className="ml-1 font-extrabold">Dark</p> : null}
-                </>
+                <MoonIcon className="block h-5 w-5 font-extrabold" aria-hidden="true" />
             )}
         </Switch>
     );

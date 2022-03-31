@@ -1,0 +1,82 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="value_compilation" id="hepv{bP!Z-nOe!gf[8UZ" x="-161" y="-563">
+        <field name="NAME">fa2_transfer</field>
+        <value name="value">
+            <block type="list_literal" id="M}O:bt-bKc5E`7utIIIS">
+                <comment pinned="false" h="80" w="160">A list of transfer actions.</comment>
+                <statement name="items">
+                    <block type="sequence_item" id="jH{a:GsPo})uOeMcqJ;b">
+                        <value name="value">
+                            <block type="record_literal" id="~Yc`6jnZ0+l~ZF?m$4(P">
+                                <field name="LAYOUT">['from_', 'txs']</field>
+                                <statement name="entries">
+                                    <block type="record_field" id="x$`p=g]ZzyDUTHB8~xAh">
+                                        <field name="field">from_</field>
+                                        <comment pinned="false" h="80" w="160">Sender address</comment>
+                                        <value name="value">
+                                            <block type="address_literal" id=".$!/lv`^h;r%_biuFKyS">
+                                                <field name="address_value">tz1Sender</field>
+                                            </block>
+                                        </value>
+                                        <next>
+                                            <block type="record_field" id="xtc[kUGf|D@)T4(_+NC8">
+                                                <field name="field">txs</field>
+                                                <comment pinned="false" h="80" w="160">Transactions</comment>
+                                                <value name="value">
+                                                    <block type="list_literal" id="k(TYVx0XOZmBQbXF5RK`">
+                                                        <statement name="items">
+                                                            <block type="sequence_item" id="qA7qZ,MMe`$:_ZJBAlV:">
+                                                                <value name="value">
+                                                                    <block type="record_literal" id="w)QA=JWi/E_M[yDllE(H">
+                                                                        <field name="LAYOUT">['to_', ['token_id', 'amount']]</field>
+                                                                        <statement name="entries">
+                                                                            <block type="record_field" id="tYI6JKk$n;06L.y@Xono">
+                                                                                <field name="field">to_</field>
+                                                                                <comment pinned="false" h="80" w="160">Recipient address</comment>
+                                                                                <value name="value">
+                                                                                    <block type="address_literal" id="tZMWE0L@b@J:VImwREC$">
+                                                                                        <field name="address_value">tz1Recipient</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                    <block type="record_field" id="B0CgGjPU^H8ZB%fuvBsD">
+                                                                                        <field name="field">token_id</field>
+                                                                                        <comment pinned="false" h="80" w="160">Token Identifier</comment>
+                                                                                        <value name="value">
+                                                                                            <block type="nat_literal" id="tXJGR}-,`d;R}yuYux~u">
+                                                                                                <field name="nat_value">0</field>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                            <block type="record_field" id="i9/6Ie;2H_xfawo=*+H?">
+                                                                                                <field name="field">amount</field>
+                                                                                                <comment pinned="false" h="80" w="160">Amount to be transferred</comment>
+                                                                                                <value name="value">
+                                                                                                    <block type="nat_literal" id="CY15PeBLB,O1Ov9VQTF[">
+                                                                                                        <field name="nat_value">100</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </next>
+                                                                                    </block>
+                                                                                </next>
+                                                                            </block>
+                                                                        </statement>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </statement>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                    </block>
+                </statement>
+            </block>
+        </value>
+    </block>
+</xml>

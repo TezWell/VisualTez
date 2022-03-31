@@ -14,6 +14,7 @@ import Michelson from './generators/Michelson';
 import Context from './core/context';
 import { extractContract } from './base/contract';
 import { Unit } from '@tezwell/michelson-sdk/literal';
+import Logger from 'src/utils/logger';
 
 export enum CompilationKind {
     Contract = 'contract',
@@ -99,7 +100,7 @@ export const compileBlock = (block: Block): Compilation | null => {
 
             const compilation = Compiler.compileContract(code);
 
-            console.error(compilation);
+            Logger.debug(compilation);
 
             return {
                 kind: CompilationKind.Contract,

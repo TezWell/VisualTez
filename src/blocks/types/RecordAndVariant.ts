@@ -7,6 +7,7 @@ import { TRecord as M_TRecord, TVariant as M_TVariant } from '@tezwell/michelson
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
+import Logger from 'src/utils/logger';
 
 const toFieldBlock = (block: Block): [string, Block] => {
     const key: string = block.getFieldValue('key');
@@ -48,10 +49,12 @@ SmartML.addBlock(BlockKind.record_type, {
 
         const layout = block.getFieldValue('LAYOUT');
         let layoutArray = undefined;
-        try {
-            layoutArray = layout ? JSON.parse(layout) : undefined;
-        } catch {
-            /* Ignore parsing error */
+        if (layout) {
+            try {
+                layoutArray = JSON.parse(layout.replace(/'/g, '"'));
+            } catch {
+                Logger.debug('Invalid layout', layout);
+            }
         }
 
         return ST_TRecord(
@@ -74,9 +77,18 @@ Michelson.addBlock(BlockKind.record_type, {
         } while ((targetBlock = targetBlock.getNextBlock()));
 
         const layout = block.getFieldValue('LAYOUT');
+        let layoutArray = undefined;
+        if (layout) {
+            try {
+                layoutArray = JSON.parse(layout.replace(/'/g, '"'));
+            } catch {
+                Logger.debug('Invalid layout', layout);
+            }
+        }
+
         return M_TRecord(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'type') }), {}),
-            layout ? JSON.parse(layout) : undefined,
+            layoutArray,
         );
     },
 });
@@ -116,10 +128,12 @@ SmartML.addBlock(BlockKind.variant_type, {
 
         const layout = block.getFieldValue('LAYOUT');
         let layoutArray = undefined;
-        try {
-            layoutArray = layout ? JSON.parse(layout) : undefined;
-        } catch {
-            /* Ignore parsing error */
+        if (layout) {
+            try {
+                layoutArray = JSON.parse(layout.replace(/'/g, '"'));
+            } catch {
+                Logger.debug('Invalid layout', layout);
+            }
         }
 
         return ST_TVariant(
@@ -142,9 +156,18 @@ Michelson.addBlock(BlockKind.variant_type, {
         } while ((targetBlock = targetBlock.getNextBlock()));
 
         const layout = block.getFieldValue('LAYOUT');
+        let layoutArray = undefined;
+        if (layout) {
+            try {
+                layoutArray = JSON.parse(layout.replace(/'/g, '"'));
+            } catch {
+                Logger.debug('Invalid layout', layout);
+            }
+        }
+
         return M_TVariant(
             fields.reduce((pv, [key, block]) => ({ ...pv, [key]: Michelson.toType(block, 'type') }), {}),
-            layout ? JSON.parse(layout) : undefined,
+            layoutArray,
         );
     },
 });

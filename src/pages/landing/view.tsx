@@ -14,14 +14,14 @@ const Landing: React.FC = () => (
                 <div className="inline-flex spacing-2">
                     <RouterButton
                         to="/editor"
-                        className="h-14 bg-black dark:bg-white text-white dark:text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                        className="h-14 inline-flex items-center px-4 text-sm md:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     >
                         Open Editor
                     </RouterButton>
                     <a
                         href="/docs"
                         target="_blank"
-                        className="h-14 bg-black dark:bg-white text-white dark:text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out ml-2"
+                        className="h-14 inline-flex items-center px-4 text-sm md:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out ml-2"
                     >
                         Documentation
                     </a>

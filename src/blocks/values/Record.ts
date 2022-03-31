@@ -19,7 +19,7 @@ Blockly.Blocks[BlockKind.record_literal] = {
             args0: [{ type: 'input_statement', name: 'entries', check: ['RecordField'] }],
             output: ['Literal', 'Record'],
             outputShape: 3,
-            colour: 100,
+            colour: 40,
         });
         const layoutField = new FieldTextInput('');
         layoutField.setTooltip('Default: Right combs\n---\nExample: ["prop1", ["prop2", "props3"]]');
@@ -150,7 +150,7 @@ Blockly.Blocks[BlockKind.record_field] = {
                 },
                 { type: 'input_value', name: 'value', check: ['Literal', 'Expression'] },
             ],
-            colour: 110,
+            colour: 50,
         });
         this.setPreviousStatement(true, ['RecordField']);
         this.setNextStatement(true, ['RecordField']);

@@ -19,9 +19,6 @@ const LightTheme = Blockly.Theme.defineTheme('light', {
         },
 
         literal_category: {
-            colour: '#D18A55',
-        },
-        simple_literal_category: {
             colour: '#a58c5b',
         },
         option_literal_category: {
@@ -29,9 +26,6 @@ const LightTheme = Blockly.Theme.defineTheme('light', {
         },
         sequence_literal_category: {
             colour: '#5b80a5',
-        },
-        map_literal_category: {
-            colour: '#5ba58c',
         },
         pair_literal_category: {
             colour: '#5b99a5',
@@ -58,6 +52,10 @@ const LightTheme = Blockly.Theme.defineTheme('light', {
         },
         operation_statements_category: {
             colour: '#5b74a5',
+        },
+
+        testing_category: {
+            colour: '#5ba58c',
         },
     },
     blockStyles: {

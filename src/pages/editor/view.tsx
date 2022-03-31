@@ -2,9 +2,9 @@ import React from 'react';
 import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
-import { FingerPrintIcon, HashtagIcon, TableIcon } from '@heroicons/react/outline';
+import { FingerPrintIcon, HashtagIcon, TableIcon, BeakerIcon } from '@heroicons/react/outline';
 
-import { Block, Category, ToolboxSearch, Value } from 'src/components/blockly';
+import { Block, Category, ToolboxSearch } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
 import BlockKind from 'src/blocks/enums/BlockKind';
 
@@ -117,6 +117,8 @@ import {
     SHA512,
     CheckSignatureExpression,
 } from 'src/components/blockly/blocks/expressions';
+import { isDevelopment } from 'src/utils';
+import Logger from 'src/utils/logger';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -148,7 +150,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
     const onChange = React.useCallback(
         (event: any) => {
-            console.error(event.type);
+            Logger.debug(event.type);
             if (workspaceRef.current) {
                 if (
                     [
@@ -368,6 +370,23 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <DelegateStatement />
                         </Category>
 
+                        <Category name="Block/Tx Properties" categorystyle="blockchain_category">
+                            <CategoryIcon>
+                                <TableIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <GetChainIdExpression />
+                            <GetLevelExpression />
+                            <GetTimestampExpression />
+                            <GetTotalVotingPowerExpression />
+                            <GetVotingPowerExpression />
+                            <GetAmountExpression />
+                            <GetBalanceExpression />
+                            <GetCurrentContractExpression />
+                            <GetCurrentContractAddressExpression />
+                            <GetSenderExpression />
+                            <GetSourceExpression />
+                        </Category>
+
                         <Category name="Cryptography" categorystyle="cryptography_category">
                             <CategoryIcon>
                                 <TableIcon className="block h-6 w-6 mr-2" />
@@ -390,25 +409,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
-                        <Category name="Block/Tx Properties" categorystyle="blockchain_category">
-                            <CategoryIcon>
-                                <TableIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                            <GetChainIdExpression />
-                            <GetLevelExpression />
-                            <GetTimestampExpression />
-                            <GetTotalVotingPowerExpression />
-                            <GetVotingPowerExpression />
-                            <GetAmountExpression />
-                            <GetBalanceExpression />
-                            <GetCurrentContractExpression />
-                            <GetCurrentContractAddressExpression />
-                            <GetSenderExpression />
-                            <GetSourceExpression />
-                        </Category>
-
                         <Category name="Values" categorystyle="literal_category">
-                            <Category name="Simple" categorystyle="simple_literal_category">
+                            <Category name="Simple" categorystyle="literal_category">
                                 <NatLiteral />
                                 <IntLiteral />
                                 <MutezLiteral />
@@ -427,24 +429,24 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Bls12_381_G2Literal />
                             </Category>
 
-                            <Category name="Sequences" categorystyle="sequence_literal_category">
+                            <Category name="Sequences" categorystyle="literal_category">
                                 <ListLiteral />
                                 <SetLiteral />
                                 <SequenceItem />
                             </Category>
 
-                            <Category name="Maps" categorystyle="map_literal_category">
+                            <Category name="Maps" categorystyle="literal_category">
                                 <MapLiteral />
                                 <BigMapLiteral />
                                 <MapEntry />
                             </Category>
 
-                            <Category name="Option" categorystyle="option_literal_category">
+                            <Category name="Option" categorystyle="literal_category">
                                 <SomeLiteral />
                                 <NoneWithTypeLiteral />
                             </Category>
 
-                            <Category name="Pair / Record" categorystyle="pair_literal_category">
+                            <Category name="Pair / Record" categorystyle="literal_category">
                                 <PairLiteral />
 
                                 <Label text="-- Record --" web-class="defaultLabel" />
@@ -452,11 +454,11 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <RecordField />
                             </Category>
 
-                            <Category name="Lambda" categorystyle="blockchain_category">
+                            <Category name="Lambda" categorystyle="literal_category">
                                 <LambdaLiteral />
                             </Category>
 
-                            <Category name="Variants" categorystyle="variant_literal_category">
+                            <Category name="Variants" categorystyle="literal_category">
                                 <LeftLiteral />
                                 <RightLiteral />
                                 <VariantLiteral />
@@ -511,7 +513,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.int_of_nat} />
                                 <Block type={BlockKind.nat_of_int} />
                             </Category>
-                            <Category name="Equality & Comparison & Logic" categorystyle="logic_category">
+                            <Category name="Equality & Comparison" categorystyle="logic_category">
                                 <Block type={BlockKind.compare_block} />
                                 <Block type={BlockKind.and} />
                                 <Block type={BlockKind.or} />
@@ -548,6 +550,14 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.delete_map_entry} />
                             </Category>
                         </Category>
+
+                        {isDevelopment() ? (
+                            <Category name="Testing" categorystyle="testing_category">
+                                <CategoryIcon>
+                                    <BeakerIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                            </Category>
+                        ) : null}
                     </BlocklyEditor>
                 </div>
                 <Drawer />

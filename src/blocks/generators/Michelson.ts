@@ -2,9 +2,9 @@ import type { IValue } from '@tezwell/michelson-sdk/typings';
 import type { IType } from '@tezwell/michelson-sdk/typings';
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
-import Logger from 'src/utils/logger';
 
 import BlockKind from '../enums/BlockKind';
+import { buildBlockErrorString } from '../utils/errorHandling';
 
 interface IBlock {
     toType?: (block: Block) => IType;
@@ -37,7 +37,7 @@ class Generator extends Blockly.Generator {
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
                 .join(' ');
 
-            throw TypeError(`Could not find "${targetBlockName}" in "${blockName}".`);
+            throw TypeError(`Could not find "${targetBlockName}" in "${blockName}". ${buildBlockErrorString(block)}`);
         }
 
         const localBlock = this.blocks.get(targetBlock.type as BlockKind);
@@ -45,7 +45,11 @@ class Generator extends Blockly.Generator {
             return localBlock.toType(targetBlock);
         }
 
-        throw TypeError(`The target block ${targetBlock.type} does not have a type generator.`);
+        throw TypeError(
+            `The target block ${targetBlock.type} does not have a type generator. ${buildBlockErrorString(
+                targetBlock,
+            )}`,
+        );
     }
 
     /**
@@ -67,7 +71,7 @@ class Generator extends Blockly.Generator {
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
                 .join(' ');
 
-            throw TypeError(`Could not find "${targetBlockName}" in "${blockName}".`);
+            throw TypeError(`Could not find "${targetBlockName}" in "${blockName}". ${buildBlockErrorString(block)}`);
         }
 
         const localBlock = this.blocks.get(targetBlock.type as BlockKind);
@@ -75,7 +79,11 @@ class Generator extends Blockly.Generator {
             return localBlock.toMichelson(targetBlock);
         }
 
-        throw TypeError(`The target block ${targetBlock.type} does not have a michelson generator.`);
+        throw TypeError(
+            `The target block ${targetBlock.type} does not have a michelson generator. ${buildBlockErrorString(
+                targetBlock,
+            )}`,
+        );
     }
 
     /**
@@ -85,9 +93,6 @@ class Generator extends Blockly.Generator {
      * @return {Michelson_LiteralUnion}
      */
     translateValue(block: Block | null): IValue {
-        if (this.isInitialized === false) {
-            Logger.warn('Generator init was not called before blockToCode was called.');
-        }
         if (!block) {
             throw Error('Unexpected null block when translating to Michelson value.');
         }
@@ -121,9 +126,6 @@ class Generator extends Blockly.Generator {
      * @return {Michelson_LiteralUnion}
      */
     translateType(block: Block | null): IType {
-        if (this.isInitialized === false) {
-            Logger.warn('Generator init was not called before blockToCode was called.');
-        }
         if (!block) {
             throw Error('Unexpected null block when translating to Michelson type.');
         }

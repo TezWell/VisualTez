@@ -12,7 +12,7 @@ Object.defineProperty(window, 'crypto', {
 afterEach(cleanup);
 
 describe('Application Routing', () => {
-    test.each(routes.filter(({ disabled }) => !disabled).map((route) => [route.title, route]))(
+    test.each(routes.map((route) => [route.title, route]))(
         `Test Route %s`,
         async (_, route: any) => {
             let path = route.routeProps.path;

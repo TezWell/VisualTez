@@ -23,7 +23,7 @@ Blockly.Blocks[BlockKind.variant_value] = {
                 },
                 { type: 'input_value', name: 'value', check: ['Literal', 'Expression'] },
             ],
-            colour: 70,
+            colour: 40,
             output: 'Expression',
         });
     },
@@ -48,7 +48,7 @@ Blockly.Blocks[BlockKind.left_literal_block] = {
             type: BlockKind.left_literal_block,
             message0: 'Left %1',
             args0: [{ type: 'input_value', name: 'VALUE', check: ['Expression', 'Literal'] }],
-            colour: 70,
+            colour: 40,
             output: 'Literal',
         });
     },
@@ -72,7 +72,7 @@ Blockly.Blocks[BlockKind.right_literal_block] = {
             type: BlockKind.right_literal_block,
             message0: 'Right %1',
             args0: [{ type: 'input_value', name: 'VALUE', check: ['Expression', 'Literal'] }],
-            colour: 70,
+            colour: 40,
             output: 'Literal',
         });
     },

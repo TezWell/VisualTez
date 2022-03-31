@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { PuzzleIcon } from '@heroicons/react/outline';
+import { MenuIcon, PuzzleIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -22,14 +22,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                 <div className="flex justify-center items-center lg:hidden pr-4">
                     <Menu as="div" className="relative h-10">
                         <Menu.Button>
-                            <svg
-                                className="block fill-current h-10"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Menu</title>
-                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                            </svg>
+                            <MenuIcon className="block h-full w-10" />
                         </Menu.Button>
                         <Transition
                             as={React.Fragment}
@@ -43,11 +36,11 @@ const Navigation: React.FC<NavigationProps> = () => {
                             <Menu.Items className="z-10 absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <Menu.Item>
                                     <NavLink
-                                        className="inline-block w-full rounded font-bold no-underline p-2 bg-gray-200 dark:bg-gray-800"
+                                        className="inline-flex w-full rounded font-bold no-underline p-2 bg-gray-200 dark:bg-gray-800"
                                         to="/editor"
                                     >
-                                        <PuzzleIcon className="block h-6 w-6" />
-                                        Editor
+                                        <PuzzleIcon className="block h-6 w-6 mr-1" />
+                                        <span>Editor</span>
                                     </NavLink>
                                 </Menu.Item>
                             </Menu.Items>
@@ -65,11 +58,11 @@ const Navigation: React.FC<NavigationProps> = () => {
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li>
                             <RouterButton
-                                className="flex items-center bg-black dark:bg-white border-gray-700 hover:border-gray-500 font-bold text-white dark:text-black border-b-4 rounded px-3 py-1"
+                                className="inline-flex bg-black dark:bg-white border-gray-700 hover:border-gray-500 font-bold text-white dark:text-black border-b-4 rounded px-3 py-2"
                                 to="/editor"
                             >
                                 <PuzzleIcon className="block h-6 w-6 mr-1" />
-                                <p>Editor</p>
+                                <span>Editor</span>
                             </RouterButton>
                         </li>
                         <li className="h-10 border ml-3 mr-3 border-black dark:border-white" />

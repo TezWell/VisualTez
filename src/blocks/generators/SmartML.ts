@@ -38,9 +38,7 @@ class Generator extends Blockly.Generator {
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
                 .join(' ');
 
-            throw TypeError(
-                `You must provide "${targetBlockName}" in "${blockName}". (${buildErrorInfo(block).fileName}, line 1)`,
-            );
+            throw TypeError(`You must provide "${targetBlockName}" in "${blockName}". ${buildBlockErrorString(block)}`);
         }
 
         const localBlock = this.blocks.get(targetBlock.type as BlockKind);
