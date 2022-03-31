@@ -2,15 +2,45 @@ import type { Workspace, WorkspaceSvg } from 'blockly';
 import React from 'react';
 import Blockly from 'blockly';
 
-import BlockKind from 'src/blocks/enums/BlockKind';
-import Block from 'src/components/blockly/Block';
 import BlocklyEditor from 'src/components/blockly/Editor';
-import Separator from 'src/components/blockly/Separator';
 import useDeployment from 'src/context/hooks/useDeployment';
 import Label from 'src/components/blockly/Label';
-import Value from 'src/components/blockly/Value';
 import { DeploymentActionKind } from 'src/context/Deployment';
 import ConditionalRender from 'src/components/common/ConditionalRender';
+import {
+    AddressLiteral,
+    BigMapLiteral,
+    Bls12_381_FrLiteral,
+    Bls12_381_G1Literal,
+    Bls12_381_G2Literal,
+    BooleanLiteral,
+    BytesLiteral,
+    ChainIdLiteral,
+    IntLiteral,
+    KeyHashLiteral,
+    KeyLiteral,
+    LambdaLiteral,
+    LeftLiteral,
+    ListLiteral,
+    MapEntry,
+    MapLiteral,
+    MutezLiteral,
+    NatLiteral,
+    NoneLiteral,
+    PairLiteral,
+    RecordField,
+    RecordLiteral,
+    RightLiteral,
+    SequenceItem,
+    SetLiteral,
+    SignatureLiteral,
+    SomeLiteral,
+    StringLiteral,
+    TimestampLiteral,
+    UnitLiteral,
+    VariantLiteral,
+} from 'src/components/blockly/blocks/literals';
+import { Category, ToolboxSearch } from 'src/components/blockly';
 
 interface InitialStorageProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -43,8 +73,8 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
     );
 
     return (
-        <div className="w-full h-96 shadow-lg rounded-md p-2 shadow-xl border-2 border-black dark:border-amber-400 dark:bg-[#1e1e1e]">
-            <div className="border-b border-black dark:border-white" style={{ height: 24 }}>
+        <div className="w-full h-[600px] shadow-lg rounded-md p-2 shadow-xl border-2 border-black dark:border-amber-400 dark:bg-[#1e1e1e]">
+            <div className="border-b border-black dark:border-white h-[24px] ">
                 <label className="block text-sm font-medium">Initial Storage</label>
             </div>
             <div className="relative w-full" style={{ height: 'calc(100% - 24px)' }}>
@@ -74,70 +104,95 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                             }}
                             onChange={onChange}
                         >
-                            <Block type={BlockKind.nat_literal} />
-                            <Block type={BlockKind.int_literal} />
-                            <Block type={BlockKind.mutez_literal} />
-                            <Block type={BlockKind.timestamp_literal} />
-                            <Block type={BlockKind.unit_literal} />
-                            <Block type={BlockKind.boolean_literal} />
-                            <Block type={BlockKind.string_literal} />
-                            <Block type={BlockKind.address_literal} />
-                            <Block type={BlockKind.bytes_literal} />
-                            <Block type={BlockKind.chain_id_literal} />
-                            <Block type={BlockKind.key_literal} />
-                            <Block type={BlockKind.key_hash_literal} />
-                            <Block type={BlockKind.signature_literal} />
-                            <Block type={BlockKind.bls12_381_fr_literal} />
-                            <Block type={BlockKind.bls12_381_g1_literal} />
-                            <Block type={BlockKind.bls12_381_g2_literal} />
+                            <ToolboxSearch>
+                                <NatLiteral />
+                                <IntLiteral />
+                                <MutezLiteral />
+                                <TimestampLiteral />
+                                <UnitLiteral />
+                                <BooleanLiteral />
+                                <StringLiteral />
+                                <AddressLiteral />
+                                <BytesLiteral />
+                                <ChainIdLiteral />
+                                <KeyLiteral />
+                                <KeyHashLiteral />
+                                <SignatureLiteral />
+                                <Bls12_381_FrLiteral />
+                                <Bls12_381_G1Literal />
+                                <Bls12_381_G2Literal />
 
-                            <Separator gap={40} />
-                            <Block type={BlockKind.pair_literal} />
-                            <Separator gap={40} />
+                                <ListLiteral />
+                                <SetLiteral />
+                                <SequenceItem />
 
-                            <Label text="-- Option --" web-class="defaultLabel" />
-                            <Block type={BlockKind.some_literal} />
-                            <Block type={BlockKind.none_literal} />
+                                <MapLiteral />
+                                <BigMapLiteral />
+                                <MapEntry />
 
-                            <Label text="-- Sequences --" web-class="defaultLabel" />
+                                <SomeLiteral />
+                                <NoneLiteral />
 
-                            <Block type={BlockKind.list_literal}>
-                                <Value name="items">
-                                    <Block type={BlockKind.sequence_item} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.set_literal}>
-                                <Value name="items">
-                                    <Block type={BlockKind.sequence_item} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.sequence_item} />
+                                <PairLiteral />
+                                <RecordLiteral />
+                                <RecordField />
 
-                            <Label text="-- Maps --" web-class="defaultLabel" />
+                                <LambdaLiteral />
 
-                            <Block type={BlockKind.map_literal}>
-                                <Value name="entries">
-                                    <Block type={BlockKind.map_entry} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.big_map_literal}>
-                                <Value name="entries">
-                                    <Block type={BlockKind.map_entry} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.map_entry} />
+                                <LeftLiteral />
+                                <RightLiteral />
+                                <VariantLiteral />
+                            </ToolboxSearch>
 
-                            <Label text="-- Record --" web-class="defaultLabel" />
+                            <Category name="Simple" categorystyle="literal_category">
+                                <NatLiteral />
+                                <IntLiteral />
+                                <MutezLiteral />
+                                <TimestampLiteral />
+                                <UnitLiteral />
+                                <BooleanLiteral />
+                                <StringLiteral />
+                                <AddressLiteral />
+                                <BytesLiteral />
+                                <ChainIdLiteral />
+                                <KeyLiteral />
+                                <KeyHashLiteral />
+                                <SignatureLiteral />
+                                <Bls12_381_FrLiteral />
+                                <Bls12_381_G1Literal />
+                                <Bls12_381_G2Literal />
+                            </Category>
 
-                            <Block type={BlockKind.record_literal}>
-                                <Value name="entries">
-                                    <Block type={BlockKind.record_field} />
-                                </Value>
-                                <Value name="entries">
-                                    <Block type={BlockKind.record_field} />
-                                </Value>
-                            </Block>
-                            <Block type={BlockKind.record_field} />
+                            <Category name="Sequences" categorystyle="literal_category">
+                                <ListLiteral />
+                                <SetLiteral />
+                                <SequenceItem />
+                            </Category>
+
+                            <Category name="Maps" categorystyle="literal_category">
+                                <MapLiteral />
+                                <BigMapLiteral />
+                                <MapEntry />
+                            </Category>
+
+                            <Category name="Option" categorystyle="literal_category">
+                                <SomeLiteral />
+                                <NoneLiteral />
+                            </Category>
+
+                            <Category name="Pair / Record" categorystyle="literal_category">
+                                <PairLiteral />
+
+                                <Label text="-- Record --" web-class="defaultLabel" />
+                                <RecordLiteral />
+                                <RecordField />
+                            </Category>
+
+                            <Category name="Variants" categorystyle="literal_category">
+                                <LeftLiteral />
+                                <RightLiteral />
+                                <VariantLiteral />
+                            </Category>
                         </BlocklyEditor>
                     )}
                 </ConditionalRender>

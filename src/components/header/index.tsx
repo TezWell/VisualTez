@@ -58,7 +58,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li>
                             <RouterButton
-                                className="inline-flex bg-black dark:bg-white border-gray-700 hover:border-gray-500 font-bold text-white dark:text-black border-b-4 rounded px-3 py-2"
+                                className="inline-flex bg-black dark:bg-white border-gray-500 hover:border-gray-300 font-bold text-white dark:text-black border-b-4 rounded px-3 py-2"
                                 to="/editor"
                             >
                                 <PuzzleIcon className="block h-6 w-6 mr-1" />

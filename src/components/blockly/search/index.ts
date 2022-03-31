@@ -90,7 +90,7 @@ class ToolboxSearch extends Blockly.ToolboxCategory {
     getContents() {
         const query = this.input?.value || '';
         const filter = (block: { tags: string }) => {
-            const tags = block.tags.split(',');
+            const tags = block.tags?.split(',') || [];
             return tags.some((tag) => tag.toLowerCase().startsWith(query.toLowerCase()));
         };
         return this.flyoutItems_.filter(filter);
