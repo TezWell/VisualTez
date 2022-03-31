@@ -5,31 +5,13 @@ exports[`Application Routing Test Route VisualTez - 404 1`] = `
   class="flex flex-col flex-1"
 >
   <div
-    class="flex-1 flex justify-center items-center"
+    class="flex-1 inline-flex justify-center items-center"
   >
-    <svg
-      class="block"
-      viewBox="0 0 345 200"
-      width="345"
+    <h1
+      class="text-[20rem] italic font-black tracking-widest diagonal-fractions"
     >
-      <text
-        dominant-baseline="middle"
-        fill="currentColor"
-        fill-opacity="1"
-        font-family="sans-serif"
-        font-size="192px"
-        font-stretch="normal"
-        font-style="italic"
-        font-weight="bold"
-        letter-spacing="0px"
-        stroke="none"
-        text-anchor="middle"
-        x="50%"
-        y="50%"
-      >
-        404
-      </text>
-    </svg>
+      404
+    </h1>
     <p>
       Page 
       <b
@@ -62,7 +44,7 @@ exports[`Application Routing Test Route VisualTez - Nodes 1`] = `
   class="flex flex-col flex-1"
 >
   <div
-    class="flex-1 flex flex-row justify-center items-center p-2 flex-wrap"
+    class="flex-1 inline-flex flex-row justify-center items-center flex-wrap container m-auto p-5"
   />
 </main>
 `;
@@ -123,15 +105,26 @@ exports[`Application Routing Test Route VisualTez 1`] = `
         >
           A visual programming tool for writing smart contracts in the Tezos blockchain.
         </p>
-        <a
-          href="/editor"
+        <div
+          class="inline-flex spacing-2"
         >
-          <button
-            class="mx-auto lg:mx-0 hover:underline bg-black dark:bg-white text-white dark:text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+          <a
+            href="/editor"
           >
-            Open Editor
-          </button>
-        </a>
+            <button
+              class="h-14 inline-flex items-center px-4 text-sm md:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+            >
+              Open Editor
+            </button>
+          </a>
+          <a
+            class="h-14 inline-flex items-center px-4 text-sm md:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out ml-2"
+            href="/docs"
+            target="_blank"
+          >
+            Documentation
+          </a>
+        </div>
       </div>
       <div
         class="flex justify-center h-full w-full md:w-2/5 py-6 text-center"
