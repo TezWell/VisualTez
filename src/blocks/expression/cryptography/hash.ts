@@ -1,6 +1,6 @@
 import Blockly, { Block } from 'blockly';
 import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
-import { BLAKE2B, KECCAK, SHA256, SHA3, SHA512 } from '@tezwell/smartts-sdk';
+import { BLAKE2B, HashKey, KECCAK, SHA256, SHA3, SHA512 } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
@@ -56,4 +56,25 @@ methods.forEach(({ kind, text, method }) => {
             return method(bytes, buildErrorInfo(block));
         },
     });
+});
+
+Blockly.Blocks[BlockKind.hash_key] = {
+    init: function () {
+        this.jsonInit({
+            type: BlockKind.hash_key,
+            message0: 'Hash key %1',
+            args0: [{ type: 'input_value', name: 'KEY', check: ['Literal', 'Expression'] }],
+            colour: 200,
+            inputsInline: true,
+            output: ['Expression'],
+        });
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
+    },
+};
+SmartML.addBlock(BlockKind.hash_key, {
+    toValue: (block: Block) => {
+        const bytes: IExpression<any> = SmartML.toValue(block, 'KEY');
+        return HashKey(bytes, buildErrorInfo(block));
+    },
 });

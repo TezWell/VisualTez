@@ -112,6 +112,7 @@ export enum BlockKind {
     sha512 = 'sha512',
     sha3 = 'sha3',
     keccak = 'keccak',
+    hash_key = 'hash_key',
     check_signature = 'check_signature',
     concat = 'concat',
     size_of = 'size_of',

@@ -134,6 +134,7 @@ import {
     CallView,
     OnChainView,
     ImplicitAccount,
+    HashKey,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -436,6 +437,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <SHA512 />
                                 <SHA3 />
                                 <Keccak />
+
+                                <HashKey />
                             </Category>
                         </Category>
 

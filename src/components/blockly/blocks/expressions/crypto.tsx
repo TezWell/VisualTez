@@ -10,3 +10,6 @@ export const Keccak = () => <Block type={BlockKind.keccak} tags={['expression', 
 export const Blake2b = () => (
     <Block type={BlockKind.blake2b} tags={['expression', 'cryptography', 'hash', 'blake2b']} />
 );
+export const HashKey = () => (
+    <Block type={BlockKind.hash_key} tags={['expression', 'hash', 'public key', 'key', 'contract']} />
+);
