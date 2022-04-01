@@ -144,7 +144,7 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                                 <VariantLiteral />
                             </ToolboxSearch>
 
-                            <Category name="Simple" categorystyle="literal_category">
+                            <Category name="Basic" categorystyle="literal_category">
                                 <NatLiteral />
                                 <IntLiteral />
                                 <MutezLiteral />

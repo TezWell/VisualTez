@@ -2,7 +2,15 @@ import React from 'react';
 import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
 import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
-import { FingerPrintIcon, HashtagIcon, TableIcon, BeakerIcon } from '@heroicons/react/outline';
+import {
+    FingerPrintIcon,
+    HashtagIcon,
+    TableIcon,
+    BeakerIcon,
+    CubeTransparentIcon,
+    TagIcon,
+    VariableIcon,
+} from '@heroicons/react/outline';
 
 import { Block, Category, ToolboxSearch } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
@@ -116,6 +124,11 @@ import {
     SHA3,
     SHA512,
     CheckSignatureExpression,
+    Or,
+    Xor,
+    And,
+    Concat,
+    SizeOf,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -301,6 +314,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <GetSenderExpression />
                             <GetSourceExpression />
 
+                            <Or />
+                            <And />
+                            <Xor />
+
+                            <Concat />
+                            <SizeOf />
+
                             {/* Statements */}
                             <AssertStatement />
                             <IfStatement />
@@ -329,7 +349,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                         <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
                             <CategoryIcon>
-                                <DatabaseIcon className="block h-6 w-6 mr-2" />
+                                <VariableIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
                         </Category>
                         <Category name="Logic (If, Assert, ...)" categorystyle="logic_category">
@@ -372,7 +392,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                         <Category name="Block/Tx Properties" categorystyle="blockchain_category">
                             <CategoryIcon>
-                                <TableIcon className="block h-6 w-6 mr-2" />
+                                <CubeTransparentIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
                             <GetChainIdExpression />
                             <GetLevelExpression />
@@ -410,7 +430,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         <Category name="Values" categorystyle="literal_category">
-                            <Category name="Simple" categorystyle="literal_category">
+                            <Category name="Basic" categorystyle="literal_category">
                                 <NatLiteral />
                                 <IntLiteral />
                                 <MutezLiteral />
@@ -466,6 +486,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
                         <Category name="Types" categorystyle="type_category">
                             <Category name="Singleton Types" categorystyle="type_category">
+                                <CategoryIcon>
+                                    <TagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
                                 <NatType />
                                 <IntType />
                                 <MutezType />
@@ -487,6 +510,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Category name="Container Types" categorystyle="type_category">
+                                <CategoryIcon>
+                                    <TagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
                                 <ListType />
                                 <SetType />
                                 <OptionType />
@@ -501,6 +527,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Category name="Artificial Types" categorystyle="type_category">
+                                <CategoryIcon>
+                                    <TagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
                                 <RecordType />
                                 <VariantType />
                                 <RecordVariantTypeEntry />
@@ -513,10 +542,11 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Block type={BlockKind.int_of_nat} />
                                 <Block type={BlockKind.nat_of_int} />
                             </Category>
-                            <Category name="Equality & Comparison" categorystyle="logic_category">
+                            <Category name="Comparison & Logic" categorystyle="logic_category">
                                 <Block type={BlockKind.compare_block} />
-                                <Block type={BlockKind.and} />
-                                <Block type={BlockKind.or} />
+                                <Or />
+                                <And />
+                                <Xor />
                             </Category>
                             <Category name="Arithmetic" categorystyle="logic_category">
                                 <Block type={BlockKind.math_block} />
@@ -539,6 +569,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                             <Category name="List Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.prepend_to_list} />
+                                <Concat />
+                                <SizeOf />
                             </Category>
                             <Category name="Boolean Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.not} />

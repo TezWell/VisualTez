@@ -104,6 +104,7 @@ export enum BlockKind {
     as_type = 'as_type',
     and = 'and',
     or = 'or',
+    xor = 'xor',
     nat_of_int = 'nat_of_int',
     int_of_nat = 'int_of_nat',
     blake2b = 'blake2b',
@@ -112,6 +113,9 @@ export enum BlockKind {
     sha3 = 'sha3',
     keccak = 'keccak',
     check_signature = 'check_signature',
+    concat = 'concat',
+    size_of = 'size_of',
+
     // Statements
     return_statement_block = 'return_statement_block',
     variable_declaration_block = 'variable_declaration_block',
