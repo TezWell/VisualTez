@@ -115,6 +115,8 @@ export enum BlockKind {
     check_signature = 'check_signature',
     concat = 'concat',
     size_of = 'size_of',
+    slice = 'slice',
+    call_view = 'call_view',
 
     // Statements
     return_statement_block = 'return_statement_block',

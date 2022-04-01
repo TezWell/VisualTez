@@ -5,6 +5,8 @@ import './Not';
 
 import './concat';
 import './sizeOf';
+import './slice';
+import './callView';
 
 import './list';
 import './map';

@@ -22,7 +22,6 @@ import Drawer from './toolbar/Drawer';
 import Label from 'src/components/blockly/Label';
 import { EditorActionKind } from 'src/context/Editor';
 import Entrypoint from 'src/components/blockly/blocks/Entrypoint';
-import OnChainView from 'src/components/blockly/blocks/OnChainView';
 import Contract from 'src/components/blockly/blocks/Contract';
 import CategoryIcon from 'src/components/blockly/CategoryIcon';
 import {
@@ -129,6 +128,9 @@ import {
     And,
     Concat,
     SizeOf,
+    Slice,
+    CallView,
+    OnChainView,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -320,6 +322,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <Concat />
                             <SizeOf />
+                            <Slice />
+
+                            <CallView />
 
                             {/* Statements */}
                             <AssertStatement />
@@ -342,7 +347,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </CategoryIcon>
                             <Contract />
                             <Entrypoint />
-                            <OnChainView />
                             <ValueCompilation />
                             <TypeCompilation />
                         </Category>
@@ -575,12 +579,19 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Category name="Boolean Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.not} />
                             </Category>
+
+                            <Slice />
                         </Category>
 
                         <Category name="Statements" categorystyle="control_statements_category">
                             <Category name="Map Statements" categorystyle="logic_category">
                                 <Block type={BlockKind.delete_map_entry} />
                             </Category>
+                        </Category>
+
+                        <Category name="Views">
+                            <OnChainView />
+                            <CallView />
                         </Category>
 
                         {isDevelopment() ? (
