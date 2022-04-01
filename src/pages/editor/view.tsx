@@ -10,6 +10,8 @@ import {
     CubeTransparentIcon,
     TagIcon,
     VariableIcon,
+    EyeIcon,
+    SwitchHorizontalIcon,
 } from '@heroicons/react/outline';
 
 import { Block, Category, ToolboxSearch } from 'src/components/blockly';
@@ -134,6 +136,7 @@ import {
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
+import { CallLambda } from 'src/components/blockly/blocks/expressions/lambda';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -326,6 +329,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <CallView />
 
+                            <CallLambda />
+
                             {/* Statements */}
                             <AssertStatement />
                             <IfStatement />
@@ -478,10 +483,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <RecordField />
                             </Category>
 
-                            <Category name="Lambda" categorystyle="literal_category">
-                                <LambdaLiteral />
-                            </Category>
-
                             <Category name="Variants" categorystyle="literal_category">
                                 <LeftLiteral />
                                 <RightLiteral />
@@ -589,7 +590,18 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
-                        <Category name="Views">
+                        <Category name="Lambda">
+                            <CategoryIcon>
+                                <SwitchHorizontalIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <LambdaLiteral />
+                            <CallLambda />
+                        </Category>
+
+                        <Category name="Onchain View" categorystyle="view_category">
+                            <CategoryIcon>
+                                <EyeIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
                             <OnChainView />
                             <CallView />
                         </Category>

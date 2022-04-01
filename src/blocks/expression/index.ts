@@ -7,6 +7,7 @@ import './concat';
 import './sizeOf';
 import './slice';
 import './callView';
+import './callLambda';
 
 import './list';
 import './map';

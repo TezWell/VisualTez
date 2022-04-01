@@ -6,3 +6,4 @@ export * from './concat';
 export * from './sizeOf';
 export * from './slice';
 export * from './view';
+export * from './lambda';

@@ -117,6 +117,7 @@ export enum BlockKind {
     size_of = 'size_of',
     slice = 'slice',
     call_view = 'call_view',
+    call_lambda = 'call_lambda',
 
     // Statements
     return_statement_block = 'return_statement_block',
