@@ -8,6 +8,7 @@ import './sizeOf';
 import './slice';
 import './callView';
 import './callLambda';
+import './implicitAccount';
 
 import './list';
 import './map';

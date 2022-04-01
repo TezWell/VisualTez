@@ -1,4 +1,4 @@
-export * from './hash';
+export * from './crypto';
 export * from './properties';
 export * from './signature';
 export * from './logic';
@@ -7,3 +7,4 @@ export * from './sizeOf';
 export * from './slice';
 export * from './view';
 export * from './lambda';
+export * from './contract';

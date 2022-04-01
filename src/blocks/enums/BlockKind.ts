@@ -118,6 +118,7 @@ export enum BlockKind {
     slice = 'slice',
     call_view = 'call_view',
     call_lambda = 'call_lambda',
+    implicit_account = 'implicit_account',
 
     // Statements
     return_statement_block = 'return_statement_block',

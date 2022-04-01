@@ -133,6 +133,7 @@ import {
     Slice,
     CallView,
     OnChainView,
+    ImplicitAccount,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -582,6 +583,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Slice />
+                            <ImplicitAccount />
                         </Category>
 
                         <Category name="Statements" categorystyle="control_statements_category">
