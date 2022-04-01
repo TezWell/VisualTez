@@ -95,6 +95,8 @@ export enum BlockKind {
     variables_get = 'variables_get',
     param_access = 'param_access',
     get_map_entries = 'get_map_entries',
+    get_map_keys = 'get_map_keys',
+    get_map_values = 'get_map_values',
     get_map_value = 'get_map_value',
     map_contains_key = 'map_contains_key',
     prepend_to_list = 'prepend_to_list',

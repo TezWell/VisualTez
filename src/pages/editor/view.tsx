@@ -569,6 +569,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                             <Category name="Map Expressions" categorystyle="logic_category">
                                 <Block type={BlockKind.get_map_entries} />
+                                <Block type={BlockKind.get_map_keys} />
+                                <Block type={BlockKind.get_map_values} />
                                 <Block type={BlockKind.get_map_value} />
                                 <Block type={BlockKind.map_contains_key} />
                             </Category>
