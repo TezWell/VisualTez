@@ -139,6 +139,8 @@ export enum BlockKind {
     call_contract_statement = 'call_contract_statement',
     delegate_statement = 'delegate_statement',
     delete_map_entry = 'delete_map_entry',
+    add_to_list = 'add_to_list',
+
     // Base
     type_compilation = 'type_compilation',
     value_compilation = 'value_compilation',

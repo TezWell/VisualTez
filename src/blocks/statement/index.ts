@@ -8,6 +8,7 @@ import './While';
 
 import './DeclareVariable';
 import './VariableSetter';
+import './list';
 
 import './Return';
 

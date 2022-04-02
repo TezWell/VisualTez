@@ -595,8 +595,11 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         <Category name="Statements" categorystyle="control_statements_category">
-                            <Category name="Map Statements" categorystyle="logic_category">
+                            <Category name="Map" categorystyle="logic_category">
                                 <Block type={BlockKind.delete_map_entry} />
+                            </Category>
+                            <Category name="List" categorystyle="logic_category">
+                                <Block type={BlockKind.add_to_list} />
                             </Category>
                         </Category>
 
