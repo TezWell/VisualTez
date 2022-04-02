@@ -19,3 +19,4 @@ import './blockchain_operations';
 import './logic';
 import './typing';
 import './cryptography';
+import './option';
