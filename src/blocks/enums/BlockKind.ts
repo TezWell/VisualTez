@@ -123,6 +123,8 @@ export enum BlockKind {
     call_lambda = 'call_lambda',
     implicit_account = 'implicit_account',
     get_some = 'get_some',
+    is_some = 'is_some',
+    is_none = 'is_none',
 
     // Statements
     return_statement_block = 'return_statement_block',

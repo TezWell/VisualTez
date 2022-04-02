@@ -9,3 +9,4 @@ export * from './view';
 export * from './lambda';
 export * from './contract';
 export * from './map';
+export * from './option';

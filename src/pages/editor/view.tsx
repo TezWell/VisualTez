@@ -135,11 +135,13 @@ import {
     OnChainView,
     ImplicitAccount,
     HashKey,
+    GetSomeExpression,
+    IsNoneExpression,
+    IsSomeExpression,
+    CallLambda,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
-import { CallLambda } from 'src/components/blockly/blocks/expressions/lambda';
-import { GetSomeExpression } from 'src/components/blockly/blocks/expressions/option';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -592,6 +594,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <ImplicitAccount />
 
                             <GetSomeExpression />
+                            <IsSomeExpression />
+                            <IsNoneExpression />
                         </Category>
 
                         <Category name="Statements" categorystyle="control_statements_category">
