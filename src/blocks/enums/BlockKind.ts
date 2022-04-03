@@ -125,6 +125,7 @@ export enum BlockKind {
     get_some = 'get_some',
     is_some = 'is_some',
     is_none = 'is_none',
+    get_elements_from_set = 'get_elements_from_set',
 
     // Statements
     return_statement_block = 'return_statement_block',
@@ -142,6 +143,8 @@ export enum BlockKind {
     delegate_statement = 'delegate_statement',
     delete_map_entry = 'delete_map_entry',
     add_to_list = 'add_to_list',
+    add_element_to_set = 'add_element_to_set',
+    remove_element_from_set = 'remove_element_from_set',
 
     // Base
     type_compilation = 'type_compilation',

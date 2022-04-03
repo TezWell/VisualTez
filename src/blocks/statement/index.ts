@@ -14,3 +14,4 @@ import './Return';
 
 import './operations';
 import './map';
+import './set';

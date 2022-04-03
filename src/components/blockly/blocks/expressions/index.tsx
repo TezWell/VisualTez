@@ -14,3 +14,4 @@ export * from './serialization';
 export * from './list';
 export * from './pair';
 export * from './typing';
+export * from './set';

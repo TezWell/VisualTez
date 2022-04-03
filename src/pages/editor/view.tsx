@@ -96,6 +96,7 @@ import {
 import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
 import {
+    AddElementToSetStatement,
     AddToListStatement,
     AssertStatement,
     CallContractStatement,
@@ -103,6 +104,7 @@ import {
     ForEachStatement,
     ForStatement,
     IfStatement,
+    RemoveElementFromSetStatement,
     TransferStatement,
     VariantMatchCase,
     VariantMatchStatement,
@@ -155,6 +157,7 @@ import {
     AsTypeExpression,
     IntOfNatExpression,
     NatOfIntExpression,
+    GetElementsFromSetExpression,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -384,6 +387,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <AccessRecordPropertyExpression />
 
+                            <GetElementsFromSetExpression />
+
                             {/* Statements */}
                             <AssertStatement />
                             <IfStatement />
@@ -391,6 +396,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <VariantMatchCase />
                             <AddToListStatement />
                             <DeleteMapEntryStatement />
+                            <RemoveElementFromSetStatement />
+                            <AddElementToSetStatement />
+
                             {/* Loops */}
                             <ForStatement />
                             <ForEachStatement />
@@ -637,8 +645,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Concat />
                                 <SizeOf />
                             </Category>
-                            <Category name="Boolean" categorystyle="logic_category">
-                                <NotExpression />
+                            <Category name="Set" categorystyle="logic_category">
+                                <GetElementsFromSetExpression />
                             </Category>
 
                             <Slice />
@@ -655,6 +663,11 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                             <Category name="List" categorystyle="logic_category">
                                 <AddToListStatement />
+                            </Category>
+
+                            <Category name="Set" categorystyle="logic_category">
+                                <AddElementToSetStatement />
+                                <RemoveElementFromSetStatement />
                             </Category>
                         </Category>
 
