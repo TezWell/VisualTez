@@ -1,7 +1,6 @@
 import './ParamAccess';
 import './Variables';
 import './GetPairElements';
-import './Not';
 
 import './concat';
 import './sizeOf';
@@ -13,7 +12,6 @@ import './implicitAccount';
 import './list';
 import './map';
 import './serialization';
-import './comparison';
 import './math';
 import './blockchain_operations';
 import './logic';

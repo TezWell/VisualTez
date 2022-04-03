@@ -1,8 +1,9 @@
 import { Not } from '@tezwell/smartts-sdk';
 import Blockly, { Block } from 'blockly';
-import BlockKind from '../enums/BlockKind';
-import SmartML from '../generators/SmartML';
-import { buildErrorInfo } from '../utils/errorHandling';
+
+import BlockKind from '../../enums/BlockKind';
+import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from '../../utils/errorHandling';
 
 const NotBlock = {
     type: BlockKind.not,
@@ -14,7 +15,7 @@ const NotBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
-    colour: 123,
+    colour: 200,
     output: ['Expression'],
 };
 

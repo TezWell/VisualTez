@@ -41,7 +41,7 @@ const CompareBlock = {
     ],
     inputsInline: true,
     output: ['Expression'],
-    colour: 350,
+    colour: 200,
 };
 
 Blockly.Blocks[CompareBlock.type] = {

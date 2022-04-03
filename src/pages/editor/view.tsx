@@ -96,6 +96,7 @@ import {
 import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
 import {
+    AddToListStatement,
     AssertStatement,
     CallContractStatement,
     DelegateStatement,
@@ -125,9 +126,10 @@ import {
     SHA3,
     SHA512,
     CheckSignatureExpression,
-    Or,
-    Xor,
-    And,
+    OrExpression,
+    XorExpression,
+    AndExpression,
+    NotExpression,
     Concat,
     SizeOf,
     Slice,
@@ -139,9 +141,26 @@ import {
     IsNoneExpression,
     IsSomeExpression,
     CallLambda,
+    PackExpression,
+    UnpackExpression,
+    GetMapValueExpression,
+    GetMapValuesExpression,
+    GetMapKeysExpression,
+    GetMapEntriesExpression,
+    MapConstainsKeyExpression,
+    PrependToListExpression,
+    GetSecondElementExpression,
+    GetFirstElementExpression,
+    CompareExpression,
+    AsTypeExpression,
+    IntOfNatExpression,
+    NatOfIntExpression,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
+import { DeleteMapEntryStatement } from 'src/components/blockly/blocks/statements/map';
+import { MathExpression } from 'src/components/blockly/blocks/expressions/math';
+import { AccessRecordPropertyExpression } from 'src/components/blockly/blocks/expressions/record';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -309,6 +328,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <SHA512 />
                             <SHA3 />
                             <Keccak />
+                            <HashKey />
 
                             <CheckSignatureExpression />
 
@@ -324,23 +344,53 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <GetSenderExpression />
                             <GetSourceExpression />
 
-                            <Or />
-                            <And />
-                            <Xor />
+                            <CompareExpression />
+                            <OrExpression />
+                            <AndExpression />
+                            <XorExpression />
+                            <NotExpression />
 
+                            <PrependToListExpression />
                             <Concat />
                             <SizeOf />
                             <Slice />
 
-                            <CallView />
+                            <ImplicitAccount />
 
+                            <GetSomeExpression />
+                            <IsSomeExpression />
+                            <IsNoneExpression />
+
+                            <CallView />
                             <CallLambda />
+
+                            <PackExpression />
+                            <UnpackExpression />
+
+                            <GetMapEntriesExpression />
+                            <GetMapKeysExpression />
+                            <GetMapValuesExpression />
+                            <GetMapValueExpression />
+                            <MapConstainsKeyExpression />
+
+                            <GetFirstElementExpression />
+                            <GetSecondElementExpression />
+
+                            <AsTypeExpression />
+                            <IntOfNatExpression />
+                            <NatOfIntExpression />
+
+                            <MathExpression />
+
+                            <AccessRecordPropertyExpression />
 
                             {/* Statements */}
                             <AssertStatement />
                             <IfStatement />
                             <VariantMatchStatement />
                             <VariantMatchCase />
+                            <AddToListStatement />
+                            <DeleteMapEntryStatement />
                             {/* Loops */}
                             <ForStatement />
                             <ForEachStatement />
@@ -550,44 +600,45 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                         <Category name="Expressions" categorystyle="container_type_category">
                             <Category name="Typing" categorystyle="logic_category">
-                                <Block type={BlockKind.as_type} />
-                                <Block type={BlockKind.int_of_nat} />
-                                <Block type={BlockKind.nat_of_int} />
+                                <AsTypeExpression />
+                                <IntOfNatExpression />
+                                <NatOfIntExpression />
                             </Category>
                             <Category name="Comparison & Logic" categorystyle="logic_category">
-                                <Block type={BlockKind.compare_block} />
-                                <Or />
-                                <And />
-                                <Xor />
+                                <CompareExpression />
+                                <OrExpression />
+                                <AndExpression />
+                                <XorExpression />
+                                <NotExpression />
                             </Category>
                             <Category name="Arithmetic" categorystyle="logic_category">
-                                <Block type={BlockKind.math_block} />
+                                <MathExpression />
                             </Category>
                             <Category name="Serialization" categorystyle="logic_category">
-                                <Block type={BlockKind.pack} />
-                                <Block type={BlockKind.unpack} />
+                                <PackExpression />
+                                <UnpackExpression />
                             </Category>
-                            <Category name="Record Expressions" categorystyle="logic_category">
-                                <Block type={BlockKind.param_access} />
+                            <Category name="Record" categorystyle="logic_category">
+                                <AccessRecordPropertyExpression />
                             </Category>
-                            <Category name="Map Expressions" categorystyle="logic_category">
-                                <Block type={BlockKind.get_map_entries} />
-                                <Block type={BlockKind.get_map_keys} />
-                                <Block type={BlockKind.get_map_values} />
-                                <Block type={BlockKind.get_map_value} />
-                                <Block type={BlockKind.map_contains_key} />
+                            <Category name="Map" categorystyle="logic_category">
+                                <GetMapEntriesExpression />
+                                <GetMapKeysExpression />
+                                <GetMapValuesExpression />
+                                <GetMapValueExpression />
+                                <MapConstainsKeyExpression />
                             </Category>
-                            <Category name="Pair Expressions" categorystyle="logic_category">
-                                <Block type={BlockKind.get_first_pair_element} />
-                                <Block type={BlockKind.get_second_pair_element} />
+                            <Category name="Pair" categorystyle="logic_category">
+                                <GetFirstElementExpression />
+                                <GetSecondElementExpression />
                             </Category>
-                            <Category name="List Expressions" categorystyle="logic_category">
-                                <Block type={BlockKind.prepend_to_list} />
+                            <Category name="List" categorystyle="logic_category">
+                                <PrependToListExpression />
                                 <Concat />
                                 <SizeOf />
                             </Category>
-                            <Category name="Boolean Expressions" categorystyle="logic_category">
-                                <Block type={BlockKind.not} />
+                            <Category name="Boolean" categorystyle="logic_category">
+                                <NotExpression />
                             </Category>
 
                             <Slice />
@@ -600,10 +651,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                         <Category name="Statements" categorystyle="control_statements_category">
                             <Category name="Map" categorystyle="logic_category">
-                                <Block type={BlockKind.delete_map_entry} />
+                                <DeleteMapEntryStatement />
                             </Category>
                             <Category name="List" categorystyle="logic_category">
-                                <Block type={BlockKind.add_to_list} />
+                                <AddToListStatement />
                             </Category>
                         </Category>
 
