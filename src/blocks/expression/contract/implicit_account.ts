@@ -2,13 +2,13 @@ import Blockly, { Block } from 'blockly';
 import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import { ImplicitAccount } from '@tezwell/smartts-sdk';
 
-import BlockKind from '../enums/BlockKind';
-import SmartML from '../generators/SmartML';
-import { buildErrorInfo } from '../utils/errorHandling';
+import BlockKind from '../../enums/BlockKind';
+import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from '../../utils/errorHandling';
 
 const ImplicitAccountBlock = {
     type: BlockKind.implicit_account,
-    message0: 'Get implict account %1',
+    message0: 'Get contract from Key Hash %1',
     args0: [{ type: 'input_value', name: 'KEY_HASH', check: ['Literal', 'Expression'] }],
     colour: 200,
     inputsInline: true,

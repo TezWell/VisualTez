@@ -7,7 +7,6 @@ import './sizeOf';
 import './slice';
 import './callView';
 import './callLambda';
-import './implicitAccount';
 
 import './list';
 import './map';
@@ -19,3 +18,4 @@ import './typing';
 import './cryptography';
 import './option';
 import './set';
+import './contract';

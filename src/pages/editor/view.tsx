@@ -158,6 +158,7 @@ import {
     IntOfNatExpression,
     NatOfIntExpression,
     GetElementsFromSetExpression,
+    GetContractExpression,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -606,7 +607,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
-                        <Category name="Expressions" categorystyle="container_type_category">
+                        <Category name="Expressions & Statements" categorystyle="container_type_category">
                             <Category name="Typing" categorystyle="logic_category">
                                 <AsTypeExpression />
                                 <IntOfNatExpression />
@@ -635,6 +636,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <GetMapValuesExpression />
                                 <GetMapValueExpression />
                                 <MapConstainsKeyExpression />
+
+                                <DeleteMapEntryStatement />
                             </Category>
                             <Category name="Pair" categorystyle="logic_category">
                                 <GetFirstElementExpression />
@@ -644,30 +647,29 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <PrependToListExpression />
                                 <Concat />
                                 <SizeOf />
+
+                                <AddToListStatement />
                             </Category>
                             <Category name="Set" categorystyle="logic_category">
                                 <GetElementsFromSetExpression />
-                            </Category>
 
-                            <Slice />
-                            <ImplicitAccount />
-
-                            <GetSomeExpression />
-                            <IsSomeExpression />
-                            <IsNoneExpression />
-                        </Category>
-
-                        <Category name="Statements" categorystyle="control_statements_category">
-                            <Category name="Map" categorystyle="logic_category">
-                                <DeleteMapEntryStatement />
-                            </Category>
-                            <Category name="List" categorystyle="logic_category">
-                                <AddToListStatement />
-                            </Category>
-
-                            <Category name="Set" categorystyle="logic_category">
                                 <AddElementToSetStatement />
                                 <RemoveElementFromSetStatement />
+                            </Category>
+
+                            <Category name="Option" categorystyle="logic_category">
+                                <GetSomeExpression />
+                                <IsSomeExpression />
+                                <IsNoneExpression />
+                            </Category>
+
+                            <Category name="Bytes" categorystyle="logic_category">
+                                <Slice />
+                            </Category>
+
+                            <Category name="Contract" categorystyle="logic_category">
+                                <ImplicitAccount />
+                                <GetContractExpression />
                             </Category>
                         </Category>
 
@@ -688,7 +690,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         {isDevelopment() ? (
-                            <Category name="Testing" categorystyle="testing_category">
+                            <Category name="Testing (In June)" categorystyle="testing_category">
                                 <CategoryIcon>
                                     <BeakerIcon className="block h-6 w-6 mr-2" />
                                 </CategoryIcon>

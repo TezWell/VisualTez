@@ -8,7 +8,7 @@ import { buildErrorInfo } from '../../utils/errorHandling';
 
 const IsNoneBlock = {
     type: BlockKind.is_none,
-    message0: 'Is None %1',
+    message0: 'Is %1 of variant None?',
     args0: [{ type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] }],
     colour: 200,
     outputShape: 3,
