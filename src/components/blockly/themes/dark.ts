@@ -28,7 +28,7 @@ const DarkTheme = Blockly.Theme.defineTheme('dark', {
         sequence_literal_category: {
             colour: '#5b80a5',
         },
-        pair_literal_category: {
+        lambda_category: {
             colour: '#5b99a5',
         },
         view_category: {

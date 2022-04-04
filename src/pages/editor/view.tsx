@@ -419,90 +419,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <TypeCompilation />
                         </Category>
 
-                        <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
-                            <CategoryIcon>
-                                <VariableIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                        </Category>
-                        <Category name="Logic (If, Assert, ...)" categorystyle="logic_category">
-                            <CategoryIcon>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="block h-6 w-6 mr-2"
-                                    stroke="currentColor"
-                                    fill="currentColor"
-                                    viewBox="120 120 500 500"
-                                >
-                                    <g>
-                                        <path d="m505.96 316.8h-327.28v-39.465h327.28l-25.512-25.512 27.906-27.906 73.152 73.152-73.152 73.148-27.906-27.906z" />
-                                        <path d="m505.96 454.93-25.512-25.508 27.906-27.906 73.152 73.152-73.152 73.148-27.906-27.906 25.512-25.512h-119.88l-122.78-157.86h49.996l92.086 118.39z" />
-                                    </g>
-                                </svg>
-                            </CategoryIcon>
-                            <AssertStatement />
-                            <IfStatement />
-                            <VariantMatchStatement />
-                            <VariantMatchCase />
-                        </Category>
-                        <Category name="Loops" categorystyle="control_statements_category">
-                            <CategoryIcon>
-                                <RefreshIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                            <ForStatement />
-                            <ForEachStatement />
-                            <WhileStatement />
-                        </Category>
-
-                        <Category name="Transfer, Delegate, ..." categorystyle="operation_statements_category">
-                            <CategoryIcon>
-                                <ScaleIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                            <TransferStatement />
-                            <CallContractStatement />
-                            <DelegateStatement />
-                        </Category>
-
-                        <Category name="Block/Tx Properties" categorystyle="blockchain_category">
-                            <CategoryIcon>
-                                <CubeTransparentIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                            <GetChainIdExpression />
-                            <GetLevelExpression />
-                            <GetTimestampExpression />
-                            <GetTotalVotingPowerExpression />
-                            <GetVotingPowerExpression />
-                            <GetAmountExpression />
-                            <GetBalanceExpression />
-                            <GetCurrentContractExpression />
-                            <GetCurrentContractAddressExpression />
-                            <GetSenderExpression />
-                            <GetSourceExpression />
-                        </Category>
-
-                        <Category name="Cryptography" categorystyle="cryptography_category">
-                            <CategoryIcon>
-                                <TableIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                            <Category name="Signature" categorystyle="cryptography_category">
-                                <CategoryIcon>
-                                    <FingerPrintIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
-                                <CheckSignatureExpression />
-                            </Category>
-                            <Category name="Hashing" categorystyle="cryptography_category">
-                                <CategoryIcon>
-                                    <HashtagIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
-                                <Blake2b />
-                                <SHA256 />
-                                <SHA512 />
-                                <SHA3 />
-                                <Keccak />
-
-                                <HashKey />
-                            </Category>
-                        </Category>
-
                         <Category name="Values" categorystyle="literal_category">
                             <Category name="Basic" categorystyle="literal_category">
                                 <NatLiteral />
@@ -606,6 +522,90 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
+                        <Category name="Variables" custom="VARIABLE" categorystyle="variables_category">
+                            <CategoryIcon>
+                                <VariableIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                        </Category>
+                        <Category name="Logic (If, Assert, ...)" categorystyle="logic_category">
+                            <CategoryIcon>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="block h-6 w-6 mr-2"
+                                    stroke="currentColor"
+                                    fill="currentColor"
+                                    viewBox="120 120 500 500"
+                                >
+                                    <g>
+                                        <path d="m505.96 316.8h-327.28v-39.465h327.28l-25.512-25.512 27.906-27.906 73.152 73.152-73.152 73.148-27.906-27.906z" />
+                                        <path d="m505.96 454.93-25.512-25.508 27.906-27.906 73.152 73.152-73.152 73.148-27.906-27.906 25.512-25.512h-119.88l-122.78-157.86h49.996l92.086 118.39z" />
+                                    </g>
+                                </svg>
+                            </CategoryIcon>
+                            <AssertStatement />
+                            <IfStatement />
+                            <VariantMatchStatement />
+                            <VariantMatchCase />
+                        </Category>
+                        <Category name="Loops" categorystyle="control_statements_category">
+                            <CategoryIcon>
+                                <RefreshIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <ForStatement />
+                            <ForEachStatement />
+                            <WhileStatement />
+                        </Category>
+
+                        <Category name="Transfer, Delegate, ..." categorystyle="operation_statements_category">
+                            <CategoryIcon>
+                                <ScaleIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <TransferStatement />
+                            <CallContractStatement />
+                            <DelegateStatement />
+                        </Category>
+
+                        <Category name="Block/Tx Properties" categorystyle="blockchain_category">
+                            <CategoryIcon>
+                                <CubeTransparentIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <GetChainIdExpression />
+                            <GetLevelExpression />
+                            <GetTimestampExpression />
+                            <GetTotalVotingPowerExpression />
+                            <GetVotingPowerExpression />
+                            <GetAmountExpression />
+                            <GetBalanceExpression />
+                            <GetCurrentContractExpression />
+                            <GetCurrentContractAddressExpression />
+                            <GetSenderExpression />
+                            <GetSourceExpression />
+                        </Category>
+
+                        <Category name="Cryptography" categorystyle="cryptography_category">
+                            <CategoryIcon>
+                                <TableIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <Category name="Signature" categorystyle="cryptography_category">
+                                <CategoryIcon>
+                                    <FingerPrintIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <CheckSignatureExpression />
+                            </Category>
+                            <Category name="Hashing" categorystyle="cryptography_category">
+                                <CategoryIcon>
+                                    <HashtagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <Blake2b />
+                                <SHA256 />
+                                <SHA512 />
+                                <SHA3 />
+                                <Keccak />
+
+                                <HashKey />
+                            </Category>
+                        </Category>
+
                         <Category name="Expressions" categorystyle="container_type_category">
                             <Category name="Typing" categorystyle="logic_category">
                                 <AsTypeExpression />
@@ -671,7 +671,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
-                        <Category name="Lambda">
+                        <Category name="Lambda" categorystyle="lambda_category">
                             <CategoryIcon>
                                 <SwitchHorizontalIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>

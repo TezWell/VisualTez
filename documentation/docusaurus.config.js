@@ -12,7 +12,7 @@ const config = {
     baseUrl: process.env.NODE_ENV === 'development' ? '/' : '/docs/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
-    favicon: 'img/favicon.ico',
+    favicon: 'favicon.ico',
     organizationName: 'TezWell',
     projectName: 'visualtez',
     trailingSlash: false,
