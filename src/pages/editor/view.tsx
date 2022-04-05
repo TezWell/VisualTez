@@ -589,26 +589,22 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                         <Category name="Cryptography" categorystyle="cryptography_category">
                             <CategoryIcon>
-                                <TableIcon className="block h-6 w-6 mr-2" />
+                                <FingerPrintIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
-                            <Category name="Signature" categorystyle="cryptography_category">
-                                <CategoryIcon>
-                                    <FingerPrintIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
-                                <CheckSignatureExpression />
-                            </Category>
-                            <Category name="Hashing" categorystyle="cryptography_category">
-                                <CategoryIcon>
-                                    <HashtagIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
-                                <Blake2b />
-                                <SHA256 />
-                                <SHA512 />
-                                <SHA3 />
-                                <Keccak />
 
-                                <HashKey />
-                            </Category>
+                            <Label text="-- Signatures --" web-class="defaultLabel" />
+
+                            <CheckSignatureExpression />
+
+                            <Label text="-- Hashes --" web-class="defaultLabel" />
+
+                            <Blake2b />
+                            <SHA256 />
+                            <SHA512 />
+                            <SHA3 />
+                            <Keccak />
+
+                            <HashKey />
                         </Category>
 
                         <Category name="Expressions & Statements" categorystyle="container_type_category">

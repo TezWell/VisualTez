@@ -41,7 +41,7 @@ methods.forEach(({ kind, text, method }) => {
                 type: kind,
                 message0: text,
                 args0: [{ type: 'input_value', name: 'BYTES', check: ['Literal', 'Expression'] }],
-                colour: 200,
+                colour: 350,
                 inputsInline: true,
                 output: ['Expression'],
             });
@@ -64,7 +64,7 @@ Blockly.Blocks[BlockKind.hash_key] = {
             type: BlockKind.hash_key,
             message0: 'Hash key %1',
             args0: [{ type: 'input_value', name: 'KEY', check: ['Literal', 'Expression'] }],
-            colour: 200,
+            colour: 350,
             inputsInline: true,
             output: ['Expression'],
         });
