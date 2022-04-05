@@ -127,6 +127,7 @@ export enum BlockKind {
     is_none = 'is_none',
     get_elements_from_set = 'get_elements_from_set',
     get_contract = 'get_contract',
+    address_of_contract = 'address_of_contract',
 
     // Statements
     return_statement_block = 'return_statement_block',
