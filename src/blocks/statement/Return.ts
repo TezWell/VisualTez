@@ -13,7 +13,7 @@ const ReturnBlock = {
         {
             type: 'input_value',
             name: 'VALUE',
-            checks: ['Expression', 'Literal'],
+            check: ['Expression', 'Literal'],
         },
     ],
     colour: 20,

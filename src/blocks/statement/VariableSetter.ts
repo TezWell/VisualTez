@@ -13,10 +13,12 @@ const VariableSetterBlock = {
         {
             type: 'input_value',
             name: 'VAR',
+            check: ['Variable'],
         },
         {
             type: 'input_value',
             name: 'VALUE',
+            check: ['Literal', 'Expression'],
         },
     ],
     colour: 20,

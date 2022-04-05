@@ -20,7 +20,7 @@ Blockly.Blocks[BlockKind.contract_storage_block] = {
         this.jsonInit({
             type: BlockKind.contract_storage_block,
             message0: 'Contract Storage',
-            output: 'Expression',
+            output: ['Variable', 'Expression'],
             colour: 80,
         });
     },

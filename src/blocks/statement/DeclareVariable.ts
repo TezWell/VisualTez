@@ -19,6 +19,7 @@ const VariableCreationBlock = {
         {
             type: 'input_value',
             name: 'VALUE',
+            check: ['Expression', 'Literal'],
         },
     ],
     colour: 20,

@@ -13,7 +13,7 @@ const WhileBlock = {
         {
             type: 'input_value',
             name: 'CONDITION',
-            check: 'Boolean',
+            check: ['Expression', 'Literal'],
         },
     ],
     message1: '%{BKY_CONTROLS_REPEAT_INPUT_DO} %1',

@@ -14,9 +14,8 @@ import {
     SwitchHorizontalIcon,
 } from '@heroicons/react/outline';
 
-import { Block, Category, ToolboxSearch } from 'src/components/blockly';
+import { Category, ToolboxSearch } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';
-import BlockKind from 'src/blocks/enums/BlockKind';
 
 import useEditor from 'src/context/hooks/useEditor';
 import ToolsBar from './toolbar/ToolsBar';
@@ -137,7 +136,7 @@ import {
     Slice,
     CallView,
     OnChainView,
-    ImplicitAccount,
+    ImplicitAccountExpression,
     HashKey,
     GetSomeExpression,
     IsNoneExpression,
@@ -159,6 +158,7 @@ import {
     NatOfIntExpression,
     GetElementsFromSetExpression,
     GetContractExpression,
+    AddressOfContractExpression,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -166,6 +166,8 @@ import { DeleteMapEntryStatement } from 'src/components/blockly/blocks/statement
 import { MathExpression } from 'src/components/blockly/blocks/expressions/math';
 import { AccessRecordPropertyExpression } from 'src/components/blockly/blocks/expressions/record';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
+import { VariableSetterStatement } from 'src/components/blockly/blocks/statements/variable_setter';
+import { GetStorageExpression, GetVariableExpression } from 'src/components/blockly/blocks/expressions/variables';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -363,7 +365,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <SizeOf />
                             <Slice />
 
-                            <ImplicitAccount />
+                            <ImplicitAccountExpression />
 
                             <GetSomeExpression />
                             <IsSomeExpression />
@@ -393,6 +395,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <AccessRecordPropertyExpression />
 
                             <GetElementsFromSetExpression />
+                            <AddressOfContractExpression />
+                            <GetStorageExpression />
+                            <GetVariableExpression />
 
                             {/* Statements */}
                             <AssertStatement />
@@ -403,6 +408,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <DeleteMapEntryStatement />
                             <RemoveElementFromSetStatement />
                             <AddElementToSetStatement />
+                            <VariableSetterStatement />
 
                             {/* Loops */}
                             <ForStatement />
@@ -668,8 +674,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
 
                             <Category name="Contract" categorystyle="logic_category">
-                                <ImplicitAccount />
+                                <ImplicitAccountExpression />
                                 <GetContractExpression />
+                                <AddressOfContractExpression />
                             </Category>
                         </Category>
 

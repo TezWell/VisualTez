@@ -20,18 +20,18 @@ const ForBlock = {
         {
             type: 'input_value',
             name: 'FROM',
-            check: 'Nat',
+            check: ['Expression', 'Literal'],
         },
         {
             type: 'input_value',
             name: 'TO',
-            check: 'Nat',
+            check: ['Expression', 'Literal'],
             align: 'RIGHT',
         },
         {
             type: 'input_value',
             name: 'BY',
-            check: 'Nat',
+            check: ['Expression', 'Literal'],
             align: 'RIGHT',
         },
     ],

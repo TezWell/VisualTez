@@ -28,7 +28,7 @@ Blockly.Blocks[BlockKind.variables_get] = {
                     variable: '%{BKY_VARIABLES_DEFAULT_NAME}',
                 },
             ],
-            output: ['Expression'],
+            output: ['Variable', 'Expression'],
             colour: 80,
             tooltip: 'Access the variable value.',
             extensions: ['contextMenu_variableSetterGetter'],
