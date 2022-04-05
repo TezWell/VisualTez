@@ -5,10 +5,10 @@ exports[`Application Routing Test Route VisualTez - 404 1`] = `
   class="flex flex-col flex-1"
 >
   <div
-    class="flex-1 inline-flex justify-center items-center"
+    class="flex-1 flex flex-col md:flex-row justify-center items-center"
   >
     <h1
-      class="text-[20rem] italic font-black tracking-widest diagonal-fractions"
+      class="text-[4rem] md:text-[20rem] italic font-black tracking-widest diagonal-fractions"
     >
       404
     </h1>

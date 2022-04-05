@@ -1,6 +1,6 @@
 import Blockly, { Block } from 'blockly';
 import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
-import { GetContract } from '@tezwell/smartts-sdk';
+import { GetContract, TUnit } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
@@ -14,11 +14,11 @@ const GetContractBlock = {
         {
             type: 'field_input',
             name: 'ENTRYPOINT',
-            value: 'default',
+            text: 'default',
             check: 'String',
         },
     ],
-    message1: 'with argument of type %1',
+    message1: 'with type argument %1',
     args1: [{ type: 'input_value', name: 'ARGUMENT_TYPE', check: ['Literal', 'Expression'] }],
     colour: 200,
     inputsInline: true,
@@ -37,7 +37,7 @@ SmartML.addBlock(BlockKind.get_contract, {
     toValue: (block: Block) => {
         const entrypoint = block.getFieldValue('ENTRYPOINT');
         const address: IExpression<any> = SmartML.toValue(block, 'ADDRESS');
-        const type = SmartML.toType(block, 'ARGUMENT_TYPE');
+        const type = SmartML.toType(block, 'ARGUMENT_TYPE', TUnit());
         return GetContract(address, entrypoint, type, buildErrorInfo(block));
     },
 });
