@@ -1,4 +1,4 @@
-import { ToContract, Transfer } from '@tezwell/smartts-sdk';
+import { Mutez, ToContract, Transfer, Unit } from '@tezwell/smartts-sdk';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import Blockly, { Block } from 'blockly';
 
@@ -77,8 +77,8 @@ Blockly.Blocks[BlockKind.call_contract_statement] = {
 SmartML.addBlock(BlockKind.call_contract_statement, {
     toStatement: (block: Block) => {
         const contract: IExpression<any> = SmartML.toValue(block, 'CONTRACT');
-        const amount: IExpression<any> = SmartML.toValue(block, 'AMOUNT');
-        const argument = SmartML.toValue(block, 'ARGUMENT');
+        const amount: IExpression<any> = SmartML.toValue(block, 'AMOUNT', Mutez(0));
+        const argument = SmartML.toValue(block, 'ARGUMENT', Unit());
 
         const line = buildErrorInfo(block);
 

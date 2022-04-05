@@ -1,2 +1,3 @@
-export * from './Transfer';
-export * from './Delegate';
+import './Transfer';
+import './Delegate';
+import './CreateContract';

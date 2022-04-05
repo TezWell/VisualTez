@@ -1,6 +1,6 @@
 import Blockly, { Block, FieldTextInput } from 'blockly';
 
-import { Contract, EntryPoint, TUnknown } from '@tezwell/smartts-sdk';
+import { Contract, EntryPoint, OnChainView, TUnknown } from '@tezwell/smartts-sdk';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -51,6 +51,7 @@ export const extractContract = (block: Block) => {
     const contract = new Contract(buildErrorInfo(block)).setStorageType(storageType);
 
     SmartML.toStatements(block, 'entry_points', true).forEach((st) => contract.addEntrypoint(st as EntryPoint));
+    SmartML.toStatements(block, 'ONCHAIN_VIEWS', true).forEach((view) => contract.addView(view as OnChainView));
 
     // Remove current scope
     Context.main.exitScope();

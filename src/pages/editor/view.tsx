@@ -99,6 +99,7 @@ import {
     AddToListStatement,
     AssertStatement,
     CallContractStatement,
+    CreateContractStatement,
     DelegateStatement,
     ForEachStatement,
     ForStatement,
@@ -418,6 +419,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <TransferStatement />
                             <CallContractStatement />
                             <DelegateStatement />
+                            <CreateContractStatement />
                         </ToolboxSearch>
 
                         <Category name="Main Blocks" categorystyle="class_category">
@@ -574,6 +576,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <TransferStatement />
                             <CallContractStatement />
                             <DelegateStatement />
+                            <CreateContractStatement />
                         </Category>
 
                         <Category name="Block/Tx Properties" categorystyle="blockchain_category">

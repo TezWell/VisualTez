@@ -28,7 +28,8 @@ export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean
     const blockID = error.match(regex)?.reverse()[0];
     const block = workspace.getBlockById(blockID || '');
     if (block) {
-        block.setWarningText(error.replace(/[(]BLOCK__(.*?),\sline\s\d[)]/g, ''));
+        const _error = error.replace(/[(]BLOCK__(.*?),\sline\s\d[)]/g, '').replace(/sp[.]/g, '');
+        block.setWarningText(_error);
         block.warning?.setVisible(true);
 
         // Set RED color

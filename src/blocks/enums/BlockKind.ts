@@ -143,6 +143,7 @@ export enum BlockKind {
     transfer_statement = 'transfer_statement',
     call_contract_statement = 'call_contract_statement',
     delegate_statement = 'delegate_statement',
+    create_contract_statement = 'create_contract_statement',
     delete_map_entry = 'delete_map_entry',
     add_to_list = 'add_to_list',
     add_element_to_set = 'add_element_to_set',

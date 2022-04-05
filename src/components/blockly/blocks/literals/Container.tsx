@@ -3,6 +3,7 @@ import * as React from 'react';
 import BlockKind from 'src/blocks/enums/BlockKind';
 import Block from 'src/components/blockly/Block';
 import Value from 'src/components/blockly/Value';
+import Shadow from '../../Shadow';
 
 import { UnitType } from '../types';
 import { UnitLiteral } from './Singleton';
@@ -61,10 +62,10 @@ export const RecordLiteral = () => (
 export const LambdaLiteral = () => (
     <Block type={BlockKind.lambda_literal} tags={['literal', 'lambda', 'function']}>
         <Value name="TYPE">
-            <UnitType />
+            <Shadow type={BlockKind.unit_type} />
         </Value>
         <Value name="RETURN">
-            <UnitLiteral />
+            <Shadow type={BlockKind.unit_literal} />
         </Value>
     </Block>
 );

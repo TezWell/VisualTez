@@ -13,7 +13,7 @@ const VariableSetterBlock = {
         {
             type: 'input_value',
             name: 'VAR',
-            check: ['Variable'],
+            check: ['Variable', 'Expression'],
         },
         {
             type: 'input_value',
