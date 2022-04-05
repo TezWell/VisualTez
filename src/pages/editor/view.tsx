@@ -165,6 +165,7 @@ import Logger from 'src/utils/logger';
 import { DeleteMapEntryStatement } from 'src/components/blockly/blocks/statements/map';
 import { MathExpression } from 'src/components/blockly/blocks/expressions/math';
 import { AccessRecordPropertyExpression } from 'src/components/blockly/blocks/expressions/record';
+import { validateBlockLocation } from 'src/blocks/utils/workspace';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -198,6 +199,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
         (event: any) => {
             Logger.debug(event.type);
             if (workspaceRef.current) {
+                if (event.type === Blockly.Events.MOVE) {
+                    validateBlockLocation(workspaceRef.current, event.blockId);
+                }
                 if (
                     [
                         Blockly.Events.BLOCK_CHANGE,
