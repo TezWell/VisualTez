@@ -91,6 +91,7 @@ import {
     RecordType,
     VariantType,
     RecordVariantTypeEntry,
+    OrType,
 } from 'src/components/blockly/blocks/types';
 import ValueCompilation from 'src/components/blockly/blocks/ValueCompilation';
 import TypeCompilation from 'src/components/blockly/blocks/TypeCompilation';
@@ -323,6 +324,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <MapType />
                             <BigMapType />
                             <PairType />
+                            <OrType />
                             <LambdaType />
                             <ContractType />
                             <TicketType />
@@ -518,6 +520,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <MapType />
                                 <BigMapType />
                                 <PairType />
+                                <OrType />
                                 <LambdaType />
                                 <ContractType />
                                 <TicketType />

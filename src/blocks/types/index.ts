@@ -23,6 +23,7 @@ import './Option';
 import './Map';
 import './Big_map';
 import './Pair';
+import './Or';
 import './Lambda';
 import './Ticket';
 import './Contract';

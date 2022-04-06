@@ -32,7 +32,7 @@ class ToolboxSearch extends Blockly.ToolboxCategory {
         this.input.type = 'text';
         this.input.placeholder = 'Search...';
         this.input.className =
-            'w-48 focus:ring-0 font-mono text-black rounded-l-md border-0 border-b-4 border-yellow-700 focus:border-yellow-500';
+            'w-48 focus:ring-0 font-mono text-black rounded-l-md border-2 border-r-0 border-black dark:border-gray-400 focus:border-yellow-500';
 
         this.input.onkeydown = async () => {
             await new Promise((r) => setTimeout(r, 200));

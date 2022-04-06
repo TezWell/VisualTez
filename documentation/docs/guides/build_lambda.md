@@ -7,3 +7,11 @@ The animation below shows how to build and compile a lambda that expects a value
         <source src={require('@site/static/media/guides/build_lambda.webm').default} type='video/webm' />
     </video>
 </div>
+
+<br/>
+
+:::info
+
+Lambdas do not have direct access to the contract storage. If a lambda needs to modify the storage, it can be passed as input and returned.
+
+:::

@@ -26,6 +26,7 @@ export enum BlockKind {
     map_type = 'map_type',
     big_map_type = 'big_map_type',
     pair_type = 'pair_type',
+    or_type = 'or_type',
     lambda_type = 'lambda_type',
     ticket_type = 'ticket_type',
     contract_type = 'contract_type',

@@ -12,6 +12,7 @@ export const OptionType = () => (
 export const MapType = () => <Block type={BlockKind.map_type} tags={['type', 'map']} />;
 export const BigMapType = () => <Block type={BlockKind.big_map_type} tags={['type', 'big_map', 'map']} />;
 export const PairType = () => <Block type={BlockKind.pair_type} tags={['type', 'pair', 'tuple']} />;
+export const OrType = () => <Block type={BlockKind.or_type} tags={['type', 'or', 'variant']} />;
 export const LambdaType = () => <Block type={BlockKind.lambda_type} tags={['type', 'lambda', 'function']} />;
 export const TicketType = () => <Block type={BlockKind.ticket_type} tags={['type', 'ticket']} />;
 export const ContractType = () => <Block type={BlockKind.contract_type} tags={['type', 'contract']} />;
