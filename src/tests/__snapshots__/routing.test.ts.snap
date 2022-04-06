@@ -85,10 +85,10 @@ exports[`Application Routing Test Route VisualTez 1`] = `
     class="pt-20 pb-20"
   >
     <div
-      class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center justify-evenly"
+      class="container px-3 mx-auto flex flex-wrap flex-col lg:flex-row items-center justify-evenly"
     >
       <div
-        class="flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left"
+        class="flex flex-col w-full md:w-4/5 lg:w-2/5 justify-center items-center lg:items-start text-center md:text-left"
       >
         <p
           class="uppercase tracking-loose w-full"
@@ -112,13 +112,13 @@ exports[`Application Routing Test Route VisualTez 1`] = `
             href="/editor"
           >
             <button
-              class="h-14 inline-flex items-center px-4 text-sm md:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+              class="h-14 inline-flex items-center px-4 text-sm lg:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
             >
               Open Editor
             </button>
           </a>
           <a
-            class="h-14 inline-flex items-center px-4 text-sm md:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out ml-2"
+            class="h-14 inline-flex items-center px-4 text-sm lg:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out ml-2"
             href="/docs"
             target="_blank"
           >
@@ -127,7 +127,7 @@ exports[`Application Routing Test Route VisualTez 1`] = `
         </div>
       </div>
       <div
-        class="flex justify-center h-full w-full md:w-2/5 py-6 text-center"
+        class="flex justify-center h-full w-full md:w-4/5 lg:w-2/5 py-6 text-center"
       >
         <img
           alt="example"
