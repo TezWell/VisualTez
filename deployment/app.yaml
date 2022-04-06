@@ -8,11 +8,19 @@ handlers:
   static_files: www/\1
   upload: www/.*\.(gif|png|jpg|js|html|css|json|txt|ico|svg|xml|webm|mp4)$
 
-- url: /docs(.*)
+- url: /docs/
   secure: always
-  redirect_http_response_code: 301
   static_files: www/docs/index.html
   upload: www/docs/index.html
+
+- url: /docs/(.*)
+  secure: always
+  static_files: www/docs/\1/index.html
+  upload: www/docs/(.*)
+
+- url: /docs
+  static_files: www/docs/\1
+  upload: www/docs/(.*)
 
 - url: /(.*)
   secure: always

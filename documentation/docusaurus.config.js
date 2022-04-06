@@ -15,7 +15,7 @@ const config = {
     favicon: 'favicon.ico',
     organizationName: 'TezWell',
     projectName: 'visualtez',
-    trailingSlash: false,
+    trailingSlash: true,
 
     presets: [
         [
