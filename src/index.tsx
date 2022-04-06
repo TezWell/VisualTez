@@ -16,9 +16,7 @@ if (!container) {
     throw new Error('Root <div/> missing!');
 }
 
-const root = ReactDOMClient.createRoot(container);
-
-root.render(
+const App = () => (
     // Re-Enable StrictMode once this gets fixed: https://github.com/tailwindlabs/headlessui/issues/681
     // <React.StrictMode>
     <div className="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen">
@@ -33,6 +31,8 @@ root.render(
                 </Theme.Provider>
             </HelmetProvider>
         </React.Suspense>
-    </div>,
+    </div>
     // </React.StrictMode>
 );
+
+ReactDOMClient.createRoot(container).render(<App />);
