@@ -33,7 +33,7 @@ const MathBlock = {
     ],
     inputsInline: true,
     output: ['Expression'],
-    colour: 350,
+    colour: 200,
 };
 
 Blockly.Blocks[BlockKind.math_block] = {

@@ -14,7 +14,7 @@ const PrependToListBlock = {
         { type: 'input_value', name: 'LIST', check: ['Literal', 'Expression'] },
     ],
     tooltip: 'Create new list and prepend an element to it.',
-    colour: 123,
+    colour: 200,
     inputsInline: true,
     output: ['Expression'],
 };

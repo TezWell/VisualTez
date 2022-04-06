@@ -13,16 +13,14 @@ const RemoveElementFromSetBlock = {
         { type: 'input_value', name: 'ELEMENT', check: ['Literal', 'Expression'] },
         { type: 'input_value', name: 'SET', check: ['Literal', 'Expression'] },
     ],
-    colour: 200,
-    outputShape: 3,
-    output: ['Expression'],
+    colour: 20,
 };
 
 Blockly.Blocks[BlockKind.remove_element_from_set] = {
     init: function () {
         this.jsonInit(RemoveElementFromSetBlock);
-        this.setPreviousStatement(false);
-        this.setNextStatement(false);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

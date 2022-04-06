@@ -11,7 +11,6 @@ const GetElementsFromSetBlock = {
     message0: 'Get elements from Set %1',
     args0: [{ type: 'input_value', name: 'SET', check: ['Literal', 'Expression'] }],
     colour: 200,
-    outputShape: 3,
     output: ['Expression'],
 };
 

@@ -14,7 +14,7 @@ const PackBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
-    colour: 123,
+    colour: 200,
     output: ['Expression'],
 };
 

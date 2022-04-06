@@ -5,6 +5,7 @@ import { TemplateIcon } from '@heroicons/react/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
 import { DrawerKind, EditorActionKind } from 'src/context/Editor';
+import ThemeSelection from 'src/components/theme/selection';
 
 interface ToolsBarProps {
     compile: () => void;

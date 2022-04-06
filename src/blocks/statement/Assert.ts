@@ -18,7 +18,7 @@ const AssertBlock = {
         },
         { type: 'input_value', name: 'error_message', check: ['Literal', 'Expression'] },
     ],
-    colour: 200,
+    colour: 20,
     inputsInline: true,
 };
 

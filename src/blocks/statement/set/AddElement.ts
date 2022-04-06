@@ -13,16 +13,14 @@ const AddElementToSetBlock = {
         { type: 'input_value', name: 'ELEMENT', check: ['Literal', 'Expression'] },
         { type: 'input_value', name: 'SET', check: ['Literal', 'Expression'] },
     ],
-    colour: 200,
-    outputShape: 3,
-    output: ['Expression'],
+    colour: 20,
 };
 
 Blockly.Blocks[BlockKind.add_element_to_set] = {
     init: function () {
         this.jsonInit(AddElementToSetBlock);
-        this.setPreviousStatement(false);
-        this.setNextStatement(false);
+        this.setPreviousStatement(true, ['Statement']);
+        this.setNextStatement(true, ['Statement']);
     },
 };
 

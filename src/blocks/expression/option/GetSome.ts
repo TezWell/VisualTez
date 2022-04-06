@@ -11,7 +11,6 @@ const GetSomeBlock = {
     message0: 'Get Some %1',
     args0: [{ type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] }],
     colour: 200,
-    outputShape: 3,
     output: ['Expression'],
 };
 

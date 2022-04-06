@@ -16,7 +16,7 @@ const ParamAccessBlock = {
         },
         { type: 'input_value', name: 'RECORD', check: ['Literal', 'Expression'] },
     ],
-    colour: 123,
+    colour: 200,
     inputsInline: true,
     output: ['Expression'],
 };

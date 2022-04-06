@@ -20,7 +20,7 @@ const UnpackBlock = {
             check: ['Type'],
         },
     ],
-    colour: 123,
+    colour: 200,
     inputsInline: true,
     output: ['Expression'],
 };

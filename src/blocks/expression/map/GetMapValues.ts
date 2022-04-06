@@ -10,7 +10,7 @@ const GetMapValuesBlock = {
     type: BlockKind.get_map_values,
     message0: 'Get map values %1',
     args0: [{ type: 'input_value', name: 'MAP', check: ['Literal', 'Expression'] }],
-    colour: 123,
+    colour: 200,
     inputsInline: true,
     output: ['Expression'],
 };

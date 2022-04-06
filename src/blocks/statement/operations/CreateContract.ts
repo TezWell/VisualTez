@@ -1,14 +1,4 @@
-import {
-    Contract,
-    CreateContract,
-    EntryPoint,
-    Mutez,
-    None,
-    OnChainView,
-    SetDelegate,
-    TUnknown,
-    Unit,
-} from '@tezwell/smartts-sdk';
+import { Contract, CreateContract, EntryPoint, Mutez, None, TUnknown, Unit } from '@tezwell/smartts-sdk';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import Blockly, { Block } from 'blockly';
 

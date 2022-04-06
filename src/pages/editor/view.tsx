@@ -12,6 +12,7 @@ import {
     VariableIcon,
     EyeIcon,
     SwitchHorizontalIcon,
+    CalculatorIcon,
 } from '@heroicons/react/outline';
 
 import { Category, ToolboxSearch } from 'src/components/blockly';
@@ -619,7 +620,15 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <HashKey />
                         </Category>
 
-                        <Category name="Expressions & Statements" categorystyle="container_type_category">
+                        <Category name="Arithmetic" categorystyle="logic_category">
+                            <CategoryIcon>
+                                <CalculatorIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+
+                            <MathExpression />
+                        </Category>
+
+                        <Category name="Expressions/Statements" categorystyle="container_type_category">
                             <Category name="Typing" categorystyle="logic_category">
                                 <AsTypeExpression />
                                 <IntOfNatExpression />
@@ -632,17 +641,23 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <XorExpression />
                                 <NotExpression />
                             </Category>
-                            <Category name="Arithmetic" categorystyle="logic_category">
-                                <MathExpression />
-                            </Category>
                             <Category name="Serialization" categorystyle="logic_category">
                                 <PackExpression />
                                 <UnpackExpression />
+                            </Category>
+                            <Category name="String" categorystyle="logic_category">
+                                <SizeOf />
+                                <Concat />
+                            </Category>
+                            <Category name="Bytes" categorystyle="logic_category">
+                                <SizeOf />
+                                <Concat />
                             </Category>
                             <Category name="Record" categorystyle="logic_category">
                                 <AccessRecordPropertyExpression />
                             </Category>
                             <Category name="Map" categorystyle="logic_category">
+                                <SizeOf />
                                 <GetMapEntriesExpression />
                                 <GetMapKeysExpression />
                                 <GetMapValuesExpression />
@@ -656,13 +671,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <GetSecondElementExpression />
                             </Category>
                             <Category name="List" categorystyle="logic_category">
-                                <PrependToListExpression />
-                                <Concat />
                                 <SizeOf />
-
+                                <Concat />
+                                <PrependToListExpression />
                                 <AddToListStatement />
                             </Category>
                             <Category name="Set" categorystyle="logic_category">
+                                <SizeOf />
                                 <GetElementsFromSetExpression />
 
                                 <AddElementToSetStatement />

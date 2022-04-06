@@ -11,7 +11,6 @@ const IsNoneBlock = {
     message0: 'Is %1 of variant None?',
     args0: [{ type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] }],
     colour: 200,
-    outputShape: 3,
     output: ['Expression'],
 };
 

@@ -17,7 +17,7 @@ const DeleteMapEntryBlock = {
         },
         { type: 'input_value', name: 'MAP', check: ['Literal', 'Expression'] },
     ],
-    colour: 200,
+    colour: 20,
     inputsInline: true,
 };
 

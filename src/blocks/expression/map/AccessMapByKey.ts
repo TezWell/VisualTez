@@ -12,7 +12,7 @@ const AccessMapByKeyBlock = {
         { type: 'input_value', name: 'MAP', check: ['Literal', 'Expression'] },
         { type: 'input_value', name: 'KEY', check: ['Literal', 'Expression'] },
     ],
-    colour: 123,
+    colour: 200,
     inputsInline: true,
     output: ['Expression'],
 };

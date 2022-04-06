@@ -9,7 +9,7 @@ const FirstPairElementBlock = {
     type: BlockKind.get_first_pair_element,
     message0: 'First element of pair %1',
     args0: [{ type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] }],
-    colour: 123,
+    colour: 200,
     inputsInline: true,
     output: ['Expression'],
 };
@@ -32,7 +32,7 @@ const SecondPairElementBlock = {
     type: BlockKind.get_second_pair_element,
     message0: 'Second element of pair %1',
     args0: [{ type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] }],
-    colour: 123,
+    colour: 200,
     inputsInline: true,
     output: ['Expression'],
 };

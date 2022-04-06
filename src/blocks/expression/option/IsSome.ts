@@ -11,7 +11,6 @@ const IsSomeBlock = {
     message0: 'Is %1 of variant Some?',
     args0: [{ type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] }],
     colour: 200,
-    outputShape: 3,
     output: ['Expression'],
 };
 

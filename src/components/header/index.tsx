@@ -11,6 +11,10 @@ import RouterButton from '../common/RouterButton';
 interface NavigationProps {}
 
 const Navigation: React.FC<NavigationProps> = () => {
+    if (location.pathname === '/editor') {
+        return null;
+    }
+
     return (
         <nav id="header" className="w-full">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between p-2">
