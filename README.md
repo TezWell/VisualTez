@@ -1,15 +1,15 @@
-# VisualTez (Work in Progress)
+# VisualTez
 
 `VisualTez` is a visual programming tool for writing smart contracts in the Tezos blockchain.
 
-### [https://visualtez.com](https://visualtez.com) (Very early version)
+### [VisualTez (Beta)](https://visualtez.com)
+
+### [Documentation](https://visualtez.com/docs)
 
 <br/>
-<center>
 
-<img src="public/assets/sample.svg" height="200px">
+https://user-images.githubusercontent.com/22591718/162019963-3c921e87-fa6c-478f-b581-64cb37dbce04.mp4
 
-</center>
 <br/>
 
 
