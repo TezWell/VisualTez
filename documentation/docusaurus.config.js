@@ -44,6 +44,11 @@ const config = {
                 title: 'VisualTez Documentation',
                 items: [
                     {
+                        href: 'https://visualtez.com/editor',
+                        label: 'Editor',
+                        position: 'right',
+                    },
+                    {
                         href: 'https://github.com/TezWell/visualtez',
                         label: 'GitHub',
                         position: 'right',
