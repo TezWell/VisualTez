@@ -149,6 +149,7 @@ export enum BlockKind {
     add_to_list = 'add_to_list',
     add_element_to_set = 'add_element_to_set',
     remove_element_from_set = 'remove_element_from_set',
+    fail_with_statement = 'fail_with_statement',
 
     // Base
     type_compilation = 'type_compilation',

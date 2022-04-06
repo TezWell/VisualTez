@@ -103,6 +103,7 @@ import {
     CallContractStatement,
     CreateContractStatement,
     DelegateStatement,
+    FailWithStatement,
     ForEachStatement,
     ForStatement,
     IfStatement,
@@ -560,6 +561,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 </svg>
                             </CategoryIcon>
                             <AssertStatement />
+                            <FailWithStatement />
                             <IfStatement />
                             <VariantMatchStatement />
                             <VariantMatchCase />

@@ -11,6 +11,7 @@ import './VariableSetter';
 import './list';
 
 import './Return';
+import './FailWith';
 
 import './operations';
 import './map';
