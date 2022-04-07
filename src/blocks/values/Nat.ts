@@ -9,7 +9,7 @@ import { Nat as ST_Nat } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
-import { buildBlockErrorString, buildErrorInfo, updateErrorInfo } from '../utils/errorHandling';
+import { buildBlockErrorString, buildErrorInfo } from '../utils/errorHandling';
 
 const NatBlock = {
     type: BlockKind.nat_literal,

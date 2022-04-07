@@ -4,3 +4,4 @@ export * from './operations';
 export * from './list';
 export * from './set';
 export * from './map';
+export * from './variable_setter';

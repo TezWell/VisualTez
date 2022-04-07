@@ -11,7 +11,7 @@ import './callLambda';
 import './list';
 import './map';
 import './serialization';
-import './math';
+import './arithmetic';
 import './blockchain_operations';
 import './logic';
 import './typing';

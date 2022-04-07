@@ -15,3 +15,6 @@ export * from './list';
 export * from './pair';
 export * from './typing';
 export * from './set';
+export * from './arithmetic';
+export * from './record';
+export * from './variables';

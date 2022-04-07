@@ -129,6 +129,12 @@ export enum BlockKind {
     get_elements_from_set = 'get_elements_from_set',
     get_contract = 'get_contract',
     address_of_contract = 'address_of_contract',
+    abs_expression = 'abs_expression',
+    negate_expression = 'negate_expression',
+    mod_expression = 'mod_expression',
+    ediv_expression = 'ediv_expression',
+    shift_left_expression = 'shift_left_expression',
+    shift_right_expression = 'shift_right_expression',
 
     // Statements
     return_statement_block = 'return_statement_block',
