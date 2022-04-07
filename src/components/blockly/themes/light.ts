@@ -11,51 +11,42 @@ const LightTheme = Blockly.Theme.defineTheme('light', {
         type_category: {
             colour: '#5b67a5',
         },
-        container_type_category: {
-            colour: '#745ba5',
-        },
-        artificial_type_category: {
-            colour: '#5b5ba4',
+        expr_stmt_category: {
+            colour: '#527772',
         },
 
         literal_category: {
             colour: '#a58c5b',
         },
-        option_literal_category: {
-            colour: '#a55b74',
-        },
-        sequence_literal_category: {
+        advanced_category: {
             colour: '#5b80a5',
         },
-        lambda_category: {
-            colour: '#5b99a5',
-        },
         view_category: {
-            colour: '#99a55b',
+            colour: '#5ba58c',
         },
 
         blockchain_category: {
-            colour: '#00C34F',
+            colour: '#a55c5b',
         },
         cryptography_category: {
-            colour: '#a55c5b',
+            colour: '#a55b74',
         },
         transaction_properties_category: {
             colour: '#6aa84f',
         },
 
         variables_category: {
-            colour: '#0075D3',
+            colour: '#99a55b',
         },
-        control_statements_category: {
-            colour: '#f61961',
+        loop_statements_category: {
+            colour: '#81d8d0',
         },
         operation_statements_category: {
             colour: '#5b74a5',
         },
 
         testing_category: {
-            colour: '#5ba58c',
+            colour: '#00C34F',
         },
     },
     blockStyles: {

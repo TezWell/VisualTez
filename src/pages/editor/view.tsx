@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
-import { DatabaseIcon, PuzzleIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
+import { DatabaseIcon, PuzzleIcon, ReceiptRefundIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
 import {
     FingerPrintIcon,
     HashtagIcon,
@@ -13,6 +13,7 @@ import {
     EyeIcon,
     SwitchHorizontalIcon,
     CalculatorIcon,
+    PencilIcon,
 } from '@heroicons/react/outline';
 
 import { Category, ToolboxSearch } from 'src/components/blockly';
@@ -175,6 +176,7 @@ import {
     EdivExpression,
     ShiftRightExpression,
     ShiftLeftExpression,
+    SetContainsElementExpression,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
@@ -558,7 +560,14 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <VariableIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
                         </Category>
+
                         <Category name="Logic (If, Assert, ...)" categorystyle="logic_category">
+                            <CompareExpression />
+                            <OrExpression />
+                            <AndExpression />
+                            <XorExpression />
+                            <NotExpression />
+
                             <CategoryIcon>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -579,7 +588,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <VariantMatchStatement />
                             <VariantMatchCase />
                         </Category>
-                        <Category name="Loops" categorystyle="control_statements_category">
+                        <Category name="Loops" categorystyle="loop_statements_category">
                             <CategoryIcon>
                                 <RefreshIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
@@ -649,35 +658,36 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <ShiftRightExpression />
                         </Category>
 
-                        <Category name="Expressions/Statements" categorystyle="container_type_category">
-                            <Category name="Typing" categorystyle="logic_category">
-                                <AsTypeExpression />
+                        <Category name="Expressions / Statements" categorystyle="expr_stmt_category">
+                            <Category name="Int" categorystyle="expr_stmt_category">
                                 <IntOfNatExpression />
                                 <NatOfIntExpression />
+                                <ABSExpression />
                             </Category>
-                            <Category name="Comparison & Logic" categorystyle="logic_category">
-                                <CompareExpression />
+                            <Category name="Nat" categorystyle="expr_stmt_category">
+                                <IntOfNatExpression />
+                                <NatOfIntExpression />
+                                <NegateExpression />
+                            </Category>
+                            <Category name="String" categorystyle="expr_stmt_category">
+                                <SizeOf />
+                                <Concat />
+                            </Category>
+                            <Category name="Bytes" categorystyle="expr_stmt_category">
+                                <SizeOf />
+                                <Concat />
+                                <Slice />
+                            </Category>
+                            <Category name="Bool" categorystyle="expr_stmt_category">
                                 <OrExpression />
                                 <AndExpression />
                                 <XorExpression />
                                 <NotExpression />
                             </Category>
-                            <Category name="Serialization" categorystyle="logic_category">
-                                <PackExpression />
-                                <UnpackExpression />
-                            </Category>
-                            <Category name="String" categorystyle="logic_category">
-                                <SizeOf />
-                                <Concat />
-                            </Category>
-                            <Category name="Bytes" categorystyle="logic_category">
-                                <SizeOf />
-                                <Concat />
-                            </Category>
-                            <Category name="Record" categorystyle="logic_category">
+                            <Category name="Record" categorystyle="expr_stmt_category">
                                 <AccessRecordPropertyExpression />
                             </Category>
-                            <Category name="Map" categorystyle="logic_category">
+                            <Category name="Map" categorystyle="expr_stmt_category">
                                 <SizeOf />
                                 <GetMapEntriesExpression />
                                 <GetMapKeysExpression />
@@ -687,44 +697,63 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                                 <DeleteMapEntryStatement />
                             </Category>
-                            <Category name="Pair" categorystyle="logic_category">
+                            <Category name="Big Map" categorystyle="expr_stmt_category">
+                                <GetMapValueExpression />
+                                <MapConstainsKeyExpression />
+
+                                <DeleteMapEntryStatement />
+                            </Category>
+                            <Category name="Pair" categorystyle="expr_stmt_category">
                                 <GetFirstElementExpression />
                                 <GetSecondElementExpression />
                             </Category>
-                            <Category name="List" categorystyle="logic_category">
+                            <Category name="List" categorystyle="expr_stmt_category">
                                 <SizeOf />
                                 <Concat />
                                 <PrependToListExpression />
                                 <AddToListStatement />
                             </Category>
-                            <Category name="Set" categorystyle="logic_category">
+                            <Category name="Set" categorystyle="expr_stmt_category">
                                 <SizeOf />
                                 <GetElementsFromSetExpression />
+                                <SetContainsElementExpression />
 
                                 <AddElementToSetStatement />
                                 <RemoveElementFromSetStatement />
                             </Category>
 
-                            <Category name="Option" categorystyle="logic_category">
+                            <Category name="Option" categorystyle="expr_stmt_category">
                                 <GetSomeExpression />
                                 <IsSomeExpression />
                                 <IsNoneExpression />
                             </Category>
 
-                            <Category name="Bytes" categorystyle="logic_category">
-                                <Slice />
-                            </Category>
-
-                            <Category name="Contract" categorystyle="logic_category">
+                            <Category name="Contract" categorystyle="expr_stmt_category">
                                 <ImplicitAccountExpression />
                                 <GetContractExpression />
                                 <AddressOfContractExpression />
                             </Category>
                         </Category>
 
-                        <Category name="Lambda" categorystyle="lambda_category">
+                        <Category name="Advanced" categorystyle="advanced_category">
+                            <Category name="Typing" categorystyle="advanced_category">
+                                <CategoryIcon>
+                                    <TagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <AsTypeExpression />
+                            </Category>
+                            <Category name="Serialization" categorystyle="advanced_category">
+                                <CategoryIcon>
+                                    <SwitchHorizontalIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <PackExpression />
+                                <UnpackExpression />
+                            </Category>
+                        </Category>
+
+                        <Category name="Lambda" categorystyle="literal_category">
                             <CategoryIcon>
-                                <SwitchHorizontalIcon className="block h-6 w-6 mr-2" />
+                                <ReceiptRefundIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
                             <LambdaLiteral />
                             <CallLambda />

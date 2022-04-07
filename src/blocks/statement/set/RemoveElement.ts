@@ -14,6 +14,7 @@ const RemoveElementFromSetBlock = {
         { type: 'input_value', name: 'SET', check: ['Literal', 'Expression'] },
     ],
     colour: 20,
+    inputsInline: true,
 };
 
 Blockly.Blocks[BlockKind.remove_element_from_set] = {

@@ -16,7 +16,7 @@ const MatchVariantBlock = {
         { type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] },
         { type: 'input_statement', name: 'CASES', check: ['MatchCase'] },
     ],
-    colour: 200,
+    colour: 20,
     inputsInline: true,
 };
 
@@ -61,7 +61,7 @@ const MatchCaseBlock = {
     ],
     message1: 'Do %1',
     args1: [{ type: 'input_statement', name: 'DO', check: ['Statement'] }],
-    colour: 200,
+    colour: 30,
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,

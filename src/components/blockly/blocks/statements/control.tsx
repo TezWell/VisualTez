@@ -2,19 +2,19 @@ import React from 'react';
 
 import BlockKind from 'src/blocks/enums/BlockKind';
 import Block from '../../Block';
+import Shadow from '../../Shadow';
 import Value from '../../Value';
-import { NatLiteral } from '../literals';
 
 export const ForStatement = () => (
     <Block type={BlockKind.for_block} tags={['statement', 'control', 'loop', 'for']}>
         <Value name="FROM">
-            <NatLiteral />
+            <Shadow type={BlockKind.nat_literal} />
         </Value>
         <Value name="TO">
-            <NatLiteral />
+            <Shadow type={BlockKind.nat_literal} />
         </Value>
         <Value name="BY">
-            <NatLiteral />
+            <Shadow type={BlockKind.nat_literal} />
         </Value>
     </Block>
 );

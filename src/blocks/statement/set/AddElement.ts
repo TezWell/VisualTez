@@ -14,6 +14,7 @@ const AddElementToSetBlock = {
         { type: 'input_value', name: 'SET', check: ['Literal', 'Expression'] },
     ],
     colour: 20,
+    inputsInline: true,
 };
 
 Blockly.Blocks[BlockKind.add_element_to_set] = {

@@ -4,12 +4,13 @@ import BlockKind from 'src/blocks/enums/BlockKind';
 import Block from '../../Block';
 import Shadow from '../../Shadow';
 import Value from '../../Value';
-import { UnitLiteral } from '../literals';
 
 export const AssertStatement = () => (
     <Block type={BlockKind.assert_block} tags={['statement', 'assert', 'logic']}>
         {/* Default error message */}
-        <UnitLiteral />
+        <Value name="error_message">
+            <Shadow type={BlockKind.unit_literal} />
+        </Value>
     </Block>
 );
 

@@ -32,7 +32,7 @@ const IfBlock = {
             check: 'Statement',
         },
     ],
-    colour: 200,
+    colour: 20,
 };
 
 Blockly.Blocks[BlockKind.if_block] = {
