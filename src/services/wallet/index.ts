@@ -120,8 +120,16 @@ export const deployContract = async (client: TezosWallet, params: WalletOriginat
             signature: signingResult.prefixSig,
         },
     ]);
-    const address = (preApplyResults?.[0]?.contents?.[0] as any)?.metadata?.operation_result?.originated_contracts?.[0];
+    // Check if the operation can be applied successfully
+    if ((preApplyResults?.[0]?.contents?.[0] as any)?.metadata?.operation_result?.status !== 'applied') {
+        throw new Error(
+            (preApplyResults?.[0]?.contents?.[0] as any)?.metadata.operation_result.errors
+                .map(({ id }: any) => id)
+                .join(', '),
+        );
+    }
 
+    const address = (preApplyResults?.[0]?.contents?.[0] as any)?.metadata?.operation_result?.originated_contracts?.[0];
     if (!address) {
         throw new Error('Could not originate contract.');
     }

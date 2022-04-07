@@ -81,6 +81,7 @@ const estimateOperation = async (
         switch (c.kind) {
             case 'origination':
                 gas += parseInt(c['metadata']['operation_result']['consumed_gas'] || '0');
+                storageCost += 300;
                 storageCost += parseInt(c['metadata']['operation_result']['paid_storage_size_diff'] || '0');
 
                 const internalOperations = c['metadata']['internal_operation_results'];
@@ -95,8 +96,6 @@ const estimateOperation = async (
                         storageCost += 257;
                     }
                 }
-
-                storageCost += 300;
         }
     }
 
