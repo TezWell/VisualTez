@@ -13,13 +13,13 @@ https://user-images.githubusercontent.com/22591718/162019963-3c921e87-fa6c-478f-
 <br/>
 
 
-| Project repos |
-|:-:|
-| [SmartTS SDK](https://github.com/RomarQ/smartts-sdk) |
-| [Michelson SDK](https://github.com/RomarQ/michelson-sdk) |
-| [Infrastructure](https://github.com/RomarQ/VisualTez-infra) |
-| [Permalink Storage](https://github.com/RomarQ/visualtez-storage)
-| [Test Runner (IN Progress)](https://github.com/RomarQ/visualtez-testing)
+| Project repos | |
+|:-:|:-:|
+| [SmartTS SDK](https://github.com/RomarQ/smartts-sdk) | Uses the [SmartPy](https://gitlab.com/SmartPy/smartpy) compiler |
+| [Michelson SDK](https://github.com/RomarQ/michelson-sdk) | |
+| [Infrastructure](https://github.com/RomarQ/VisualTez-infra) | |
+| [Permalink Storage](https://github.com/RomarQ/visualtez-storage) | |
+| [Test Runner (IN Progress)](https://github.com/RomarQ/visualtez-testing) | |
 
 ## **About**
 
