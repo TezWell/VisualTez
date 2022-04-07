@@ -103,12 +103,14 @@ import {
     CallContractStatement,
     CreateContractStatement,
     DelegateStatement,
+    DeleteMapEntryStatement,
     FailWithStatement,
     ForEachStatement,
     ForStatement,
     IfStatement,
     RemoveElementFromSetStatement,
     TransferStatement,
+    VariableSetterStatement,
     VariantMatchCase,
     VariantMatchStatement,
     WhileStatement,
@@ -163,15 +165,20 @@ import {
     GetElementsFromSetExpression,
     GetContractExpression,
     AddressOfContractExpression,
+    ArithmeticExpression,
+    ABSExpression,
+    NegateExpression,
+    AccessRecordPropertyExpression,
+    GetStorageExpression,
+    GetVariableExpression,
+    ModExpression,
+    EdivExpression,
+    ShiftRightExpression,
+    ShiftLeftExpression,
 } from 'src/components/blockly/blocks/expressions';
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
-import { DeleteMapEntryStatement } from 'src/components/blockly/blocks/statements/map';
-import { MathExpression } from 'src/components/blockly/blocks/expressions/math';
-import { AccessRecordPropertyExpression } from 'src/components/blockly/blocks/expressions/record';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
-import { VariableSetterStatement } from 'src/components/blockly/blocks/statements/variable_setter';
-import { GetStorageExpression, GetVariableExpression } from 'src/components/blockly/blocks/expressions/variables';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -395,7 +402,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <IntOfNatExpression />
                             <NatOfIntExpression />
 
-                            <MathExpression />
+                            <ArithmeticExpression />
+                            <ABSExpression />
+                            <NegateExpression />
+                            <ModExpression />
+                            <EdivExpression />
+                            <ShiftLeftExpression />
+                            <ShiftRightExpression />
 
                             <AccessRecordPropertyExpression />
 
@@ -627,7 +640,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <CalculatorIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
 
-                            <MathExpression />
+                            <ArithmeticExpression />
+                            <ABSExpression />
+                            <NegateExpression />
+                            <ModExpression />
+                            <EdivExpression />
+                            <ShiftLeftExpression />
+                            <ShiftRightExpression />
                         </Category>
 
                         <Category name="Expressions/Statements" categorystyle="container_type_category">
