@@ -136,6 +136,8 @@ export enum BlockKind {
     shift_left_expression = 'shift_left_expression',
     shift_right_expression = 'shift_right_expression',
     set_contains_element_expression = 'set_contains_element_expression',
+    is_variant_expression = 'is_variant_expression',
+    open_variant_expression = 'open_variant_expression',
 
     // Statements
     return_statement_block = 'return_statement_block',

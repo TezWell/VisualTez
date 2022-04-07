@@ -181,6 +181,7 @@ import {
 import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
+import { IsVariantExpression, OpenVariantExpression } from 'src/components/blockly/blocks/expressions/variant';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -418,6 +419,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <AddressOfContractExpression />
                             <GetStorageExpression />
                             <GetVariableExpression />
+
+                            <IsVariantExpression />
+                            <OpenVariantExpression />
 
                             {/* Statements */}
                             <AssertStatement />
@@ -732,6 +736,11 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <ImplicitAccountExpression />
                                 <GetContractExpression />
                                 <AddressOfContractExpression />
+                            </Category>
+
+                            <Category name="Variant" categorystyle="expr_stmt_category">
+                                <IsVariantExpression />
+                                <OpenVariantExpression />
                             </Category>
                         </Category>
 

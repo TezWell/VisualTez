@@ -19,3 +19,4 @@ import './cryptography';
 import './option';
 import './set';
 import './contract';
+import './variant';

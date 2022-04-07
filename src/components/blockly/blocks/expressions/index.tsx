@@ -18,3 +18,4 @@ export * from './set';
 export * from './arithmetic';
 export * from './record';
 export * from './variables';
+export * from './variant';
