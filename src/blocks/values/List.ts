@@ -39,15 +39,13 @@ SmartML.addBlock(BlockKind.list_literal, {
     toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('items');
         const line = buildErrorInfo(block);
-        if (!targetBlock) {
-            return ST_List([], line);
-        }
 
         const items = [];
-        do {
-            items.push(SmartML.toValue(targetBlock, 'value'));
-        } while ((targetBlock = targetBlock.getNextBlock()));
-
+        if (targetBlock) {
+            do {
+                items.push(SmartML.toValue(targetBlock, 'value'));
+            } while ((targetBlock = targetBlock.getNextBlock()));
+        }
         return ST_List(items, line);
     },
 });
@@ -63,15 +61,13 @@ Michelson.addBlock(BlockKind.list_literal, {
     },
     toMichelson: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('items');
-        if (!targetBlock) {
-            return M_List([]);
-        }
 
         const items = [];
-        do {
-            items.push(Michelson.toMichelson(targetBlock, 'value'));
-        } while ((targetBlock = targetBlock.getNextBlock()));
-
+        if (targetBlock) {
+            do {
+                items.push(Michelson.toMichelson(targetBlock, 'value'));
+            } while ((targetBlock = targetBlock.getNextBlock()));
+        }
         return M_List(items);
     },
 });

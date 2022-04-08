@@ -1,14 +1,15 @@
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
-import { List as M_List } from '@tezwell/michelson-sdk/literal';
-import { TList as M_TList } from '@tezwell/michelson-sdk/type';
-import { TList as ST_TList } from '@tezwell/smartts-sdk/type';
-import { List as ST_List } from '@tezwell/smartts-sdk/expression';
+import { Set as M_Set } from '@tezwell/michelson-sdk/literal';
+import { TSet as M_TSet } from '@tezwell/michelson-sdk/type';
+import { TSet as ST_TSet, TUnknown } from '@tezwell/smartts-sdk/type';
+import { Set as ST_Set } from '@tezwell/smartts-sdk/expression';
 import SmartML from '../generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
 import { buildErrorInfo } from '../utils/errorHandling';
+import { IValue } from '@tezwell/michelson-sdk/typings';
 
 const SetBlock = {
     type: BlockKind.set_literal,
@@ -31,23 +32,21 @@ SmartML.addBlock(BlockKind.set_literal, {
     toType: (block: Block) => {
         const targetBlock = block.getInputTargetBlock('items');
         if (!targetBlock) {
-            throw new Error('The (set) is empty.');
+            return ST_TSet(TUnknown());
         }
 
-        return ST_TList(SmartML.toType(targetBlock, 'value'));
+        return ST_TSet(SmartML.toType(targetBlock, 'value'));
     },
     toValue: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('items');
-        if (!targetBlock) {
-            throw new Error('The (set) is empty.');
-        }
-
+        const errorInfo = buildErrorInfo(block);
         const items = [];
-        do {
-            items.push(SmartML.toValue(targetBlock, 'value'));
-        } while ((targetBlock = targetBlock.getNextBlock()));
-
-        return ST_List(items, buildErrorInfo(block));
+        if (targetBlock) {
+            do {
+                items.push(SmartML.toValue(targetBlock, 'value'));
+            } while ((targetBlock = targetBlock.getNextBlock()));
+        }
+        return ST_Set(items, errorInfo);
     },
 });
 
@@ -58,19 +57,17 @@ Michelson.addBlock(BlockKind.set_literal, {
             throw new Error('The (set) is empty.');
         }
 
-        return M_TList(Michelson.toType(targetBlock, 'value'));
+        return M_TSet(Michelson.toType(targetBlock, 'value'));
     },
     toMichelson: (block: Block) => {
         let targetBlock = block.getInputTargetBlock('items');
-        if (!targetBlock) {
-            throw new Error('The (set) is empty.');
+
+        const items: IValue[] = [];
+        if (targetBlock) {
+            do {
+                items.push(Michelson.toMichelson(targetBlock, 'value'));
+            } while ((targetBlock = targetBlock.getNextBlock()));
         }
-
-        const items = [];
-        do {
-            items.push(Michelson.toMichelson(targetBlock, 'value'));
-        } while ((targetBlock = targetBlock.getNextBlock()));
-
-        return M_List(items);
+        return M_Set(items);
     },
 });
