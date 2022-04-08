@@ -29,7 +29,7 @@ const CodeBlock: React.FC<OwnProps> = ({ text, square, withCopy, wrapLongLines =
     };
 
     return text ? (
-        <div className="relative h-full">
+        <div className="relative w-full flex-1 overflow-y-auto">
             {withCopy ? (
                 <Button
                     onClick={copy}

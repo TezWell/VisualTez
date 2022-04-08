@@ -27,7 +27,8 @@ export interface ContractCompilation {
         name: string;
         storage: IValue;
         storageXML: string;
-        code: string;
+        codeJSON: string;
+        codeMicheline: string;
         smartpy: string;
     };
 }
@@ -108,7 +109,8 @@ export const compileBlock = (block: Block): Compilation | null => {
                     name: block.getFieldValue('NAME'),
                     storage: storageBlock ? Michelson.translateValue(storageBlock) : Unit(),
                     storageXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageXML}</xml>`,
-                    code: JSON.stringify(compilation.json, null, 4),
+                    codeJSON: JSON.stringify(compilation.json, null, 4),
+                    codeMicheline: compilation.micheline,
                     smartpy: compilation.smartpy,
                 },
             };

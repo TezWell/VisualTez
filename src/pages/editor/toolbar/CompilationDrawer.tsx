@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Tab } from '@headlessui/react';
+import { Switch, Tab } from '@headlessui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
 import {
@@ -20,6 +20,55 @@ import Logger from 'src/utils/logger';
 import { DeploymentActionKind } from 'src/context/Deployment';
 import ConditionalRender from 'src/components/common/ConditionalRender';
 
+interface JSONOrMichelineSwitchProps {
+    showMicheline: boolean;
+    onSwitch: () => void;
+}
+
+const JSONOrMichelineSwitch: React.FC<JSONOrMichelineSwitchProps> = ({ showMicheline, onSwitch }) => (
+    <div className="flex justify-center items-center p-2">
+        <p className="mr-2 text-md font-medium text-black dark:text-white">JSON</p>
+        <Switch
+            checked={showMicheline}
+            onChange={onSwitch}
+            className={buildClassName([
+                {
+                    classes:
+                        'inline-flex flex-shrink-0 h-[28px] w-[56px] border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-0',
+                    append: true,
+                },
+                {
+                    classes: 'bg-yellow-600',
+                    append: showMicheline,
+                },
+                {
+                    classes: 'bg-yellow-600',
+                    append: !showMicheline,
+                },
+            ])}
+        >
+            <span
+                aria-hidden="true"
+                className={buildClassName([
+                    {
+                        classes:
+                            'pointer-events-none inline-block h-[24px] w-[24px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200',
+                        append: true,
+                    },
+                    {
+                        classes: 'translate-x-7',
+                        append: showMicheline,
+                    },
+                    {
+                        classes: 'translate-x-0',
+                        append: !showMicheline,
+                    },
+                ])}
+            />
+        </Switch>
+        <p className="ml-2 text-md font-medium text-black dark:text-white">Micheline</p>
+    </div>
+);
 interface ContractModalProps {
     gotoDeployment: (compilation: ContractCompilation) => void;
     compilation: ContractCompilation;
@@ -28,11 +77,15 @@ interface ContractModalProps {
 
 const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilation, ...props }) => {
     const isOpen = React.useMemo(() => !!compilation, [compilation]);
+    const [showMicheline, changeShowMicheline] = React.useState(false);
 
-    const storageJSON = React.useMemo(() => {
+    const storage = React.useMemo(() => {
         try {
             if (compilation) {
-                return JSON.stringify(compilation.result.storage.toJSON(), null, 2);
+                return {
+                    json: JSON.stringify(compilation.result.storage.toJSON(), null, 2),
+                    micheline: compilation.result.storage.toMicheline(),
+                };
             }
         } catch (e: any) {
             Logger.debug(e);
@@ -129,12 +182,32 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
                         SmartPy
                     </Tab>
                 </Tab.List>
-                <Tab.Panels className="flex-1 overflow-y-auto">
-                    <Tab.Panel className="h-full">
-                        <CodeBlock withCopy language={'json'} showLineNumbers text={storageJSON} />
+                <Tab.Panels className="flex-1 overflow-hidden">
+                    <Tab.Panel className="h-full flex flex-col">
+                        <JSONOrMichelineSwitch
+                            showMicheline={showMicheline}
+                            onSwitch={() => changeShowMicheline((prev) => !prev)}
+                        />
+                        <CodeBlock
+                            withCopy
+                            language={'json'}
+                            showLineNumbers
+                            text={showMicheline ? storage.micheline : storage.json}
+                        />
                     </Tab.Panel>
-                    <Tab.Panel className="h-full">
-                        <CodeBlock withCopy language={'json'} showLineNumbers text={compilation?.result.code || ''} />
+                    <Tab.Panel className="h-full flex flex-col">
+                        <JSONOrMichelineSwitch
+                            showMicheline={showMicheline}
+                            onSwitch={() => changeShowMicheline((prev) => !prev)}
+                        />
+                        <CodeBlock
+                            withCopy
+                            language={'json'}
+                            showLineNumbers
+                            text={
+                                (showMicheline ? compilation?.result.codeMicheline : compilation?.result.codeJSON) || ''
+                            }
+                        />
                     </Tab.Panel>
                     <Tab.Panel className="h-full">
                         <CodeBlock
@@ -342,7 +415,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 type: DeploymentActionKind.UPDATE_STATE,
                 payload: {
                     storageXML: compilation.result.storageXML,
-                    code: compilation.result.code,
+                    code: compilation.result.codeJSON,
                 },
             });
             navigate('/deploy');
