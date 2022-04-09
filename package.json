@@ -21,7 +21,7 @@
     "@testing-library/react": "13.0.0-alpha.6",
     "@testing-library/user-event": "14.0.0",
     "@tezwell/michelson-sdk": "0.4.2",
-    "@tezwell/smartts-sdk": "0.8.3",
+    "@tezwell/smartts-sdk": "0.8.4",
     "@tezwell/tezmonitor": "0.0.4",
     "@types/crypto-js": "4.1.1",
     "@types/jest": "27.4.1",

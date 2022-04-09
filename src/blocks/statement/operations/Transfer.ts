@@ -1,4 +1,4 @@
-import { Mutez, ToContract, Transfer, Unit } from '@tezwell/smartts-sdk';
+import { Mutez, ToContract, Transfer, TUnit, Unit } from '@tezwell/smartts-sdk';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import Blockly, { Block } from 'blockly';
 
@@ -39,7 +39,7 @@ SmartML.addBlock(BlockKind.transfer_statement, {
 
         const line = buildErrorInfo(block);
 
-        return Transfer(ToContract(address), amount, undefined, line).send(line);
+        return Transfer(ToContract(address, '', TUnit(), undefined, line), amount, undefined, line).send(line);
     },
 });
 
