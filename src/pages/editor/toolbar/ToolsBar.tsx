@@ -5,7 +5,8 @@ import { TemplateIcon } from '@heroicons/react/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
 import { DrawerKind, EditorActionKind } from 'src/context/Editor';
-import ThemeSelection from 'src/components/theme/selection';
+
+import pkg from 'src/../package.json';
 
 interface ToolsBarProps {
     compile: () => void;
@@ -41,7 +42,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                 </button>
                 <div className="border mt-5 mb-5 w-20" />
             </div>
-            <div className="flex flex-col items-center justify-start pb-5">
+            <div className="flex flex-col items-center justify-start ">
                 <div className="border mt-5 mb-5 w-20" />
                 <button
                     onClick={() => onMenuSelection(DrawerKind.Templates)}
@@ -83,6 +84,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     <BookOpenIcon className="block" />
                     <p>Docs</p>
                 </a>
+                <div className="border mt-5 mb-2 w-20" />v{pkg.version}
             </div>
         </div>
     );
