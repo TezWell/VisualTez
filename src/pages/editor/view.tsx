@@ -182,6 +182,7 @@ import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
 import { IsVariantExpression, OpenVariantExpression } from 'src/components/blockly/blocks/expressions/variant';
+import { Testing_CreateImplicitAccount, TestTarget } from 'src/components/blockly/blocks/Testing';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -443,6 +444,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <CallContractStatement />
                             <DelegateStatement />
                             <CreateContractStatement />
+
+                            {/* Testing */}
+                            <TestTarget />
+                            <Testing_CreateImplicitAccount />
                         </ToolboxSearch>
 
                         <Category name="Main Blocks" categorystyle="class_category">
@@ -781,6 +786,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <CategoryIcon>
                                     <BeakerIcon className="block h-6 w-6 mr-2" />
                                 </CategoryIcon>
+                                <TestTarget />
+                                <Testing_CreateImplicitAccount />
                             </Category>
                         ) : null}
                     </BlocklyEditor>

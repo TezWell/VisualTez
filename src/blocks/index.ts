@@ -2,27 +2,31 @@ import type { Block, Workspace } from 'blockly';
 import type { IValue, MichelsonJSON, MichelsonMicheline } from '@tezwell/michelson-sdk/typings';
 import Blockly from 'blockly';
 import Compiler from '@tezwell/smartts-sdk/compiler';
+import { Unit } from '@tezwell/michelson-sdk/literal';
 
 import './base';
 import './values';
 import './types';
 import './statement';
 import './expression';
+import './testing';
 
 import BlockKind from './enums/BlockKind';
 import Michelson from './generators/Michelson';
 import Context from './core/context';
 import { extractContract } from './base/contract';
-import { Unit } from '@tezwell/michelson-sdk/literal';
 import Logger from 'src/utils/logger';
+import { ITestAction } from './testing/utils';
+import { extractTest } from './testing/test';
 
-export enum CompilationKind {
-    Contract = 'contract',
-    Value = 'value',
-    Type = 'type',
+export enum Target {
+    ContractCompilation = 'contract_compilation',
+    ValueCompilation = 'value_compilation',
+    TypeCompilation = 'type_compilation',
+    Test = 'test',
 }
 export interface ContractCompilation {
-    kind: CompilationKind.Contract;
+    kind: Target.ContractCompilation;
     result: {
         name: string;
         storage: IValue;
@@ -33,7 +37,7 @@ export interface ContractCompilation {
     };
 }
 export interface TypeCompilation {
-    kind: CompilationKind.Type;
+    kind: Target.TypeCompilation;
     result: {
         name: string;
         micheline: MichelsonMicheline;
@@ -41,17 +45,25 @@ export interface TypeCompilation {
     };
 }
 export interface ValueCompilation {
-    kind: CompilationKind.Value;
+    kind: Target.ValueCompilation;
     result: {
         name: string;
         micheline: MichelsonMicheline;
         json: MichelsonJSON;
     };
 }
-export type Compilation = ContractCompilation | ValueCompilation | TypeCompilation;
+
+export interface Test {
+    kind: Target;
+    result: {
+        name: string;
+        actions: ITestAction[];
+    };
+}
+export type Compilation = ContractCompilation | ValueCompilation | TypeCompilation | Test;
 
 export const filterCompilationKind =
-    <T extends Compilation>(kind: CompilationKind) =>
+    <T extends Compilation>(kind: Target) =>
     (c: Compilation): c is T =>
         c.kind === kind;
 
@@ -59,13 +71,21 @@ export const extractBlocks = (workspace: Workspace) => workspace.getTopBlocks(tr
 
 export const compileBlock = (block: Block): Compilation | null => {
     switch (block.type) {
+        case BlockKind.test: {
+            const test = extractTest(block);
+
+            return {
+                kind: Target.Test,
+                result: test,
+            };
+        }
         case BlockKind.type_compilation: {
             const name = block.getFieldValue('NAME');
 
             const type = Michelson.toType(block, 'type');
 
             return {
-                kind: CompilationKind.Type,
+                kind: Target.TypeCompilation,
                 result: {
                     name,
                     micheline: type.toMicheline(),
@@ -79,7 +99,7 @@ export const compileBlock = (block: Block): Compilation | null => {
             const value = Michelson.toMichelson(block, 'value');
 
             return {
-                kind: CompilationKind.Value,
+                kind: Target.ValueCompilation,
                 result: {
                     name,
                     micheline: value.toMicheline(),
@@ -104,7 +124,7 @@ export const compileBlock = (block: Block): Compilation | null => {
             Logger.debug(compilation);
 
             return {
-                kind: CompilationKind.Contract,
+                kind: Target.ContractCompilation,
                 result: {
                     name: block.getFieldValue('NAME'),
                     storage: storageBlock ? Michelson.translateValue(storageBlock) : Unit(),

@@ -1,5 +1,4 @@
-import type { IValue } from '@tezwell/michelson-sdk/typings';
-import type { IType } from '@tezwell/michelson-sdk/typings';
+import type { IValue, IType } from '@tezwell/michelson-sdk/typings';
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 

@@ -6,7 +6,7 @@ import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 
 import BlockKind from '../enums/BlockKind';
 import Logger from 'src/utils/logger';
-import { buildBlockErrorString, buildErrorInfo } from '../utils/errorHandling';
+import { buildBlockErrorString } from '../utils/errorHandling';
 
 interface IBlock {
     toType?: (block: Block) => IType;

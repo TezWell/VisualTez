@@ -166,6 +166,10 @@ export enum BlockKind {
     entry_point_block = 'entry_point_block',
     onchain_view = 'onchain_view',
     contract_block = 'contract_block',
+
+    // Testing
+    test = 'test',
+    test__create_implicit_account = 'test__create_implicit_account',
 }
 
 export default BlockKind;

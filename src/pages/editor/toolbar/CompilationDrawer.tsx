@@ -3,13 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Switch, Tab } from '@headlessui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
-import {
-    CompilationKind,
-    ContractCompilation,
-    filterCompilationKind,
-    TypeCompilation,
-    ValueCompilation,
-} from 'src/blocks';
+import { ContractCompilation, filterCompilationKind, Target, TypeCompilation, ValueCompilation } from 'src/blocks';
 import CodeBlock from 'src/components/CodeBlock';
 import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
@@ -248,7 +242,7 @@ const TypeValueModal: React.FC<TypeModalProps> = ({ compilation, ...props }) => 
             open={isOpen}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
-                    {compilation.kind === CompilationKind.Type ? 'Type' : 'Value'}{' '}
+                    {compilation.kind === Target.TypeCompilation ? 'Type' : 'Value'}{' '}
                     <p className="ml-2 font-bold">{compilation?.result.name}</p>
                 </div>
             }
@@ -355,24 +349,24 @@ interface CompilationDrawerProps {}
 
 const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     const navigate = useNavigate();
-    const [tab, setTab] = React.useState<CompilationKind | null>();
+    const [tab, setTab] = React.useState<Target | null>();
     const [contractCompilation, setContractCompilation] = React.useState<ContractCompilation>();
     const [typeValueCompilation, setTypeValueCompilation] = React.useState<TypeCompilation | ValueCompilation>();
     const { state } = useEditor();
     const { dispatch: deploymentDispatch } = useDeployment();
 
     const contractCompilations = React.useMemo(
-        () => (state.compilations || []).filter(filterCompilationKind<ContractCompilation>(CompilationKind.Contract)),
+        () => (state.compilations || []).filter(filterCompilationKind<ContractCompilation>(Target.ContractCompilation)),
         [state.compilations],
     );
 
     const valueCompilations = React.useMemo(
-        () => (state.compilations || []).filter(filterCompilationKind<ValueCompilation>(CompilationKind.Value)),
+        () => (state.compilations || []).filter(filterCompilationKind<ValueCompilation>(Target.ValueCompilation)),
         [state.compilations],
     );
 
     const typeCompilations = React.useMemo(
-        () => (state.compilations || []).filter(filterCompilationKind<TypeCompilation>(CompilationKind.Type)),
+        () => (state.compilations || []).filter(filterCompilationKind<TypeCompilation>(Target.TypeCompilation)),
         [state.compilations],
     );
 
@@ -380,13 +374,13 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
         if (tab) {
             return tab;
         } else if (contractCompilations.length) {
-            return CompilationKind.Contract;
+            return Target.ContractCompilation;
         } else if (typeCompilations.length) {
-            return CompilationKind.Type;
+            return Target.TypeCompilation;
         } else if (valueCompilations.length) {
-            return CompilationKind.Value;
+            return Target.ValueCompilation;
         }
-        return CompilationKind.Contract;
+        return Target.ContractCompilation;
     }, [contractCompilations.length, tab, typeCompilations.length, valueCompilations.length]);
 
     function closeContractCompilationModal() {
@@ -405,7 +399,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
         setTypeValueCompilation(compilation);
     }
 
-    function onTabSelection(kind: CompilationKind) {
+    function onTabSelection(kind: Target) {
         setTab((t) => (t === kind ? null : kind));
     }
 
@@ -428,15 +422,15 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
             <div className="flex items-center justify-between p-5">
                 <TabInfo title="Contracts" items={contractCompilations.length} />
                 <ExpandButton
-                    selected={selectedTab === CompilationKind.Contract}
-                    select={() => onTabSelection(CompilationKind.Contract)}
+                    selected={selectedTab === Target.ContractCompilation}
+                    select={() => onTabSelection(Target.ContractCompilation)}
                 />
             </div>
             <div
                 className={buildClassName([
                     {
                         classes: 'hidden',
-                        append: selectedTab !== CompilationKind.Contract,
+                        append: selectedTab !== Target.ContractCompilation,
                     },
                     {
                         classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
@@ -471,15 +465,15 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
             <div className="flex items-center justify-between border-t p-5">
                 <TabInfo title="Values" items={valueCompilations.length} />
                 <ExpandButton
-                    selected={selectedTab === CompilationKind.Value}
-                    select={() => onTabSelection(CompilationKind.Value)}
+                    selected={selectedTab === Target.ValueCompilation}
+                    select={() => onTabSelection(Target.ValueCompilation)}
                 />
             </div>
             <div
                 className={buildClassName([
                     {
                         classes: 'hidden',
-                        append: selectedTab !== CompilationKind.Value,
+                        append: selectedTab !== Target.ValueCompilation,
                     },
                     {
                         classes: 'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
@@ -507,15 +501,15 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
             <div className="flex items-center justify-between p-5 border-b border-t">
                 <TabInfo title="Types" items={typeCompilations.length} />
                 <ExpandButton
-                    selected={selectedTab === CompilationKind.Type}
-                    select={() => onTabSelection(CompilationKind.Type)}
+                    selected={selectedTab === Target.TypeCompilation}
+                    select={() => onTabSelection(Target.TypeCompilation)}
                 />
             </div>
             <div
                 className={buildClassName([
                     {
                         classes: 'hidden',
-                        append: selectedTab !== CompilationKind.Type,
+                        append: selectedTab !== Target.TypeCompilation,
                     },
                     {
                         classes: 'grow basis-0 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',

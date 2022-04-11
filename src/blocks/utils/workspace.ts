@@ -1,7 +1,12 @@
 import { WorkspaceSvg } from 'blockly';
 import BlockKind from '../enums/BlockKind';
 
-const WHITELISTED: string[] = [BlockKind.contract_block, BlockKind.type_compilation, BlockKind.value_compilation];
+const WHITELISTED: string[] = [
+    BlockKind.contract_block,
+    BlockKind.type_compilation,
+    BlockKind.value_compilation,
+    BlockKind.test,
+];
 
 /**
  * Validate block location and notify users about misplaced blocks.
