@@ -13,7 +13,6 @@ export interface TezosWallet {
 
 enum NetworkType {
     MAINNET = 'mainnet',
-    HANGZHOUNET = 'hangzhounet',
     ITHACANET = 'ithacanet',
     CUSTOM = 'custom',
 }
@@ -29,8 +28,8 @@ const getNetwork = (network: NetworkKind): NetworkType => {
     switch (network) {
         case NetworkKind.Mainnet:
             return NetworkType.MAINNET;
-        case NetworkKind.Hangzhounet:
-            return NetworkType.HANGZHOUNET;
+        case NetworkKind.Ithacanet:
+            return NetworkType.ITHACANET;
         default:
             return NetworkType.CUSTOM;
     }

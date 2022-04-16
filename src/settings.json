@@ -2,7 +2,6 @@
     "storage_prefix": "@VisualTez",
     "networks": [
         "mainnet",
-        "hangzhounet",
         "ithacanet"
     ],
     "node_monitor": {

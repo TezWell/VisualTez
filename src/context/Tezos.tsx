@@ -6,13 +6,11 @@ import Logger from 'src/utils/logger';
 
 export enum NetworkKind {
     Mainnet = 'mainnet',
-    Hangzhounet = 'hangzhounet',
     Ithacanet = 'ithacanet',
 }
 
 export const DEFAULT_RPC = {
     [NetworkKind.Mainnet]: 'https://mainnet.visualtez.com',
-    [NetworkKind.Hangzhounet]: 'https://hangzhounet.visualtez.com',
     [NetworkKind.Ithacanet]: 'https://ithacanet.visualtez.com',
 };
 
