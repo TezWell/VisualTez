@@ -16,8 +16,8 @@ import Michelson from './generators/Michelson';
 import Context from './core/context';
 import { extractContract } from './base/contract';
 import Logger from 'src/utils/logger';
-import { ITestAction } from './testing/utils';
 import { extractTest } from './testing/test';
+import { IAction } from '@tezwell/tezos-testing-sdk/action';
 
 export enum Target {
     ContractCompilation = 'contract_compilation',
@@ -57,7 +57,7 @@ export interface Test {
     kind: Target;
     result: {
         name: string;
-        actions: ITestAction[];
+        actions: IAction[];
     };
 }
 export type Compilation = ContractCompilation | ValueCompilation | TypeCompilation | Test;

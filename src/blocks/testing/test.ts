@@ -4,7 +4,7 @@ import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
 import Context, { ScopeKind } from '../core/context';
 import Testing from '../generators/Testing';
-import { ITestAction } from './utils';
+import { IAction } from '@tezwell/tezos-testing-sdk/action';
 
 Blockly.Blocks[BlockKind.test] = {
     rename: function (oldName: string) {
@@ -38,7 +38,7 @@ export const extractTest = (block: Block) => {
         kind: ScopeKind.Test,
     });
 
-    const actions: ITestAction[] = Testing.toActions(block, 'TEST_ACTIONS', true);
+    const actions: IAction[] = Testing.toActions(block, 'TEST_ACTIONS', true);
 
     // Remove current scope
     Context.main.exitScope();

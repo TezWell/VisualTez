@@ -1,12 +1,12 @@
+import { IAction } from '@tezwell/tezos-testing-sdk/action';
 import type { Block } from 'blockly';
 import Blockly from 'blockly';
 
 import BlockKind from '../enums/BlockKind';
-import { ITestAction } from '../testing/utils';
 import { buildBlockErrorString } from '../utils/errorHandling';
 
 interface IBlock {
-    toAction?: (block: Block) => ITestAction;
+    toAction?: (block: Block) => IAction;
 }
 
 class Generator extends Blockly.Generator {
@@ -23,7 +23,7 @@ class Generator extends Blockly.Generator {
      * @param {Block} name The child block name.
      * @return {Michelson_LiteralUnion}
      */
-    toAction(block: Block, name: string): ITestAction {
+    toAction(block: Block, name: string): IAction {
         const targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
             const blockName = block.type
@@ -51,7 +51,7 @@ class Generator extends Blockly.Generator {
     }
 
     toActions(block: Block, name: string, allow_empty = false) {
-        const actions: ITestAction[] = [];
+        const actions: IAction[] = [];
 
         let targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
