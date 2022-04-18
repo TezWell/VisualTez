@@ -182,7 +182,11 @@ import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
 import { IsVariantExpression, OpenVariantExpression } from 'src/components/blockly/blocks/expressions/variant';
-import { Testing_CreateImplicitAccount, TestTarget } from 'src/components/blockly/blocks/Testing';
+import {
+    Testing_CreateImplicitAccount,
+    Testing_OriginateContract,
+    TestTarget,
+} from 'src/components/blockly/blocks/Testing';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -226,6 +230,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         Blockly.Events.DELETE,
                         Blockly.Events.CREATE,
                         Blockly.Events.VAR_RENAME,
+                        Blockly.Events.CHANGE,
                     ].includes(event.type)
                 ) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
@@ -448,6 +453,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             {/* Testing */}
                             <TestTarget />
                             <Testing_CreateImplicitAccount />
+                            <Testing_OriginateContract />
                         </ToolboxSearch>
 
                         <Category name="Main Blocks" categorystyle="class_category">
@@ -788,6 +794,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 </CategoryIcon>
                                 <TestTarget />
                                 <Testing_CreateImplicitAccount />
+                                <Testing_OriginateContract />
                             </Category>
                         ) : null}
                     </BlocklyEditor>

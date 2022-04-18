@@ -3,7 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Switch, Tab } from '@headlessui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
-import { ContractCompilation, filterCompilationKind, Target, TypeCompilation, ValueCompilation } from 'src/blocks';
+import {
+    ContractCompilation,
+    filterCompilationKind,
+    Target,
+    TestCompilation,
+    TypeCompilation,
+    ValueCompilation,
+} from 'src/blocks';
 import CodeBlock from 'src/components/CodeBlock';
 import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
@@ -13,6 +20,8 @@ import { buildClassName } from 'src/utils/className';
 import Logger from 'src/utils/logger';
 import { DeploymentActionKind } from 'src/context/Deployment';
 import ConditionalRender from 'src/components/common/ConditionalRender';
+import TestModal from './modal/TestModal';
+import { isDevelopment } from 'src/utils';
 
 interface JSONOrMichelineSwitchProps {
     showMicheline: boolean;
@@ -352,11 +361,17 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
     const [tab, setTab] = React.useState<Target | null>();
     const [contractCompilation, setContractCompilation] = React.useState<ContractCompilation>();
     const [typeValueCompilation, setTypeValueCompilation] = React.useState<TypeCompilation | ValueCompilation>();
+    const [testCompilation, setTestCompilation] = React.useState<TestCompilation>();
     const { state } = useEditor();
     const { dispatch: deploymentDispatch } = useDeployment();
 
     const contractCompilations = React.useMemo(
         () => (state.compilations || []).filter(filterCompilationKind<ContractCompilation>(Target.ContractCompilation)),
+        [state.compilations],
+    );
+
+    const testCompilations = React.useMemo(
+        () => (state.compilations || []).filter(filterCompilationKind<TestCompilation>(Target.Test)),
         [state.compilations],
     );
 
@@ -382,22 +397,6 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
         }
         return Target.ContractCompilation;
     }, [contractCompilations.length, tab, typeCompilations.length, valueCompilations.length]);
-
-    function closeContractCompilationModal() {
-        setContractCompilation(undefined);
-    }
-
-    function openContractCompilationModal(compilation: ContractCompilation) {
-        setContractCompilation(compilation);
-    }
-
-    function closeTypeValueCompilationModal() {
-        setTypeValueCompilation(undefined);
-    }
-
-    function openTypeValueCompilationModal(compilation: TypeCompilation | ValueCompilation) {
-        setTypeValueCompilation(compilation);
-    }
 
     function onTabSelection(kind: Target) {
         setTab((t) => (t === kind ? null : kind));
@@ -447,7 +446,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         </div>
                         <Button
                             fullWidth
-                            onClick={() => openContractCompilationModal(compilation)}
+                            onClick={() => setContractCompilation(compilation)}
                             className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
                         >
                             Show Contract
@@ -462,6 +461,47 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                     </div>
                 ))}
             </div>
+            {isDevelopment() ? (
+                <>
+                    <div className="flex items-center justify-between p-5 border-b border-t">
+                        <TabInfo title="Tests" items={testCompilations.length} />
+                        <ExpandButton
+                            selected={selectedTab === Target.Test}
+                            select={() => onTabSelection(Target.Test)}
+                        />
+                    </div>
+                    <div
+                        className={buildClassName([
+                            {
+                                classes: 'hidden',
+                                append: selectedTab !== Target.Test,
+                            },
+                            {
+                                classes:
+                                    'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
+                            },
+                        ])}
+                    >
+                        {testCompilations.map((compilation) => (
+                            <div
+                                key={compilation.result.name}
+                                className="mb-3 bg-white shadow-lg rounded-md p-3 dark:bg-black border-2 border-black dark:border-white"
+                            >
+                                <div className="flex items-center justify-center text-xl text-center align-middle font-mono p-2 border-2 rounded-lg mb-3">
+                                    <p className="text-ellipsis overflow-hidden">{compilation.result.name}</p>
+                                </div>
+                                <Button
+                                    fullWidth
+                                    onClick={() => setTestCompilation(compilation)}
+                                    className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
+                                >
+                                    Run Test
+                                </Button>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            ) : null}
             <div className="flex items-center justify-between border-t p-5">
                 <TabInfo title="Values" items={valueCompilations.length} />
                 <ExpandButton
@@ -490,7 +530,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         </div>
                         <Button
                             fullWidth
-                            onClick={() => openTypeValueCompilationModal(compilation)}
+                            onClick={() => setTypeValueCompilation(compilation)}
                             className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
                         >
                             Show
@@ -526,7 +566,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                         </div>
                         <Button
                             fullWidth
-                            onClick={() => openTypeValueCompilationModal(compilation)}
+                            onClick={() => setTypeValueCompilation(compilation)}
                             className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
                         >
                             Show
@@ -541,7 +581,11 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 }}
             >
                 {(props) => (
-                    <ContractModal gotoDeployment={gotoDeployment} onClose={closeContractCompilationModal} {...props} />
+                    <ContractModal
+                        gotoDeployment={gotoDeployment}
+                        onClose={() => setContractCompilation(undefined)}
+                        {...props}
+                    />
                 )}
             </ConditionalRender>
             <ConditionalRender
@@ -549,7 +593,14 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                     compilation: typeValueCompilation,
                 }}
             >
-                {(props) => <TypeValueModal onClose={closeTypeValueCompilationModal} {...props} />}
+                {(props) => <TypeValueModal onClose={() => setTypeValueCompilation(undefined)} {...props} />}
+            </ConditionalRender>
+            <ConditionalRender
+                props={{
+                    compilation: testCompilation,
+                }}
+            >
+                {(props) => <TestModal onClose={() => setTestCompilation(undefined)} {...props} />}
             </ConditionalRender>
         </div>
     );

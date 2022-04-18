@@ -12,7 +12,7 @@ const createLogLevel =
     (level: LogLevel): LogLevelMethod =>
     (...d) => {
         if (isDevelopment()) {
-            console.trace(`[${level.toUpperCase()}]`, ...d);
+            console[level](`[${level.toUpperCase()}]`, ...d);
         }
     };
 

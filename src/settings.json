@@ -9,6 +9,7 @@
         "max_delay": 180000
     },
     "storage_api": "https://storage.visualtez.com",
+    "testing_api": "http://localhost:5000/testing",
     "templates": {
         "contracts": [
             {

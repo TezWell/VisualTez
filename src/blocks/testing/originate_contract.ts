@@ -41,7 +41,7 @@ const OriginateContract = {
             check: 'Mutez',
         },
     ],
-    colour: 20,
+    colour: 100,
     extensions: ['contextMenu_newGetVariableBlock'],
 };
 

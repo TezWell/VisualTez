@@ -21,7 +21,7 @@ const CreateImplicitAccount = {
             check: 'Mutez',
         },
     ],
-    colour: 20,
+    colour: 100,
     extensions: ['contextMenu_newGetVariableBlock'],
 };
 
@@ -36,7 +36,7 @@ Blockly.Blocks[CreateImplicitAccount.type] = {
 Testing.addBlock(CreateImplicitAccount.type, {
     toAction: (block: Block) => {
         const name: string = extractVariableName(block, 'NAME');
-        const balance: string = block.getInputTargetBlock('BALANCE')?.getFieldValue('value') || '0';
+        const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value') || 0);
         return buildCreateImplicitAccountAction({ name, balance });
     },
 });

@@ -11,6 +11,7 @@ import { EditorActionKind } from 'src/context/Editor';
 
 import EditorView from './view';
 import SharedWorkspace from './SharedWorkspace';
+import Context from 'src/blocks/core/context';
 
 const EditorContainer = () => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
@@ -33,6 +34,7 @@ const EditorContainer = () => {
         if (workspaceRef.current) {
             try {
                 const blocks = extractBlocks(workspaceRef.current as Workspace);
+                Context.resetTesting();
                 const compilations: Compilation[] = blocks.map(compileBlock).filter(notNull);
                 dispatch({
                     type: EditorActionKind.UPDATE_COMPILATIONS,
