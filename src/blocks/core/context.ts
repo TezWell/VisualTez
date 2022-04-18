@@ -39,9 +39,30 @@ type IScope =
           id: number;
       };
 
-class CompilationContext {
+class TestingContext {
+    #contracts: Record<string, Record<string, unknown>[]> = {};
+
+    /**
+     * Adds contract reference
+     *
+     * @param name contract name
+     * @returns void
+     */
+    public addContract(name: string, json: Record<string, unknown>[]): void {
+        this.#contracts[name] = json;
+    }
+    /**
+     * Get contract
+     *
+     * @param name contract name
+     * @returns void
+     */
+    public getContract(name: string): Record<string, unknown>[] | null {
+        return this.#contracts[name];
+    }
+}
+class ContractContext {
     #scopes: IScope[] = [];
-    private blockCounter: Map<BlockKind, number> = new Map();
 
     // + Scope methods
 
@@ -63,9 +84,13 @@ class CompilationContext {
 }
 
 const Context = {
-    main: new CompilationContext(),
-    reset: function () {
-        this.main = new CompilationContext();
+    contract: new ContractContext(),
+    testing: new TestingContext(),
+    resetContract: function () {
+        this.contract = new ContractContext();
+    },
+    resetTesting: function () {
+        this.testing = new TestingContext();
     },
 };
 

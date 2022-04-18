@@ -34,14 +34,14 @@ export const extractTest = (block: Block) => {
     const name: string = block.getFieldValue('NAME');
 
     // Update current scope to (Contract)
-    Context.main.enterScope({
+    Context.contract.enterScope({
         kind: ScopeKind.Test,
     });
 
     const actions: IAction[] = Testing.toActions(block, 'TEST_ACTIONS', true);
 
     // Remove current scope
-    Context.main.exitScope();
+    Context.contract.exitScope();
 
     return {
         name,

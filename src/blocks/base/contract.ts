@@ -10,13 +10,11 @@ import { buildErrorInfo } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.contract_block] = {
     rename: function (oldName: string) {
-        const current = this.getFieldValue('NAME');
-        if (!this.oldName) {
-            this.oldName = oldName !== 'contract_1' ? oldName : current;
-        } else {
-            this.oldName = oldName;
+        if ((!this.oldName && oldName === 'contract_1') || !oldName.match(/^[_a-zA-Z0-9]+$/g)) {
+            return this.getFieldValue('NAME');
         }
-        return this.oldName;
+
+        return (this.oldName = oldName);
     },
     init: function () {
         const initName = findName('contract', this.workspace, BlockKind.contract_block);
@@ -43,7 +41,7 @@ Blockly.Blocks[BlockKind.contract_block] = {
 
 export const extractContract = (block: Block) => {
     // Update current scope to (Contract)
-    Context.main.enterScope({
+    Context.contract.enterScope({
         kind: ScopeKind.Contract,
     });
 
@@ -54,7 +52,7 @@ export const extractContract = (block: Block) => {
     SmartML.toStatements(block, 'ONCHAIN_VIEWS', true).forEach((view) => contract.addView(view as OnChainView));
 
     // Remove current scope
-    Context.main.exitScope();
+    Context.contract.exitScope();
 
     return contract;
 };

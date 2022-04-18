@@ -77,7 +77,7 @@ function getLambdaExpression(block: Block) {
     const lambda = ST_Lambda([], type, argumentName, buildErrorInfo(block));
 
     // Add an (Lambda) scope
-    Context.main.enterScope({
+    Context.contract.enterScope({
         kind: ScopeKind.Lambda,
         id: lambda.id,
         variables: {
@@ -94,7 +94,7 @@ function getLambdaExpression(block: Block) {
     lambda.code(() => [...statements, returnValue]);
 
     // Remove current scope
-    Context.main.exitScope();
+    Context.contract.exitScope();
 
     return lambda;
 }

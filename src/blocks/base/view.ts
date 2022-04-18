@@ -40,7 +40,7 @@ SmartML.addBlock(BlockKind.onchain_view, {
         const type = SmartML.toType(block, 'TYPE', TUnknown());
 
         // Add an (View) scope
-        Context.main.enterScope({
+        Context.contract.enterScope({
             kind: ScopeKind.View,
             variables: {
                 [argumentName]: {
@@ -53,7 +53,7 @@ SmartML.addBlock(BlockKind.onchain_view, {
         const code = SmartML.toStatements(block, 'CODE', true);
 
         // Remove current scope
-        Context.main.exitScope();
+        Context.contract.exitScope();
 
         return new OnChainView(name, buildErrorInfo(block)).setInputType(type).code(() => code);
     },

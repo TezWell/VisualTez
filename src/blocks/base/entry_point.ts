@@ -36,7 +36,7 @@ SmartML.addBlock(BlockKind.entry_point_block, {
         const type = SmartML.toType(block, 'TYPE', TUnknown());
 
         // Add an (Entrypoint) scope
-        Context.main.enterScope({
+        Context.contract.enterScope({
             kind: ScopeKind.Entrypoint,
             variables: {
                 [argumentName]: {
@@ -49,7 +49,7 @@ SmartML.addBlock(BlockKind.entry_point_block, {
         const code = SmartML.toStatements(block, 'CODE', true);
 
         // Remove current scope
-        Context.main.exitScope();
+        Context.contract.exitScope();
 
         return new EntryPoint(name, buildErrorInfo(block)).setInputType(type).code(() => code);
     },

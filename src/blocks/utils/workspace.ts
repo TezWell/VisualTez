@@ -18,8 +18,8 @@ const WHITELISTED: string[] = [
  */
 export const validateBlockLocation = (workspace: WorkspaceSvg, blockID: string): void => {
     const block = workspace.getBlockById(blockID);
-    if (block) {
-        if (block.getParent() || WHITELISTED.includes(block.type)) {
+    if (block && !WHITELISTED.includes(block.type)) {
+        if (block.getParent()) {
             block.setEnabled(true);
             block.setWarningText(null);
             block.warning?.dispose();

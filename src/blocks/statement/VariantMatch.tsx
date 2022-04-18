@@ -80,7 +80,7 @@ const getMatchCase = (block: Block): [string, string, IStatement[]] => {
     const variantArgumentName = extractVariableName(block, 'VAR');
 
     // Add a (MatchCase) scope
-    Context.main.enterScope({
+    Context.contract.enterScope({
         kind: ScopeKind.MatchCase,
         variables: {
             [variantArgumentName]: {
@@ -93,7 +93,7 @@ const getMatchCase = (block: Block): [string, string, IStatement[]] => {
     const instructions = SmartML.toStatements(block, 'DO', true);
 
     // Remove current scope
-    Context.main.exitScope();
+    Context.contract.exitScope();
 
     return [variant, variantArgumentName, instructions];
 };

@@ -36,7 +36,7 @@ SmartML.addBlock(BlockKind.variables_get, {
         const variableName = extractVariableName(block, 'VAR');
         const line = buildErrorInfo(block);
 
-        for (const scope of Context.main.scopes) {
+        for (const scope of Context.contract.scopes) {
             switch (scope.kind) {
                 case ScopeKind.View:
                 case ScopeKind.Entrypoint:

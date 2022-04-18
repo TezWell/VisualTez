@@ -53,26 +53,41 @@ export interface ValueCompilation {
     };
 }
 
-export interface Test {
+export interface TestCompilation {
     kind: Target;
     result: {
         name: string;
         actions: IAction[];
     };
 }
-export type Compilation = ContractCompilation | ValueCompilation | TypeCompilation | Test;
+export type Compilation = ContractCompilation | ValueCompilation | TypeCompilation | TestCompilation;
 
 export const filterCompilationKind =
     <T extends Compilation>(kind: Target) =>
     (c: Compilation): c is T =>
         c.kind === kind;
 
-export const extractBlocks = (workspace: Workspace) => workspace.getTopBlocks(true);
+export const extractBlocks = (workspace: Workspace) => {
+    const priority: Record<string, number> = {
+        [BlockKind.contract_block]: 0,
+        [BlockKind.type_compilation]: 1,
+        [BlockKind.value_compilation]: 2,
+        [BlockKind.test]: 3,
+    };
+    // This clousure is used to avoid comparing undefined values
+    const getPriority = (key: string): number => priority[key] || 9999;
+    return workspace.getTopBlocks(true).sort((a: Block, b: Block) => {
+        const [ap, bp] = [getPriority(a.type), getPriority(b.type)];
+        return ap == bp ? 0 : ap > bp ? -1 : 1;
+    });
+};
 
 export const compileBlock = (block: Block): Compilation | null => {
     switch (block.type) {
         case BlockKind.test: {
             const test = extractTest(block);
+
+            console.error(test);
 
             return {
                 kind: Target.Test,
@@ -108,9 +123,15 @@ export const compileBlock = (block: Block): Compilation | null => {
             };
         }
         case BlockKind.contract_block:
-            // Reset context
-            Context.reset();
+            const name = block.getFieldValue('NAME');
+            if (!block.isEnabled()) {
+                Logger.info(`Ignoring disabled contract block "${name}".`);
+                // Do not try to compile disabled blocks
+                return null;
+            }
 
+            // Reset context
+            Context.resetContract();
             const storageBlock = block.getInputTargetBlock('initial_storage');
 
             // The xml will be used in the deployment page
@@ -121,12 +142,12 @@ export const compileBlock = (block: Block): Compilation | null => {
 
             const compilation = Compiler.compileContract(code);
 
-            Logger.debug(compilation);
+            Context.testing.addContract(name, compilation.json);
 
             return {
                 kind: Target.ContractCompilation,
                 result: {
-                    name: block.getFieldValue('NAME'),
+                    name,
                     storage: storageBlock ? Michelson.translateValue(storageBlock) : Unit(),
                     storageXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageXML}</xml>`,
                     codeJSON: JSON.stringify(compilation.json, null, 4),

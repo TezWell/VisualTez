@@ -64,7 +64,7 @@ SmartML.addBlock(BlockKind.for_block, {
         const step = SmartML.toValue(block, 'BY');
 
         // Add a (For) scope
-        Context.main.enterScope({
+        Context.contract.enterScope({
             kind: ScopeKind.For,
             variables: {
                 [iteratorName]: {

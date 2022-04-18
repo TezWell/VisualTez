@@ -50,7 +50,7 @@ SmartML.addBlock(BlockKind.for_each_block, {
         const iteratorName = extractVariableName(block, 'VAR');
 
         // Add a (For) scope
-        Context.main.enterScope({
+        Context.contract.enterScope({
             kind: ScopeKind.For,
             variables: {
                 [iteratorName]: {
@@ -63,7 +63,7 @@ SmartML.addBlock(BlockKind.for_each_block, {
         const instructions = SmartML.toStatements(block, 'DO', true);
 
         // Remove current scope
-        Context.main.exitScope();
+        Context.contract.exitScope();
 
         return ForEachOf(list, [], undefined, buildErrorInfo(block))
             .setIteratorName(iteratorName)

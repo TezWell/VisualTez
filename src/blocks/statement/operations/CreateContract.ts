@@ -35,7 +35,7 @@ SmartML.addBlock(BlockKind.create_contract_statement, {
         const storageType = SmartML.toType(block, 'TYPE', TUnknown());
 
         // Update current scope to (Contract)
-        Context.main.enterScope({
+        Context.contract.enterScope({
             kind: ScopeKind.Contract,
         });
 
@@ -44,7 +44,7 @@ SmartML.addBlock(BlockKind.create_contract_statement, {
         SmartML.toStatements(block, 'ENTRY_POINTS', true).forEach((st) => contract.addEntrypoint(st as EntryPoint));
 
         // Remove current scope
-        Context.main.exitScope();
+        Context.contract.exitScope();
 
         const line = buildErrorInfo(block);
 
