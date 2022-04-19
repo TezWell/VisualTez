@@ -57,7 +57,7 @@ Testing.addBlock(OriginateContract.type, {
     toAction: (block: Block) => {
         const name: string = block.getFieldValue('NAME');
         const contractName: string = block.getFieldValue('CONTRACT_NAME');
-        const balance: string = block.getInputTargetBlock('BALANCE')?.getFieldValue('value') || '0';
+        const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value'));
         const storage = Michelson.toMichelson(block, 'STORAGE');
 
         const code = Context.testing.getContract(contractName);

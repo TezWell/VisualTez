@@ -28,4 +28,8 @@ export const Testing_OriginateContract = () => (
     </Block>
 );
 
+export const Testing_AddressOfAccount = () => (
+    <Block type={BlockKind.test__address_of_account} tags={['test', 'testing']} />
+);
+
 export const TestTarget = () => <Block type={BlockKind.test} tags={['test', 'testing']} />;

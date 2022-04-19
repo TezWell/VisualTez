@@ -9,10 +9,7 @@ import Button from 'src/components/common/Button';
 import Modal from 'src/components/common/Modal';
 import { buildClassName } from 'src/utils/className';
 import Http from 'src/utils/http';
-import Logger from 'src/utils/logger';
 import CircularLoading from 'src/components/common/Spinner';
-import useEditor from 'src/context/hooks/useEditor';
-import { EditorActionKind } from 'src/context/Editor';
 
 const getActionLabel = (action: ActionKind): string => {
     switch (action) {
@@ -90,8 +87,8 @@ const ActionResult: React.FC<ActionResultProps> = ({ action, connect }) => {
                                         ])}
                                     />
                                 </Disclosure.Button>
-                                <Disclosure.Panel className=" w-full p-2 text-sm border-t">
-                                    {JSON.stringify(action.result)}
+                                <Disclosure.Panel className="w-full p-2 text-sm border-t border-black">
+                                    {JSON.stringify(action.result, null, 4)}
                                 </Disclosure.Panel>
                             </div>
                         )}
@@ -106,35 +103,26 @@ interface TestModalProps {
     compilation: TestCompilation;
     onClose: () => void;
 }
-
 const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
-    const { dispatch } = useEditor();
     const isOpen = React.useMemo(() => !!compilation, [compilation]);
     const [running, setRunning] = React.useState(false);
+    const [error, setError] = React.useState<string>();
     const [results, setResults] = React.useState<IActionResult[]>();
 
-    const runTests = async () => {
+    const runTests = React.useCallback(async () => {
         setRunning(true);
-        try {
-            const results = await Http.post(settings.testing_api, compilation.result.actions).then(({ data }) => data);
-            console.error(results);
-            setResults(results);
-        } catch (e: any) {
-            dispatch({
-                type: EditorActionKind.UPDATE_ERROR,
-                payload: {
-                    msg: e.message || e.toString() || e,
-                },
-            });
-            Logger.debug(e.message || e.toString() || e);
-        } finally {
-            setRunning(false);
-        }
-    };
+        setError(undefined);
+        await Http.post(settings.testing_api, compilation.result.actions)
+            .then(({ data }) => setResults(data))
+            .catch((e: any) => {
+                return setError(e.response?.data.message || e.message);
+            })
+            .finally(() => setRunning(false));
+    }, [compilation.result.actions]);
 
     React.useEffect(() => {
         runTests();
-    }, []);
+    }, [runTests]);
 
     return (
         <Modal
@@ -159,10 +147,17 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
             <div className="flex justify-center items-center h-full">
                 {running ? (
                     <CircularLoading className="h-56 w-56" message="Executing ..." />
+                ) : error ? (
+                    <div className="w-full h-full p-5">
+                        <h2 className="text-xl font-bold text-black dark:text-white mb-5">Something went wrong :(</h2>
+                        <div className="w-full rounded-lg bg-red-400 p-5">
+                            <p className="text-black dark:text-white">{error}</p>
+                        </div>
+                    </div>
                 ) : (
                     <div className="h-full w-full p-5 overflow-y-auto">
                         {(results || []).map((action, index) => (
-                            <div>
+                            <div key={index}>
                                 {/* Connector */}
                                 <div
                                     className={buildClassName([
@@ -173,11 +168,7 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
                                         },
                                     ])}
                                 />
-                                <ActionResult
-                                    key={index}
-                                    action={action}
-                                    connect={index !== (results?.length || 0) - 1}
-                                />
+                                <ActionResult action={action} connect={index !== (results?.length || 0) - 1} />
                             </div>
                         ))}
                     </div>

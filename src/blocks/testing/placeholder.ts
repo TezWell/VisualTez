@@ -1,0 +1,3 @@
+export enum PLACEHOLDER {
+    ADDRESS_OF = 'TEST__ADDRESS_OF_ACCOUNT__',
+}

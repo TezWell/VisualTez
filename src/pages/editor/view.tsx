@@ -183,6 +183,7 @@ import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
 import { IsVariantExpression, OpenVariantExpression } from 'src/components/blockly/blocks/expressions/variant';
 import {
+    Testing_AddressOfAccount,
     Testing_CreateImplicitAccount,
     Testing_OriginateContract,
     TestTarget,
@@ -793,6 +794,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                     <BeakerIcon className="block h-6 w-6 mr-2" />
                                 </CategoryIcon>
                                 <TestTarget />
+
+                                <Testing_AddressOfAccount />
+
                                 <Testing_CreateImplicitAccount />
                                 <Testing_OriginateContract />
                             </Category>

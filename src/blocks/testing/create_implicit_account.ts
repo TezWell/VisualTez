@@ -36,7 +36,7 @@ Blockly.Blocks[CreateImplicitAccount.type] = {
 Testing.addBlock(CreateImplicitAccount.type, {
     toAction: (block: Block) => {
         const name: string = extractVariableName(block, 'NAME');
-        const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value') || 0);
+        const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value'));
         return buildCreateImplicitAccountAction({ name, balance });
     },
 });
