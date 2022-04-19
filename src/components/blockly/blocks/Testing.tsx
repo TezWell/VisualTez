@@ -32,4 +32,8 @@ export const Testing_AddressOfAccount = () => (
     <Block type={BlockKind.test__address_of_account} tags={['test', 'testing']} />
 );
 
+export const Testing_BalanceOfAccount = () => (
+    <Block type={BlockKind.test__balance_of_account} tags={['test', 'testing']} />
+);
+
 export const TestTarget = () => <Block type={BlockKind.test} tags={['test', 'testing']} />;

@@ -172,6 +172,7 @@ export enum BlockKind {
     test__create_implicit_account = 'test__create_implicit_account',
     test__originate_contract = 'test__originate_contract',
     test__address_of_account = 'test__address_of_account',
+    test__balance_of_account = 'test__balance_of_account',
 }
 
 export default BlockKind;

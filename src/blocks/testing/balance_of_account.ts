@@ -3,13 +3,13 @@ import Blockly from 'blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
-import { Address } from '@tezwell/michelson-sdk/literal';
 import { PLACEHOLDER } from './placeholder';
 import { extractVariableName } from '../utils/variables';
+import { Mutez } from '@tezwell/michelson-sdk/literal';
 
-const AddressOfAccount = {
-    type: BlockKind.test__address_of_account,
-    message0: 'Address of %1',
+const BalanceOfAccount = {
+    type: BlockKind.test__balance_of_account,
+    message0: 'Balance of %1',
     args0: [
         {
             type: 'field_variable',
@@ -17,23 +17,23 @@ const AddressOfAccount = {
             variable: '%{BKY_VARIABLES_DEFAULT_NAME}',
         },
     ],
-    tooltip: '[Testing] - Get the address of an account not yet created. Returns a value of type `TAddress`.',
+    tooltip: '[Testing] - Get the balance of an account not yet created. Returns a value of type `TMutez`.',
     output: ['Literal', 'Expression'],
     colour: 340,
     extensions: ['contextMenu_variableSetterGetter'],
 };
 
-Blockly.Blocks[AddressOfAccount.type] = {
+Blockly.Blocks[BalanceOfAccount.type] = {
     init: function () {
-        this.jsonInit(AddressOfAccount);
+        this.jsonInit(BalanceOfAccount);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
 };
 
-Michelson.addBlock(AddressOfAccount.type, {
+Michelson.addBlock(BalanceOfAccount.type, {
     toMichelson: (block: Block) => {
         const name: string = extractVariableName(block, 'NAME');
-        return Address(`${PLACEHOLDER.ADDRESS_OF}${name}`);
+        return Mutez(`${PLACEHOLDER.BALANCE_OF}${name}`);
     },
 });

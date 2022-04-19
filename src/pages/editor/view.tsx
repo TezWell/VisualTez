@@ -184,6 +184,7 @@ import { validateBlockLocation } from 'src/blocks/utils/workspace';
 import { IsVariantExpression, OpenVariantExpression } from 'src/components/blockly/blocks/expressions/variant';
 import {
     Testing_AddressOfAccount,
+    Testing_BalanceOfAccount,
     Testing_CreateImplicitAccount,
     Testing_OriginateContract,
     TestTarget,
@@ -796,6 +797,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <TestTarget />
 
                                 <Testing_AddressOfAccount />
+                                <Testing_BalanceOfAccount />
 
                                 <Testing_CreateImplicitAccount />
                                 <Testing_OriginateContract />

@@ -7,16 +7,16 @@ import Testing from '../generators/Testing';
 import Michelson from '../generators/Michelson';
 import Context from '../core/context';
 import { buildBlockErrorString } from '../utils/errorHandling';
+import { extractVariableName } from '../utils/variables';
 
 const OriginateContract = {
     type: BlockKind.test__originate_contract,
     message0: 'Originate contract %1 from compilation %2',
     args0: [
         {
-            type: 'field_input',
+            type: 'field_variable',
             name: 'NAME',
-            text: '',
-            check: 'String',
+            variable: null,
         },
         {
             type: 'field_input',
@@ -38,7 +38,7 @@ const OriginateContract = {
         {
             type: 'input_value',
             name: 'BALANCE',
-            check: 'Mutez',
+            check: ['Mutez'],
         },
     ],
     colour: 300,
@@ -55,7 +55,7 @@ Blockly.Blocks[OriginateContract.type] = {
 
 Testing.addBlock(OriginateContract.type, {
     toAction: (block: Block) => {
-        const name: string = block.getFieldValue('NAME');
+        const name: string = extractVariableName(block, 'NAME');
         const contractName: string = block.getFieldValue('CONTRACT_NAME');
         const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value'));
         const storage = Michelson.toMichelson(block, 'STORAGE');
