@@ -493,7 +493,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                                 <Button
                                     fullWidth
                                     onClick={() => setTestCompilation(compilation)}
-                                    className="bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500 mb-2 p-1"
+                                    className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 mb-2 p-1"
                                 >
                                     Run Test
                                 </Button>

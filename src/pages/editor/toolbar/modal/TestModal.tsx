@@ -156,11 +156,11 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
                 </Button>,
             ]}
         >
-            <div className="flex flex-col justify-center items-center h-full">
+            <div className="flex justify-center items-center h-full">
                 {running ? (
                     <CircularLoading className="h-56 w-56" message="Executing ..." />
                 ) : (
-                    <div className="h-full w-full p-5">
+                    <div className="h-full w-full p-5 overflow-y-auto">
                         {(results || []).map((action, index) => (
                             <div>
                                 {/* Connector */}
