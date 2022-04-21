@@ -1,7 +1,7 @@
 import React from 'react';
 import { Disclosure } from '@headlessui/react';
 import { CheckIcon, ChevronUpIcon, XIcon } from '@heroicons/react/solid';
-import { ActionKind, IActionResult, IActionResultStatus } from '@tezwell/tezos-testing-sdk/action';
+import { ActionKind, ActionResultStatus, IActionResult } from '@tezwell/tezos-testing-sdk/action';
 
 import settings from 'src/settings.json';
 import { TestCompilation } from 'src/blocks';
@@ -19,11 +19,15 @@ const getActionLabel = (action: ActionKind): string => {
             return 'Create Implicit Account';
         case ActionKind.OriginateContract:
             return 'Originate Contract';
+        case ActionKind.AssertAccountBalance:
+            return 'Assert Account Balance';
+        case ActionKind.AssertContractStorage:
+            return 'Assert Contract Storage';
     }
 };
 
-const ActionStatus = ({ status }: { status: IActionResultStatus }) =>
-    status === IActionResultStatus.Failure ? (
+const ActionStatus = ({ status }: { status: ActionResultStatus }) =>
+    status === ActionResultStatus.Failure ? (
         <div className="flex items-center justify-center h-10 w-10 p-1 rounded-full bg-red-200">
             <XIcon className="block h-full text-red-600" aria-hidden="true" />
         </div>
@@ -38,9 +42,11 @@ interface ActionResultProps {
     connect: boolean;
 }
 const ActionResult: React.FC<ActionResultProps> = ({ action, connect }) => {
-    switch (action.kind) {
+    switch (action.action.kind) {
         case ActionKind.CreateImplicitAccount:
         case ActionKind.OriginateContract:
+        case ActionKind.AssertAccountBalance:
+        case ActionKind.AssertContractStorage:
             return (
                 <div className="flex justify-start mt-1">
                     <div className="flex flex-col">
@@ -65,16 +71,16 @@ const ActionResult: React.FC<ActionResultProps> = ({ action, connect }) => {
                                     },
                                     {
                                         classes: 'bg-green-200',
-                                        append: action.status === IActionResultStatus.Success,
+                                        append: action.status === ActionResultStatus.Success,
                                     },
                                     {
                                         classes: 'bg-red-200',
-                                        append: action.status === IActionResultStatus.Failure,
+                                        append: action.status === ActionResultStatus.Failure,
                                     },
                                 ])}
                             >
                                 <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                                    <span>{getActionLabel(action.kind)}</span>
+                                    <span>{getActionLabel(action.action.kind)}</span>
                                     <ChevronUpIcon
                                         className={buildClassName([
                                             {
@@ -112,13 +118,13 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
     const runTests = React.useCallback(async () => {
         setRunning(true);
         setError(undefined);
-        await Http.post(settings.testing_api, compilation.result.actions)
+        await Http.post(settings.testing_api, compilation.result.suite.actions)
             .then(({ data }) => setResults(data))
             .catch((e: any) => {
                 return setError(e.response?.data.message || e.message);
             })
             .finally(() => setRunning(false));
-    }, [compilation.result.actions]);
+    }, [compilation.result.suite.actions]);
 
     React.useEffect(() => {
         runTests();

@@ -183,10 +183,11 @@ import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
 import { IsVariantExpression, OpenVariantExpression } from 'src/components/blockly/blocks/expressions/variant';
 import {
+    TestingAction_AssertAccountBalance,
     Testing_AddressOfAccount,
     Testing_BalanceOfAccount,
-    Testing_CreateImplicitAccount,
-    Testing_OriginateContract,
+    TestingAction_CreateImplicitAccount,
+    TestingAction_OriginateContract,
     TestTarget,
 } from 'src/components/blockly/blocks/Testing';
 
@@ -451,11 +452,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <CallContractStatement />
                             <DelegateStatement />
                             <CreateContractStatement />
-
-                            {/* Testing */}
-                            <TestTarget />
-                            <Testing_CreateImplicitAccount />
-                            <Testing_OriginateContract />
                         </ToolboxSearch>
 
                         <Category name="Main Blocks" categorystyle="class_category">
@@ -799,8 +795,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Testing_AddressOfAccount />
                                 <Testing_BalanceOfAccount />
 
-                                <Testing_CreateImplicitAccount />
-                                <Testing_OriginateContract />
+                                <TestingAction_AssertAccountBalance />
+                                <TestingAction_CreateImplicitAccount />
+                                <TestingAction_OriginateContract />
                             </Category>
                         ) : null}
                     </BlocklyEditor>

@@ -4,10 +4,10 @@ import BlockKind from 'src/blocks/enums/BlockKind';
 import Block from '../Block';
 import Shadow from '../Shadow';
 import Value from '../Value';
-import { MutezLiteral, UnitLiteral } from './literals';
+import { MutezLiteral } from './literals';
 
-export const Testing_CreateImplicitAccount = () => (
-    <Block type={BlockKind.test__create_implicit_account} tags={['test', 'testing']}>
+export const TestingAction_CreateImplicitAccount = () => (
+    <Block type={BlockKind.test__create_implicit_account_action} tags={['test', 'testing']}>
         <Value name="BALANCE">
             <Shadow type={BlockKind.mutez_literal} />
             <MutezLiteral />
@@ -15,12 +15,20 @@ export const Testing_CreateImplicitAccount = () => (
     </Block>
 );
 
-export const Testing_OriginateContract = () => (
-    <Block type={BlockKind.test__originate_contract} tags={['test', 'testing']}>
+export const TestingAction_OriginateContract = () => (
+    <Block type={BlockKind.test__originate_contract_action} tags={['test', 'testing']}>
+        <Value name="BALANCE">
+            <Shadow type={BlockKind.mutez_literal} />
+            <MutezLiteral />
+        </Value>
         <Value name="STORAGE">
             <Shadow type={BlockKind.unit_literal} />
-            <UnitLiteral />
         </Value>
+    </Block>
+);
+
+export const TestingAction_AssertAccountBalance = () => (
+    <Block type={BlockKind.test__assert_account_balance_action} tags={['test', 'testing']}>
         <Value name="BALANCE">
             <Shadow type={BlockKind.mutez_literal} />
             <MutezLiteral />

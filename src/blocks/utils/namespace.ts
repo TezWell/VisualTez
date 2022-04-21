@@ -7,7 +7,7 @@ const filterByBlockType =
         blockKind === type ? true : false;
 
 export const findName = function (name: string, workspace: Workspace, blockKind?: BlockKind) {
-    let blocks = workspace.getAllBlocks(false);
+    let blocks = workspace.getTopBlocks(false);
     if (blockKind) {
         blocks = blocks.filter(filterByBlockType(blockKind));
     }
@@ -22,4 +22,18 @@ export const findName = function (name: string, workspace: Workspace, blockKind?
     }
 
     return blockName;
+};
+
+export const findVarName = function (name: string, workspace: Workspace) {
+    const varNames = workspace.getAllVariableNames();
+
+    // The "index" is used as postfix in the new name.
+    // It increments until no collision exist.
+    let index = 1;
+    let newName = `${name}_${index}`;
+    while (varNames.includes(newName)) {
+        newName = `${name}_${++index}`;
+    }
+
+    return newName;
 };

@@ -1,42 +1,30 @@
-import type { Block } from 'blockly';
+import { Block, FieldVariable, Procedures } from 'blockly';
 import Blockly from 'blockly';
-import { buildCreateImplicitAccountAction } from '@tezwell/tezos-testing-sdk';
+import { buildAction } from '@tezwell/tezos-testing-sdk';
+import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
 
 import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
 import { extractVariableName } from '../utils/variables';
+import { findVarName } from '../utils/namespace';
 
-const CreateImplicitAccount = {
-    type: BlockKind.test__create_implicit_account,
-    message0: 'Create wallet %1 with balance %2',
-    args0: [
-        {
-            type: 'field_variable',
-            name: 'NAME',
-            variable: null,
-        },
-        {
-            type: 'input_value',
-            name: 'BALANCE',
-            check: 'Mutez',
-        },
-    ],
-    colour: 300,
-    extensions: ['contextMenu_newGetVariableBlock'],
-};
-
-Blockly.Blocks[CreateImplicitAccount.type] = {
+Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
     init: function () {
-        this.jsonInit(CreateImplicitAccount);
+        const initName = findVarName('wallet', this.workspace);
+        const variableField = new FieldVariable(initName, Procedures.rename);
+        this.appendDummyInput().appendField('Create wallet').appendField(variableField, 'NAME');
+        this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('with balance');
+        this.setColour(300);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, ['TestAction']);
         this.setNextStatement(true, ['TestAction']);
     },
 };
 
-Testing.addBlock(CreateImplicitAccount.type, {
+Testing.addBlock(BlockKind.test__create_implicit_account_action, {
     toAction: (block: Block) => {
         const name: string = extractVariableName(block, 'NAME');
         const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value'));
-        return buildCreateImplicitAccountAction({ name, balance });
+        return buildAction(ActionKind.CreateImplicitAccount, { name, balance });
     },
 });

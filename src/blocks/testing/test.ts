@@ -17,10 +17,9 @@ Blockly.Blocks[BlockKind.test] = {
         return this.oldName;
     },
     init: function () {
-        const initName = findName('test', this.workspace, BlockKind.contract_block);
+        const initName = findName('test', this.workspace, BlockKind.test);
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
-        nameField.setSpellcheck(false);
-        this.appendDummyInput().appendField('Test').appendField(nameField, 'NAME').setAlign(Blockly.ALIGN_CENTRE);
+        this.appendDummyInput().appendField('Test').appendField(nameField, 'NAME');
         this.appendDummyInput().appendField('Actions').setAlign(Blockly.ALIGN_LEFT);
         this.appendStatementInput('TEST_ACTIONS').setCheck(['TestAction']).setAlign(Blockly.ALIGN_LEFT);
         this.setTooltip('A block that represents a test suite.');
@@ -33,7 +32,7 @@ Blockly.Blocks[BlockKind.test] = {
 export const extractTest = (block: Block) => {
     const name: string = block.getFieldValue('NAME');
 
-    // Update current scope to (Contract)
+    // Update current scope
     Context.contract.enterScope({
         kind: ScopeKind.Test,
     });
@@ -45,6 +44,8 @@ export const extractTest = (block: Block) => {
 
     return {
         name,
-        actions,
+        suite: {
+            actions,
+        },
     };
 };

@@ -3,6 +3,7 @@ import type { IValue, MichelsonJSON, MichelsonMicheline } from '@tezwell/michels
 import Blockly from 'blockly';
 import Compiler from '@tezwell/smartts-sdk/compiler';
 import { Unit } from '@tezwell/michelson-sdk/literal';
+import { TestSuite } from '@tezwell/tezos-testing-sdk';
 
 import './base';
 import './values';
@@ -17,7 +18,6 @@ import Context from './core/context';
 import { extractContract } from './base/contract';
 import Logger from 'src/utils/logger';
 import { extractTest } from './testing/test';
-import { IAction } from '@tezwell/tezos-testing-sdk/action';
 
 export enum Target {
     ContractCompilation = 'contract_compilation',
@@ -57,7 +57,7 @@ export interface TestCompilation {
     kind: Target;
     result: {
         name: string;
-        actions: IAction[];
+        suite: TestSuite;
     };
 }
 export type Compilation = ContractCompilation | ValueCompilation | TypeCompilation | TestCompilation;

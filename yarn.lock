@@ -1808,10 +1808,10 @@
     axios "0.26.1"
     rxjs "7.5.5"
 
-"@tezwell/tezos-testing-sdk@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@tezwell/tezos-testing-sdk/-/tezos-testing-sdk-0.0.2.tgz#f50c5677f831dcfa0f8acf62b5561fa6d8fdd02c"
-  integrity sha512-QiPj1ADLrd42jM8VU1QsKo+m/KYknD5A5l/9lF9apmgJy0IeGbYKgZl9GzJU+u199ZkBScEDjFM4IW+wTqmmZw==
+"@tezwell/tezos-testing-sdk@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@tezwell/tezos-testing-sdk/-/tezos-testing-sdk-0.0.6.tgz#252c1057f4ce1e1d67ec5d5b7a6fb8127617b28f"
+  integrity sha512-+/9XfO82ySxMpvwpqumQA0rhDKX9NSDw4pe0oLo/yke4myBGg8PWa41Onk7LbslAYjPl4tvvOBk/g3iJcg/16A==
 
 "@tootallnate/once@1":
   version "1.1.2"
