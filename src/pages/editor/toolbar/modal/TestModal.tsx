@@ -10,6 +10,7 @@ import Modal from 'src/components/common/Modal';
 import { buildClassName } from 'src/utils/className';
 import Http from 'src/utils/http';
 import CircularLoading from 'src/components/common/Spinner';
+import CodeBlock from 'src/components/CodeBlock';
 
 const getActionLabel = (action: ActionKind): string => {
     switch (action) {
@@ -37,72 +38,88 @@ const ActionStatus = ({ status }: { status: ActionResultStatus }) =>
         </div>
     );
 
+const AssertContractStorageDetails = ({ result }: { result: IActionResult }) => {
+    console.error(result.result);
+    if ('actual' in result.result && 'expected' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Expected</p>
+                <CodeBlock language="json" text={JSON.stringify(result.result['expected'], null, 4)} showLineNumbers />
+                <p className="my-2 font-bold">Received</p>
+                <CodeBlock language="json" text={JSON.stringify(result.result['actual'], null, 4)} showLineNumbers />
+            </div>
+        );
+    }
+    return <></>;
+};
+
 interface ActionResultProps {
-    action: IActionResult;
+    result: IActionResult;
     connect: boolean;
 }
-const ActionResult: React.FC<ActionResultProps> = ({ action, connect }) => {
-    switch (action.action.kind) {
-        case ActionKind.CreateImplicitAccount:
-        case ActionKind.OriginateContract:
-        case ActionKind.AssertAccountBalance:
+const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
+    let details: JSX.Element | null | string = null;
+    switch (result.action.kind) {
         case ActionKind.AssertContractStorage:
-            return (
-                <div className="flex justify-start mt-1">
-                    <div className="flex flex-col">
-                        <ActionStatus status={action.status} />
-                        {/* Connector */}
-                        <div
-                            className={buildClassName([
-                                {
-                                    append: connect,
-                                    classes: 'grow mt-1 h-full ml-[18px] border-l-2 border-black dark:border-white',
-                                },
-                            ])}
-                        />
-                    </div>
-                    <div className="m-1" />
-                    <Disclosure>
-                        {({ open }) => (
-                            <div
+            details = <AssertContractStorageDetails result={result} />;
+            break;
+        default:
+            details = JSON.stringify(result.result, null, 4);
+    }
+    return (
+        <div className="flex justify-start mt-1">
+            <div className="flex flex-col">
+                <ActionStatus status={result.status} />
+                {/* Connector */}
+                <div
+                    className={buildClassName([
+                        {
+                            append: connect,
+                            classes: 'grow mt-1 h-full ml-[18px] border-l-2 border-black dark:border-white',
+                        },
+                    ])}
+                />
+            </div>
+            <div className="m-1" />
+            <Disclosure>
+                {({ open }) => (
+                    <div
+                        className={buildClassName([
+                            {
+                                classes: 'flex justify-center items-center flex-col w-full rounded-lg',
+                            },
+                            {
+                                classes: 'bg-green-200',
+                                append: result.status === ActionResultStatus.Success,
+                            },
+                            {
+                                classes: 'bg-red-200',
+                                append: result.status === ActionResultStatus.Failure,
+                            },
+                        ])}
+                    >
+                        <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+                            <span>{getActionLabel(result.action.kind)}</span>
+                            <ChevronUpIcon
                                 className={buildClassName([
                                     {
-                                        classes: 'flex justify-center items-center flex-col w-full rounded-lg',
+                                        classes: 'transform rotate-180',
+                                        append: open,
                                     },
                                     {
-                                        classes: 'bg-green-200',
-                                        append: action.status === ActionResultStatus.Success,
-                                    },
-                                    {
-                                        classes: 'bg-red-200',
-                                        append: action.status === ActionResultStatus.Failure,
+                                        classes: 'block w-5 h-5',
                                     },
                                 ])}
-                            >
-                                <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                                    <span>{getActionLabel(action.action.kind)}</span>
-                                    <ChevronUpIcon
-                                        className={buildClassName([
-                                            {
-                                                classes: 'transform rotate-180',
-                                                append: open,
-                                            },
-                                            {
-                                                classes: 'block w-5 h-5',
-                                            },
-                                        ])}
-                                    />
-                                </Disclosure.Button>
-                                <Disclosure.Panel className="w-full p-2 text-sm border-t border-black">
-                                    {JSON.stringify(action.result, null, 4)}
-                                </Disclosure.Panel>
-                            </div>
-                        )}
-                    </Disclosure>
-                </div>
-            );
-    }
-    return null;
+                            />
+                        </Disclosure.Button>
+                        <Disclosure.Panel className="w-full p-2 text-sm border-t border-black">
+                            {details}
+                        </Disclosure.Panel>
+                    </div>
+                )}
+            </Disclosure>
+        </div>
+    );
 };
 
 interface TestModalProps {
@@ -118,13 +135,13 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
     const runTests = React.useCallback(async () => {
         setRunning(true);
         setError(undefined);
-        await Http.post(settings.testing_api, compilation.result.suite.actions)
+        await Http.post(settings.testing_api, compilation.result.suite)
             .then(({ data }) => setResults(data))
             .catch((e: any) => {
                 return setError(e.response?.data.message || e.message);
             })
             .finally(() => setRunning(false));
-    }, [compilation.result.suite.actions]);
+    }, [compilation.result.suite]);
 
     React.useEffect(() => {
         runTests();
@@ -162,7 +179,7 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
                     </div>
                 ) : (
                     <div className="h-full w-full p-5 overflow-y-auto">
-                        {(results || []).map((action, index) => (
+                        {(results || []).map((result, index) => (
                             <div key={index}>
                                 {/* Connector */}
                                 <div
@@ -174,7 +191,7 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
                                         },
                                     ])}
                                 />
-                                <ActionResult action={action} connect={index !== (results?.length || 0) - 1} />
+                                <ActionResult result={result} connect={index !== (results?.length || 0) - 1} />
                             </div>
                         ))}
                     </div>

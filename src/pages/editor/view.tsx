@@ -189,6 +189,7 @@ import {
     TestingAction_CreateImplicitAccount,
     TestingAction_OriginateContract,
     TestTarget,
+    TestingAction_AssertContractStorage,
 } from 'src/components/blockly/blocks/Testing';
 
 interface EditorViewProps {
@@ -790,14 +791,18 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <CategoryIcon>
                                     <BeakerIcon className="block h-6 w-6 mr-2" />
                                 </CategoryIcon>
+
                                 <TestTarget />
-
-                                <Testing_AddressOfAccount />
-                                <Testing_BalanceOfAccount />
-
-                                <TestingAction_AssertAccountBalance />
                                 <TestingAction_CreateImplicitAccount />
                                 <TestingAction_OriginateContract />
+
+                                <Label text="Assertions" web-class="defaultLabel" />
+                                <TestingAction_AssertAccountBalance />
+                                <TestingAction_AssertContractStorage />
+
+                                <Label text="Macros" web-class="defaultLabel" />
+                                <Testing_AddressOfAccount />
+                                <Testing_BalanceOfAccount />
                             </Category>
                         ) : null}
                     </BlocklyEditor>

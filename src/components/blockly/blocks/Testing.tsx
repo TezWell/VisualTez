@@ -36,6 +36,14 @@ export const TestingAction_AssertAccountBalance = () => (
     </Block>
 );
 
+export const TestingAction_AssertContractStorage = () => (
+    <Block type={BlockKind.test__assert_contract_storage_action} tags={['test', 'testing']}>
+        <Value name="STORAGE">
+            <Shadow type={BlockKind.unit_literal} />
+        </Value>
+    </Block>
+);
+
 export const Testing_AddressOfAccount = () => (
     <Block type={BlockKind.test__address_of_account} tags={['test', 'testing']} />
 );

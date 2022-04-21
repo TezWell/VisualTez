@@ -44,7 +44,7 @@ const CodeBlock: React.FC<OwnProps> = ({ text, square, withCopy, wrapLongLines =
                 style={isDark ? darkTheme : lightTheme}
                 customStyle={{
                     margin: 0,
-                    borderRadius: square ? 0 : undefined,
+                    borderRadius: square ? 0 : 10,
                 }}
                 wrapLines
                 wrapLongLines={wrapLongLines}

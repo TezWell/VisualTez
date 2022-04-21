@@ -6,10 +6,11 @@ import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
 import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
 import { extractVariableName } from '../utils/variables';
+import Michelson from '../generators/Michelson';
 
-const AssertAccountBalance = {
-    type: BlockKind.test__assert_account_balance_action,
-    message0: 'Contract %1 balance must be %2',
+const AssertContractStorage = {
+    type: BlockKind.test__assert_contract_storage_action,
+    message0: 'Contract %1 storage must be %2',
     args0: [
         {
             type: 'field_variable',
@@ -18,25 +19,25 @@ const AssertAccountBalance = {
         },
         {
             type: 'input_value',
-            name: 'BALANCE',
-            check: 'Mutez',
+            name: 'STORAGE',
+            check: ['Literal'],
         },
     ],
     colour: 300,
 };
 
-Blockly.Blocks[AssertAccountBalance.type] = {
+Blockly.Blocks[AssertContractStorage.type] = {
     init: function () {
-        this.jsonInit(AssertAccountBalance);
+        this.jsonInit(AssertContractStorage);
         this.setPreviousStatement(true, ['TestAction']);
         this.setNextStatement(true, ['TestAction']);
     },
 };
 
-Testing.addBlock(AssertAccountBalance.type, {
+Testing.addBlock(AssertContractStorage.type, {
     toAction: (block: Block) => {
-        const account_name: string = extractVariableName(block, 'NAME');
-        const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value'));
-        return buildAction(ActionKind.AssertAccountBalance, { account_name, balance });
+        const contract_name: string = extractVariableName(block, 'NAME');
+        const storage = Michelson.toMichelson(block, 'STORAGE');
+        return buildAction(ActionKind.AssertContractStorage, { contract_name, storage: storage.toJSON() as any });
     },
 });
