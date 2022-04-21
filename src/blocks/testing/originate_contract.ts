@@ -1,4 +1,4 @@
-import { Block, FieldTextInput, FieldVariable, Procedures } from 'blockly';
+import { Block, FieldMultilineInput, FieldTextInput, FieldVariable, Procedures } from 'blockly';
 import Blockly from 'blockly';
 import { buildAction } from '@tezwell/tezos-testing-sdk';
 import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
@@ -10,17 +10,18 @@ import Context from '../core/context';
 import { buildBlockErrorString } from '../utils/errorHandling';
 import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
+import Logger from 'src/utils/logger';
 
 Blockly.Blocks[BlockKind.test__originate_contract_action] = {
     init: function () {
         const initName = findVarName('contract', this.workspace);
         const variableField = new FieldVariable(initName, Procedures.rename);
-        const nameField = new FieldTextInput('compilation_x');
+        const multilineField = new FieldMultilineInput('compilation_x');
         this.appendDummyInput()
             .appendField('Originate contract')
             .appendField(variableField, 'NAME')
             .appendField('from compilation')
-            .appendField(nameField, 'CONTRACT_NAME');
+            .appendField(multilineField, 'CONTRACT');
 
         this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('Balance');
         this.appendValueInput('STORAGE').setCheck(['Literal']).appendField('Storage');
@@ -34,11 +35,23 @@ Blockly.Blocks[BlockKind.test__originate_contract_action] = {
 Testing.addBlock(BlockKind.test__originate_contract_action, {
     toAction: (block: Block) => {
         const name: string = extractVariableName(block, 'NAME');
-        const contractName: string = block.getFieldValue('CONTRACT_NAME');
+        const contract: string = block.getFieldValue('CONTRACT');
         const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value'));
         const storage = Michelson.toMichelson(block, 'STORAGE');
 
-        const code = Context.testing.getContract(contractName);
+        let code = null;
+        if (contract.trim().startsWith('[')) {
+            // Users can specify the michelson directly
+            try {
+                code = JSON.parse(contract);
+            } catch (e: any) {
+                Logger.debug(e);
+                throw new Error(`Invalid michelson JSON. ${buildBlockErrorString(block)}`);
+            }
+        } else {
+            // Or reference the code from a contract compilation
+            code = Context.testing.getContract(contract);
+        }
         if (!code) {
             throw Error(`Could not extract contract code. ${buildBlockErrorString(block)}`);
         }

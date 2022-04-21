@@ -22,13 +22,11 @@ Blockly.Blocks[BlockKind.test] = {
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         const protocolDropDown = new FieldDropdown(settings.protocols.map(({ name, id }) => [name, id]));
         this.appendDummyInput()
-            .appendField('Test')
+            .appendField('Test suite')
             .appendField(nameField, 'NAME')
-            .appendField('on protocol')
+            .appendField('running protocol')
             .appendField(protocolDropDown, 'PROTOCOL');
 
-        this.appendDummyInput();
-        this.appendDummyInput().appendField('Performing the following actions:').setAlign(Blockly.ALIGN_LEFT);
         this.appendStatementInput('TEST_ACTIONS').setCheck(['TestAction']).setAlign(Blockly.ALIGN_LEFT);
         this.setTooltip('A block that represents a test suite.');
         this.setColour(200);
