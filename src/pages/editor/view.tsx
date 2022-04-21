@@ -252,7 +252,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
     );
 
     return (
-        <div className="flex flex-row flex-1">
+        <div className="flex flex-row flex-1 select-none">
             <div className="flex-1 flex">
                 <div className="relative w-full">
                     <BlocklyEditor
