@@ -190,6 +190,7 @@ import {
     TestingAction_OriginateContract,
     TestTarget,
     TestingAction_AssertContractStorage,
+    TestingAction_CallContract,
 } from 'src/components/blockly/blocks/Testing';
 
 interface EditorViewProps {
@@ -787,7 +788,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
 
                         {isDevelopment() ? (
-                            <Category name="Testing (In June)" categorystyle="testing_category">
+                            <Category name="Testing" categorystyle="testing_category">
                                 <CategoryIcon>
                                     <BeakerIcon className="block h-6 w-6 mr-2" />
                                 </CategoryIcon>
@@ -795,6 +796,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <TestTarget />
                                 <TestingAction_CreateImplicitAccount />
                                 <TestingAction_OriginateContract />
+                                <TestingAction_CallContract />
 
                                 <Label text="Assertions" web-class="defaultLabel" />
                                 <TestingAction_AssertAccountBalance />

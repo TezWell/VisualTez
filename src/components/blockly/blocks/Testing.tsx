@@ -27,6 +27,18 @@ export const TestingAction_OriginateContract = () => (
     </Block>
 );
 
+export const TestingAction_CallContract = () => (
+    <Block type={BlockKind.test__call_contract_action} tags={['test', 'testing']}>
+        <Value name="AMOUNT">
+            <Shadow type={BlockKind.mutez_literal} />
+            <MutezLiteral />
+        </Value>
+        <Value name="ARGUMENT">
+            <Shadow type={BlockKind.unit_literal} />
+        </Value>
+    </Block>
+);
+
 export const TestingAction_AssertAccountBalance = () => (
     <Block type={BlockKind.test__assert_account_balance_action} tags={['test', 'testing']}>
         <Value name="BALANCE">
