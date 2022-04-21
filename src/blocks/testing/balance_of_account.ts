@@ -14,7 +14,7 @@ const BalanceOfAccount = {
         {
             type: 'field_variable',
             name: 'NAME',
-            variable: '%{BKY_VARIABLES_DEFAULT_NAME}',
+            variable: null,
         },
     ],
     tooltip: '[Testing] - Get the balance of an account not yet created. Returns a value of type `TMutez`.',

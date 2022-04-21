@@ -1,10 +1,11 @@
-import Blockly, { Block, FieldTextInput } from 'blockly';
+import Blockly, { Block, FieldDropdown, FieldTextInput } from 'blockly';
+import { IAction } from '@tezwell/tezos-testing-sdk/action';
 
 import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
 import Context, { ScopeKind } from '../core/context';
 import Testing from '../generators/Testing';
-import { IAction } from '@tezwell/tezos-testing-sdk/action';
+import settings from 'src/settings.json';
 
 Blockly.Blocks[BlockKind.test] = {
     rename: function (oldName: string) {
@@ -19,8 +20,15 @@ Blockly.Blocks[BlockKind.test] = {
     init: function () {
         const initName = findName('test', this.workspace, BlockKind.test);
         const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
-        this.appendDummyInput().appendField('Test').appendField(nameField, 'NAME');
-        this.appendDummyInput().appendField('Actions').setAlign(Blockly.ALIGN_LEFT);
+        const protocolDropDown = new FieldDropdown(settings.protocols.map(({ name, id }) => [name, id]));
+        this.appendDummyInput()
+            .appendField('Test')
+            .appendField(nameField, 'NAME')
+            .appendField('on protocol')
+            .appendField(protocolDropDown, 'PROTOCOL');
+
+        this.appendDummyInput();
+        this.appendDummyInput().appendField('Performing the following actions:').setAlign(Blockly.ALIGN_LEFT);
         this.appendStatementInput('TEST_ACTIONS').setCheck(['TestAction']).setAlign(Blockly.ALIGN_LEFT);
         this.setTooltip('A block that represents a test suite.');
         this.setColour(200);
@@ -31,6 +39,8 @@ Blockly.Blocks[BlockKind.test] = {
 
 export const extractTest = (block: Block) => {
     const name: string = block.getFieldValue('NAME');
+    const protocol: string = block.getFieldValue('PROTOCOL');
+    console.error(protocol);
 
     // Update current scope
     Context.contract.enterScope({
@@ -45,6 +55,7 @@ export const extractTest = (block: Block) => {
     return {
         name,
         suite: {
+            protocol,
             actions,
         },
     };

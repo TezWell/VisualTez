@@ -4,6 +4,16 @@
         "mainnet",
         "ithacanet"
     ],
+    "protocols": [
+        {
+            "name": "Alpha",
+            "id": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
+        },
+        {
+            "name": "Ithaca",
+            "id": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A"
+        }
+    ],
     "node_monitor": {
         "interval": 30000,
         "max_delay": 180000

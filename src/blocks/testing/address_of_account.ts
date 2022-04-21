@@ -14,13 +14,12 @@ const AddressOfAccount = {
         {
             type: 'field_variable',
             name: 'NAME',
-            variable: '%{BKY_VARIABLES_DEFAULT_NAME}',
+            variable: null,
         },
     ],
     tooltip: '[Testing] - Get the address of an account not yet created. Returns a value of type `TAddress`.',
-    output: ['Literal', 'Expression'],
+    output: ['Literal'],
     colour: 340,
-    extensions: ['contextMenu_variableSetterGetter'],
 };
 
 Blockly.Blocks[AddressOfAccount.type] = {
