@@ -24,6 +24,8 @@ const getActionLabel = (action: ActionKind): string => {
             return 'Assert Account Balance';
         case ActionKind.AssertContractStorage:
             return 'Assert Contract Storage';
+        case ActionKind.ModifyChainID:
+            return 'Modify Chain Identifier';
     }
 };
 
@@ -39,7 +41,14 @@ const ActionStatus = ({ status }: { status: ActionResultStatus }) =>
     );
 
 const AssertContractStorageDetails = ({ result }: { result: IActionResult }) => {
-    console.error(result.result);
+    if ('storage' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Contract Storage</p>
+                <CodeBlock language="json" text={JSON.stringify(result.result['storage'], null, 4)} showLineNumbers />
+            </div>
+        );
+    }
     if ('actual' in result.result && 'expected' in result.result) {
         return (
             <div>
@@ -50,7 +59,87 @@ const AssertContractStorageDetails = ({ result }: { result: IActionResult }) => 
             </div>
         );
     }
-    return <></>;
+    if ('details' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Error Details</p>
+                <CodeBlock language="json" text={String(result.result['details'])} showLineNumbers />
+            </div>
+        );
+    }
+
+    return null;
+};
+
+const ModifyChainIDDetails = ({ result }: { result: IActionResult }) => {
+    if ('details' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Error Details</p>
+                <CodeBlock language="json" text={String(result.result['details'])} showLineNumbers={false} />
+            </div>
+        );
+    }
+    if ('chain_id' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Chain Identifier</p>
+                <CodeBlock
+                    language="json"
+                    text={JSON.stringify(result.result['chain_id'], null, 4)}
+                    showLineNumbers={false}
+                />
+            </div>
+        );
+    }
+
+    return null;
+};
+
+const CallContractDetails = ({ result }: { result: IActionResult }) => {
+    if ('storage' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Contract Storage</p>
+                <CodeBlock language="json" text={JSON.stringify(result.result['storage'], null, 4)} showLineNumbers />
+            </div>
+        );
+    }
+    if ('details' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Error Details</p>
+                <CodeBlock language="json" text={String(result.result['details'])} showLineNumbers />
+            </div>
+        );
+    }
+
+    return null;
+};
+
+const OriginateContractDetails = ({ result }: { result: IActionResult }) => {
+    if ('details' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Error Details</p>
+                <CodeBlock language="json" text={String(result.result['details'])} showLineNumbers={false} />
+            </div>
+        );
+    }
+    if ('address' in result.result) {
+        return (
+            <div>
+                <p className="my-2 font-bold">Contract Address</p>
+                <CodeBlock
+                    language="json"
+                    text={JSON.stringify(result.result['address'], null, 4)}
+                    showLineNumbers={false}
+                />
+            </div>
+        );
+    }
+
+    return null;
 };
 
 interface ActionResultProps {
@@ -62,6 +151,15 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
     switch (result.action.kind) {
         case ActionKind.AssertContractStorage:
             details = <AssertContractStorageDetails result={result} />;
+            break;
+        case ActionKind.ModifyChainID:
+            details = <ModifyChainIDDetails result={result} />;
+            break;
+        case ActionKind.OriginateContract:
+            details = <OriginateContractDetails result={result} />;
+            break;
+        case ActionKind.CallContract:
+            details = <CallContractDetails result={result} />;
             break;
         default:
             details = JSON.stringify(result.result, null, 4);

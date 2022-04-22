@@ -28,7 +28,7 @@ Blockly.Blocks[BlockKind.test] = {
             .appendField(protocolDropDown, 'PROTOCOL');
 
         this.appendStatementInput('TEST_ACTIONS').setCheck(['TestAction']).setAlign(Blockly.ALIGN_LEFT);
-        this.setTooltip('A block that represents a test suite.');
+        this.setTooltip('A block that represents a test suite.\n-\nchain_id: NetXynUjJNZm7wi');
         this.setColour(200);
         this.setPreviousStatement(false);
         this.setNextStatement(false);

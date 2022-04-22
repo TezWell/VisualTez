@@ -174,6 +174,7 @@ export enum BlockKind {
     test__call_contract_action = 'test__call_contract_action',
     test__assert_account_balance_action = 'test__assert_account_balance_action',
     test__assert_contract_storage_action = 'test__assert_contract_storage_action',
+    test__modify_chain_id_action = 'test__modify_chain_id_action',
 
     test__address_of_account = 'test__address_of_account',
     test__balance_of_account = 'test__balance_of_account',

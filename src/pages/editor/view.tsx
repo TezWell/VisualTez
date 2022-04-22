@@ -191,6 +191,7 @@ import {
     TestTarget,
     TestingAction_AssertContractStorage,
     TestingAction_CallContract,
+    TestingAction_ModifyChainID,
 } from 'src/components/blockly/blocks/Testing';
 
 interface EditorViewProps {
@@ -797,6 +798,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <TestingAction_CreateImplicitAccount />
                                 <TestingAction_OriginateContract />
                                 <TestingAction_CallContract />
+
+                                <Label text="Context Modifiers" web-class="defaultLabel" />
+
+                                <TestingAction_ModifyChainID />
 
                                 <Label text="Assertions" web-class="defaultLabel" />
                                 <TestingAction_AssertAccountBalance />

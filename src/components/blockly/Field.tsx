@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FieldProps {
-    type: string;
+    name: string;
 }
 
 export const Field: React.FC<FieldProps> = ({ children, ...props }) => {
