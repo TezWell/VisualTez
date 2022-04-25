@@ -29,7 +29,12 @@ const CodeBlock: React.FC<OwnProps> = ({ text, square, withCopy, wrapLongLines =
     };
 
     return text ? (
-        <div className="relative w-full flex-1 overflow-y-auto">
+        <div
+            className="relative w-full flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400"
+            style={{
+                borderRadius: square ? 0 : 10,
+            }}
+        >
             {withCopy ? (
                 <Button
                     onClick={copy}
@@ -40,11 +45,10 @@ const CodeBlock: React.FC<OwnProps> = ({ text, square, withCopy, wrapLongLines =
             ) : null}
             <SyntaxHighlighter
                 {...props}
-                className="h-full w-full scrollbar-thin scrollbar-thumb-gray-400 overflow-y-auto"
+                className="h-full w-full"
                 style={isDark ? darkTheme : lightTheme}
                 customStyle={{
                     margin: 0,
-                    borderRadius: square ? 0 : 10,
                 }}
                 wrapLines
                 wrapLongLines={wrapLongLines}

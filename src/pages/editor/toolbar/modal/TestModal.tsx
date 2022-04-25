@@ -211,6 +211,14 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                             />
                         </Disclosure.Button>
                         <Disclosure.Panel className="w-full p-2 text-sm border-t border-black">
+                            <div className="relative flex flex-col flex-shrink-0 max-h-[300px]">
+                                <p className="my-2 font-bold">Action</p>
+                                <CodeBlock
+                                    language="json"
+                                    text={JSON.stringify(result.action, null, 4)}
+                                    showLineNumbers={false}
+                                />
+                            </div>
                             {details}
                         </Disclosure.Panel>
                     </div>
