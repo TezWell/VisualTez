@@ -45,10 +45,22 @@ export const TestingAction_CallContract = () => (
         </Value>
     </Block>
 );
+
 export const TestingAction_ModifyChainID = () => (
     <Block type={BlockKind.test__modify_chain_id_action} tags={['test', 'testing']}>
         <Value name="CHAIN_ID">
             <Shadow type={BlockKind.chain_id_literal} />
+        </Value>
+    </Block>
+);
+
+export const TestingAction_PrintPackedData = () => (
+    <Block type={BlockKind.test__pack_data_action} tags={['test', 'testing']}>
+        <Value name="DATA">
+            <Shadow type={BlockKind.unit_literal} />
+        </Value>
+        <Value name="TYPE">
+            <Shadow type={BlockKind.unit_type} />
         </Value>
     </Block>
 );

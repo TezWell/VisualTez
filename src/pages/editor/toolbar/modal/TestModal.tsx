@@ -26,6 +26,8 @@ const getActionLabel = (action: ActionKind): string => {
             return 'Assert Contract Storage';
         case ActionKind.ModifyChainID:
             return 'Modify Chain Identifier';
+        case ActionKind.PackData:
+            return 'Pack Data';
     }
 };
 
@@ -131,6 +133,13 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
                                 text={JSON.stringify(result.result['balance'], null, 4)}
                                 showLineNumbers
                             />
+                        </div>
+                    );
+                case ActionKind.PackData:
+                    return (
+                        <div>
+                            <p className="my-2 font-bold">Packed Bytes</p>
+                            <CodeBlock language="json" text={result.result['bytes'] as string} showLineNumbers />
                         </div>
                     );
             }
