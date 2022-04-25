@@ -15,9 +15,10 @@ const TimestampBlock = {
     message0: 'Timestamp %1',
     args0: [
         {
-            type: 'field_number',
+            type: 'field_input',
             name: 'value',
-            check: 'Number',
+            text: '1970-01-01T00:00:00Z',
+            check: 'String',
         },
     ],
     output: ['Literal', 'Timestamp'],
@@ -37,7 +38,8 @@ SmartML.addBlock(BlockKind.timestamp_literal, {
         return ST_TTimestamp();
     },
     toValue: (block: Block) => {
-        return ST_Timestamp(validate(block), buildErrorInfo(block));
+        const timestamp = validateTimestamp(block);
+        return ST_Timestamp(Number(Number(Date.parse(timestamp) / 1000).toFixed(0)), buildErrorInfo(block));
     },
 });
 Michelson.addBlock(BlockKind.timestamp_literal, {
@@ -45,14 +47,24 @@ Michelson.addBlock(BlockKind.timestamp_literal, {
         return M_TTimestamp();
     },
     toMichelson: (block: Block) => {
-        return M_Timestamp(validate(block));
+        return M_Timestamp(validateTimestamp(block));
     },
 });
 
-const validate = (block: Block) => {
+export const validateTimestamp = (block: Block) => {
+    const value: string = block.getFieldValue('value');
+    console.error(value);
+    if (value.includes('Z')) {
+        const date = new Date(value);
+        if (isNaN(date.getTime())) {
+            throw new Error(`The timestamp is invalid. (Expected RFC3339 notation). ${buildBlockErrorString(block)}`);
+        }
+        return value;
+    }
     const number = Number(block.getFieldValue('value'));
     if (number < 0) {
         throw new Error(`Cannot take negative values. ${buildBlockErrorString(block)}`);
     }
-    return number;
+    // Convert seconds to date and encode it using RFC3339 date format
+    return new Date(number * 1000).toISOString().replace(/[.]\d{3}Z/g, 'Z');
 };

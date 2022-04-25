@@ -1,13 +1,14 @@
 import { Block, FieldTextInput, FieldVariable } from 'blockly';
 import Blockly from 'blockly';
 import { buildAction } from '@tezwell/tezos-testing-sdk';
-import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
+import { ActionKind, ICallContractPayload } from '@tezwell/tezos-testing-sdk/action';
 
 import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
 import Michelson from '../generators/Michelson';
 import { extractVariableName } from '../utils/variables';
 import { buildBlockErrorString } from '../utils/errorHandling';
+import { validateTimestamp } from '../values/Timestamp';
 
 Blockly.Blocks[BlockKind.test__call_contract_action] = {
     init: function () {
@@ -22,6 +23,7 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
 
         this.appendDummyInput();
         this.appendValueInput('LEVEL').setCheck(['Nat']).appendField('Block Level');
+        this.appendValueInput('TIMESTAMP').setCheck(['Timestamp']).appendField('Block Timestamp');
         this.appendDummyInput();
 
         this.appendDummyInput().appendField('Sender').appendField(senderVariable, 'SENDER');
@@ -43,17 +45,24 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
         const level = Number(block.getInputTargetBlock('LEVEL')?.getFieldValue('nat_value'));
         const argument = Michelson.toMichelson(block, 'ARGUMENT');
 
-        if (level < 1 || level > 99999999) {
-            throw new Error(`The block level must be between 1 and 99999999. ${buildBlockErrorString(block)}`);
-        }
-
-        return buildAction(ActionKind.CallContract, {
+        const action: ICallContractPayload = {
             recipient,
             sender,
             entrypoint,
             amount,
-            level,
             parameter: argument as any,
-        });
+        };
+
+        const timestampBlock = block.getInputTargetBlock('TIMESTAMP');
+        if (timestampBlock) {
+            action.timestamp = validateTimestamp(timestampBlock);
+        }
+
+        if (level < 1 || level > 99999999) {
+            throw new Error(`The block level must be between 1 and 99999999. ${buildBlockErrorString(block)}`);
+        }
+        action.level = level;
+
+        return buildAction(ActionKind.CallContract, action);
     },
 });

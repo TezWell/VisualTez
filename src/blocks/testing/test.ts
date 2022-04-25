@@ -38,7 +38,6 @@ Blockly.Blocks[BlockKind.test] = {
 export const extractTest = (block: Block) => {
     const name: string = block.getFieldValue('NAME');
     const protocol: string = block.getFieldValue('PROTOCOL');
-    console.error(protocol);
 
     // Update current scope
     Context.contract.enterScope({
