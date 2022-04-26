@@ -1,7 +1,8 @@
-import type { WalletOriginateParams } from '@taquito/taquito';
-import type { Workspace, WorkspaceSvg } from 'blockly';
-import type { Subscription } from 'rxjs';
 import React from 'react';
+
+import type { WalletOriginateParams } from '@taquito/taquito';
+import type { Subscription } from 'rxjs';
+import type { Workspace, WorkspaceSvg } from 'src/typings/blockly';
 
 import { extractBlocks } from 'src/blocks';
 import Michelson from 'src/blocks/generators/Michelson';

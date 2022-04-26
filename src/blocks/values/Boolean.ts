@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Bool as M_Bool } from '@tezwell/michelson-sdk/literal';
 import { TBool as M_TBool } from '@tezwell/michelson-sdk/type';

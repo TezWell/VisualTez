@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Left as ST_Left, Right as ST_Right, Variant as ST_Variant } from '@tezwell/smartts-sdk/expression';
 import { Left as M_Left, Right as M_Right } from '@tezwell/michelson-sdk/literal';

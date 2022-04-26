@@ -1,7 +1,8 @@
-import { Block, FieldTextInput, FieldVariable } from 'blockly';
 import Blockly from 'blockly';
 import { buildAction } from '@tezwell/tezos-testing-sdk';
 import { ActionKind, ICallContractPayload } from '@tezwell/tezos-testing-sdk/action';
+
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
@@ -12,9 +13,9 @@ import { validateTimestamp } from '../values/Timestamp';
 
 Blockly.Blocks[BlockKind.test__call_contract_action] = {
     init: function () {
-        const contractVariable = new FieldVariable(null);
-        const senderVariable = new FieldVariable(null);
-        const entrypointField = new FieldTextInput('default');
+        const contractVariable = new Blockly.FieldVariable(null);
+        const senderVariable = new Blockly.FieldVariable(null);
+        const entrypointField = new Blockly.FieldTextInput('default');
         this.appendDummyInput()
             .appendField('Call entrypoint')
             .appendField(entrypointField, 'ENTRYPOINT')

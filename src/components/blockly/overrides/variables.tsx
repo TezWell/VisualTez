@@ -1,5 +1,6 @@
-import type { Workspace } from 'blockly';
-import Blockly, { Variables } from 'blockly';
+import Blockly from 'blockly';
+
+import type { Workspace } from 'src/typings/blockly';
 
 import BlockKind from 'src/blocks/enums/BlockKind';
 
@@ -74,7 +75,7 @@ const flyoutCategoryBlocks = (workspace: Workspace) => {
 
     const variables = workspace.getVariablesOfType('');
     if (variables.length) {
-        variableGetterBlock.appendChild(Variables.generateVariableFieldDom(variables[0])!);
+        variableGetterBlock.appendChild(Blockly.Variables.generateVariableFieldDom(variables[0]));
     }
 
     xmlList.push(variableSetterBlock, variableGetterBlock);

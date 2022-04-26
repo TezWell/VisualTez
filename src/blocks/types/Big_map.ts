@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TBig_map as ST_TBig_map } from '@tezwell/smartts-sdk/type';
 import { TBig_map as M_TBig_map } from '@tezwell/michelson-sdk/type';

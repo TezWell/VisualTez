@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TList as ST_TList } from '@tezwell/smartts-sdk/type';
 import { TList as M_TList } from '@tezwell/michelson-sdk/type';

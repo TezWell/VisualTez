@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TSapling_state as ST_TSapling_state } from '@tezwell/smartts-sdk/type';
 import { TSapling_state as M_TSapling_state } from '@tezwell/michelson-sdk/type';

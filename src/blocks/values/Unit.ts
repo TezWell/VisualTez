@@ -1,4 +1,6 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Unit as M_Unit } from '@tezwell/michelson-sdk/literal';
 import { TUnit as M_TUnit } from '@tezwell/michelson-sdk/type';

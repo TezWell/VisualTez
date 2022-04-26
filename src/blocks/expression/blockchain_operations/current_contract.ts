@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TContract, TUnknown } from '@tezwell/smartts-sdk/type';
 import { GetSelf } from '@tezwell/smartts-sdk';

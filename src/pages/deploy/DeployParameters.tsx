@@ -1,5 +1,6 @@
-import type { Workspace, WorkspaceSvg } from 'blockly';
 import React from 'react';
+
+import type { Workspace, WorkspaceSvg } from 'src/typings/blockly';
 
 import { extractBlocks } from 'src/blocks';
 import Michelson from 'src/blocks/generators/Michelson';

@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Bls12_381_g2 as M_Bls12_381_g2 } from '@tezwell/michelson-sdk/literal';
 import { TBls12_381_g2 as M_TBls12_381_g2 } from '@tezwell/michelson-sdk/type';

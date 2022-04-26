@@ -1,5 +1,7 @@
 import React from 'react';
-import Blockly, { Workspace, WorkspaceSvg } from 'blockly';
+import Blockly from 'blockly';
+
+import type { Workspace, WorkspaceSvg } from 'src/typings/blockly';
 
 import { extractBlocks, compileBlock, Compilation } from 'src/blocks';
 import useEditor from 'src/context/hooks/useEditor';

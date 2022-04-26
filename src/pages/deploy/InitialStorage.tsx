@@ -1,6 +1,7 @@
-import type { Workspace, WorkspaceSvg } from 'blockly';
 import React from 'react';
 import Blockly from 'blockly';
+
+import type { Workspace, WorkspaceSvg } from 'src/typings/blockly';
 
 import BlocklyEditor from 'src/components/blockly/Editor';
 import useDeployment from 'src/context/hooks/useDeployment';

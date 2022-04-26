@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TSapling_transaction as ST_TSapling_transaction } from '@tezwell/smartts-sdk/type';
 import { TSapling_transaction as M_TSapling_transaction } from '@tezwell/michelson-sdk/type';

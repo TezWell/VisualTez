@@ -1,5 +1,6 @@
 import { Not } from '@tezwell/smartts-sdk';
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';

@@ -1,6 +1,7 @@
-import { Block, FieldTextInput, FieldVariable, Procedures } from 'blockly';
 import Blockly from 'blockly';
 import { OnChainView, TUnknown } from '@tezwell/smartts-sdk';
+
+import type { Block } from 'src/typings/blockly';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -10,10 +11,10 @@ import { extractVariableName } from '../utils/variables';
 
 Blockly.Blocks[BlockKind.onchain_view] = {
     init: function () {
-        const initName = Procedures.findLegalName('view', this);
-        const nameField = new FieldTextInput(initName, Procedures.rename);
+        const initName = Blockly.Procedures.findLegalName('view', this);
+        const nameField = new Blockly.FieldTextInput(initName, Blockly.Procedures.rename);
         nameField.setSpellcheck(false);
-        const variableField = new FieldVariable(`view_argument`);
+        const variableField = new Blockly.FieldVariable(`view_argument`);
         this.appendDummyInput()
             .appendField('View')
             .appendField(nameField, 'NAME')

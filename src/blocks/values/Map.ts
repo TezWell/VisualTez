@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Map as M_Map } from '@tezwell/michelson-sdk/literal';
 import { TMap as M_TMap } from '@tezwell/michelson-sdk/type';

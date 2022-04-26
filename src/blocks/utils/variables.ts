@@ -1,4 +1,4 @@
-import type { Block } from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 export const extractVariableName = (block: Block, fieldName: string) => {
     // Blockly Typescript support is terrible

@@ -1,7 +1,7 @@
 import React from 'react';
-
-import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Workspace, WorkspaceSvg } from 'src/typings/blockly';
 
 import DarkTheme from './themes/dark';
 import LightTheme from './themes/light';
@@ -80,7 +80,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
                     workspaceRef.current as Workspace,
                 );
                 Blockly.svgResize(workspaceRef.current);
-                workspaceRef.current.scrollCenter();
+                workspaceRef.current?.scrollCenter();
                 onLoad?.();
             } catch (e: any) {
                 Logger.debug(e);

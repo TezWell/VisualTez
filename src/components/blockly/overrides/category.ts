@@ -1,10 +1,12 @@
 import Blockly from 'blockly';
 
+import { BlocklyToolboxCategory } from 'src/typings/blockly';
+
 enum ItemKind {
     CATEGORYICON = 'CATEGORYICON',
 }
 
-class VisualTezCategory extends Blockly.ToolboxCategory {
+class VisualTezCategory extends (Blockly.ToolboxCategory as BlocklyToolboxCategory) {
     icon?: SVGSVGElement;
 
     /**

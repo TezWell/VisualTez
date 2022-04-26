@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Negate } from '@tezwell/smartts-sdk/expression';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';

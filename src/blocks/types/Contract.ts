@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TContract as ST_TContract } from '@tezwell/smartts-sdk/type';
 import { TContract as M_TContract } from '@tezwell/michelson-sdk/type';

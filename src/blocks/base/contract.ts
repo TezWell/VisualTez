@@ -1,6 +1,8 @@
-import Blockly, { Block, FieldTextInput } from 'blockly';
+import Blockly from 'blockly';
 
 import { Contract, EntryPoint, OnChainView, TUnknown } from '@tezwell/smartts-sdk';
+
+import type { Block } from 'src/typings/blockly';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -18,7 +20,7 @@ Blockly.Blocks[BlockKind.contract_block] = {
     },
     init: function () {
         const initName = findName('contract', this.workspace, BlockKind.contract_block);
-        const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
+        const nameField = new Blockly.FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
         this.appendDummyInput()
             .appendField('Contract compilation')

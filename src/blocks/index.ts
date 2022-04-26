@@ -1,9 +1,10 @@
-import type { Block, Workspace } from 'blockly';
-import type { IValue, MichelsonJSON, MichelsonMicheline } from '@tezwell/michelson-sdk/typings';
 import Blockly from 'blockly';
 import Compiler from '@tezwell/smartts-sdk/compiler';
 import { Unit } from '@tezwell/michelson-sdk/literal';
 import { TestSuite } from '@tezwell/tezos-testing-sdk';
+
+import type { IValue, MichelsonJSON, MichelsonMicheline } from '@tezwell/michelson-sdk/typings';
+import type { Block, Workspace } from 'src/typings/blockly';
 
 import './base';
 import './values';

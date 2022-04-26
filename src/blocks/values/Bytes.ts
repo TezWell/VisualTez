@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Bytes as M_Bytes } from '@tezwell/michelson-sdk/literal';
 import { TBytes as M_TBytes } from '@tezwell/michelson-sdk/type';

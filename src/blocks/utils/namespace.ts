@@ -1,4 +1,4 @@
-import { Block, Workspace } from 'blockly';
+import type { Block, Workspace } from 'src/typings/blockly';
 import BlockKind from '../enums/BlockKind';
 
 const filterByBlockType =

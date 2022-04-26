@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Set as M_Set } from '@tezwell/michelson-sdk/literal';
 import { TSet as M_TSet } from '@tezwell/michelson-sdk/type';

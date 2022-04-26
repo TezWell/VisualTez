@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { CheckSignature } from '@tezwell/smartts-sdk/expression';
 import BlockKind from '../../enums/BlockKind';

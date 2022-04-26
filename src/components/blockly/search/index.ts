@@ -1,6 +1,8 @@
 import Blockly from 'blockly';
 
-class ToolboxSearch extends Blockly.ToolboxCategory {
+import { BlocklyToolboxCategory } from 'src/typings/blockly';
+
+class ToolboxSearch extends (Blockly.ToolboxCategory as BlocklyToolboxCategory) {
     private input?: HTMLInputElement;
     private button?: HTMLButtonElement;
 
@@ -15,7 +17,7 @@ class ToolboxSearch extends Blockly.ToolboxCategory {
     /** @override */
     init() {
         this.createDom_();
-        if (this.toolboxItemDef_['hidden'] === 'true') {
+        if ((this.toolboxItemDef_ as any)['hidden'] === 'true') {
             this.hide();
         }
     }

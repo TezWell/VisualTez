@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import { BLAKE2B, HashKey, KECCAK, SHA256, SHA3, SHA512 } from '@tezwell/smartts-sdk';
 

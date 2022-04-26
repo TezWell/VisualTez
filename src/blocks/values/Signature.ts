@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Signature as M_Signature } from '@tezwell/michelson-sdk/literal';
 import { TSignature as M_TSignature } from '@tezwell/michelson-sdk/type';

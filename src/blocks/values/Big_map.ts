@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Big_map as M_Big_map } from '@tezwell/michelson-sdk/literal';
 import { TBig_map as M_TBig_map } from '@tezwell/michelson-sdk/type';

@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Timestamp as M_Timestamp } from '@tezwell/michelson-sdk/literal';
 import { TTimestamp as M_TTimestamp } from '@tezwell/michelson-sdk/type';

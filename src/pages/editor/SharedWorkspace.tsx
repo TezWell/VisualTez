@@ -1,5 +1,6 @@
 import React from 'react';
-import type { WorkspaceSvg } from 'blockly';
+
+import type { WorkspaceSvg } from 'src/typings/blockly';
 
 import BlocklyEditor from 'src/components/blockly/Editor';
 import Button from 'src/components/common/Button';

@@ -1,6 +1,7 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
 import { NewVariable } from '@tezwell/smartts-sdk/statement';
+
+import type { Block } from 'src/typings/blockly';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';

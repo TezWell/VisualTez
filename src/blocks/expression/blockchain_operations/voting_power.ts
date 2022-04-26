@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TNat } from '@tezwell/smartts-sdk/type';
 import { GetVotingPower } from '@tezwell/smartts-sdk';

@@ -1,6 +1,7 @@
 import { Contract, CreateContract, EntryPoint, Mutez, None, TUnknown, Unit } from '@tezwell/smartts-sdk';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';

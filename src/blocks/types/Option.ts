@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TOption as ST_TOption } from '@tezwell/smartts-sdk/type';
 import { TOption as M_TOption } from '@tezwell/michelson-sdk/type';

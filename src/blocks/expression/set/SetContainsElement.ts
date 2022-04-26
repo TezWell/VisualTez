@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 import { MapContainsKey, SetContainsElement } from '@tezwell/smartts-sdk';
 
 import BlockKind from '../../enums/BlockKind';

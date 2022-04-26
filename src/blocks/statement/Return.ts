@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 import { Return } from '@tezwell/smartts-sdk/statement';
 
 import SmartML from 'src/blocks/generators/SmartML';

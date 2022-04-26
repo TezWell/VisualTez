@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';

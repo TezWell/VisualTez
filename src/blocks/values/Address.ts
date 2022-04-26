@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Address as M_Address } from '@tezwell/michelson-sdk/literal';
 import { TAddress as M_TAddress } from '@tezwell/michelson-sdk/type';

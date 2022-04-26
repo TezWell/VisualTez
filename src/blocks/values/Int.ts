@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Int as M_Int } from '@tezwell/michelson-sdk/literal';
 import { TInt as M_TInt } from '@tezwell/michelson-sdk/type';

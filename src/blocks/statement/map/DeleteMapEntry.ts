@@ -1,6 +1,7 @@
 import { DeleteMapEntry } from '@tezwell/smartts-sdk';
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../../enums/BlockKind';

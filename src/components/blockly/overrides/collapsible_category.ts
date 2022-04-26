@@ -1,6 +1,8 @@
 import Blockly from 'blockly';
 
-class VisualTezCollapsibleToolboxCategory extends Blockly.CollapsibleToolboxCategory {
+import { BlocklyCollapsibleToolboxCategory } from 'src/typings/blockly';
+
+class VisualTezCollapsibleToolboxCategory extends (Blockly.CollapsibleToolboxCategory as BlocklyCollapsibleToolboxCategory) {
     /** @override */
     addColourBorder_(colour: string) {
         (this.rowDiv_ as any).style.border = '2px solid ' + 'currentColor';
@@ -12,7 +14,7 @@ class VisualTezCollapsibleToolboxCategory extends Blockly.CollapsibleToolboxCate
         super.createDom_();
         (this.labelDom_ as any).classList.add('font-bold', 'text-lg', 'text-white');
 
-        return this.htmlDiv_;
+        return this.htmlDiv_!;
     }
 
     /** @override */

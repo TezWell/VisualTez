@@ -1,8 +1,9 @@
-import type { Block, Workspace } from 'blockly';
 import Blockly from 'blockly';
 import { IType } from '@tezwell/smartts-sdk/typings/type';
 import { IToString } from '@tezwell/smartts-sdk/typings/shared';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
+
+import type { Block, Workspace, BlocklyGenerator } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Logger from 'src/utils/logger';
@@ -15,7 +16,7 @@ interface IBlock {
     toFieldBlock?: (block: Block) => [string, Block];
 }
 
-class Generator extends Blockly.Generator {
+class Generator extends (Blockly.Generator as BlocklyGenerator) {
     blocks: Map<BlockKind, IBlock> = new Map();
 
     addBlock(type: BlockKind, block: IBlock) {

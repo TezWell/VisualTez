@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { TLambda as ST_TLambda, TUnknown } from '@tezwell/smartts-sdk/type';
 import { Lambda as ST_Lambda, Unit } from '@tezwell/smartts-sdk/expression';

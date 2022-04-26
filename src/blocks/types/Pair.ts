@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TPair as ST_TPair } from '@tezwell/smartts-sdk/type';
 import { TPair as M_TPair } from '@tezwell/michelson-sdk/type';

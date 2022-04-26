@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Chain_id as M_Chain_id } from '@tezwell/michelson-sdk/literal';
 import { TChain_id as M_TChain_id } from '@tezwell/michelson-sdk/type';

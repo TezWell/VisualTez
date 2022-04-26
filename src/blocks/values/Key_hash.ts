@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Key_hash as M_Key_hash } from '@tezwell/michelson-sdk/literal';
 import { TKey_hash as M_TKey_hash } from '@tezwell/michelson-sdk/type';

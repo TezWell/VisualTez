@@ -1,6 +1,7 @@
 import type { IValue, IType } from '@tezwell/michelson-sdk/typings';
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block, BlocklyGenerator } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import { buildBlockErrorString } from '../utils/errorHandling';
@@ -10,7 +11,7 @@ interface IBlock {
     toMichelson?: (block: Block) => IValue;
 }
 
-class Generator extends Blockly.Generator {
+class Generator extends (Blockly.Generator as BlocklyGenerator) {
     blocks: Map<BlockKind, IBlock> = new Map();
 
     addBlock(type: BlockKind, block: IBlock) {

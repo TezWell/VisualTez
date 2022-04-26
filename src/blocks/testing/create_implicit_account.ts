@@ -1,7 +1,8 @@
-import { Block, FieldVariable, Procedures } from 'blockly';
 import Blockly from 'blockly';
 import { buildAction } from '@tezwell/tezos-testing-sdk';
 import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
+
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
@@ -11,7 +12,7 @@ import { findVarName } from '../utils/namespace';
 Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
     init: function () {
         const initName = findVarName('wallet', this.workspace);
-        const variableField = new FieldVariable(initName, Procedures.rename);
+        const variableField = new Blockly.FieldVariable(initName, Blockly.Procedures.rename);
         this.appendDummyInput().appendField('Create wallet').appendField(variableField, 'NAME');
         this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('with balance');
         this.setColour(300);

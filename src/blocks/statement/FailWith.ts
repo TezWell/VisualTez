@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 import { FailWith } from '@tezwell/smartts-sdk/statement';
 import { Unit } from '@tezwell/smartts-sdk';
 

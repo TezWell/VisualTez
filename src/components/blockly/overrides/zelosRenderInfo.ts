@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-Blockly.zelos.RenderInfo.prototype.getSpacerRowHeight_ = function (this: any, prev, next) {
+Blockly.zelos.RenderInfo.prototype.getSpacerRowHeight_ = function (this: any, prev: any, next: any) {
     // If we have an empty block add a spacer to increase the height.
     if (Blockly.blockRendering.Types.isTopRow(prev) && Blockly.blockRendering.Types.isBottomRow(next)) {
         return this.constants_.EMPTY_BLOCK_SPACER_HEIGHT;
@@ -28,7 +28,7 @@ Blockly.zelos.RenderInfo.prototype.getSpacerRowHeight_ = function (this: any, pr
     }
     return this.constants_.MEDIUM_PADDING;
 };
-Blockly.zelos.RenderInfo.prototype.getInRowSpacing_ = function (this: any, prev, next) {
+Blockly.zelos.RenderInfo.prototype.getInRowSpacing_ = function (this: any, prev: any, next: any) {
     if (!prev || !next) {
         // No need for padding at the beginning or end of the row if the
         // output shape is dynamic.

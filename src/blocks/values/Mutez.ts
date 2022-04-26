@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Mutez as M_Mutez } from '@tezwell/michelson-sdk/literal';
 import { TMutez as M_TMutez } from '@tezwell/michelson-sdk/type';

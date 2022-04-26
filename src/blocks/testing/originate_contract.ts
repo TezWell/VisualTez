@@ -1,7 +1,8 @@
-import { Block, FieldMultilineInput, FieldTextInput, FieldVariable, Procedures } from 'blockly';
 import Blockly from 'blockly';
 import { buildAction } from '@tezwell/tezos-testing-sdk';
 import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
+
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
@@ -15,8 +16,8 @@ import Logger from 'src/utils/logger';
 Blockly.Blocks[BlockKind.test__originate_contract_action] = {
     init: function () {
         const initName = findVarName('contract', this.workspace);
-        const variableField = new FieldVariable(initName, Procedures.rename);
-        const multilineField = new FieldMultilineInput('compilation_x');
+        const variableField = new Blockly.FieldVariable(initName, Blockly.Procedures.rename);
+        const multilineField = new Blockly.FieldMultilineInput('compilation_x');
         this.appendDummyInput()
             .appendField('Originate contract')
             .appendField(variableField, 'NAME')

@@ -1,4 +1,6 @@
-import Blockly, { Block, FieldTextInput } from 'blockly';
+import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Michelson from '../generators/Michelson';
@@ -16,7 +18,7 @@ Blockly.Blocks[BlockKind.type_compilation] = {
     },
     init: function () {
         const initName = findName('type', this.workspace, BlockKind.type_compilation);
-        const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
+        const nameField = new Blockly.FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
         this.appendDummyInput()
             .appendField('Type compilation')

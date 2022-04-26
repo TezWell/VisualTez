@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TSet as ST_TSet } from '@tezwell/smartts-sdk/type';
 import { TSet as M_TSet } from '@tezwell/michelson-sdk/type';

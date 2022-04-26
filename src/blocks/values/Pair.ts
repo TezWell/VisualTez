@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Pair as M_Pair } from '@tezwell/michelson-sdk/literal';
 import { TPair as M_TPair } from '@tezwell/michelson-sdk/type';

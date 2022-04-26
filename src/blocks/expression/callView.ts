@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import { CallView } from '@tezwell/smartts-sdk';
 

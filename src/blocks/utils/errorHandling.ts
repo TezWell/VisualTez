@@ -1,5 +1,5 @@
-import type { Block, WorkspaceSvg } from 'blockly';
 import { LineInfo } from '@tezwell/smartts-sdk/misc/utils';
+import type { Block, BlockSvg, WorkspaceSvg } from 'src/typings/blockly';
 
 /**
  * Create a LineInfo instance with the block identifier.
@@ -26,14 +26,14 @@ export const buildBlockErrorString = (block: Block) => `(BLOCK__${block.id}, lin
 export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean => {
     const regex = new RegExp(/[(]BLOCK__(.*?),\sline\s\d[)]/);
     const blockID = error.match(regex)?.reverse()[0];
-    const block = workspace.getBlockById(blockID || '');
+    const block = workspace.getBlockById(blockID || '') as BlockSvg;
     if (block) {
         const _error = error.replace(/[(]BLOCK__(.*?),\sline\s\d[)]/g, '').replace(/sp[.]/g, '');
         block.setWarningText(_error);
         block.warning?.setVisible(true);
 
         // Set RED color
-        block.warning?.bubble_.setColour('#ff0000');
+        (block.warning as any)?.bubble_?.setColour('#ff0000');
         block.select();
 
         const teardDown = () => {
@@ -41,9 +41,9 @@ export const updateErrorInfo = (workspace: WorkspaceSvg, error: string): boolean
             block.warning?.setVisible(false);
             block.warning?.dispose();
 
-            workspace.svgGroup_.removeEventListener('click', teardDown);
+            workspace.svgGroup_?.removeEventListener('click', teardDown);
         };
-        workspace.svgGroup_.addEventListener('click', teardDown);
+        workspace.svgGroup_?.addEventListener('click', teardDown);
 
         return false;
     }

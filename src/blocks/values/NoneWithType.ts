@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { None as M_None } from '@tezwell/michelson-sdk/literal';
 import { TOption as M_TOption } from '@tezwell/michelson-sdk/type';

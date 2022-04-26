@@ -1,4 +1,4 @@
-import { WorkspaceSvg } from 'blockly';
+import type { WorkspaceSvg } from 'src/typings/blockly';
 import BlockKind from '../enums/BlockKind';
 
 const WHITELISTED: string[] = [
@@ -17,7 +17,7 @@ const WHITELISTED: string[] = [
  * @returns void
  */
 export const validateBlockLocation = (workspace: WorkspaceSvg, blockID: string): void => {
-    const block = workspace.getBlockById(blockID);
+    const block: any = workspace.getBlockById(blockID);
     if (block && !WHITELISTED.includes(block.type)) {
         if (block.getParent()) {
             block.setEnabled(true);

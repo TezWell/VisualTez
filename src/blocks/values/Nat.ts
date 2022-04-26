@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { Nat as M_Nat } from '@tezwell/michelson-sdk/literal';
 import { TNat as M_TNat } from '@tezwell/michelson-sdk/type';

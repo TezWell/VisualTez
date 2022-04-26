@@ -1,6 +1,7 @@
-import { Block, FieldTextInput, FieldVariable, Procedures } from 'blockly';
 import Blockly from 'blockly';
 import { EntryPoint, TUnknown } from '@tezwell/smartts-sdk';
+
+import type { Block } from 'src/typings/blockly';
 
 import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
@@ -10,10 +11,10 @@ import { extractVariableName } from '../utils/variables';
 
 Blockly.Blocks[BlockKind.entry_point_block] = {
     init: function () {
-        const initName = Procedures.findLegalName('entrypoint', this);
-        const nameField = new FieldTextInput(initName, Procedures.rename);
+        const initName = Blockly.Procedures.findLegalName('entrypoint', this);
+        const nameField = new Blockly.FieldTextInput(initName, Blockly.Procedures.rename);
         nameField.setSpellcheck(false);
-        const variableField = new FieldVariable(`entrypoint_argument`);
+        const variableField = new Blockly.FieldVariable(`entrypoint_argument`);
         this.appendDummyInput()
             .appendField('Entrypoint')
             .appendField(nameField, 'NAME')

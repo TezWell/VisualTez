@@ -1,5 +1,6 @@
-import { Block, FieldTextInput } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 
 import { TRecord as ST_TRecord } from '@tezwell/smartts-sdk/type';
 import { Record as ST_Record } from '@tezwell/smartts-sdk/expression';
@@ -21,7 +22,7 @@ Blockly.Blocks[BlockKind.record_literal] = {
             outputShape: 3,
             colour: 40,
         });
-        const layoutField = new FieldTextInput('');
+        const layoutField = new Blockly.FieldTextInput('');
         layoutField.setTooltip('Default: Right combs\n---\nExample: ["prop1", ["prop2", "props3"]]');
         this.appendDummyInput().appendField('Layout').appendField(layoutField, 'LAYOUT').setAlign(Blockly.ALIGN_RIGHT);
         this.setPreviousStatement(false);

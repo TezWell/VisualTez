@@ -1,5 +1,7 @@
-import Blockly, { Block, FieldDropdown, FieldTextInput } from 'blockly';
+import Blockly from 'blockly';
 import { IAction } from '@tezwell/tezos-testing-sdk/action';
+
+import type { Block } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
@@ -19,8 +21,8 @@ Blockly.Blocks[BlockKind.test] = {
     },
     init: function () {
         const initName = findName('test', this.workspace, BlockKind.test);
-        const nameField = new FieldTextInput(initName, (oldName: string) => this.rename(oldName));
-        const protocolDropDown = new FieldDropdown(settings.protocols.map(({ name, id }) => [name, id]));
+        const nameField = new Blockly.FieldTextInput(initName, (oldName: string) => this.rename(oldName));
+        const protocolDropDown = new Blockly.FieldDropdown(settings.protocols.map(({ name, id }) => [name, id]));
         this.appendDummyInput()
             .appendField('Test suite')
             .appendField(nameField, 'NAME')

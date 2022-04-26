@@ -1,11 +1,8 @@
 import React from 'react';
-import type { Workspace, WorkspaceSvg } from 'blockly';
 import Blockly from 'blockly';
-import { DatabaseIcon, PuzzleIcon, ReceiptRefundIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
+import { PuzzleIcon, ReceiptRefundIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
 import {
     FingerPrintIcon,
-    HashtagIcon,
-    TableIcon,
     BeakerIcon,
     CubeTransparentIcon,
     TagIcon,
@@ -13,8 +10,9 @@ import {
     EyeIcon,
     SwitchHorizontalIcon,
     CalculatorIcon,
-    PencilIcon,
 } from '@heroicons/react/outline';
+
+import type { Workspace, WorkspaceSvg } from 'src/typings/blockly';
 
 import { Category, ToolboxSearch } from 'src/components/blockly';
 import BlocklyEditor from 'src/components/blockly/Editor';

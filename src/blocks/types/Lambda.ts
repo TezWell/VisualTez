@@ -1,4 +1,5 @@
-import Blockly, { Block } from 'blockly';
+import Blockly from 'blockly';
+import type { Block } from 'src/typings/blockly';
 
 import { TLambda as ST_TLambda } from '@tezwell/smartts-sdk/type';
 import { TLambda as M_TLambda } from '@tezwell/michelson-sdk/type';

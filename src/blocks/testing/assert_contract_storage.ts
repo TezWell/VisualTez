@@ -1,5 +1,6 @@
-import type { Block } from 'blockly';
 import Blockly from 'blockly';
+
+import type { Block } from 'src/typings/blockly';
 import { buildAction } from '@tezwell/tezos-testing-sdk';
 import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
 
