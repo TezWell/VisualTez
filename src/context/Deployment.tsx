@@ -169,7 +169,7 @@ const reducer = (state: IDeploymentState, action: DeploymentReducerAction): IDep
     }
 };
 
-const Provider: React.FC = (props) => {
+const Provider: React.FC<{ children?: React.ReactNode }> = (props) => {
     const [state, dispatch] = React.useReducer(reducer, {
         ...contextStub.state,
         ...fetchPersistentState(),

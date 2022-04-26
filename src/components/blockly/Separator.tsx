@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface SeparatorProps {
+    children?: React.ReactNode;
     gap: number;
     cssContainer?: string;
 }

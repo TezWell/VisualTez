@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface BlockProps {
+    children?: React.ReactNode;
     type: string;
     tags?: string[];
 }

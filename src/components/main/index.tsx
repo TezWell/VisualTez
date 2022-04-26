@@ -1,7 +1,8 @@
 import React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface MainProps {}
+interface MainProps {
+    children: React.ReactNode;
+}
 
 const Main: React.FC<MainProps> = ({ children }) => <main className="flex flex-col flex-1">{children}</main>;
 

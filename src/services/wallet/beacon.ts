@@ -1,5 +1,5 @@
 import { BeaconWallet } from '@taquito/beacon-wallet';
-import { SigningType } from '@airgap/beacon-sdk';
+import { SigningType } from '@airgap/beacon-dapp';
 import bs58check from 'bs58check';
 
 /**

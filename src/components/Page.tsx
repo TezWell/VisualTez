@@ -4,6 +4,7 @@ import Footer from './footer';
 import Main from './main';
 
 interface PageProps {
+    children?: React.ReactNode;
     withNavigation?: boolean;
     withFooter?: boolean;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface ValueProps {
+    children?: React.ReactNode;
     name: string;
 }
 

@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationIcon } from '@heroicons/react/outline';
 
 interface ErrorModalProps {
+    children?: React.ReactNode;
     open: boolean;
     title: string;
     onClose: () => void;

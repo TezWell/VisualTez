@@ -7,6 +7,7 @@ const updateViewport = (content: string) => {
 };
 
 interface AdaptableViewportProps {
+    children?: React.ReactNode;
     minSize: number;
 }
 

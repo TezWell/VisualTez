@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface LabelProps {
+    children?: React.ReactNode;
     text: string;
     'web-class': string;
 }

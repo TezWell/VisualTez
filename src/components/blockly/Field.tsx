@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface FieldProps {
+    children?: React.ReactNode;
     name: string;
 }
 

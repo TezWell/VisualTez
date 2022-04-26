@@ -13,10 +13,10 @@ const SettingsDrawer: React.FC<SettingsDrawerProps> = () => {
     const { dispatch, state } = useEditor();
 
     const selectRenderer = React.useCallback(
-        (e) => {
+        (e: React.ChangeEvent<HTMLSelectElement>) => {
             dispatch({
                 type: EditorActionKind.UPDATE_RENDERER,
-                payload: e.target.value,
+                payload: e.target.value as EditorRenderer,
             });
             window.location.reload();
         },

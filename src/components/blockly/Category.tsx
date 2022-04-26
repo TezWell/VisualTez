@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface CategoryProps {
+    children?: React.ReactNode;
     name: string;
     categorystyle?: string;
     custom?: string;

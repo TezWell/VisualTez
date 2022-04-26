@@ -6,15 +6,15 @@ const NetworkSelection = () => {
     const { state, changeNetwork, changeRPC } = useTezos();
 
     const onRpcChange = React.useCallback(
-        (e) => {
+        (e: React.ChangeEvent<HTMLInputElement>) => {
             changeRPC(e.target.value);
         },
         [changeRPC],
     );
 
     const onNetworkChange = React.useCallback(
-        (e) => {
-            changeNetwork(e.target.value);
+        (e: React.ChangeEvent<HTMLSelectElement>) => {
+            changeNetwork(e.target.value as NetworkKind);
         },
         [changeNetwork],
     );

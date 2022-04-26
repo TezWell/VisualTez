@@ -99,7 +99,7 @@ const saveState = (state: ITezosStorage): void => {
     globalThis.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 };
 
-const Provider: React.FC = (props) => {
+const Provider: React.FC<{ children?: React.ReactNode }> = (props) => {
     const [state, setState] = React.useState<ITezosStorage>(fetchState());
     const [walletStatus, setWalletStatus] = React.useState<ITezosWalletStatus>({
         connected: false,

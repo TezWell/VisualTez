@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface ShadowProps {
+    children?: React.ReactNode;
     type: string;
 }
 

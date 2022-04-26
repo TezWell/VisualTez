@@ -8,13 +8,16 @@ import Divider from './Divider';
 const sizesOfSections = (children: React.ReactNode) =>
     React.Children.toArray(children)
         .filter(Guards.notNull)
-        .filter((el): el is { props: { size: string } } => typeof el === 'object' && 'props' in el)
+        .filter((el): el is React.ReactElement & { props: { size: string } } => typeof el === 'object' && 'props' in el)
         .map((child) => child.props.size || '1');
 
 const getMinMaxSize = (children: React.ReactNode, key: 'minSize' | 'maxSize') =>
     React.Children.toArray(children)
         .filter(Guards.notNull)
-        .filter((el): el is { props: Record<string, string> } => typeof el === 'object' && 'props' in el)
+        .filter(
+            (el): el is React.ReactElement & { props: Record<string, string> } =>
+                typeof el === 'object' && 'props' in el,
+        )
         .map((child) => child.props[key] || (key === 'maxSize' ? '100%' : '0'));
 
 const dimensionsOfSections = (sections: Record<number, HTMLElement>) =>
@@ -52,6 +55,7 @@ const Wrapper: React.FC<WrapperProps> = ({ split, className = '', innerRef, ...p
     );
 
 interface SectionsProps {
+    children: React.ReactNode;
     split: 'vertical' | 'horizontal';
     className?: string;
     onChange?: (sizes: string[]) => void;
@@ -65,7 +69,7 @@ const Sections: React.FC<SectionsProps> = ({ split = 'vertical', children, class
     const [sections, setSections] = React.useState<Record<number, HTMLElement>>({});
 
     const onMove = React.useCallback(
-        (clientX, clientY) => {
+        (clientX: number, clientY: number) => {
             if (!ref.current) {
                 // This should never happen
                 throw new Error('Something went wrong when loading "<Sections />"...');
@@ -118,7 +122,7 @@ const Sections: React.FC<SectionsProps> = ({ split = 'vertical', children, class
     );
 
     const onDown = React.useCallback(
-        (dividerIndex, clientX, clientY) => {
+        (dividerIndex: number, clientX: number, clientY: number) => {
             selectedDivider.current = dividerIndex;
             startClientX.current = clientX;
             startClientY.current = clientY;
@@ -146,7 +150,7 @@ const Sections: React.FC<SectionsProps> = ({ split = 'vertical', children, class
     );
 
     const onMouseDown = React.useCallback(
-        (event, resizerIndex) => {
+        (event: React.MouseEvent<HTMLDivElement, MouseEvent>, resizerIndex: number) => {
             if (event.button === 0) {
                 const { clientX, clientY } = event;
                 onDown(resizerIndex, clientX, clientY);
@@ -156,7 +160,7 @@ const Sections: React.FC<SectionsProps> = ({ split = 'vertical', children, class
     );
 
     const onTouchStart = React.useCallback(
-        (event, dividerIndex) => {
+        (event: React.TouchEvent<HTMLDivElement>, dividerIndex: number) => {
             const { clientX, clientY } = event.touches[0];
             onDown(dividerIndex, clientX, clientY);
         },
@@ -178,7 +182,10 @@ const Sections: React.FC<SectionsProps> = ({ split = 'vertical', children, class
         <Wrapper {...{ className, innerRef: ref, split }}>
             {React.Children.toArray(children)
                 .filter(Guards.notNull)
-                .filter((el): el is { props: { show?: boolean } } => typeof el === 'object' && 'props' in el)
+                .filter(
+                    (el): el is React.ReactElement & { props: { show?: boolean } } =>
+                        typeof el === 'object' && 'props' in el,
+                )
                 .reduce<React.ReactElement[]>((acc, child, index) => {
                     // Ignore section
                     if (typeof child.props.show !== 'undefined' && !child.props.show) {

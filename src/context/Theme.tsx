@@ -44,7 +44,7 @@ const saveTheme = (theme: ThemeKind): void => {
     globalThis.localStorage.setItem(THEME_STORAGE_KEY, theme);
 };
 
-const Provider: React.FC = (props) => {
+const Provider: React.FC<{ children?: React.ReactNode }> = (props) => {
     const [theme, setTheme] = React.useState<ThemeKind>(fetchTheme());
 
     React.useEffect(() => {

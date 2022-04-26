@@ -14,6 +14,7 @@ import Logger from 'src/utils/logger';
 import useEditor from 'src/context/hooks/useEditor';
 
 interface BlocklyContainerProps extends Blockly.BlocklyOptions {
+    children?: React.ReactNode;
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
     noToolbox?: boolean;
     trashcan?: boolean;
