@@ -2,7 +2,7 @@
 
 set -o pipefail
 
-if [ ! -d "build" ] || [ "$1" == "--with-build" ];
+if [ ! -d "build" ] || [ "$1" != "--no-build" ];
 then
     echo "Building frontend..."
     yarn build

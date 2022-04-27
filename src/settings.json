@@ -2,12 +2,17 @@
     "storage_prefix": "@VisualTez",
     "networks": [
         "mainnet",
-        "ithacanet"
+        "ithacanet",
+        "jakartanet"
     ],
     "protocols": [
         {
             "name": "Alpha",
             "id": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
+        },
+        {
+            "name": "Jakarta",
+            "id": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
         },
         {
             "name": "Ithaca",

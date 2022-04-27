@@ -1,6 +1,7 @@
 import { TezosToolkit, WalletOriginateParams } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { localForger } from '@taquito/local-forging';
+import { NetworkType } from '@airgap/beacon-types';
 import TezMonitor from '@tezwell/tezmonitor';
 
 import { NetworkKind } from 'src/context/Tezos';
@@ -9,12 +10,6 @@ import * as Beacon from './beacon';
 export interface TezosWallet {
     taquito: TezosToolkit;
     beacon: BeaconWallet;
-}
-
-enum NetworkType {
-    MAINNET = 'mainnet',
-    ITHACANET = 'ithacanet',
-    CUSTOM = 'custom',
 }
 
 enum PermissionScope {
@@ -30,6 +25,7 @@ const getNetwork = (network: NetworkKind): NetworkType => {
             return NetworkType.MAINNET;
         case NetworkKind.Ithacanet:
             return NetworkType.ITHACANET;
+        case NetworkKind.Jakartanet:
         default:
             return NetworkType.CUSTOM;
     }
