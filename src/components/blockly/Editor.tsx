@@ -12,6 +12,7 @@ import './blockly.css';
 import useTheme from 'src/context/hooks/useTheme';
 import Logger from 'src/utils/logger';
 import useEditor from 'src/context/hooks/useEditor';
+import * as BlocklyInject from 'src/components/blockly/overrides/inject';
 
 interface BlocklyContainerProps extends Blockly.BlocklyOptions {
     children?: React.ReactNode;
@@ -69,7 +70,7 @@ const BlocklyContainer: React.FC<BlocklyContainerProps> = ({
     React.useEffect(() => {
         if (blocklyDiv.current && toolbox.current) {
             try {
-                workspaceRef.current = Blockly.inject(blocklyDiv.current, {
+                workspaceRef.current = BlocklyInject.inject(blocklyDiv.current, {
                     toolbox: noToolbox ? undefined : toolbox.current,
                     theme: isDark ? DarkTheme : LightTheme,
                     renderer: state.renderer,

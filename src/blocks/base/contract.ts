@@ -4,11 +4,12 @@ import { Contract, EntryPoint, OnChainView, TUnknown } from '@tezwell/smartts-sd
 
 import type { Block } from 'src/typings/blockly';
 
-import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { findName } from '../utils/namespace';
 import Context, { ScopeKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
+import Logger from 'src/utils/logger';
+import SmartML from 'src/blocks/generators/SmartML';
 
 Blockly.Blocks[BlockKind.contract_block] = {
     rename: function (oldName: string) {
@@ -19,6 +20,11 @@ Blockly.Blocks[BlockKind.contract_block] = {
         return (this.oldName = oldName);
     },
     init: function () {
+        if (!this.workspace.isFlyout) {
+            Logger.debug('Create (contract compilation) scope:', this.id);
+            this.workspace.createScope(this);
+        }
+
         const initName = findName('contract', this.workspace, BlockKind.contract_block);
         const nameField = new Blockly.FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         nameField.setSpellcheck(false);
@@ -38,6 +44,19 @@ Blockly.Blocks[BlockKind.contract_block] = {
         this.setColour(200);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
+
+        /**
+         * @override dispose function
+         */
+        const dispose = this.dispose.bind(this);
+        this.dispose = function (healStack: boolean) {
+            if (!this.workspace.isFlyout) {
+                Logger.debug('Remove (contract compilation) scope:', this.id);
+                this.workspace.removeScope(this);
+            }
+
+            dispose(this, healStack);
+        };
     },
 };
 

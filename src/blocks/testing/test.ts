@@ -8,11 +8,12 @@ import { findName } from '../utils/namespace';
 import Context, { ScopeKind } from '../core/context';
 import Testing from '../generators/Testing';
 import settings from 'src/settings.json';
+import Logger from 'src/utils/logger';
 
 Blockly.Blocks[BlockKind.test] = {
     rename: function (oldName: string) {
-        const current = this.getFieldValue('NAME');
         if (!this.oldName) {
+            const current = this.getFieldValue('NAME');
             this.oldName = oldName !== 'test_1' ? oldName : current;
         } else {
             this.oldName = oldName;
@@ -20,6 +21,11 @@ Blockly.Blocks[BlockKind.test] = {
         return this.oldName;
     },
     init: function () {
+        if (!this.workspace.isFlyout) {
+            Logger.debug('Create (test) scope:', this.id);
+            this.workspace.createScope(this);
+        }
+
         const initName = findName('test', this.workspace, BlockKind.test);
         const nameField = new Blockly.FieldTextInput(initName, (oldName: string) => this.rename(oldName));
         const protocolDropDown = new Blockly.FieldDropdown(settings.protocols.map(({ name, id }) => [name, id]));
@@ -34,6 +40,19 @@ Blockly.Blocks[BlockKind.test] = {
         this.setColour(200);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
+
+        /**
+         * @override dispose function
+         */
+        const dispose = this.dispose.bind(this);
+        this.dispose = function (healStack: boolean) {
+            if (!this.workspace.isFlyout) {
+                Logger.debug('Remove (test) scope:', this.id);
+                this.workspace.removeScope(this);
+            }
+
+            dispose(this, healStack);
+        };
     },
 };
 

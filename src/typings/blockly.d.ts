@@ -12,6 +12,9 @@ import Blockly from 'core/blockly';
 export type BlocklyGenerator = typeof Blockly.Generator;
 export type BlocklyToolboxCategory = typeof Blockly.ToolboxCategory;
 export type BlocklyCollapsibleToolboxCategory = typeof Blockly.CollapsibleToolboxCategory;
+export type BlocklyFieldVariable = typeof Blockly.FieldVariable;
+export type BlocklyWorkspaceSvg = typeof Blockly.WorkspaceSvg;
+export type BlocklyWorkspace = typeof Blockly.Workspace;
 
 export * from 'core/blockly';
 export * from 'core/toolbox/category';
