@@ -54,7 +54,6 @@ Michelson.addBlock(BlockKind.timestamp_literal, {
 
 export const validateTimestamp = (block: Block) => {
     const value: string = block.getFieldValue('value');
-    console.error(value);
     if (value.includes('Z')) {
         const date = new Date(value);
         if (isNaN(date.getTime())) {
