@@ -10,12 +10,22 @@ import Michelson from '../generators/Michelson';
 import { extractVariableName } from '../utils/variables';
 import { buildBlockErrorString } from '../utils/errorHandling';
 import { validateTimestamp } from '../values/Timestamp';
+import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
+import settings from 'src/settings.json';
 
 Blockly.Blocks[BlockKind.test__call_contract_action] = {
     init: function () {
-        const contractVariable = new Blockly.FieldVariable(null);
-        const senderVariable = new Blockly.FieldVariable(null);
+        const contractVariable = new FieldVariableGetter(
+            null,
+            undefined,
+            ['implicit_account', 'originated_contract'],
+            'originated_contract',
+        );
+        const senderVariable = new FieldVariableGetter(null, undefined, ['implicit_account'], 'implicit_account', {
+            default_options: settings.testing_accounts.map((id, idx) => [`test_account_${idx + 1}`, id]),
+        });
         const entrypointField = new Blockly.FieldTextInput('default');
+
         this.appendDummyInput()
             .appendField('Call entrypoint')
             .appendField(entrypointField, 'ENTRYPOINT')

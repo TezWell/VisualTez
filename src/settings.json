@@ -25,6 +25,13 @@
     },
     "storage_api": "https://storage.visualtez.com",
     "testing_api": "http://localhost:5000/testing",
+    "testing_accounts": [
+        "bootstrap1",
+        "bootstrap2",
+        "bootstrap3",
+        "bootstrap4",
+        "bootstrap5"
+    ],
     "templates": {
         "contracts": [
             {

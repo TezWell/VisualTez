@@ -1,6 +1,13 @@
 import type { Block } from 'src/typings/blockly';
 
+import { buildBlockErrorString } from './errorHandling';
+
 export const extractVariableName = (block: Block, fieldName: string) => {
-    // Blockly Typescript support is terrible
-    return (block.getField(fieldName) as any).getVariable().name;
+    const field = block.getField(fieldName);
+    if (!field) {
+        throw new Error(
+            `Block (${block.type}) does not have any field named '${fieldName}'. ${buildBlockErrorString(block)}`,
+        );
+    }
+    return field.getText();
 };
