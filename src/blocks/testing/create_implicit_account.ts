@@ -10,9 +10,19 @@ import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
 
 Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
+    renameVar: function (oldName: string) {
+        if (!this.oldName) {
+            const current = this.getFieldValue('NAME');
+            this.oldName = oldName !== 'wallet_1' ? oldName : current;
+        } else {
+            this.oldName = oldName;
+        }
+        return this.oldName;
+    },
     init: function () {
+        const variableType = 'implicit_account';
         const initName = findVarName('wallet', this.workspace);
-        const variableField = new Blockly.FieldVariable(initName, Blockly.Procedures.rename);
+        const variableField = new Blockly.FieldVariable(initName, this.renameVar, [variableType], variableType);
         this.appendDummyInput().appendField('Create wallet').appendField(variableField, 'NAME');
         this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('with balance');
         this.setColour(300);
