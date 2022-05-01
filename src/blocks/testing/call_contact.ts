@@ -22,7 +22,7 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
             'originated_contract',
         );
         const senderVariable = new FieldVariableGetter(null, undefined, ['implicit_account'], 'implicit_account', {
-            default_options: settings.testing_accounts.map((id, idx) => [`test_account_${idx + 1}`, id]),
+            default_options: Object.keys(settings.testing_accounts).map((account) => [account, account]),
         });
         const entrypointField = new Blockly.FieldTextInput('default');
 
@@ -58,7 +58,7 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
 
         const action: ICallContractPayload = {
             recipient,
-            sender,
+            sender: (settings.testing_accounts as any)[sender] || sender,
             entrypoint,
             amount,
             parameter: argument as any,
