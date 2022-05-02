@@ -50,8 +50,9 @@ export class ScopeContext {
     removeVariable(variable: VariableModel) {
         const variableID = variable.getId();
         const scope = this.scopeOfVariable[variableID];
-
-        delete this.scopes[scope][variable.type][variableID];
+        if (this.scopes[scope]?.[variable.type]?.[variableID]) {
+            delete this.scopes[scope][variable.type][variableID];
+        }
         delete this.scopeOfVariable[variableID];
     }
 
