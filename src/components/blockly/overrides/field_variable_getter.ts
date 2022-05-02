@@ -136,7 +136,27 @@ export class FieldVariableGetter extends (Blockly.FieldVariable as any) {
      * @override
      */
     getText() {
-        return this.selectedOption_?.[0] || '';
+        return (this.variable_ ? this.variable_.name : this.selectedOption_?.[0]) || '';
+    }
+
+    /**
+     * Return a list of the options for this dropdown.
+     * @param {boolean=} opt_useCache For dynamic options, whether or not to use
+     *     the cached options or to re-generate them.
+     * @return {!Array<!Array>} A non-empty array of option tuples:
+     *     (human-readable text or image, language-neutral name).
+     * @throws {TypeError} If generated options are incorrectly structured.
+     *
+     * @override
+     */
+    getOptions(opt_useCache: any) {
+        if (this.isOptionListDynamic()) {
+            if (!this.generatedOptions_ || !opt_useCache) {
+                this.generatedOptions_ = this.menuGenerator_.call(this);
+            }
+            return this.generatedOptions_;
+        }
+        return /** @type {!Array<!Array<string>>} */ this.menuGenerator_;
     }
 
     /**
@@ -152,21 +172,16 @@ export class FieldVariableGetter extends (Blockly.FieldVariable as any) {
         let variableModelList: VariableModel[] = [];
 
         if (rootBlock) {
-            const scopeVariables = this.sourceBlock_.workspace.getScope(rootBlock);
-            if (scopeVariables) {
+            const variablesPerType = this.sourceBlock_.workspace.getScope(rootBlock);
+            if (variablesPerType) {
                 variableTypes.forEach((variableType: string) => {
-                    scopeVariables.forEach((variable: VariableModel) => {
-                        if (variableType === variable.type) {
-                            variableModelList.push(variable);
-                        }
-                    });
+                    const variablesOfType = variablesPerType[variableType];
+                    if (variablesOfType) {
+                        variableModelList = [...variableModelList, ...(Object.values(variablesOfType) as any)];
+                    }
                 });
             }
         }
-        variableTypes.forEach((variableType: string) => {
-            const variables = this.sourceBlock_.workspace.getVariablesOfType(variableType);
-            variableModelList = variableModelList.concat(variables);
-        });
         variableModelList.sort(Blockly.VariableModel.compareByName);
 
         const options = [...this.defaultOptions];

@@ -1,19 +1,18 @@
-import type { VariableModel, WorkspaceSvg } from 'src/typings/blockly';
+import type { VariableModel } from 'src/typings/blockly';
 
 /**
  * A context that organizes variables based on their scope and type.
  */
 export class ScopeContext {
-    workspace: WorkspaceSvg;
-    scopes: Record<string, Record<string, VariableModel[]>>;
+    scopes: Record<string, Record<string, Record<string, VariableModel>>>;
+    scopeOfVariable: Record<string, string>;
 
     /**
      * @param {!Workspace} workspace The workspace this context belongs to.
      */
-    constructor(workspace: WorkspaceSvg) {
+    constructor() {
         this.scopes = {};
-
-        this.workspace = workspace;
+        this.scopeOfVariable = {};
     }
 
     /**
@@ -21,12 +20,45 @@ export class ScopeContext {
      */
     clear() {
         this.scopes = {};
+        this.scopeOfVariable = {};
+    }
+
+    /**
+     * Add variable to scope
+     *
+     * @param scope Scope identifier
+     * @param variable
+     *
+     * @returns void
+     */
+    addVariable(scope: string, variable: VariableModel) {
+        this.scopes[scope][variable.type] ||= {};
+
+        const variableID = variable.getId();
+        this.scopes[scope][variable.type][variableID] = variable;
+        this.scopeOfVariable[variableID] = scope;
+    }
+
+    /**
+     * Remove variable from scope
+     *
+     * @param scope Scope identifier
+     * @param variable
+     *
+     * @returns void
+     */
+    removeVariable(variable: VariableModel) {
+        const variableID = variable.getId();
+        const scope = this.scopeOfVariable[variableID];
+
+        delete this.scopes[scope][variable.type][variableID];
+        delete this.scopeOfVariable[variableID];
     }
 
     /**
      * Create scope
      *
-     * @param name Scope name
+     * @param name Scope identifier
      *
      * @returns void
      */
@@ -35,18 +67,23 @@ export class ScopeContext {
             throw new Error(`There is already a scope named '${name}'.`);
         }
         this.scopes[name] = {};
-        console.error('+ SCOPES', Object.keys(this.scopes));
     }
 
     /**
      * Remove scope
      *
-     * @param name Scope name
+     * @param name Scope identifier
      *
      * @returns void
      */
     removeScope(name: string) {
         delete this.scopes[name];
-        console.error('- SCOPES', Object.keys(this.scopes));
+    }
+
+    /**
+     * Get scope
+     */
+    getScope(name: string): Readonly<Record<string, Record<string, VariableModel>>> {
+        return this.scopes[name];
     }
 }

@@ -8,6 +8,7 @@ import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
 import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
     renameVar: function (oldName: string) {
@@ -22,7 +23,7 @@ Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
     init: function () {
         const variableType = 'implicit_account';
         const initName = findVarName('wallet', this.workspace);
-        const variableField = new Blockly.FieldVariable(initName, this.renameVar, [variableType], variableType);
+        const variableField = new FieldVariableSetter(initName, this.renameVar, [variableType], variableType);
         this.appendDummyInput().appendField('Create wallet').appendField(variableField, 'NAME');
         this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('with balance');
         this.setColour(300);

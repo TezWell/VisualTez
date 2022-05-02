@@ -12,12 +12,25 @@ import { buildBlockErrorString } from '../utils/errorHandling';
 import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
 import Logger from 'src/utils/logger';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 Blockly.Blocks[BlockKind.test__originate_contract_action] = {
+    renameVar: function (oldName: string) {
+        if (!this.oldName) {
+            const current = this.getFieldValue('NAME');
+            this.oldName = oldName !== 'contract_1' ? oldName : current;
+        } else {
+            this.oldName = oldName;
+        }
+        return this.oldName;
+    },
     init: function () {
+        const variableType = 'originated_contract';
+
         const initName = findVarName('contract', this.workspace);
-        const variableField = new Blockly.FieldVariable(initName, Blockly.Procedures.rename);
+        const variableField = new FieldVariableSetter(initName, this.renameVar, [variableType], variableType);
         const multilineField = new Blockly.FieldMultilineInput('compilation_x');
+
         this.appendDummyInput()
             .appendField('Originate contract')
             .appendField(variableField, 'NAME')
