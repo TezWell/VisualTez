@@ -11,6 +11,7 @@ import { buildClassName } from 'src/utils/className';
 import Http from 'src/utils/http';
 import CircularLoading from 'src/components/common/Spinner';
 import CodeBlock from 'src/components/CodeBlock';
+import { isDevelopment } from 'src/utils';
 
 const getActionLabel = (action: ActionKind): string => {
     switch (action) {
@@ -230,7 +231,8 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
     const runTests = React.useCallback(async () => {
         setRunning(true);
         setError(undefined);
-        await Http.post(settings.testing_api, compilation.result.suite)
+        const api = isDevelopment() ? settings.testing_api_dev : settings.testing_api;
+        await Http.post(api, compilation.result.suite)
             .then(({ data }) => setResults(data))
             .catch((e: any) => {
                 return setError(e.response?.data.message || e.message);

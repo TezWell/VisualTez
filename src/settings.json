@@ -24,7 +24,8 @@
         "max_delay": 180000
     },
     "storage_api": "https://storage.visualtez.com",
-    "testing_api": "http://localhost:5000/testing",
+    "testing_api": "https://testing.visualtez.com/testing",
+    "testing_api_dev": "http://localhost:5000/testing",
     "testing_accounts": {
         "test_account_1": "bootstrap1",
         "test_account_2": "bootstrap2",
