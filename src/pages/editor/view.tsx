@@ -191,6 +191,7 @@ import {
     TestingAction_CallContract,
     TestingAction_ModifyChainID,
     TestingAction_PrintPackedData,
+    TestingAction_OriginateContractFromCode,
 } from 'src/components/blockly/blocks/Testing';
 
 interface EditorViewProps {
@@ -810,6 +811,9 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Label text="Macros" web-class="defaultLabel" />
                                 <Testing_AddressOfAccount />
                                 <Testing_BalanceOfAccount />
+
+                                <Label text="Others" web-class="defaultLabel" />
+                                <TestingAction_OriginateContractFromCode />
                             </Category>
                         ) : null}
                     </BlocklyEditor>
