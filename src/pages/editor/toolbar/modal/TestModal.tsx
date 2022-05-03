@@ -48,6 +48,16 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
     switch (result.status) {
         case ActionResultStatus.Failure:
             switch (result.action.kind) {
+                case ActionKind.CallContract:
+                    if (result.action.payload.expect_failure) {
+                        if ('storage' in result.result) {
+                            return (
+                                <p className="my-2 font-bold">The contract call was expected to fail, but passed.</p>
+                            );
+                        }
+                    }
+
+                    break;
                 case ActionKind.AssertContractStorage:
                 case ActionKind.AssertAccountBalance:
                     if ('actual' in result.result && 'expected' in result.result) {
@@ -81,6 +91,17 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
             );
         case ActionResultStatus.Success:
             switch (result.action.kind) {
+                case ActionKind.CreateImplicitAccount:
+                    return (
+                        <div>
+                            <p className="my-2 font-bold">Wallet Address</p>
+                            <CodeBlock
+                                language="json"
+                                text={JSON.stringify(result.result['address'], null, 4)}
+                                showLineNumbers={false}
+                            />
+                        </div>
+                    );
                 case ActionKind.OriginateContract:
                     return (
                         <div>
@@ -93,6 +114,9 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
                         </div>
                     );
                 case ActionKind.CallContract:
+                    if (result.action.payload.expect_failure) {
+                        return <p className="my-2 font-bold">The contract call failed as expected.</p>;
+                    }
                     return (
                         <div>
                             <p className="my-2 font-bold">New Contract Storage</p>
@@ -145,8 +169,6 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
                     );
             }
     }
-
-    return <CodeBlock language="json" text={JSON.stringify(result.result, null, 4)} showLineNumbers />;
 };
 
 interface ActionResultProps {
@@ -200,8 +222,11 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                 ])}
                             />
                         </Disclosure.Button>
-                        <Disclosure.Panel className="w-full p-2 text-sm border-t border-black">
-                            <div className="relative flex flex-col flex-shrink-0 max-h-[300px]">
+                        <Disclosure.Panel className="w-full text-sm border-t border-black">
+                            <div className="p-2">
+                                <ResultDetails result={result} />
+                            </div>
+                            <div className="relative flex flex-col flex-shrink-0 max-h-[300px] border-t border-black p-2">
                                 <p className="my-2 font-bold">Action</p>
                                 <CodeBlock
                                     language="json"
@@ -209,7 +234,6 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                     showLineNumbers={false}
                                 />
                             </div>
-                            <ResultDetails result={result} />
                         </Disclosure.Panel>
                     </div>
                 )}

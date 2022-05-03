@@ -40,6 +40,13 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
         this.appendDummyInput().appendField('Sender').appendField(senderVariable, 'SENDER');
         this.appendValueInput('AMOUNT').setCheck(['Mutez']).appendField('Amount');
         this.appendValueInput('ARGUMENT').setCheck(['Literal']).appendField('Argument');
+        this.appendDummyInput();
+
+        const expectDropDown = new Blockly.FieldDropdown([
+            ['Succeed', 'succeed'],
+            ['Fail', 'fail'],
+        ]);
+        this.appendDummyInput().appendField('Expecting transaction to').appendField(expectDropDown, 'EXPECT');
 
         this.setColour(300);
         this.setPreviousStatement(true, ['TestAction']);
@@ -55,6 +62,7 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
         const amount = String(block.getInputTargetBlock('AMOUNT')?.getFieldValue('value'));
         const level = Number(block.getInputTargetBlock('LEVEL')?.getFieldValue('nat_value'));
         const argument = Michelson.toMichelson(block, 'ARGUMENT');
+        const expect: string = block.getFieldValue('EXPECT');
 
         const action: ICallContractPayload = {
             recipient,
@@ -62,6 +70,7 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
             entrypoint,
             amount,
             parameter: argument as any,
+            expect_failure: expect === 'fail',
         };
 
         const timestampBlock = block.getInputTargetBlock('TIMESTAMP');
