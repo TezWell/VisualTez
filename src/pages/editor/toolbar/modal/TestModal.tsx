@@ -232,7 +232,7 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
         setRunning(true);
         setError(undefined);
         const api = isDevelopment() ? settings.testing_api_dev : settings.testing_api;
-        await Http.post(api, compilation.result.suite)
+        await Http.post(api, compilation.result.suite, { timeout: 10000 })
             .then(({ data }) => setResults(data))
             .catch((e: any) => {
                 return setError(e.response?.data.message || e.message);
