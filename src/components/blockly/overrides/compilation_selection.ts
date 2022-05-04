@@ -7,6 +7,13 @@ export class CompilationSelection extends (Blockly.FieldDropdown as any) {
         super(Blockly.Field.SKIP_SETUP);
     }
 
+    /**
+     * @override
+     */
+    doClassValidation_(opt_newValue: any) {
+        return /** @type {string} */ opt_newValue;
+    }
+
     getOptions() {
         return (this.generatedOptions_ = this.dropdownCreate());
     }

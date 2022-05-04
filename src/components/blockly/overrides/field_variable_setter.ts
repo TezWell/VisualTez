@@ -102,7 +102,6 @@ export class FieldVariableSetter extends (Blockly.FieldVariable as any) {
         const name = this.getText();
 
         const options = [];
-        console.error(Blockly);
         options.push([Blockly.Msg['RENAME_VARIABLE'], Blockly.RENAME_VARIABLE_ID]);
         options.push([Blockly.Msg['NEW_VARIABLE'], 'NEW_VARIABLE']);
         if (Blockly.Msg['DELETE_VARIABLE']) {
