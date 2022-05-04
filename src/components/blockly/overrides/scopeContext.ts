@@ -32,6 +32,7 @@ export class ScopeContext {
      * @returns void
      */
     addVariable(scope: string, variable: VariableModel) {
+        this.scopes[scope] ||= {};
         this.scopes[scope][variable.type] ||= {};
 
         const variableID = variable.getId();

@@ -4,6 +4,7 @@ import { OnChainView, TUnknown } from '@tezwell/smartts-sdk';
 import type { Block } from 'src/typings/blockly';
 
 import SmartML from 'src/blocks/generators/SmartML';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 import BlockKind from '../enums/BlockKind';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
@@ -13,8 +14,15 @@ Blockly.Blocks[BlockKind.onchain_view] = {
     init: function () {
         const initName = Blockly.Procedures.findLegalName('view', this);
         const nameField = new Blockly.FieldTextInput(initName, Blockly.Procedures.rename);
-        nameField.setSpellcheck(false);
-        const variableField = new Blockly.FieldVariable(`view_argument`);
+        const variableField = new FieldVariableSetter(
+            'view_argument',
+            this.renameVar,
+            [VariableKind.EntrypointOrViewArgument],
+            VariableKind.EntrypointOrViewArgument,
+            {
+                disabledDropdown: true,
+            },
+        );
         this.appendDummyInput()
             .appendField('View')
             .appendField(nameField, 'NAME')

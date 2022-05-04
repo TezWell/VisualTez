@@ -3,8 +3,8 @@ import Blockly from 'blockly';
 import type { VisualTezWorkspace } from './workspace';
 
 export class FieldVariableSetter extends (Blockly.FieldVariable as any) {
-    private scope = '';
     workspace: VisualTezWorkspace | null = null;
+    disabledDropdown = false;
 
     constructor(
         varName: string | null,
@@ -23,6 +23,44 @@ export class FieldVariableSetter extends (Blockly.FieldVariable as any) {
 
         if (opt_config && 'scope' in opt_config) {
             this.scope = opt_config['scope'];
+        }
+
+        this.disabledDropdown = !!opt_config?.disabledDropdown;
+    }
+
+    /**
+     * @link https://github.com/google/blockly/blob/master/core/field_dropdown.js
+     * @override
+     */
+    showEditor_(opt_e: any) {
+        if (!this.disabledDropdown) {
+            super.showEditor_(opt_e);
+        }
+    }
+
+    /**
+     * @link https://github.com/google/blockly/blob/master/core/field_dropdown.js
+     * @override
+     */
+    initView() {
+        if (this.shouldAddBorderRect_()) {
+            this.createBorderRect_();
+        } else {
+            this.clickTarget_ = this.sourceBlock_.getSvgRoot();
+        }
+        this.createTextElement_();
+
+        this.imageElement_ = Blockly.utils.dom.createSvgElement(Blockly.utils.Svg.IMAGE, {}, this.fieldGroup_);
+        if (!this.disabledDropdown) {
+            if (this.getConstants().FIELD_DROPDOWN_SVG_ARROW) {
+                this.createSVGArrow_();
+            } else {
+                this.createTextArrow_();
+            }
+        }
+
+        if (this.borderRect_) {
+            Blockly.utils.dom.addClass(this.borderRect_, 'blocklyDropdownRect');
         }
     }
 

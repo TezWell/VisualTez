@@ -1,5 +1,4 @@
 import { IType } from '@tezwell/smartts-sdk/typings/type';
-import BlockKind from '../enums/BlockKind';
 
 export enum ScopeKind {
     Contract,
@@ -12,11 +11,11 @@ export enum ScopeKind {
 }
 
 export enum VariableKind {
-    Local,
-    Iterator,
-    LambdaArgument,
-    VariantArgument,
-    EntrypointOrViewArgument,
+    Local = 'local',
+    Iterator = 'iterator',
+    LambdaArgument = 'lambda_argument',
+    VariantArgument = 'variant_argument',
+    EntrypointOrViewArgument = 'entry_argument',
 }
 
 interface IVariable {

@@ -8,13 +8,21 @@ import BlockKind from '../enums/BlockKind';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
 import { extractVariableName } from '../utils/variables';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 Blockly.Blocks[BlockKind.entry_point_block] = {
     init: function () {
         const initName = Blockly.Procedures.findLegalName('entrypoint', this);
         const nameField = new Blockly.FieldTextInput(initName, Blockly.Procedures.rename);
-        nameField.setSpellcheck(false);
-        const variableField = new Blockly.FieldVariable(`entrypoint_argument`);
+        const variableField = new FieldVariableSetter(
+            'entrypoint_argument',
+            this.renameVar,
+            [VariableKind.EntrypointOrViewArgument],
+            VariableKind.EntrypointOrViewArgument,
+            {
+                disabledDropdown: true,
+            },
+        );
         this.appendDummyInput()
             .appendField('Entrypoint')
             .appendField(nameField, 'NAME')
