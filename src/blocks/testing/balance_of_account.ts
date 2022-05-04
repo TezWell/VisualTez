@@ -7,32 +7,21 @@ import Michelson from '../generators/Michelson';
 import { PLACEHOLDER } from './placeholder';
 import { extractVariableName } from '../utils/variables';
 import { Mutez } from '@tezwell/michelson-sdk/literal';
+import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
 
-const BalanceOfAccount = {
-    type: BlockKind.test__balance_of_account,
-    message0: 'Balance of %1',
-    args0: [
-        {
-            type: 'field_variable',
-            name: 'NAME',
-            variable: null,
-        },
-    ],
-    tooltip: '[Testing] - Get the balance of an account not yet created. Returns a value of type `TMutez`.',
-    output: ['Literal', 'Expression'],
-    colour: 340,
-    extensions: ['contextMenu_variableSetterGetter'],
-};
-
-Blockly.Blocks[BalanceOfAccount.type] = {
+Blockly.Blocks[BlockKind.test__balance_of_account] = {
     init: function () {
-        this.jsonInit(BalanceOfAccount);
+        const contractVariable = new FieldVariableGetter(undefined, ['implicit_account', 'originated_contract']);
+        this.appendDummyInput().appendField('Address of').appendField(contractVariable, 'NAME');
+        this.setTooltip('[Testing] - Expends to the balance of a given account. Returns a value of type `TMutez`.');
+        this.setColour(340);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
+        this.setOutput(true, ['Literal', 'Mutez']);
     },
 };
 
-Michelson.addBlock(BalanceOfAccount.type, {
+Michelson.addBlock(BlockKind.test__balance_of_account, {
     toMichelson: (block: Block) => {
         const name: string = extractVariableName(block, 'NAME');
         return Mutez(`${PLACEHOLDER.BALANCE_OF}${name}`);

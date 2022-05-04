@@ -7,31 +7,21 @@ import Michelson from '../generators/Michelson';
 import { Address } from '@tezwell/michelson-sdk/literal';
 import { PLACEHOLDER } from './placeholder';
 import { extractVariableName } from '../utils/variables';
+import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
 
-const AddressOfAccount = {
-    type: BlockKind.test__address_of_account,
-    message0: 'Address of %1',
-    args0: [
-        {
-            type: 'field_variable',
-            name: 'NAME',
-            variable: null,
-        },
-    ],
-    tooltip: '[Testing] - Get the address of an account not yet created. Returns a value of type `TAddress`.',
-    output: ['Literal'],
-    colour: 340,
-};
-
-Blockly.Blocks[AddressOfAccount.type] = {
+Blockly.Blocks[BlockKind.test__address_of_account] = {
     init: function () {
-        this.jsonInit(AddressOfAccount);
+        const contractVariable = new FieldVariableGetter(undefined, ['implicit_account', 'originated_contract']);
+        this.appendDummyInput().appendField('Balance of').appendField(contractVariable, 'NAME');
+        this.setTooltip('[Testing] - Expands to an address of a given account. Returns a value of type `TAddress`.');
+        this.setOutput(true, ['Literal', 'Address']);
+        this.setColour(340);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
 };
 
-Michelson.addBlock(AddressOfAccount.type, {
+Michelson.addBlock(BlockKind.test__address_of_account, {
     toMichelson: (block: Block) => {
         const name: string = extractVariableName(block, 'NAME');
         return Address(`${PLACEHOLDER.ADDRESS_OF}${name}`);

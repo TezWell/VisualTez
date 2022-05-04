@@ -4,14 +4,8 @@ import { VariableModel } from 'src/typings/blockly';
 export class FieldVariableGetter extends (Blockly.FieldVariable as any) {
     private defaultOptions: [string, string][] = [];
 
-    constructor(
-        varName: string | null,
-        opt_validator?: any,
-        opt_variableTypes?: Array<string> | undefined,
-        opt_defaultType?: string | undefined,
-        opt_config?: any,
-    ) {
-        super(varName, opt_validator, opt_variableTypes, opt_defaultType, opt_config);
+    constructor(opt_validator: any, opt_variableTypes: Array<string> | undefined, opt_config?: any) {
+        super(null, opt_validator, opt_variableTypes, opt_variableTypes?.[0] || '', opt_config);
 
         /**
          * @override
@@ -24,7 +18,7 @@ export class FieldVariableGetter extends (Blockly.FieldVariable as any) {
             }
         }
 
-        this.setTypes_(opt_variableTypes, opt_defaultType);
+        this.setTypes_(opt_variableTypes, opt_variableTypes?.[0] || '');
     }
 
     /**
@@ -149,25 +143,18 @@ export class FieldVariableGetter extends (Blockly.FieldVariable as any) {
      *
      * @override
      */
-    getOptions(opt_useCache: any) {
-        if (this.isOptionListDynamic()) {
-            if (!this.generatedOptions_ || !opt_useCache) {
-                this.generatedOptions_ = this.menuGenerator_.call(this);
-            }
-            return this.generatedOptions_;
-        }
-        return /** @type {!Array<!Array<string>>} */ this.menuGenerator_;
+    getOptions() {
+        return (this.generatedOptions_ = this.dropdownCreate());
     }
 
     /**
      * Return a sorted list of variable names to be populated in the variable dropdown menu.
      */
     dropdownCreate() {
-        // The methods bellow can be used to access the root block
+        // The methods bellow can be used to access the block parents
         // this.sourceBlock_.getSurroundParent();
         // this.sourceBlock_.getRootBlock();
-        const rootBlock = this.sourceBlock_.getSurroundParent();
-
+        const rootBlock = this.sourceBlock_.getRootBlock();
         const variableTypes = this.getVariableTypes_();
         let variableModelList: VariableModel[] = [];
 

@@ -15,13 +15,8 @@ import settings from 'src/settings.json';
 
 Blockly.Blocks[BlockKind.test__call_contract_action] = {
     init: function () {
-        const contractVariable = new FieldVariableGetter(
-            null,
-            undefined,
-            ['implicit_account', 'originated_contract'],
-            'originated_contract',
-        );
-        const senderVariable = new FieldVariableGetter(null, undefined, ['implicit_account'], 'implicit_account', {
+        const contractVariable = new FieldVariableGetter(undefined, ['implicit_account', 'originated_contract']);
+        const senderVariable = new FieldVariableGetter(undefined, ['implicit_account'], {
             default_options: Object.keys(settings.testing_accounts).map((account) => [account, account]),
         });
         const entrypointField = new Blockly.FieldTextInput('default');

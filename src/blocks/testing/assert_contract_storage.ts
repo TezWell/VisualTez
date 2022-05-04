@@ -8,34 +8,21 @@ import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
 import { extractVariableName } from '../utils/variables';
 import Michelson from '../generators/Michelson';
+import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
 
-const AssertContractStorage = {
-    type: BlockKind.test__assert_contract_storage_action,
-    message0: 'Contract %1 storage must be %2',
-    args0: [
-        {
-            type: 'field_variable',
-            name: 'NAME',
-            variable: null,
-        },
-        {
-            type: 'input_value',
-            name: 'STORAGE',
-            check: ['Literal'],
-        },
-    ],
-    colour: 300,
-};
-
-Blockly.Blocks[AssertContractStorage.type] = {
+Blockly.Blocks[BlockKind.test__assert_contract_storage_action] = {
     init: function () {
-        this.jsonInit(AssertContractStorage);
+        const contractVariable = new FieldVariableGetter(undefined, ['originated_contract']);
+        this.appendDummyInput().appendField('Contract').appendField(contractVariable, 'NAME');
+        this.appendValueInput('STORAGE').setCheck(['Literal']).appendField('storage must be');
+        this.setInputsInline(true);
+        this.setColour(300);
         this.setPreviousStatement(true, ['TestAction']);
         this.setNextStatement(true, ['TestAction']);
     },
 };
 
-Testing.addBlock(AssertContractStorage.type, {
+Testing.addBlock(BlockKind.test__assert_contract_storage_action, {
     toAction: (block: Block) => {
         const contract_name: string = extractVariableName(block, 'NAME');
         const storage = Michelson.toMichelson(block, 'STORAGE');
