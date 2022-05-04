@@ -61,6 +61,40 @@ export class FieldVariableSetter extends (Blockly.FieldVariable as any) {
         }
     }
 
+    onItemSelected_(menu: any, menuItem: any) {
+        const id = menuItem.getValue();
+        // Handle special cases.
+        if (this.sourceBlock_ && this.sourceBlock_.workspace) {
+            if (id === Blockly.RENAME_VARIABLE_ID) {
+                // Rename variable.
+                Blockly.Variables.renameVariable(
+                    this.sourceBlock_.workspace,
+                    /** @type {!VariableModel} */ this.variable_,
+                );
+                return;
+            } else if (id === Blockly.DELETE_VARIABLE_ID) {
+                // Delete variable.
+                this.sourceBlock_.workspace.deleteVariableById(this.variable_.getId());
+                return;
+            } else if (id === 'NEW_VARIABLE') {
+                Blockly.Variables.createVariableButtonHandler(
+                    this.sourceBlock_.workspace,
+                    (varName: string) => {
+                        if (varName) {
+                            // Update field with the new variable
+                            const variable = this.sourceBlock_.workspace.getVariable(varName, this.defaultType_);
+                            this.doValueUpdate_(variable.getId());
+                            this.addVariableToScope();
+                        }
+                    },
+                    this.defaultType_,
+                );
+            }
+        }
+        // Handle unspecial case.
+        this.setValue(id);
+    }
+
     dropdownCreate() {
         if (!this.variable_) {
             throw Error('Tried to call dropdownCreate on a variable field with no' + ' variable selected.');
@@ -68,7 +102,9 @@ export class FieldVariableSetter extends (Blockly.FieldVariable as any) {
         const name = this.getText();
 
         const options = [];
+        console.error(Blockly);
         options.push([Blockly.Msg['RENAME_VARIABLE'], Blockly.RENAME_VARIABLE_ID]);
+        options.push([Blockly.Msg['NEW_VARIABLE'], 'NEW_VARIABLE']);
         if (Blockly.Msg['DELETE_VARIABLE']) {
             options.push([Blockly.Msg['DELETE_VARIABLE'].replace('%1', name), Blockly.DELETE_VARIABLE_ID]);
         }
