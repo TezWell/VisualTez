@@ -14,8 +14,18 @@ Blockly.Blocks[BlockKind.onchain_view] = {
     init: function () {
         const initName = Blockly.Procedures.findLegalName('view', this);
         const nameField = new Blockly.FieldTextInput(initName, Blockly.Procedures.rename);
-        const variableField = new FieldVariableSetter(
-            'view_argument',
+
+        const storageVariable = new FieldVariableSetter(
+            'storage',
+            this.renameVar,
+            [VariableKind.ContractStorage],
+            VariableKind.ContractStorage,
+            {
+                disabledDropdown: true,
+            },
+        );
+        const argumentVariable = new FieldVariableSetter(
+            'parameter',
             this.renameVar,
             [VariableKind.EntrypointOrViewArgument],
             VariableKind.EntrypointOrViewArgument,
@@ -23,12 +33,16 @@ Blockly.Blocks[BlockKind.onchain_view] = {
                 disabledDropdown: true,
             },
         );
+
         this.appendDummyInput()
             .appendField('View')
             .appendField(nameField, 'NAME')
-            .appendField('with argument')
-            .appendField(variableField, 'ARGUMENT');
-        this.appendValueInput('TYPE').setCheck(['Type']).appendField('of type');
+            .appendField('with arguments (')
+            .appendField(argumentVariable, 'ARGUMENT')
+            .appendField(', ')
+            .appendField(storageVariable, 'STORAGE')
+            .appendField(')');
+        this.appendValueInput('TYPE').setCheck(['Type']).appendField('and type');
         this.appendStatementInput('CODE').setCheck(['Statement']).appendField('Code');
         this.appendValueInput('RETURN')
             .setCheck(['Literal', 'Expression'])
@@ -46,6 +60,7 @@ SmartML.addBlock(BlockKind.onchain_view, {
     toStatement: (block: Block) => {
         const name = block.getFieldValue('NAME');
         const argumentName = extractVariableName(block, 'ARGUMENT');
+        const storageName = extractVariableName(block, 'STORAGE');
         const type = SmartML.toType(block, 'TYPE', TUnknown());
 
         // Add an (View) scope
@@ -56,6 +71,10 @@ SmartML.addBlock(BlockKind.onchain_view, {
                     kind: VariableKind.EntrypointOrViewArgument,
                     name: argumentName,
                     type,
+                },
+                [storageName]: {
+                    kind: VariableKind.ContractStorage,
+                    name: storageName,
                 },
             },
         });

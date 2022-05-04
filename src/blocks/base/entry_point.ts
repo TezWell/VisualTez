@@ -14,8 +14,18 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
     init: function () {
         const initName = Blockly.Procedures.findLegalName('entrypoint', this);
         const nameField = new Blockly.FieldTextInput(initName, Blockly.Procedures.rename);
-        const variableField = new FieldVariableSetter(
-            'entrypoint_argument',
+
+        const storageVariable = new FieldVariableSetter(
+            'storage',
+            this.renameVar,
+            [VariableKind.ContractStorage],
+            VariableKind.ContractStorage,
+            {
+                disabledDropdown: true,
+            },
+        );
+        const argumentVariable = new FieldVariableSetter(
+            'parameter',
             this.renameVar,
             [VariableKind.EntrypointOrViewArgument],
             VariableKind.EntrypointOrViewArgument,
@@ -23,12 +33,16 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
                 disabledDropdown: true,
             },
         );
+
         this.appendDummyInput()
             .appendField('Entrypoint')
             .appendField(nameField, 'NAME')
-            .appendField('with argument')
-            .appendField(variableField, 'ARGUMENT');
-        this.appendValueInput('TYPE').setCheck(['Type']).appendField('of type');
+            .appendField('with arguments (')
+            .appendField(argumentVariable, 'ARGUMENT')
+            .appendField(', ')
+            .appendField(storageVariable, 'STORAGE')
+            .appendField(')');
+        this.appendValueInput('TYPE').setCheck(['Type']).appendField('and type');
         this.appendStatementInput('CODE').setCheck(['Statement']).appendField('Code');
         this.setTooltip('A block that represents an entry point.');
         this.setColour(140);
@@ -42,6 +56,7 @@ SmartML.addBlock(BlockKind.entry_point_block, {
     toStatement: (block: Block) => {
         const name = block.getFieldValue('NAME');
         const argumentName = extractVariableName(block, 'ARGUMENT');
+        const storageName = extractVariableName(block, 'STORAGE');
         const type = SmartML.toType(block, 'TYPE', TUnknown());
 
         // Add an (Entrypoint) scope
@@ -52,6 +67,10 @@ SmartML.addBlock(BlockKind.entry_point_block, {
                     kind: VariableKind.EntrypointOrViewArgument,
                     name: argumentName,
                     type: type,
+                },
+                [storageName]: {
+                    kind: VariableKind.ContractStorage,
+                    name: storageName,
                 },
             },
         });

@@ -16,6 +16,7 @@ export enum VariableKind {
     LambdaArgument = 'lambda_argument',
     VariantArgument = 'variant_argument',
     EntrypointOrViewArgument = 'entry_argument',
+    ContractStorage = 'contract_storage',
 }
 
 interface IVariable {

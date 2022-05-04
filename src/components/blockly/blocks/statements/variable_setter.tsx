@@ -8,7 +8,7 @@ import Value from '../../Value';
 export const VariableSetterStatement = () => (
     <Block type={BlockKind.variable_setter_block} tags={['statement', 'variable', 'setter', 'update', 'change']}>
         <Value name="VAR">
-            <Shadow type={BlockKind.variables_get} />
+            <Shadow type={BlockKind.variables_get_v2} />
         </Value>
     </Block>
 );

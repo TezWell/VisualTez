@@ -168,7 +168,6 @@ import {
     ABSExpression,
     NegateExpression,
     AccessRecordPropertyExpression,
-    GetStorageExpression,
     GetVariableExpression,
     ModExpression,
     EdivExpression,
@@ -429,7 +428,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <GetElementsFromSetExpression />
                             <AddressOfContractExpression />
-                            <GetStorageExpression />
                             <GetVariableExpression />
 
                             <IsVariantExpression />

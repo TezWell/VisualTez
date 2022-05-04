@@ -17,6 +17,7 @@ import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
 import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
 
+/** @deprecated */
 Blockly.Blocks[BlockKind.contract_storage_block] = {
     init: function () {
         this.jsonInit({
@@ -27,13 +28,14 @@ Blockly.Blocks[BlockKind.contract_storage_block] = {
         });
     },
 };
+/** @deprecated */
 SmartML.addBlock(BlockKind.contract_storage_block, {
     toValue: () => {
         return ContractStorage();
     },
 });
 
-Blockly.Blocks[BlockKind.variables_get] = {
+Blockly.Blocks[BlockKind.variables_get_v2] = {
     init: function () {
         const variable = new FieldVariableGetter(undefined, Object.values(VariableKind));
         this.appendDummyInput().appendField('Access variable').appendField(variable, 'VAR');
@@ -45,7 +47,7 @@ Blockly.Blocks[BlockKind.variables_get] = {
     },
 };
 
-SmartML.addBlock(BlockKind.variables_get, {
+const AccessVariableBlock = {
     toValue: (block: Block) => {
         const variableName = extractVariableName(block, 'VAR');
         const line = buildErrorInfo(block);
@@ -58,6 +60,8 @@ SmartML.addBlock(BlockKind.variables_get, {
                         switch (scope.variables[variableName].kind) {
                             case VariableKind.EntrypointOrViewArgument:
                                 return MethodArgument(line);
+                            case VariableKind.ContractStorage:
+                                return ContractStorage();
                         }
                     }
                     break;
@@ -90,4 +94,6 @@ SmartML.addBlock(BlockKind.variables_get, {
 
         return GetVariable(variableName, line);
     },
-});
+};
+SmartML.addBlock(BlockKind.variables_get, AccessVariableBlock);
+SmartML.addBlock(BlockKind.variables_get_v2, AccessVariableBlock);
