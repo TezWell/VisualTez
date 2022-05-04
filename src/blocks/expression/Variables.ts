@@ -15,6 +15,7 @@ import SmartML from '../generators/SmartML';
 import { extractVariableName } from '../utils/variables';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
+import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
 
 Blockly.Blocks[BlockKind.contract_storage_block] = {
     init: function () {
@@ -31,6 +32,18 @@ SmartML.addBlock(BlockKind.contract_storage_block, {
         return ContractStorage();
     },
 });
+
+Blockly.Blocks[BlockKind.variables_get] = {
+    init: function () {
+        const variable = new FieldVariableGetter(undefined, Object.values(VariableKind));
+        this.appendDummyInput().appendField('Access variable').appendField(variable, 'VAR');
+        this.setTooltip('Access the value of a given variable.');
+        this.setOutput(true, ['Variable', 'Expression']);
+        this.setColour(80);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
+    },
+};
 
 SmartML.addBlock(BlockKind.variables_get, {
     toValue: (block: Block) => {

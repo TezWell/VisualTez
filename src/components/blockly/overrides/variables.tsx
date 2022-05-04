@@ -17,28 +17,6 @@ import BlockKind from 'src/blocks/enums/BlockKind';
 //     createVariable('Entrypoint Argument', Variable.entrypoint_arg, '');
 // };
 
-Blockly.Blocks[BlockKind.variables_get] = {
-    init: function () {
-        this.jsonInit({
-            type: BlockKind.variables_get,
-            message0: 'Get Variable: %1',
-            args0: [
-                {
-                    type: 'field_variable',
-                    name: 'VAR',
-                    variable: '%{BKY_VARIABLES_DEFAULT_NAME}',
-                },
-            ],
-            output: ['Variable', 'Expression'],
-            colour: 80,
-            tooltip: 'Access the variable value.',
-            extensions: ['contextMenu_variableSetterGetter'],
-        });
-        this.setPreviousStatement(false);
-        this.setNextStatement(false);
-    },
-};
-
 /**
  * Override "flyoutCategoryBlocks" method
  *

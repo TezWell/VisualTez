@@ -115,6 +115,13 @@ export class FieldVariableGetter extends (Blockly.FieldVariable as any) {
     }
 
     /**
+     * @override
+     */
+    shouldAddBorderRect_() {
+        return !this.sourceBlock_.isShadow();
+    }
+
+    /**
      * Get the variable's ID.
      * @return {?string} Current variable's ID.
      * @override
