@@ -7,30 +7,35 @@ import SmartML from 'src/blocks/generators/SmartML';
 import BlockKind from '../enums/BlockKind';
 import { extractVariableName } from '../utils/variables';
 import { buildErrorInfo } from '../utils/errorHandling';
-
-const VariableCreationBlock = {
-    type: BlockKind.variable_declaration_block,
-    message0: 'Create variable %1 with value %2',
-    args0: [
-        {
-            type: 'field_variable',
-            name: 'VAR',
-            variable: null,
-        },
-        {
-            type: 'input_value',
-            name: 'VALUE',
-            check: ['Expression', 'Literal'],
-        },
-    ],
-    colour: 20,
-    inputsInline: true,
-    extensions: ['contextMenu_newGetVariableBlock'],
-};
+import { findVarName } from '../utils/namespace';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { VariableKind } from '../core/context';
 
 Blockly.Blocks[BlockKind.variable_declaration_block] = {
+    renameVar: function (oldName: string) {
+        if (!this.oldName) {
+            const current = this.getFieldValue('NAME');
+            this.oldName = oldName !== 'var_1' ? oldName : current;
+        } else {
+            this.oldName = oldName;
+        }
+        return this.oldName;
+    },
     init: function () {
-        this.jsonInit(VariableCreationBlock);
+        const initName = findVarName('var', this.workspace);
+        const variableField = new FieldVariableSetter(
+            initName,
+            this.renameVar,
+            [VariableKind.Local],
+            VariableKind.Local,
+        );
+
+        this.appendDummyInput().appendField('Create variable').appendField(variableField, 'VAR');
+
+        this.appendValueInput('VALUE').setCheck(['Expression', 'Literal']).appendField('with value');
+
+        this.setColour(20);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, ['Statement']);
         this.setNextStatement(true, ['Statement']);
     },

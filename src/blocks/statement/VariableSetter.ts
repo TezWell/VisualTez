@@ -9,7 +9,7 @@ import { buildErrorInfo } from '../utils/errorHandling';
 
 const VariableSetterBlock = {
     type: BlockKind.variable_setter_block,
-    message0: 'Set variable %1 to be %2',
+    message0: 'Assign %1 = %2',
     args0: [
         {
             type: 'input_value',
