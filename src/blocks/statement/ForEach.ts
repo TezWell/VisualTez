@@ -36,6 +36,15 @@ const ForEachBlock = {
 };
 
 Blockly.Blocks[BlockKind.for_each_block] = {
+    renameVar: function (oldName: string) {
+        if (!this.oldName) {
+            const current = this.getFieldValue('NAME');
+            this.oldName = oldName !== 'iter_1' ? oldName : current;
+        } else {
+            this.oldName = oldName;
+        }
+        return this.oldName;
+    },
     init: function () {
         this.jsonInit(ForEachBlock);
         this.setPreviousStatement(true, ['Statement']);

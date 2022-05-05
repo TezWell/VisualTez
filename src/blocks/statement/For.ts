@@ -7,6 +7,8 @@ import BlockKind from '../enums/BlockKind';
 import { extractVariableName } from '../utils/variables';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
+import { findVarName } from '../utils/namespace';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 const ForBlock = {
     type: BlockKind.for_block,
@@ -48,8 +50,33 @@ const ForBlock = {
 };
 
 Blockly.Blocks[BlockKind.for_block] = {
+    renameVar: function (oldName: string) {
+        if (!this.oldName) {
+            const current = this.getFieldValue('NAME');
+            this.oldName = oldName !== 'iter_1' ? oldName : current;
+        } else {
+            this.oldName = oldName;
+        }
+        return this.oldName;
+    },
     init: function () {
-        this.jsonInit(ForBlock);
+        const initName = findVarName('iter', this.workspace);
+        const variableField = new FieldVariableSetter(
+            initName,
+            this.renameVar,
+            [VariableKind.Local],
+            VariableKind.Local,
+        );
+
+        this.appendDummyInput().appendField('Iterate').appendField(variableField, 'VAR');
+        this.appendValueInput('FROM').setCheck(['Expression', 'Literal']).appendField('from');
+        this.appendValueInput('TO').setCheck(['Expression', 'Literal']).appendField('to');
+        this.appendValueInput('BY').setCheck(['Expression', 'Literal']).appendField('by');
+
+        this.appendStatementInput('DO').setCheck(['Statement']).appendField('Do');
+
+        this.setColour(180);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, ['Statement']);
         this.setNextStatement(true, ['Statement']);
     },
