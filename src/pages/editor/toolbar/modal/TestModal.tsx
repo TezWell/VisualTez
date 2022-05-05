@@ -177,7 +177,7 @@ interface ActionResultProps {
 }
 const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
     return (
-        <div className="flex justify-start mt-1">
+        <div className="inline-flex justify-start w-full mt-1">
             <div className="flex flex-col">
                 <ActionStatus status={result.status} />
                 {/* Connector */}
@@ -208,7 +208,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                             },
                         ])}
                     >
-                        <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+                        <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none border-b border-black">
                             <span>{getActionLabel(result.action.kind)}</span>
                             <ChevronUpIcon
                                 className={buildClassName([
@@ -222,11 +222,11 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                 ])}
                             />
                         </Disclosure.Button>
-                        <Disclosure.Panel className="w-full text-sm border-t border-black">
+                        <Disclosure.Panel className="text-sm max-w-[500px]">
                             <div className="p-2">
                                 <ResultDetails result={result} />
                             </div>
-                            <div className="relative flex flex-col flex-shrink-0 max-h-[300px] border-t border-black p-2">
+                            <div className="relative flex flex-col flex-shrink-0 max-h-[300px] border-t border-black mt-2 p-2">
                                 <p className="my-2 font-bold">Action</p>
                                 <CodeBlock
                                     language="json"

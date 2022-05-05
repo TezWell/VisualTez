@@ -30,7 +30,7 @@ const CodeBlock: React.FC<OwnProps> = ({ text, square, withCopy, wrapLongLines =
 
     return text ? (
         <div
-            className="relative w-full flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400"
+            className="relative h-full w-full overflow-auto scrollbar-thin scrollbar-thumb-gray-400"
             style={{
                 borderRadius: square ? 0 : 10,
             }}

@@ -193,6 +193,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
                         />
                         <CodeBlock
                             withCopy
+                            square
                             language={'json'}
                             showLineNumbers
                             text={showMicheline ? storage.micheline : storage.json}
@@ -205,6 +206,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
                         />
                         <CodeBlock
                             withCopy
+                            square
                             language={'json'}
                             showLineNumbers
                             text={
@@ -215,6 +217,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
                     <Tab.Panel className="h-full">
                         <CodeBlock
                             withCopy
+                            square
                             language={'python'}
                             showLineNumbers
                             text={compilation?.result.smartpy || ''}
