@@ -13,7 +13,7 @@ import { FieldVariableSetter } from 'src/components/blockly/overrides/field_vari
 Blockly.Blocks[BlockKind.for_each_block] = {
     renameVar: function (oldName: string) {
         if (!this.oldName) {
-            const current = this.getFieldValue('NAME');
+            const current = this.getFieldValue('VAR');
             this.oldName = oldName !== 'iter_1' ? oldName : current;
         } else {
             this.oldName = oldName;

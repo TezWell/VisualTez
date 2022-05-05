@@ -26,6 +26,8 @@ export class FieldVariableSetter extends (Blockly.FieldVariable as any) {
         }
 
         this.disabledDropdown = !!opt_config?.disabledDropdown;
+
+        if (opt_validator) this.setValidator(opt_validator);
     }
 
     /**
