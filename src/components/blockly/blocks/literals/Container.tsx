@@ -5,9 +5,6 @@ import Block from 'src/components/blockly/Block';
 import Value from 'src/components/blockly/Value';
 import Shadow from '../../Shadow';
 
-import { UnitType } from '../types';
-import { UnitLiteral } from './Singleton';
-
 export const SequenceItem = () => <Block type={BlockKind.sequence_item} />;
 export const ListLiteral = () => (
     <Block type={BlockKind.list_literal} tags={['literal', 'list', 'sequence']}>

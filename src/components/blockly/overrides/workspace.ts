@@ -33,7 +33,7 @@ export class VisualTezWorkspace extends (Blockly.WorkspaceSvg as BlocklyWorkspac
      * @returns void
      */
     addVariable(block: Block, variable: VariableModel) {
-        const rootBlock = block.getSurroundParent();
+        const rootBlock = block.getRootBlock();
 
         if (rootBlock) {
             this.scopeContext.addVariable(rootBlock.id, variable);

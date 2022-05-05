@@ -16,34 +16,38 @@ import Context, { ScopeKind, VariableKind } from '../core/context';
 import { extractVariableName } from '../utils/variables';
 import { buildErrorInfo } from '../utils/errorHandling';
 import { MichelsonJSON } from '@tezwell/michelson-sdk/typings';
+import { findVarName } from '../utils/namespace';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 Blockly.Blocks[BlockKind.lambda_literal] = {
     init: function () {
-        this.jsonInit({
-            type: BlockKind.lambda_literal,
-            message0: 'Lambda with argument %1 of type %2',
-            args0: [
-                {
-                    type: 'field_variable',
-                    name: 'VAR',
-                    variable: null,
-                },
-                {
-                    type: 'input_value',
-                    name: 'TYPE',
-                    check: ['Type'],
-                },
-            ],
-            message1: 'Code %1',
-            args1: [{ type: 'input_statement', name: 'CODE', check: ['Statement'] }],
-            message2: 'Return %1',
-            args2: [{ type: 'input_value', name: 'RETURN', check: ['Literal', 'Expression'], align: 'RIGHT' }],
-            inputsInline: true,
-            output: ['Literal', 'Lambda'],
-            outputShape: 3,
-            colour: 40,
-            extensions: ['contextMenu_newGetVariableBlock'],
-        });
+        const initName = findVarName('lambda_argument', this.workspace);
+        const variableField = new FieldVariableSetter(
+            initName,
+            this.renameVar,
+            [VariableKind.LambdaArgument],
+            VariableKind.LambdaArgument,
+            {
+                disabledDropdown: true,
+            },
+        );
+
+        this.appendDummyInput()
+            .appendField('Lambda with argument (')
+            .appendField(variableField, 'VAR')
+            .appendField(')');
+        this.appendValueInput('TYPE').setCheck(['Type']).appendField('of type');
+
+        this.appendStatementInput('CODE').setCheck(['Statement']).appendField('Code');
+        this.appendValueInput('RETURN')
+            .setCheck(['Literal', 'Expression'])
+            .appendField('Return')
+            .setAlign(Blockly.ALIGN_RIGHT);
+
+        this.setOutput(true, ['Literal', 'Lambda']);
+        this.setOutputShape(3);
+        this.setColour(40);
+        this.setInputsInline(true);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },

@@ -7,37 +7,35 @@ import BlockKind from '../enums/BlockKind';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { extractVariableName } from '../utils/variables';
 import { buildErrorInfo } from '../utils/errorHandling';
-
-const ForEachBlock = {
-    type: BlockKind.for_each_block,
-    message0: 'For each %1 of list %2',
-    args0: [
-        {
-            type: 'field_variable',
-            name: 'VAR',
-            variable: null,
-        },
-        {
-            type: 'input_value',
-            name: 'LIST',
-            check: ['Expression', 'List'],
-        },
-    ],
-    message1: '%{BKY_CONTROLS_REPEAT_INPUT_DO} %1',
-    args1: [
-        {
-            type: 'input_statement',
-            name: 'DO',
-            check: 'Statement',
-        },
-    ],
-    colour: 180,
-    extensions: ['contextMenu_newGetVariableBlock', 'controls_forEach_tooltip'],
-};
+import { findVarName } from '../utils/namespace';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 Blockly.Blocks[BlockKind.for_each_block] = {
+    renameVar: function (oldName: string) {
+        if (!this.oldName) {
+            const current = this.getFieldValue('VAR');
+            this.oldName = oldName !== 'iter_1' ? oldName : current;
+        } else {
+            this.oldName = oldName;
+        }
+        return this.oldName;
+    },
     init: function () {
-        this.jsonInit(ForEachBlock);
+        const initName = findVarName('iter', this.workspace);
+        const variableField = new FieldVariableSetter(
+            initName,
+            this.renameVar,
+            [VariableKind.Iterator],
+            VariableKind.Iterator,
+        );
+
+        this.appendDummyInput().appendField('For each').appendField(variableField, 'VAR');
+        this.appendValueInput('LIST').setCheck(['Expression', 'List']).appendField('of list');
+
+        this.appendStatementInput('DO').setCheck(['Statement']).appendField('Do');
+
+        this.setColour(180);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, ['Statement']);
         this.setNextStatement(true, ['Statement']);
     },

@@ -9,6 +9,8 @@ import Context, { ScopeKind, VariableKind } from '../core/context';
 import { extractVariableName } from '../utils/variables';
 import { IStatement } from '@tezwell/smartts-sdk/typings/statement';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
+import { findVarName } from '../utils/namespace';
+import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 const MatchVariantBlock = {
     type: BlockKind.match_variant,
@@ -69,8 +71,35 @@ const MatchCaseBlock = {
 };
 
 Blockly.Blocks[BlockKind.match_variant_case] = {
+    renameCase: function (oldName: string) {
+        if (oldName.match(/^[a-zA-Z0-9_]+$/)) {
+            return oldName;
+        }
+        return this.getFieldValue('CASE');
+    },
+    renameVar: function (oldName: string) {
+        // TODO: Add variable validation
+    },
     init: function () {
-        this.jsonInit(MatchCaseBlock);
+        const initName = findVarName('case_arg', this.workspace);
+        const variableField = new FieldVariableSetter(
+            initName,
+            this.renameVar,
+            [VariableKind.VariantArgument],
+            VariableKind.VariantArgument,
+        );
+
+        const caseField = new Blockly.FieldTextInput('', (name: string) => this.renameCase(name));
+        this.appendDummyInput()
+            .appendField('Case')
+            .appendField(caseField, 'CASE')
+            .appendField('with argument')
+            .appendField(variableField, 'VAR');
+
+        this.appendStatementInput('DO').setCheck(['Statement']).appendField('Do');
+
+        this.setColour(30);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, ['MatchCase']);
         this.setNextStatement(true, ['MatchCase']);
     },
