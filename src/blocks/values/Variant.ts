@@ -56,7 +56,7 @@ Blockly.Blocks[BlockKind.left_literal_block] = {
 };
 SmartML.addBlock(BlockKind.left_literal_block, {
     toValue: (block: Block) => {
-        const value = SmartML.toValue(block, 'value');
+        const value = SmartML.toValue(block, 'VALUE');
         return ST_Left(value, buildErrorInfo(block));
     },
 });
@@ -80,7 +80,7 @@ Blockly.Blocks[BlockKind.right_literal_block] = {
 };
 SmartML.addBlock(BlockKind.right_literal_block, {
     toValue: (block: Block) => {
-        const value = SmartML.toValue(block, 'value');
+        const value = SmartML.toValue(block, 'VALUE');
         return ST_Right(value, buildErrorInfo(block));
     },
 });
