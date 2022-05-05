@@ -235,6 +235,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         Blockly.Events.DELETE,
                         Blockly.Events.CREATE,
                         Blockly.Events.VAR_RENAME,
+                        Blockly.Events.VAR_CREATE,
                         Blockly.Events.CHANGE,
                     ].includes(event.type)
                 ) {

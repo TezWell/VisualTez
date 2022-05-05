@@ -16,14 +16,12 @@ import Context, { ScopeKind, VariableKind } from '../core/context';
 import { extractVariableName } from '../utils/variables';
 import { buildErrorInfo } from '../utils/errorHandling';
 import { MichelsonJSON } from '@tezwell/michelson-sdk/typings';
-import { findVarName } from '../utils/namespace';
 import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
 Blockly.Blocks[BlockKind.lambda_literal] = {
     init: function () {
-        const initName = findVarName('lambda_argument', this.workspace);
         const variableField = new FieldVariableSetter(
-            initName,
+            'lambda_argument',
             this.renameVar,
             [VariableKind.LambdaArgument],
             VariableKind.LambdaArgument,

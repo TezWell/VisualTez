@@ -54,7 +54,7 @@ const TemplatesDrawer: React.FC<TemplatesDrawerProps> = () => {
                     <Button
                         key={template.name}
                         onClick={() => selectTemplate(template.path)}
-                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
+                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2 my-1"
                     >
                         {template.name}
                     </Button>
@@ -67,7 +67,7 @@ const TemplatesDrawer: React.FC<TemplatesDrawerProps> = () => {
                     <Button
                         key={template.name}
                         onClick={() => selectTemplate(template.path)}
-                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
+                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2 my-1"
                     >
                         {template.name}
                     </Button>
@@ -80,7 +80,7 @@ const TemplatesDrawer: React.FC<TemplatesDrawerProps> = () => {
                     <Button
                         key={template.name}
                         onClick={() => selectTemplate(template.path)}
-                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2"
+                        className="w-full bg-yellow-600 hover:bg-yellow-500 active:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2 my-1"
                     >
                         {template.name}
                     </Button>

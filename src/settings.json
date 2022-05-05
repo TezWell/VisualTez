@@ -44,6 +44,10 @@
             {
                 "name": "FA2 - Transfer",
                 "path": "/templates/value/fa2_transfer.xml"
+            },
+            {
+                "name": "Lambda value",
+                "path": "/templates/lambda.xml"
             }
         ],
         "types": [
