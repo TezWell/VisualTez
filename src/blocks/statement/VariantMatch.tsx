@@ -85,8 +85,8 @@ Blockly.Blocks[BlockKind.match_variant_case] = {
         const variableField = new FieldVariableSetter(
             initName,
             this.renameVar,
-            [VariableKind.Iterator],
-            VariableKind.Iterator,
+            [VariableKind.VariantArgument],
+            VariableKind.VariantArgument,
         );
 
         const caseField = new Blockly.FieldTextInput('', (name: string) => this.renameCase(name));
