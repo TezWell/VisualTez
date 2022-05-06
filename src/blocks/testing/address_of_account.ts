@@ -12,7 +12,7 @@ import { FieldVariableGetter } from 'src/components/blockly/overrides/field_vari
 Blockly.Blocks[BlockKind.test__address_of_account] = {
     init: function () {
         const contractVariable = new FieldVariableGetter(undefined, ['implicit_account', 'originated_contract']);
-        this.appendDummyInput().appendField('Balance of').appendField(contractVariable, 'NAME');
+        this.appendDummyInput().appendField('Address of').appendField(contractVariable, 'NAME');
         this.setTooltip('[Testing] - Expands to an address of a given account. Returns a value of type `TAddress`.');
         this.setOutput(true, ['Literal', 'Address']);
         this.setColour(340);
