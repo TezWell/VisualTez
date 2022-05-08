@@ -1,4 +1,5 @@
 import Blockly from 'blockly';
+import { EditorRenderer } from 'src/context/Editor';
 
 /**
  * Highlights the input value connection
@@ -29,28 +30,13 @@ Blockly.BlockSvg.prototype.setDragging = function (this, adding: boolean) {
  * @param add Indicates when to add the highlight effect and when to remove it
  */
 const highlightConnection = (block: any, conn: any, add: boolean) => {
-    if (conn) {
+    // Highlighting is only necessary when using Zelos renderer
+    const usingZelosRenderer = block?.workspace?.renderer_?.name?.toLowerCase() === EditorRenderer.Zelos;
+    if (conn && usingZelosRenderer) {
         if (add) {
-            let colour;
-            let size;
-            let fill;
-            if (conn.type === Blockly.ConnectionType.INPUT_VALUE) {
-                size = 5;
-                colour = 'magenta';
-                fill = 'blue';
-            } else if (conn.type === Blockly.ConnectionType.OUTPUT_VALUE) {
-                size = 5;
-                colour = 'magenta';
-                fill = 'blue';
-            } else if (conn.type === Blockly.ConnectionType.NEXT_STATEMENT) {
-                size = 4;
-                colour = 'goldenrod';
-                fill = 'none';
-            } else if (conn.type === Blockly.ConnectionType.PREVIOUS_STATEMENT) {
-                size = 2;
-                colour = 'goldenrod';
-                fill = colour;
-            }
+            const colour = 'magenta';
+            const size = 5;
+            const fill = 'blue';
             // Add connection indicator
             block.blockConnection_ = Blockly.utils.dom.createSvgElement(
                 Blockly.utils.Svg.CIRCLE,
