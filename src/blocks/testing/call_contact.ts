@@ -33,6 +33,7 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
         this.appendDummyInput();
 
         this.appendDummyInput().appendField('Sender').appendField(senderVariable, 'SENDER');
+        this.appendDummyInput();
         this.appendValueInput('AMOUNT').setCheck(['Mutez']).appendField('Amount');
         this.appendValueInput('ARGUMENT').setCheck(['Literal']).appendField('Argument');
         this.appendDummyInput();

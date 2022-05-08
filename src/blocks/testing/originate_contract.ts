@@ -2,7 +2,7 @@ import Blockly from 'blockly';
 import { buildAction } from '@tezwell/tezos-testing-sdk';
 import { ActionKind } from '@tezwell/tezos-testing-sdk/action';
 
-import type { Block } from 'src/typings/blockly';
+import { Block } from 'src/typings/blockly';
 
 import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
@@ -36,8 +36,8 @@ Blockly.Blocks[BlockKind.test__originate_contract_action] = {
             .appendField('from compilation')
             .appendField(compilationField, 'CONTRACT');
 
-        this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('Balance');
-        this.appendValueInput('STORAGE').setCheck(['Literal']).appendField('Storage');
+        this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('Initial balance');
+        this.appendValueInput('STORAGE').setCheck(['Literal']).appendField('Initial storage');
 
         this.setColour(300);
         this.setPreviousStatement(true, ['TestAction']);
