@@ -1,3 +1,4 @@
+import './connection_marker';
 import './variables';
 import './category';
 import './collapsible_category';
