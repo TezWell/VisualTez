@@ -263,14 +263,14 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         trashcan={false}
                         comments={true}
                         grid={{
-                            spacing: 50,
-                            length: 3,
-                            colour: '#ccc',
+                            spacing: 40,
+                            length: 40,
+                            colour: '#000',
                         }}
                         zoom={{
                             controls: true,
                             wheel: true,
-                            startScale: 0.6,
+                            startScale: 1,
                             maxScale: 2,
                             minScale: 0.01,
                             scaleSpeed: 1.1,
