@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="inline-block align-bottom bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle w-full max-w-5xl">
+                        <div className="inline-block align-bottom bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle w-full max-w-3xl">
                             <div className="flex flex-col bg-white dark:bg-black">
                                 {title ? (
                                     <div className="p-3 bg-gray-400 bg-opacity-20">

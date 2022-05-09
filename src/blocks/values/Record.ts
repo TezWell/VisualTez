@@ -91,7 +91,10 @@ Michelson.addBlock(BlockKind.record_literal, {
         } while ((targetBlock = targetBlock.getNextBlock()));
 
         if (fields.length < 2) {
-            throw new Error('Each record must contain at least two(2) entries.');
+            if (fields.length === 0) {
+                throw new Error('Each record must contain at least two(2) entries.');
+            }
+            return Michelson.toType(fields[0][1], 'value');
         }
 
         const layout = block.getFieldValue('LAYOUT');
@@ -119,7 +122,10 @@ Michelson.addBlock(BlockKind.record_literal, {
         } while ((targetBlock = targetBlock.getNextBlock()));
 
         if (fields.length < 2) {
-            throw new Error('Each record must contain at least two(2) entries.');
+            if (fields.length === 0) {
+                throw new Error('Each record must contain at least two(2) entries.');
+            }
+            return Michelson.toMichelson(fields[0][1], 'value');
         }
 
         const layout = block.getFieldValue('LAYOUT');
