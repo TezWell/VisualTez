@@ -10,7 +10,7 @@ import Michelson from '../generators/Michelson';
 
 const PackData = {
     type: BlockKind.test__pack_data_action,
-    message0: 'Print packed data %1 of type %2',
+    message0: 'Show packed data %1 for type %2',
     args0: [
         {
             type: 'input_value',
