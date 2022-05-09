@@ -29,9 +29,7 @@
     "testing_accounts": {
         "test_account_1": "bootstrap1",
         "test_account_2": "bootstrap2",
-        "test_account_3": "bootstrap3",
-        "test_account_4": "bootstrap4",
-        "test_account_5": "bootstrap5"
+        "test_account_3": "bootstrap3"
     },
     "templates": {
         "contracts": [

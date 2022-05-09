@@ -259,7 +259,7 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
         await Http.post(api, compilation.result.suite, { timeout: 10000 })
             .then(({ data }) => setResults(data))
             .catch((e: any) => {
-                return setError(e.response?.data.message || e.message);
+                return setError(e.response?.data?.message || e.message);
             })
             .finally(() => setRunning(false));
     }, [compilation.result.suite]);
