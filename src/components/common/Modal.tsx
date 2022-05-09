@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="inline-block align-bottom bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-2xl sm:w-full">
+                        <div className="inline-block align-bottom bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle w-full max-w-5xl">
                             <div className="flex flex-col bg-white dark:bg-black">
                                 {title ? (
                                     <div className="p-3 bg-gray-400 bg-opacity-20">
@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                                         </Dialog.Title>
                                     </div>
                                 ) : null}
-                                <div className="relative h-96 border-t border-b border-yellow-400 dark:border-yellow-500 max-h-96 bg-white dark:bg-gray-400 dark:bg-opacity-20">
+                                <div className="relative h-96 border-t border-b border-yellow-400 dark:border-yellow-500 bg-white dark:bg-gray-400 dark:bg-opacity-20">
                                     {children}
                                 </div>
                                 <div className="bg-gray-400 bg-opacity-20 flex space-x-2 justify-end h-14 p-2">

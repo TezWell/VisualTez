@@ -224,15 +224,60 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                         </Disclosure.Button>
                         <Disclosure.Panel className="text-sm max-w-[500px]">
                             <div className="p-2">
-                                <ResultDetails result={result} />
+                                <Disclosure>
+                                    {({ open }) => (
+                                        <div>
+                                            <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none border border-black">
+                                                <span>Show result</span>
+                                                <ChevronUpIcon
+                                                    className={buildClassName([
+                                                        {
+                                                            classes: 'transform rotate-180',
+                                                            append: !open,
+                                                        },
+                                                        {
+                                                            classes: 'block w-5 h-5',
+                                                        },
+                                                    ])}
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel className="relative">
+                                                <ResultDetails result={result} />
+                                            </Disclosure.Panel>
+                                        </div>
+                                    )}
+                                </Disclosure>
                             </div>
-                            <div className="relative flex flex-col flex-shrink-0 max-h-[300px] border-t border-black mt-2 p-2">
-                                <p className="my-2 font-bold">Action</p>
-                                <CodeBlock
-                                    language="json"
-                                    text={JSON.stringify(result.action, null, 4)}
-                                    showLineNumbers={false}
-                                />
+                            <div className="m-2">
+                                <Disclosure>
+                                    {({ open }) => (
+                                        <div>
+                                            <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none border border-black">
+                                                <span>Show action</span>
+                                                <ChevronUpIcon
+                                                    className={buildClassName([
+                                                        {
+                                                            classes: 'transform rotate-180',
+                                                            append: !open,
+                                                        },
+                                                        {
+                                                            classes: 'block w-5 h-5',
+                                                        },
+                                                    ])}
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel>
+                                                <div className="relative flex flex-col flex-shrink-0 max-h-[300px] p-2">
+                                                    <CodeBlock
+                                                        language="json"
+                                                        text={JSON.stringify(result.action, null, 4)}
+                                                        showLineNumbers={false}
+                                                    />
+                                                </div>
+                                            </Disclosure.Panel>
+                                        </div>
+                                    )}
+                                </Disclosure>
                             </div>
                         </Disclosure.Panel>
                     </div>
