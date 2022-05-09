@@ -208,7 +208,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                             },
                         ])}
                     >
-                        <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none border-b border-black">
+                        <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none bg-black/[.1]">
                             <span>{getActionLabel(result.action.kind)}</span>
                             <ChevronUpIcon
                                 className={buildClassName([
@@ -223,11 +223,11 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                             />
                         </Disclosure.Button>
                         <Disclosure.Panel className="text-sm max-w-[500px]">
-                            <div className="p-2">
+                            <div className="m-2 p-2 border border-black">
                                 <Disclosure>
                                     {({ open }) => (
                                         <div>
-                                            <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none border border-black">
+                                            <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none bg-black/[.1]">
                                                 <span>Show result</span>
                                                 <ChevronUpIcon
                                                     className={buildClassName([
@@ -248,11 +248,11 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                     )}
                                 </Disclosure>
                             </div>
-                            <div className="m-2">
+                            <div className="m-2 p-2 border border-black">
                                 <Disclosure>
                                     {({ open }) => (
                                         <div>
-                                            <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none border border-black">
+                                            <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none bg-black/[.1]">
                                                 <span>Show action</span>
                                                 <ChevronUpIcon
                                                     className={buildClassName([
