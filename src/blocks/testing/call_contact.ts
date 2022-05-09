@@ -12,6 +12,7 @@ import { buildBlockErrorString } from '../utils/errorHandling';
 import { validateTimestamp } from '../values/Timestamp';
 import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
 import settings from 'src/settings.json';
+import { Unit } from '@tezwell/michelson-sdk/literal';
 
 Blockly.Blocks[BlockKind.test__call_contract_action] = {
     init: function () {
@@ -38,15 +39,21 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
         this.appendValueInput('ARGUMENT').setCheck(['Literal']).appendField('Argument');
         this.appendDummyInput();
 
-        const expectDropDown = new Blockly.FieldDropdown([
-            ['Succeed', 'succeed'],
-            ['Fail', 'fail'],
-        ]);
-        this.appendDummyInput().appendField('Expecting transaction to').appendField(expectDropDown, 'EXPECT');
+        this.appendDummyInput()
+            .appendField('Expecting transaction to fail?')
+            .appendField(new Blockly.FieldCheckbox(false, this.validate.bind(this)), 'EXPECT_FAIL');
 
         this.setColour(300);
         this.setPreviousStatement(true, ['TestAction']);
         this.setNextStatement(true, ['TestAction']);
+    },
+    validate: function (newValue: string) {
+        if (newValue == 'TRUE') {
+            this.appendValueInput('EXPECTED_ERROR').setCheck(['Literal']).appendField('with error');
+        } else if (this.getInput('EXPECTED_ERROR')) {
+            this.removeInput('EXPECTED_ERROR');
+        }
+        return newValue;
     },
 };
 
@@ -58,7 +65,6 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
         const amount = String(block.getInputTargetBlock('AMOUNT')?.getFieldValue('value'));
         const level = Number(block.getInputTargetBlock('LEVEL')?.getFieldValue('nat_value'));
         const argument = Michelson.toMichelson(block, 'ARGUMENT');
-        const expect: string = block.getFieldValue('EXPECT');
 
         const action: ICallContractPayload = {
             recipient,
@@ -66,8 +72,11 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
             entrypoint,
             amount,
             parameter: argument as any,
-            expect_failure: expect === 'fail',
         };
+
+        if (block.getFieldValue('EXPECT_FAIL') === 'TRUE') {
+            action.expect_failwith = Michelson.toMichelson(block, 'EXPECTED_ERROR', Unit()) as any;
+        }
 
         const timestampBlock = block.getInputTargetBlock('TIMESTAMP');
         if (timestampBlock) {

@@ -49,10 +49,23 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
         case ActionResultStatus.Failure:
             switch (result.action.kind) {
                 case ActionKind.CallContract:
-                    if (result.action.payload.expect_failure) {
-                        if ('storage' in result.result) {
+                    if (result.action.payload.expect_failwith) {
+                        if ('actual' in result.result && 'expected' in result.result) {
                             return (
-                                <p className="my-2 font-bold">The contract call was expected to fail, but passed.</p>
+                                <div>
+                                    <p className="my-2 font-bold">Expected</p>
+                                    <CodeBlock
+                                        language="json"
+                                        text={JSON.stringify(result.result['expected'], null, 4)}
+                                        showLineNumbers
+                                    />
+                                    <p className="my-2 font-bold">Received</p>
+                                    <CodeBlock
+                                        language="json"
+                                        text={JSON.stringify(result.result['actual'], null, 4)}
+                                        showLineNumbers
+                                    />
+                                </div>
                             );
                         }
                     }
@@ -114,7 +127,7 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
                         </div>
                     );
                 case ActionKind.CallContract:
-                    if (result.action.payload.expect_failure) {
+                    if (result.action.payload.expect_failwith) {
                         return <p className="my-2 font-bold">The contract call failed as expected.</p>;
                     }
                     return (
@@ -222,7 +235,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                 ])}
                             />
                         </Disclosure.Button>
-                        <Disclosure.Panel className="text-sm max-w-[500px]">
+                        <Disclosure.Panel className="text-sm max-w-[600px]">
                             <div className="m-2 p-2 border border-black">
                                 <Disclosure>
                                     {({ open }) => (

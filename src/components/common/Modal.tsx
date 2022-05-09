@@ -13,7 +13,7 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
     return (
         <Transition.Root show={open} as={React.Fragment}>
             <Dialog as="div" className="fixed z-100 inset-0 overflow-y-auto" onClose={onClose}>
-                <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="min-h-screen pt-4 px-4 pb-20 text-center block">
                     <Transition.Child
                         as={React.Fragment}
                         enter="ease-out duration-300"
@@ -39,8 +39,8 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="inline-block align-bottom bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle w-full max-w-3xl">
-                            <div className="flex flex-col bg-white dark:bg-black">
+                        <div className="inline-block bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all align-middle w-[80%]">
+                            <div className="flex flex-col bg-white dark:bg-black h-full">
                                 {title ? (
                                     <div className="p-3 bg-gray-400 bg-opacity-20">
                                         <Dialog.Title

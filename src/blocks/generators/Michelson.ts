@@ -59,9 +59,13 @@ class Generator extends (Blockly.Generator as BlocklyGenerator) {
      * @param {Block} name The child block name.
      * @return {Michelson_LiteralUnion}
      */
-    toMichelson(block: Block, name: string): IValue {
+    toMichelson(block: Block, name: string, default_value?: IValue): IValue {
         const targetBlock = block.getInputTargetBlock(name);
         if (!targetBlock) {
+            if (default_value) {
+                // Return default value if provided
+                return default_value;
+            }
             const blockName = block.type
                 .split('_')
                 .map((tk) => tk.charAt(0).toUpperCase() + tk.slice(1))
