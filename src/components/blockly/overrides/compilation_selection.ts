@@ -10,6 +10,17 @@ export class CompilationSelection extends (Blockly.FieldDropdown as any) {
     /**
      * @override
      */
+    getDisplayText_() {
+        const text = super.getDisplayText_();
+        if (!text || text === 'null') {
+            return '';
+        }
+        return text;
+    }
+
+    /**
+     * @override
+     */
     doClassValidation_(opt_newValue: any) {
         return /** @type {string} */ opt_newValue;
     }
