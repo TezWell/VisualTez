@@ -16,10 +16,13 @@ Blockly.BlockSvg.prototype.highlightShapeForInput = function (this: any, conn: a
  *
  * @override
  */
-const original_setDragging = Blockly.BlockSvg.prototype.setDragging;
-Blockly.BlockSvg.prototype.setDragging = function (this, adding: boolean) {
-    highlightConnection(this, this.outputConnection, adding);
-    original_setDragging.call(this, adding);
+Blockly.BlockSvg.prototype.addSelect = function (this) {
+    this.pathObject.updateSelected(true);
+    highlightConnection(this, this.outputConnection, true);
+};
+Blockly.BlockSvg.prototype.removeSelect = function (this) {
+    this.pathObject.updateSelected(false);
+    highlightConnection(this, this.outputConnection, false);
 };
 
 /**
