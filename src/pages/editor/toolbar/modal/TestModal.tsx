@@ -1,7 +1,7 @@
 import React from 'react';
 import { Disclosure } from '@headlessui/react';
 import { CheckIcon, ChevronUpIcon, XIcon } from '@heroicons/react/solid';
-import { ActionKind, ActionResultStatus, IActionResult } from '@tezwell/tezos-testing-sdk/action';
+import { ActionKind, ActionResultStatus, IAction, IActionResult } from '@tezwell/tezos-testing-sdk/action';
 
 import settings from 'src/settings.json';
 import { TestCompilation } from 'src/blocks';
@@ -13,14 +13,39 @@ import CircularLoading from 'src/components/common/Spinner';
 import CodeBlock from 'src/components/CodeBlock';
 import { isDevelopment } from 'src/utils';
 
-const getActionLabel = (action: ActionKind): string => {
-    switch (action) {
+const getActionLabel = (action: IAction): string | React.ReactElement => {
+    switch (action.kind) {
         case ActionKind.CallContract:
-            return 'Contract Call';
+            return (
+                <span>
+                    Call entrypoint{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">
+                        {action.payload.entrypoint}
+                    </span>{' '}
+                    of contract{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">
+                        {action.payload.recipient}
+                    </span>
+                </span>
+            );
         case ActionKind.CreateImplicitAccount:
-            return 'Create Implicit Account';
+            return (
+                <span>
+                    Create an implicit account{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">{action.payload.name}</span>{' '}
+                    with balance{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">
+                        {action.payload.balance} μꜩ
+                    </span>
+                </span>
+            );
         case ActionKind.OriginateContract:
-            return 'Originate Contract';
+            return (
+                <span>
+                    Originate contract{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">{action.payload.name}</span>
+                </span>
+            );
         case ActionKind.AssertAccountBalance:
             return 'Assert Account Balance';
         case ActionKind.AssertContractStorage:
@@ -222,7 +247,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                         ])}
                     >
                         <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none bg-black/[.1]">
-                            <span>{getActionLabel(result.action.kind)}</span>
+                            <span>{getActionLabel(result.action)}</span>
                             <ChevronUpIcon
                                 className={buildClassName([
                                     {
@@ -235,8 +260,8 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                 ])}
                             />
                         </Disclosure.Button>
-                        <Disclosure.Panel className="text-sm max-w-[600px]">
-                            <div className="m-2 p-2 border border-black">
+                        <Disclosure.Panel className="text-sm w-full max-w-[600px]">
+                            <div className="m-2 p-2 border border-black w-full">
                                 <Disclosure>
                                     {({ open }) => (
                                         <div>
@@ -261,7 +286,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                     )}
                                 </Disclosure>
                             </div>
-                            <div className="m-2 p-2 border border-black">
+                            <div className="m-2 p-2 border border-black w-full">
                                 <Disclosure>
                                     {({ open }) => (
                                         <div>
