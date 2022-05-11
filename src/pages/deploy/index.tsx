@@ -59,13 +59,12 @@ const DeployContainer = () => {
                 }
 
                 const result = await deployContract(client.current, params);
-                result.watcher.forEach((confirmation) => {
+                subscription.current = result.watcher.subscribe((confirmation) => {
                     dispatch({
                         type: DeploymentActionKind.UPDATE_CONFIRMATIONS,
                         payload: confirmation,
                     });
                 });
-                subscription.current = result.watcher.subscribe();
 
                 dispatch({
                     type: DeploymentActionKind.UPDATE_RESULT,
