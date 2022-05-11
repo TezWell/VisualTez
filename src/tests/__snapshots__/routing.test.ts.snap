@@ -82,7 +82,7 @@ exports[`Application Routing Test Route VisualTez 1`] = `
   class="flex flex-col flex-1"
 >
   <div
-    class="pt-20 pb-20"
+    class="pt-10 pb-10"
   >
     <div
       class="container px-3 mx-auto flex flex-wrap flex-col lg:flex-row items-center justify-evenly"
@@ -103,7 +103,7 @@ exports[`Application Routing Test Route VisualTez 1`] = `
         <p
           class="leading-normal text-2xl mb-8"
         >
-          A visual programming tool for writing smart contracts in the Tezos blockchain.
+          A visual programming tool for writing and testing smart contracts in the Tezos blockchain.
         </p>
         <div
           class="inline-flex spacing-2"
@@ -127,12 +127,12 @@ exports[`Application Routing Test Route VisualTez 1`] = `
         </div>
       </div>
       <div
-        class="flex justify-center h-full w-full md:w-4/5 lg:w-2/5 py-6 text-center"
+        class="flex justify-center h-full w-full lg:w-2/5 py-6 text-center"
       >
         <img
           alt="example"
           class="h-full w-full"
-          src="/assets/sample.svg"
+          src="/assets/sample2.svg"
         />
       </div>
     </div>
