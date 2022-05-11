@@ -1,7 +1,3 @@
----
-slug: /
----
-
 # Building a contract
 
 <div style={{ display: "flex", justifyContent: "center" }}>
