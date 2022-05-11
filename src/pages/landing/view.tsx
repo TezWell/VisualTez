@@ -2,14 +2,14 @@ import React from 'react';
 import RouterButton from 'src/components/common/RouterButton';
 import { resolvePath } from 'src/utils/path';
 
-const Landing: React.FC = () => (
-    <div className="pt-20 pb-20">
+const Landing = () => (
+    <div className="pt-10 pb-10">
         <div className="container px-3 mx-auto flex flex-wrap flex-col lg:flex-row items-center justify-evenly">
             <div className="flex flex-col w-full md:w-4/5 lg:w-2/5 justify-center items-center lg:items-start text-center md:text-left">
                 <p className="uppercase tracking-loose w-full">About the Project</p>
                 <h1 className="my-4 text-5xl font-bold leading-tight w-full">VisualTez</h1>
                 <p className="leading-normal text-2xl mb-8">
-                    A visual programming tool for writing smart contracts in the Tezos blockchain.
+                    A visual programming tool for writing and testing smart contracts in the Tezos blockchain.
                 </p>
                 <div className="inline-flex spacing-2">
                     <RouterButton
@@ -27,8 +27,8 @@ const Landing: React.FC = () => (
                     </a>
                 </div>
             </div>
-            <div className="flex justify-center h-full w-full md:w-4/5 lg:w-2/5 py-6 text-center">
-                <img alt="example" className="h-full w-full" src={resolvePath('/assets/sample.svg')} />
+            <div className="flex justify-center h-full w-full lg:w-2/5 py-6 text-center">
+                <img alt="example" className="h-full w-full" src={resolvePath('/assets/sample2.svg')} />
             </div>
         </div>
     </div>
