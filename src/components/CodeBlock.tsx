@@ -38,7 +38,7 @@ const CodeBlock: React.FC<OwnProps> = ({ text, square, withCopy, wrapLongLines =
             {withCopy ? (
                 <Button
                     onClick={copy}
-                    className="absolute p-2 right-5 top-2 bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500"
+                    className="absolute z-20 p-2 right-5 top-2 bg-blue-500 hover:bg-blue-400 border-blue-700 hover:border-blue-500"
                 >
                     Copy
                 </Button>

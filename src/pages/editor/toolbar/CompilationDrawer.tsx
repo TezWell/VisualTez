@@ -21,7 +21,6 @@ import Logger from 'src/utils/logger';
 import { DeploymentActionKind } from 'src/context/Deployment';
 import ConditionalRender from 'src/components/common/ConditionalRender';
 import TestModal from './modal/TestModal';
-import { isDevelopment } from 'src/utils';
 
 interface JSONOrMichelineSwitchProps {
     showMicheline: boolean;
@@ -464,47 +463,42 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                     </div>
                 ))}
             </div>
-            {isDevelopment() ? (
-                <>
-                    <div className="flex items-center justify-between p-5 border-b border-t">
-                        <TabInfo title="Tests" items={testCompilations.length} />
-                        <ExpandButton
-                            selected={selectedTab === Target.Test}
-                            select={() => onTabSelection(Target.Test)}
-                        />
-                    </div>
-                    <div
-                        className={buildClassName([
-                            {
-                                classes: 'hidden',
-                                append: selectedTab !== Target.Test,
-                            },
-                            {
-                                classes:
-                                    'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
-                            },
-                        ])}
-                    >
-                        {testCompilations.map((compilation) => (
-                            <div
-                                key={compilation.result.name}
-                                className="mb-3 bg-white shadow-lg rounded-md p-3 dark:bg-black border-2 border-black dark:border-white"
-                            >
-                                <div className="flex items-center justify-center text-xl text-center align-middle font-mono p-2 border-2 rounded-lg mb-3">
-                                    <p className="text-ellipsis overflow-hidden">{compilation.result.name}</p>
-                                </div>
-                                <Button
-                                    fullWidth
-                                    onClick={() => setTestCompilation(compilation)}
-                                    className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 mb-2 p-1"
-                                >
-                                    Run Test
-                                </Button>
+            <>
+                <div className="flex items-center justify-between p-5 border-b border-t">
+                    <TabInfo title="Tests" items={testCompilations.length} />
+                    <ExpandButton selected={selectedTab === Target.Test} select={() => onTabSelection(Target.Test)} />
+                </div>
+                <div
+                    className={buildClassName([
+                        {
+                            classes: 'hidden',
+                            append: selectedTab !== Target.Test,
+                        },
+                        {
+                            classes:
+                                'grow basis-0 border-t p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400',
+                        },
+                    ])}
+                >
+                    {testCompilations.map((compilation) => (
+                        <div
+                            key={compilation.result.name}
+                            className="mb-3 bg-white shadow-lg rounded-md p-3 dark:bg-black border-2 border-black dark:border-white"
+                        >
+                            <div className="flex items-center justify-center text-xl text-center align-middle font-mono p-2 border-2 rounded-lg mb-3">
+                                <p className="text-ellipsis overflow-hidden">{compilation.result.name}</p>
                             </div>
-                        ))}
-                    </div>
-                </>
-            ) : null}
+                            <Button
+                                fullWidth
+                                onClick={() => setTestCompilation(compilation)}
+                                className="bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 mb-2 p-1"
+                            >
+                                Run Test
+                            </Button>
+                        </div>
+                    ))}
+                </div>
+            </>
             <div className="flex items-center justify-between border-t p-5">
                 <TabInfo title="Values" items={valueCompilations.length} />
                 <ExpandButton

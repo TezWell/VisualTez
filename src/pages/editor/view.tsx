@@ -175,7 +175,6 @@ import {
     ShiftLeftExpression,
     SetContainsElementExpression,
 } from 'src/components/blockly/blocks/expressions';
-import { isDevelopment } from 'src/utils';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
 import { IsVariantExpression, OpenVariantExpression } from 'src/components/blockly/blocks/expressions/variant';
@@ -265,6 +264,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         grid={{
                             spacing: 40,
                             length: 40,
+                            snap: false,
                             colour: '#000',
                         }}
                         zoom={{
@@ -787,34 +787,32 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <CallView />
                         </Category>
 
-                        {isDevelopment() ? (
-                            <Category name="Testing" categorystyle="testing_category">
-                                <CategoryIcon>
-                                    <BeakerIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
+                        <Category name="Testing" categorystyle="testing_category">
+                            <CategoryIcon>
+                                <BeakerIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
 
-                                <TestTarget />
-                                <TestingAction_CreateImplicitAccount />
-                                <TestingAction_OriginateContract />
-                                <TestingAction_CallContract />
-                                <TestingAction_PrintPackedData />
+                            <TestTarget />
+                            <TestingAction_CreateImplicitAccount />
+                            <TestingAction_OriginateContract />
+                            <TestingAction_CallContract />
+                            <TestingAction_PrintPackedData />
 
-                                <Label text="Context Modifiers" web-class="defaultLabel" />
+                            <Label text="Context Modifiers" web-class="defaultLabel" />
 
-                                <TestingAction_ModifyChainID />
+                            <TestingAction_ModifyChainID />
 
-                                <Label text="Assertions" web-class="defaultLabel" />
-                                <TestingAction_AssertAccountBalance />
-                                <TestingAction_AssertContractStorage />
+                            <Label text="Assertions" web-class="defaultLabel" />
+                            <TestingAction_AssertAccountBalance />
+                            <TestingAction_AssertContractStorage />
 
-                                <Label text="Macros" web-class="defaultLabel" />
-                                <Testing_AddressOfAccount />
-                                <Testing_BalanceOfAccount />
+                            <Label text="Macros" web-class="defaultLabel" />
+                            <Testing_AddressOfAccount />
+                            <Testing_BalanceOfAccount />
 
-                                <Label text="Others" web-class="defaultLabel" />
-                                <TestingAction_OriginateContractFromCode />
-                            </Category>
-                        ) : null}
+                            <Label text="Others" web-class="defaultLabel" />
+                            <TestingAction_OriginateContractFromCode />
+                        </Category>
                     </BlocklyEditor>
                 </div>
                 <Drawer />
