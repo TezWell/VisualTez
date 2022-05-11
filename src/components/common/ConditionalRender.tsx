@@ -3,7 +3,7 @@ import React from 'react';
 interface ConditionalRenderProps<ChildProps> {
     props: ChildProps;
     children: React.FC<Required<ChildProps>>;
-    fallback?: React.ReactElement<any, any> | null;
+    fallback?: React.ReactElement | null;
 }
 
 function ConditionalRender<ChildProps>({

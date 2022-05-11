@@ -11,19 +11,17 @@ const ElapsedTime: React.FC<Props> = ({ timestamp }) => {
     const [elapsedTime, setElapsedTime] = React.useState(getElapsedTime(timestamp));
 
     React.useEffect(() => {
-        setTimeout(() => {
+        isMounted.current = true;
+        const timeout = setTimeout(() => {
             if (isMounted.current) {
                 setElapsedTime(getElapsedTime(timestamp));
             }
         }, 1000);
-    });
-
-    React.useEffect(() => {
-        isMounted.current = true;
         return () => {
             isMounted.current = false;
+            clearTimeout(timeout);
         };
-    }, []);
+    }, [timestamp]);
 
     return <>{elapsedTime} ago</>;
 };

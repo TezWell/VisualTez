@@ -87,9 +87,25 @@ export const deployContract = async (client: TezosWallet, params: WalletOriginat
     const pkh = await client.taquito.wallet.pkh();
     const counter = Number((await client.taquito.rpc.getContract(pkh)).counter || 0);
     const blockHeader = await client.taquito.rpc.getBlockHeader();
-    const operation: any = {
+    const operations: any[] = [];
+    if (await requiresReveal(client, pkh)) {
+        const publicKey = (await client.beacon.client.getActiveAccount())?.publicKey;
+        if (publicKey) {
+            const reveal = {
+                kind: 'reveal',
+                counter: String(counter + 1),
+                source: pkh,
+                fee: '1270',
+                storage_limit: '0',
+                gas_limit: '1100',
+                public_key: publicKey,
+            };
+            operations.push(reveal);
+        }
+    }
+    const origination = {
         kind: 'origination',
-        counter: String(counter + 1),
+        counter: String(counter + operations.length + 1),
         source: pkh,
         fee: String((params.fee || 0) * 1_000_000),
         balance: String(params.balance),
@@ -101,9 +117,11 @@ export const deployContract = async (client: TezosWallet, params: WalletOriginat
         },
         delegate: params.delegate || undefined,
     };
+    operations.push(origination);
+
     const bytes = await localForger.forge({
         branch: blockHeader.hash,
-        contents: [operation],
+        contents: operations,
     });
     const signingResult = await Beacon.sign(client.beacon, bytes);
 
@@ -111,7 +129,7 @@ export const deployContract = async (client: TezosWallet, params: WalletOriginat
         {
             branch: blockHeader.hash,
             protocol: blockHeader.protocol,
-            contents: [operation],
+            contents: operations,
             signature: signingResult.prefixSig,
         },
     ]);
@@ -124,7 +142,8 @@ export const deployContract = async (client: TezosWallet, params: WalletOriginat
         );
     }
 
-    const address = (preApplyResults?.[0]?.contents?.[0] as any)?.metadata?.operation_result?.originated_contracts?.[0];
+    const address = (preApplyResults?.[0]?.contents?.[operations.length - 1] as any)?.metadata?.operation_result
+        ?.originated_contracts?.[0];
     if (!address) {
         throw new Error('Could not originate contract.');
     }
@@ -136,4 +155,15 @@ export const deployContract = async (client: TezosWallet, params: WalletOriginat
         address,
         watcher: TezMonitor.operationConfirmations(client.taquito.rpc.getRpcUrl(), operationHash, 10),
     };
+};
+
+/**
+ * Verify if the public key needs to be revealed
+ * @param client Tezos client
+ * @param pkh Public key hash
+ * @returns true if the account needs to be revealed, false otherwise
+ */
+const requiresReveal = async (client: TezosWallet, pkh: string) => {
+    const managerKey = await client.taquito.rpc.getManagerKey(pkh);
+    return !managerKey;
 };
