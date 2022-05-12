@@ -4,7 +4,7 @@
 |   |   |
 |---|---|
 | Date | 2022-05-11 |
-| Commit  | 7d06ae264628c0caa033e37a094812ee2db8966f |
+| Commit  | [7d06ae2](https://github.com/TezWell/VisualTez/commit/7d06ae264628c0caa033e37a094812ee2db8966f) |
 
 ### Change Log
 

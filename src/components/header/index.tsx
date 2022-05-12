@@ -62,11 +62,11 @@ const Navigation: React.FC<NavigationProps> = () => {
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li>
                             <RouterButton
-                                className="inline-flex bg-black dark:bg-white border-gray-500 hover:border-gray-300 font-bold text-white dark:text-black border-b-4 rounded px-3 py-2"
+                                className="inline-flex bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 font-bold text-white dark:text-black border-b-4 rounded px-3 py-2"
                                 to="/editor"
                             >
                                 <PuzzleIcon className="block h-6 w-6 mr-1" />
-                                <span>Editor</span>
+                                Editor
                             </RouterButton>
                         </li>
                         <li className="h-10 border ml-3 mr-3 border-black dark:border-white" />
