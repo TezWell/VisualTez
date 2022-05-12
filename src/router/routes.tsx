@@ -9,6 +9,7 @@ import AdaptableViewport from 'src/components/common/AdaptableViewport';
 import PrivacyMarkdown from 'src/pages/markdown/privacy.md';
 import ContactMarkdown from 'src/pages/markdown/contact.md';
 import TermsMarkdown from 'src/pages/markdown/terms.md';
+import ReleasesMarkdown from 'src/pages/markdown/releases.md';
 import MarkdownLayout from 'src/components/MarkdownLayout';
 
 const EditorPage = React.lazy(() => import('src/pages/editor'));
@@ -86,6 +87,19 @@ export const routes = [
         component: (
             <Page withNavigation withFooter>
                 <MarkdownLayout markdown={TermsMarkdown} />
+            </Page>
+        ),
+    },
+    // Releases Page
+    {
+        title: 'VisualTez - Releases',
+        routeProps: {
+            key: 'releases',
+            path: '/releases',
+        },
+        component: (
+            <Page withNavigation withFooter>
+                <MarkdownLayout markdown={ReleasesMarkdown} />
             </Page>
         ),
     },
