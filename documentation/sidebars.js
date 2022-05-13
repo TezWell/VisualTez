@@ -27,6 +27,11 @@ const sidebars = {
                 },
             ],
         },
+        {
+            type: 'doc',
+            label: 'Testing',
+            id: 'testing',
+        },
     ],
 };
 
