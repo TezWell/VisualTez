@@ -63,6 +63,20 @@ exports[`Application Routing Test Route VisualTez - Privacy 1`] = `
 </main>
 `;
 
+exports[`Application Routing Test Route VisualTez - Releases 1`] = `
+<main
+  class="flex flex-col flex-1"
+>
+  <div
+    class="prose dark:prose-invert md:prose-2xl container mx-auto pt-24 pb-24 pl-5 pr-5"
+  >
+    <p>
+      releases.md
+    </p>
+  </div>
+</main>
+`;
+
 exports[`Application Routing Test Route VisualTez - Terms 1`] = `
 <main
   class="flex flex-col flex-1"
@@ -88,7 +102,7 @@ exports[`Application Routing Test Route VisualTez 1`] = `
       class="container px-3 mx-auto flex flex-wrap flex-col lg:flex-row items-center justify-evenly"
     >
       <div
-        class="flex flex-col w-full md:w-4/5 lg:w-2/5 justify-center items-center lg:items-start text-center md:text-left"
+        class="flex flex-col w-full md:w-4/5 lg:w-2/5 justify-center items-center lg:items-start text-center lg:text-left"
       >
         <p
           class="uppercase tracking-loose w-full"
@@ -106,13 +120,13 @@ exports[`Application Routing Test Route VisualTez 1`] = `
           A visual programming tool for writing and testing smart contracts in the Tezos blockchain.
         </p>
         <div
-          class="inline-flex spacing-2"
+          class="inline-flex p-2"
         >
           <a
             href="/editor"
           >
             <button
-              class="h-14 inline-flex items-center px-4 text-sm lg:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+              class="h-14 bg-yellow-500 hover:bg-yellow-400 border-2 border-yellow-700 hover:border-yellow-500 px-4 text-sm lg:text-lg text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
             >
               Open Editor
             </button>
@@ -123,6 +137,15 @@ exports[`Application Routing Test Route VisualTez 1`] = `
             target="_blank"
           >
             Documentation
+          </a>
+          <a
+            href="/releases"
+          >
+            <button
+              class="h-14 px-4 text-sm lg:text-lg bg-black dark:bg-white text-white dark:text-black font-bold rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out ml-2"
+            >
+              Releases
+            </button>
           </a>
         </div>
       </div>
