@@ -10,45 +10,6 @@ import { buildErrorInfo } from '../utils/errorHandling';
 import { findVarName } from '../utils/namespace';
 import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
 
-const ForBlock = {
-    type: BlockKind.for_block,
-    message0: 'Iterate %1 from %2 to %3 by %4',
-    args0: [
-        {
-            type: 'field_variable',
-            name: 'VAR',
-            variable: null,
-        },
-        {
-            type: 'input_value',
-            name: 'FROM',
-            check: ['Expression', 'Literal'],
-        },
-        {
-            type: 'input_value',
-            name: 'TO',
-            check: ['Expression', 'Literal'],
-            align: 'RIGHT',
-        },
-        {
-            type: 'input_value',
-            name: 'BY',
-            check: ['Expression', 'Literal'],
-            align: 'RIGHT',
-        },
-    ],
-    message1: '%{BKY_CONTROLS_REPEAT_INPUT_DO} %1',
-    args1: [
-        {
-            type: 'input_statement',
-            name: 'DO',
-            check: 'Statement',
-        },
-    ],
-    inputsInline: true,
-    colour: 180,
-};
-
 Blockly.Blocks[BlockKind.for_block] = {
     renameVar: function (oldName: string) {
         if (!this.oldName) {
