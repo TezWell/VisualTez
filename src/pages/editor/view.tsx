@@ -191,6 +191,7 @@ import {
     TestingAction_PrintPackedData,
     TestingAction_OriginateContractFromCode,
 } from 'src/components/blockly/blocks/Testing';
+import { StringStartsWith } from 'src/components/blockly/blocks/expressions/string';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -433,6 +434,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <IsVariantExpression />
                             <OpenVariantExpression />
+
+                            <StringStartsWith />
 
                             {/* Statements */}
                             <AssertStatement />
@@ -687,6 +690,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Category name="String" categorystyle="expr_stmt_category">
                                 <SizeOf />
                                 <Concat />
+                                <StringStartsWith />
                             </Category>
                             <Category name="Bytes" categorystyle="expr_stmt_category">
                                 <SizeOf />

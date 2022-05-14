@@ -74,7 +74,7 @@ class Generator extends (Blockly.Generator as BlocklyGenerator) {
             return localBlock.toValue(targetBlock);
         }
 
-        throw new Error(`Block ${targetBlock.type} is in the wrong place. ${buildBlockErrorString(targetBlock)}`);
+        throw new Error(`Block "${targetBlock.type}" is in the wrong place. ${buildBlockErrorString(targetBlock)}`);
     }
 
     toStatements(block: Block, name: string, allow_empty = false) {

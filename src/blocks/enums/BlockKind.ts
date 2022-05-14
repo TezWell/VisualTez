@@ -139,6 +139,7 @@ export enum BlockKind {
     set_contains_element_expression = 'set_contains_element_expression',
     is_variant_expression = 'is_variant_expression',
     open_variant_expression = 'open_variant_expression',
+    string_starts_with = 'string_starts_with',
 
     // Statements
     return_statement_block = 'return_statement_block',

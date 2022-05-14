@@ -20,3 +20,4 @@ import './option';
 import './set';
 import './contract';
 import './variant';
+import './string';
