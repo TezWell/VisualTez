@@ -140,6 +140,7 @@ export enum BlockKind {
     is_variant_expression = 'is_variant_expression',
     open_variant_expression = 'open_variant_expression',
     string_starts_with = 'string_starts_with',
+    string_ends_with = 'string_ends_with',
 
     // Statements
     return_statement_block = 'return_statement_block',

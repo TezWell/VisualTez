@@ -15,3 +15,13 @@ export const StringStartsWith = () => (
         </Value>
     </Block>
 );
+export const StringEndsWith = () => (
+    <Block type={BlockKind.string_ends_with} tags={['expression', 'string', 'ends with']}>
+        <Value name="TEXT">
+            <Shadow type={BlockKind.string_literal} />
+        </Value>
+        <Value name="POSTFIX">
+            <Shadow type={BlockKind.string_literal} />
+        </Value>
+    </Block>
+);
