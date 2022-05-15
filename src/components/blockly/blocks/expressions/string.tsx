@@ -15,6 +15,7 @@ export const StringStartsWith = () => (
         </Value>
     </Block>
 );
+
 export const StringEndsWith = () => (
     <Block type={BlockKind.string_ends_with} tags={['expression', 'string', 'ends with']}>
         <Value name="TEXT">

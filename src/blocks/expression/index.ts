@@ -21,3 +21,4 @@ import './set';
 import './contract';
 import './variant';
 import './string';
+import './address';

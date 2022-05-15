@@ -192,6 +192,7 @@ import {
     TestingAction_OriginateContractFromCode,
 } from 'src/components/blockly/blocks/Testing';
 import { StringEndsWith, StringStartsWith } from 'src/components/blockly/blocks/expressions/string';
+import { AddressIsKT1 } from 'src/components/blockly/blocks/expressions/address';
 
 interface EditorViewProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
@@ -437,6 +438,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <StringStartsWith />
                             <StringEndsWith />
+                            <AddressIsKT1 />
 
                             {/* Statements */}
                             <AssertStatement />
@@ -753,6 +755,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <ImplicitAccountExpression />
                                 <GetContractExpression />
                                 <AddressOfContractExpression />
+                            </Category>
+
+                            <Category name="Address" categorystyle="expr_stmt_category">
+                                <AddressIsKT1 />
                             </Category>
 
                             <Category name="Variant" categorystyle="expr_stmt_category">

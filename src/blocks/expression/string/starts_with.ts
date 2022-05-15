@@ -8,7 +8,7 @@ import SmartML from '../../generators/SmartML';
 
 Blockly.Blocks[BlockKind.string_starts_with] = {
     init: function () {
-        this.appendValueInput('TEXT').setCheck(['String', 'Expression']).appendField('String');
+        this.appendValueInput('TEXT').setCheck(['String', 'Expression']);
         this.appendValueInput('PREFIX').setCheck(['String', 'Expression']).appendField('starts with');
 
         this.setInputsInline(true);

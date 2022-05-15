@@ -141,6 +141,7 @@ export enum BlockKind {
     open_variant_expression = 'open_variant_expression',
     string_starts_with = 'string_starts_with',
     string_ends_with = 'string_ends_with',
+    address_is_kt1 = 'address_is_kt1',
 
     // Statements
     return_statement_block = 'return_statement_block',
