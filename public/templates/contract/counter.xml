@@ -1,0 +1,117 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <variables>
+        <variable type="entry_argument" id="Lb8gp7sxZY4CF;SR+RNf">parameter</variable>
+        <variable type="contract_storage" id="$LQ@@5bjelf#KH!g_t]S">storage</variable>
+    </variables>
+    <block type="contract_block" id="a.1s`p*JXe(h:MTdQ$hi" x="-510" y="-642">
+        <field name="NAME">counter</field>
+        <value name="TYPE">
+            <shadow type="unit_type" id="lhU%|L;lZ~|WBwi^+4dJ"></shadow>
+            <block type="nat_type" id="4c4LQ}oc-XiH3fA#]g`N"></block>
+        </value>
+        <value name="initial_storage">
+            <shadow type="unit_literal" id="bII-It,S~7CNYCOw,[!i"></shadow>
+        </value>
+        <statement name="entry_points">
+            <block type="entry_point_block" id="Dch4(}I_GM86Or=jifL*">
+                <field name="NAME">increment</field>
+                <field name="ARGUMENT" id="Lb8gp7sxZY4CF;SR+RNf" variabletype="entry_argument">parameter</field>
+                <field name="STORAGE" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                <value name="TYPE">
+                    <shadow type="unit_type" id="1KWB^9ps:EWaAD/qrJNK"></shadow>
+                </value>
+                <statement name="CODE">
+                    <block type="variable_setter_block" id="p}ssMaJ66@b]gZ}U*1L?">
+                        <value name="VAR">
+                            <block type="variables_get_v2" id="Sz7OM$1GmE_^*|AHY6*y">
+                                <field name="VAR" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                            </block>
+                        </value>
+                        <value name="VALUE">
+                            <block type="math_block" id="i;!Fa6/CXzyaQ!Q6uMza">
+                                <field name="OP">SUM</field>
+                                <value name="A">
+                                    <block type="variables_get_v2" id="YZ~90C:yr|2Bh*3:!{^i">
+                                        <field name="VAR" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                                    </block>
+                                </value>
+                                <value name="B">
+                                    <block type="nat_literal" id="_oxlbM=OH6SC~ohMM?0u">
+                                        <field name="nat_value">1</field>
+                                    </block>
+                                </value>
+                            </block>
+                        </value>
+                    </block>
+                </statement>
+                <next>
+                    <block type="entry_point_block" id="%NAW=j-+,e6d5oD+YZk@">
+                        <field name="NAME">decrement</field>
+                        <field name="ARGUMENT" id="Lb8gp7sxZY4CF;SR+RNf" variabletype="entry_argument">parameter</field>
+                        <field name="STORAGE" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                        <value name="TYPE">
+                            <shadow type="unit_type" id="$qF_.(lO;NZ+JoJ(Z`dC"></shadow>
+                        </value>
+                        <statement name="CODE">
+                            <block type="variable_setter_block" id="5L.G/?3.7v}0M86g+%n~">
+                                <value name="VAR">
+                                    <block type="variables_get_v2" id="06=Ur:f4y~)bCjdHEiWO">
+                                        <field name="VAR" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                                    </block>
+                                </value>
+                                <value name="VALUE">
+                                    <block type="nat_of_int" id="c$;{a(NPp8o4%e0))I+`">
+                                        <value name="VALUE">
+                                            <block type="math_block" id="kUE;gq..=5J5cbc1LsMH">
+                                                <field name="OP">SUB</field>
+                                                <value name="A">
+                                                    <block type="variables_get_v2" id="+~HF$~~Dzs=n!fEb`)HC">
+                                                        <field name="VAR" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                                                    </block>
+                                                </value>
+                                                <value name="B">
+                                                    <block type="nat_literal" id="$;]gKqSnFS)*i31LuW1=">
+                                                        <field name="nat_value">1</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                        <value name="ERROR_MESSAGE">
+                                            <block type="string_literal" id="Nrk~ooUBXT2D1_^+AuTm">
+                                                <field name="string_literal">The counter is already zero.</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                            </block>
+                        </statement>
+                        <next>
+                            <block type="entry_point_block" id="a7CEH{T?d3@/qYMt3%xM">
+                                <field name="NAME">reset</field>
+                                <field name="ARGUMENT" id="Lb8gp7sxZY4CF;SR+RNf" variabletype="entry_argument">parameter</field>
+                                <field name="STORAGE" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                                <value name="TYPE">
+                                    <shadow type="unit_type" id="D]Y4fx5cUo/@w6IvzpB_"></shadow>
+                                </value>
+                                <statement name="CODE">
+                                    <block type="variable_setter_block" id=":iHR_G(2dDt~X:69nmWs">
+                                        <value name="VAR">
+                                            <block type="variables_get_v2" id="O/FAcl@wu7iE4)7f7F6E">
+                                                <field name="VAR" id="$LQ@@5bjelf#KH!g_t]S" variabletype="contract_storage">storage</field>
+                                            </block>
+                                        </value>
+                                        <value name="VALUE">
+                                            <block type="nat_literal" id="7r!|*np|F=h+#^kh`xON">
+                                                <field name="nat_value">0</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </statement>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+</xml>

@@ -34,23 +34,27 @@
     "templates": {
         "contracts": [
             {
-                "name": "FA2 - Contract",
-                "path": "/templates/fa2.xml"
+                "name": "FA2",
+                "path": "/templates/contract/fa2.xml"
+            },
+            {
+                "name": "Counter",
+                "path": "/templates/contract/counter.xml"
             }
         ],
         "values": [
             {
-                "name": "FA2 - Transfer",
+                "name": "FA2 - Transfer Parameter",
                 "path": "/templates/value/fa2_transfer.xml"
             },
             {
-                "name": "Lambda value",
-                "path": "/templates/lambda.xml"
+                "name": "Lambda - Add / Subtract",
+                "path": "/templates/value/lambda.xml"
             }
         ],
         "types": [
             {
-                "name": "FA2 - Transfer",
+                "name": "FA2 - Transfer Parameter",
                 "path": "/templates/type/fa2_transfer.xml"
             }
         ]
