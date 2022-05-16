@@ -1,4 +1,22 @@
 # Releases
+## v0.7.1
+|   |   |
+|---|---|
+| Date | 2022-05-16 |
+| Commit  | [d7e53db](https://github.com/TezWell/VisualTez/commit/d7e53db200a25589f2ba2355fd4efdc52c9558c6) |
+
+### Change Log
+
+- Verify and reveal wallet when originating a contract.
+- Update landing page;
+- Adds documention for the testing feature;
+- Adds helper expressions;
+
+#### Breaking changes
+
+#### Bug fixes
+
+- Unsubscribe previous operation subscription when originating multiple contracts.
 
 ## v0.7.0
 |   |   |

@@ -13,7 +13,12 @@ handlers:
   static_files: www/docs/index.html
   upload: www/docs/index.html
 
-- url: /docs/(.*)[/]?$
+- url: /docs/(.*)/$
+  secure: always
+  static_files: www/docs/\1/index.html
+  upload: www/docs/(.*)
+
+- url: /docs/(.*)$
   secure: always
   static_files: www/docs/\1/index.html
   upload: www/docs/(.*)
