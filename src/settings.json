@@ -38,6 +38,10 @@
                 "path": "/templates/contract/fa2.xml"
             },
             {
+                "name": "FA1.2",
+                "path": "/templates/contract/fa1_2.xml"
+            },
+            {
                 "name": "Counter",
                 "path": "/templates/contract/counter.xml"
             }
