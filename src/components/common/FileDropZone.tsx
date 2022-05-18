@@ -42,6 +42,7 @@ const FileDropZone: React.FC<FileDropZoneProps> = ({
         <Modal
             open={open}
             onClose={onClose}
+            height={96}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
                     {title}

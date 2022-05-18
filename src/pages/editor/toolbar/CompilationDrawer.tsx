@@ -99,6 +99,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ gotoDeployment, compilati
         <Modal
             {...props}
             open={isOpen}
+            height={96}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
                     Contract <p className="ml-2 font-bold">{compilation?.result.name}</p>
@@ -251,6 +252,7 @@ const TypeValueModal: React.FC<TypeModalProps> = ({ compilation, ...props }) => 
         <Modal
             {...props}
             open={isOpen}
+            height={96}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
                     {compilation.kind === Target.TypeCompilation ? 'Type' : 'Value'}{' '}

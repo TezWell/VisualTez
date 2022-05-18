@@ -46,6 +46,7 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = () => {
         <Modal
             open={!!state.volatileWorkspace}
             onClose={() => updateVolatileWorkspace()}
+            height={96}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
                     Import Workspace

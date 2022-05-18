@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { buildClassName } from 'src/utils/className';
 
 export interface ModalProps {
     children?: React.ReactNode;
@@ -7,9 +8,10 @@ export interface ModalProps {
     title?: React.ReactElement;
     onClose: () => void;
     actions?: React.ReactElement[];
+    height?: number;
 }
 
-const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }) => {
+const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children, height }) => {
     return (
         <Transition.Root show={open} as={React.Fragment}>
             <Dialog as="div" className="fixed z-100 inset-0 overflow-y-auto" onClose={onClose}>
@@ -47,7 +49,18 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                                         </Dialog.Title>
                                     </div>
                                 ) : null}
-                                <div className="relative h-96 border-t border-b border-yellow-400 dark:border-yellow-500 bg-white dark:bg-gray-400 dark:bg-opacity-20">
+                                <div
+                                    className={buildClassName([
+                                        {
+                                            classes:
+                                                'relative border-t border-b border-yellow-400 dark:border-yellow-500 bg-white dark:bg-gray-400 dark:bg-opacity-20',
+                                        },
+                                        {
+                                            classes: `h-${height}`,
+                                            append: !!height,
+                                        },
+                                    ])}
+                                >
                                     {children}
                                 </div>
                                 <div className="bg-gray-400 bg-opacity-20 flex space-x-2 justify-end h-14 p-2">

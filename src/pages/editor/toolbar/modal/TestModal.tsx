@@ -355,6 +355,7 @@ const TestModal: React.FC<TestModalProps> = ({ compilation, ...props }) => {
         <Modal
             {...props}
             open={isOpen}
+            height={96}
             title={
                 <div className="flex items-center text-xl text-center align-middle font-mono text-ellipsis overflow-hidden">
                     Test
