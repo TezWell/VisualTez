@@ -13,7 +13,7 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
     return (
         <Transition.Root show={open} as={React.Fragment}>
             <Dialog as="div" className="fixed z-100 inset-0 overflow-y-auto" onClose={onClose}>
-                <div className="min-h-screen pt-4 px-4 pb-20 text-center block">
+                <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center block">
                     <Transition.Child
                         as={React.Fragment}
                         enter="ease-out duration-300"
@@ -26,10 +26,6 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children }
                         <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity" />
                     </Transition.Child>
 
-                    {/* This element is to trick the browser into centering the modal contents. */}
-                    <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-                        &#8203;
-                    </span>
                     <Transition.Child
                         as={React.Fragment}
                         enter="ease-out duration-300"
