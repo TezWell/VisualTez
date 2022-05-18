@@ -65,10 +65,9 @@ export class ScopeContext {
      * @returns void
      */
     createScope(name: string) {
-        if (name in this.scopes) {
-            throw new Error(`There is already a scope named '${name}'.`);
+        if (!(name in this.scopes)) {
+            this.scopes[name] = {};
         }
-        this.scopes[name] = {};
     }
 
     /**
