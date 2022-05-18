@@ -523,6 +523,95 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <VariantLiteral />
                             </Category>
                         </Category>
+
+                        <Category name="Typed Operations" categorystyle="expr_stmt_category">
+                            <Category name="Int" categorystyle="expr_stmt_category">
+                                <IntOfNatExpression />
+                                <NatOfIntExpression />
+                                <ABSExpression />
+                            </Category>
+                            <Category name="Nat" categorystyle="expr_stmt_category">
+                                <IntOfNatExpression />
+                                <NatOfIntExpression />
+                                <NegateExpression />
+                            </Category>
+                            <Category name="String" categorystyle="expr_stmt_category">
+                                <SizeOf />
+                                <Concat />
+                                <StringStartsWith />
+                                <StringEndsWith />
+                            </Category>
+                            <Category name="Bytes" categorystyle="expr_stmt_category">
+                                <SizeOf />
+                                <Concat />
+                                <Slice />
+                            </Category>
+                            <Category name="Bool" categorystyle="expr_stmt_category">
+                                <OrExpression />
+                                <AndExpression />
+                                <XorExpression />
+                                <NotExpression />
+                            </Category>
+                            <Category name="Record" categorystyle="expr_stmt_category">
+                                <AccessRecordPropertyExpression />
+                            </Category>
+                            <Category name="Map" categorystyle="expr_stmt_category">
+                                <SizeOf />
+                                <GetMapEntriesExpression />
+                                <GetMapKeysExpression />
+                                <GetMapValuesExpression />
+                                <GetMapValueExpression />
+                                <MapConstainsKeyExpression />
+
+                                <DeleteMapEntryStatement />
+                            </Category>
+                            <Category name="Big Map" categorystyle="expr_stmt_category">
+                                <GetMapValueExpression />
+                                <MapConstainsKeyExpression />
+
+                                <DeleteMapEntryStatement />
+                            </Category>
+                            <Category name="Pair" categorystyle="expr_stmt_category">
+                                <GetFirstElementExpression />
+                                <GetSecondElementExpression />
+                            </Category>
+                            <Category name="List" categorystyle="expr_stmt_category">
+                                <SizeOf />
+                                <Concat />
+                                <PrependToListExpression />
+                                <AddToListStatement />
+                            </Category>
+                            <Category name="Set" categorystyle="expr_stmt_category">
+                                <SizeOf />
+                                <GetElementsFromSetExpression />
+                                <SetContainsElementExpression />
+
+                                <AddElementToSetStatement />
+                                <RemoveElementFromSetStatement />
+                            </Category>
+
+                            <Category name="Option" categorystyle="expr_stmt_category">
+                                <GetSomeExpression />
+                                <IsSomeExpression />
+                                <IsNoneExpression />
+                            </Category>
+
+                            <Category name="Contract" categorystyle="expr_stmt_category">
+                                <ImplicitAccountExpression />
+                                <GetContractExpression />
+                                <AddressOfContractExpression />
+                            </Category>
+
+                            <Category name="Address" categorystyle="expr_stmt_category">
+                                <AddressIsKT1 />
+                            </Category>
+
+                            <Category name="Variant" categorystyle="expr_stmt_category">
+                                <IsVariantExpression />
+                                <OpenVariantExpression />
+                            </Category>
+                        </Category>
+
                         <Category name="Types" categorystyle="type_category">
                             <Category name="Singleton Types" categorystyle="type_category">
                                 <CategoryIcon>
@@ -679,92 +768,20 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <ShiftRightExpression />
                         </Category>
 
-                        <Category name="Expressions / Statements" categorystyle="expr_stmt_category">
-                            <Category name="Int" categorystyle="expr_stmt_category">
-                                <IntOfNatExpression />
-                                <NatOfIntExpression />
-                                <ABSExpression />
-                            </Category>
-                            <Category name="Nat" categorystyle="expr_stmt_category">
-                                <IntOfNatExpression />
-                                <NatOfIntExpression />
-                                <NegateExpression />
-                            </Category>
-                            <Category name="String" categorystyle="expr_stmt_category">
-                                <SizeOf />
-                                <Concat />
-                                <StringStartsWith />
-                                <StringEndsWith />
-                            </Category>
-                            <Category name="Bytes" categorystyle="expr_stmt_category">
-                                <SizeOf />
-                                <Concat />
-                                <Slice />
-                            </Category>
-                            <Category name="Bool" categorystyle="expr_stmt_category">
-                                <OrExpression />
-                                <AndExpression />
-                                <XorExpression />
-                                <NotExpression />
-                            </Category>
-                            <Category name="Record" categorystyle="expr_stmt_category">
-                                <AccessRecordPropertyExpression />
-                            </Category>
-                            <Category name="Map" categorystyle="expr_stmt_category">
-                                <SizeOf />
-                                <GetMapEntriesExpression />
-                                <GetMapKeysExpression />
-                                <GetMapValuesExpression />
-                                <GetMapValueExpression />
-                                <MapConstainsKeyExpression />
+                        <Category name="Lambda" categorystyle="literal_category">
+                            <CategoryIcon>
+                                <ReceiptRefundIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <LambdaLiteral />
+                            <CallLambda />
+                        </Category>
 
-                                <DeleteMapEntryStatement />
-                            </Category>
-                            <Category name="Big Map" categorystyle="expr_stmt_category">
-                                <GetMapValueExpression />
-                                <MapConstainsKeyExpression />
-
-                                <DeleteMapEntryStatement />
-                            </Category>
-                            <Category name="Pair" categorystyle="expr_stmt_category">
-                                <GetFirstElementExpression />
-                                <GetSecondElementExpression />
-                            </Category>
-                            <Category name="List" categorystyle="expr_stmt_category">
-                                <SizeOf />
-                                <Concat />
-                                <PrependToListExpression />
-                                <AddToListStatement />
-                            </Category>
-                            <Category name="Set" categorystyle="expr_stmt_category">
-                                <SizeOf />
-                                <GetElementsFromSetExpression />
-                                <SetContainsElementExpression />
-
-                                <AddElementToSetStatement />
-                                <RemoveElementFromSetStatement />
-                            </Category>
-
-                            <Category name="Option" categorystyle="expr_stmt_category">
-                                <GetSomeExpression />
-                                <IsSomeExpression />
-                                <IsNoneExpression />
-                            </Category>
-
-                            <Category name="Contract" categorystyle="expr_stmt_category">
-                                <ImplicitAccountExpression />
-                                <GetContractExpression />
-                                <AddressOfContractExpression />
-                            </Category>
-
-                            <Category name="Address" categorystyle="expr_stmt_category">
-                                <AddressIsKT1 />
-                            </Category>
-
-                            <Category name="Variant" categorystyle="expr_stmt_category">
-                                <IsVariantExpression />
-                                <OpenVariantExpression />
-                            </Category>
+                        <Category name="Onchain View" categorystyle="view_category">
+                            <CategoryIcon>
+                                <EyeIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+                            <OnChainView />
+                            <CallView />
                         </Category>
 
                         <Category name="Advanced" categorystyle="advanced_category">
@@ -781,22 +798,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <PackExpression />
                                 <UnpackExpression />
                             </Category>
-                        </Category>
-
-                        <Category name="Lambda" categorystyle="literal_category">
-                            <CategoryIcon>
-                                <ReceiptRefundIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                            <LambdaLiteral />
-                            <CallLambda />
-                        </Category>
-
-                        <Category name="Onchain View" categorystyle="view_category">
-                            <CategoryIcon>
-                                <EyeIcon className="block h-6 w-6 mr-2" />
-                            </CategoryIcon>
-                            <OnChainView />
-                            <CallView />
                         </Category>
 
                         <Category name="Testing" categorystyle="testing_category">
