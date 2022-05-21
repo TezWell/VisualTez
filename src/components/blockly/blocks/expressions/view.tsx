@@ -2,15 +2,16 @@ import React from 'react';
 
 import BlockKind from 'src/blocks/enums/BlockKind';
 import Block from 'src/components/blockly/Block';
+import Shadow from '../../Shadow';
 import Value from '../../Value';
-import { AddressLiteral, UnitLiteral } from '../literals';
-import { UnitType } from '../types';
 
 export const OnChainView = () => (
     <Block type={BlockKind.onchain_view} tags={['view', 'onchain']}>
-        {/* Default input type */}
         <Value name="TYPE">
-            <UnitType />
+            <Shadow type={BlockKind.unit_type} />
+        </Value>
+        <Value name="RETURN">
+            <Shadow type={BlockKind.unit_literal} />
         </Value>
     </Block>
 );
@@ -18,13 +19,13 @@ export const OnChainView = () => (
 export const CallView = () => (
     <Block type={BlockKind.call_view} tags={['expression', 'view', 'call', 'onchain']}>
         <Value name="ADDRESS">
-            <AddressLiteral />
+            <Shadow type={BlockKind.address_literal} />
         </Value>
         <Value name="ARGUMENT">
-            <UnitLiteral />
+            <Shadow type={BlockKind.unit_literal} />
         </Value>
         <Value name="OUT_TYPE">
-            <UnitType />
+            <Shadow type={BlockKind.unit_type} />
         </Value>
     </Block>
 );
