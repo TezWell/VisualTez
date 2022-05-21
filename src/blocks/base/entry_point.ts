@@ -44,7 +44,7 @@ Blockly.Blocks[BlockKind.entry_point_block] = {
             .appendField(')');
         this.appendValueInput('TYPE').setCheck(['Type']).appendField('and type');
         this.appendStatementInput('CODE').setCheck(['Statement']).appendField('Code');
-        this.setTooltip('A block that represents an entry point.');
+        this.setTooltip('A block that represents a contract entry point.');
         this.setColour(140);
         this.setInputsInline(true);
         this.setPreviousStatement(true, ['Entrypoint']);

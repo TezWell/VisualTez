@@ -11,6 +11,9 @@ const ConcatBlock = {
     type: BlockKind.concat,
     message0: 'Concat %1',
     args0: [{ type: 'input_value', name: 'LIST', check: ['Literal', 'Expression'] }],
+    tooltip: `Concatenates values of type TList(TString()), TList(TBytes()).\n-\n
+    (Concat TList(TString())) => TString()\n
+    (Concat TList(TBytes())) => TBytes()\n`,
     colour: 200,
     inputsInline: true,
     output: ['Expression'],

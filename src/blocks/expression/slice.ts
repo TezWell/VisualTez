@@ -15,6 +15,9 @@ const SliceBlock = {
         { type: 'input_value', name: 'OFFSET', check: ['Literal', 'Expression'] },
         { type: 'input_value', name: 'LENGTH', check: ['Literal', 'Expression'] },
     ],
+    tooltip: `Obtain a subsequence of a string or sequence bytes.\n-\n
+    (Slice TString() from TNat() to TNat()) => TOption(TString())\n
+    (Slice TBytes() from TNat() to TNat()) => TOption(TBytes())\n`,
     colour: 200,
     inputsInline: true,
     output: ['Expression'],

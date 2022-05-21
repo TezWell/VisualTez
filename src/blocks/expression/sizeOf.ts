@@ -12,7 +12,7 @@ const SizeOfBlock = {
     message0: 'Size of %1',
     args0: [{ type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] }],
     colour: 200,
-    tooltip: 'Obtain size of a string, list, set, map or byte sequence bytes.',
+    tooltip: 'Obtain size of a string, list, set, map or byte sequence bytes.\n-\nTNat()',
     inputsInline: true,
     output: ['Expression'],
 };
