@@ -13,7 +13,10 @@ Blockly.Blocks[BlockKind.string_starts_with] = {
 
         this.setInputsInline(true);
         this.setOutput(true, ['Expression']);
-        this.setColour(200);
+
+        this.setTooltip(`Check if a string starts with a given prefix.\n-\n
+    (TString() starts with TString()) => TBool()\n`),
+            this.setColour(200);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },

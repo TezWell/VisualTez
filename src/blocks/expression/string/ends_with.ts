@@ -13,7 +13,10 @@ Blockly.Blocks[BlockKind.string_ends_with] = {
 
         this.setInputsInline(true);
         this.setOutput(true, ['Expression']);
-        this.setColour(200);
+
+        this.setTooltip(`Check if a string ends with a given postfix.\n-\n
+    (TString() ends with TString()) => TBool()\n`),
+            this.setColour(200);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
