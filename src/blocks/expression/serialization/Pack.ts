@@ -15,6 +15,8 @@ const PackBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip:
+        'Serializes any value of packable type to its optimized binary representation.\n-\nany packable value => TBytes()',
     colour: 200,
     output: ['Expression'],
 };

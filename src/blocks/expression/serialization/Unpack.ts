@@ -21,6 +21,8 @@ const UnpackBlock = {
             check: ['Type'],
         },
     ],
+    tooltip:
+        'Deserializes a value of type TBytes() into the corresponding Michelson value of type TOption(...).\n-\nUnpack TBytes() of type ... => TOption(...)',
     colour: 200,
     inputsInline: true,
     output: ['Expression'],
