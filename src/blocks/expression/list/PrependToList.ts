@@ -14,7 +14,7 @@ const PrependToListBlock = {
         { type: 'input_value', name: 'ELEMENT', check: ['Literal', 'Expression'] },
         { type: 'input_value', name: 'LIST', check: ['Literal', 'Expression'] },
     ],
-    tooltip: 'Create new list and prepend an element to it.',
+    tooltip: 'Create new list and prepend an element to it.\n-\n(any, TList(any)) => TList(any)',
     colour: 200,
     inputsInline: true,
     output: ['Expression'],
