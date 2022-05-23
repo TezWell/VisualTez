@@ -14,6 +14,7 @@ Blockly.Blocks[BlockKind.address_is_kt1] = {
         this.setInputsInline(true);
         this.setOutput(true, ['Expression']);
         this.setColour(200);
+        this.setTooltip(`Verifies if a given address is an originated contract (KT1).\n-\nTAddress => TBool()`);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     },
