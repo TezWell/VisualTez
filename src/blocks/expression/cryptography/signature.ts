@@ -15,19 +15,21 @@ const CheckSignatureBlock = {
         {
             type: 'input_value',
             name: 'SIGNATURE',
-            check: ['Literal', 'Expression'],
+            check: ['Signature', 'Expression'],
         },
         {
             type: 'input_value',
             name: 'BYTES',
-            check: ['Literal', 'Expression'],
+            check: ['Bytes', 'Expression'],
         },
         {
             type: 'input_value',
             name: 'KEY',
-            check: ['Literal', 'Expression'],
+            check: ['Key', 'Expression'],
         },
     ],
+    tooltip:
+        'Verifies that a byte sequence has been signed with a given key.\n-\n(TSignature(), TBytes(), TKey()) => TBool()',
     inputsInline: true,
     output: ['Expression'],
     colour: 350,

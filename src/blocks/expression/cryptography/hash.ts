@@ -11,31 +11,36 @@ const methods = [
     {
         kind: BlockKind.blake2b,
         text: 'BLAKE2B %1',
+        tooltip: 'Compute a Blake2B cryptographic hash.\n-\nTBytes() => TBytes()',
         method: BLAKE2B,
     },
     {
         kind: BlockKind.sha256,
         text: 'SHA256 %1',
+        tooltip: 'Compute a SHA256 cryptographic hash.\n-\nTBytes() => TBytes()',
         method: SHA256,
     },
     {
         kind: BlockKind.sha512,
         text: 'SHA512 %1',
+        tooltip: 'Compute a SHA512 cryptographic hash.\n-\nTBytes() => TBytes()',
         method: SHA512,
     },
     {
         kind: BlockKind.sha3,
         text: 'SHA3 %1',
+        tooltip: 'Compute a SHA3 cryptographic hash.\n-\nTBytes() => TBytes()',
         method: SHA3,
     },
     {
         kind: BlockKind.keccak,
         text: 'KECCAK %1',
+        tooltip: 'Compute a KECCAK cryptographic hash.\n-\nTBytes() => TBytes()',
         method: KECCAK,
     },
 ];
 
-methods.forEach(({ kind, text, method }) => {
+methods.forEach(({ kind, text, tooltip, method }) => {
     Blockly.Blocks[kind] = {
         init: function () {
             this.jsonInit({
@@ -43,6 +48,7 @@ methods.forEach(({ kind, text, method }) => {
                 message0: text,
                 args0: [{ type: 'input_value', name: 'BYTES', check: ['Literal', 'Expression'] }],
                 colour: 350,
+                tooltip,
                 inputsInline: true,
                 output: ['Expression'],
             });
@@ -66,6 +72,7 @@ Blockly.Blocks[BlockKind.hash_key] = {
             message0: 'Hash key %1',
             args0: [{ type: 'input_value', name: 'KEY', check: ['Literal', 'Expression'] }],
             colour: 350,
+            tooltip: 'Compute the Base58Check of a public key.\n-\nTKey() => TKeyHash()',
             inputsInline: true,
             output: ['Expression'],
         });
