@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const GetSenderBlock = {
     type: BlockKind.get_sender_block,
     message0: 'Get Sender',
-    tooltip: 'Returns the address of the operation sender.',
+    tooltip: 'Returns the address of the operation sender.\n-\nTAddress()',
     output: ['Expression', 'Address'],
     colour: 1,
 };

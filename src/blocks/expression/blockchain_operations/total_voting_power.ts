@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const GetTotalVotingPowerBlock = {
     type: BlockKind.get_total_voting_power_block,
     message0: 'Get total voting power',
-    tooltip: 'Returns the total voting power of all contracts.',
+    tooltip: 'Returns the total voting power of all contracts.\n-\nTNat()',
     output: ['Expression', 'Nat'],
     colour: 1,
 };

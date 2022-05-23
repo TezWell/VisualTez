@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const GetSourceBlock = {
     type: BlockKind.get_source_block,
     message0: 'Get Source',
-    tooltip: 'Returns the address of the contract that initiated the current transaction.',
+    tooltip: 'Returns the address of the contract that initiated the current transaction.\n-\nTAddress()',
     output: ['Expression', 'Address'],
     colour: 1,
 };

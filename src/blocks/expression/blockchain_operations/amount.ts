@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const GetAmountBlock = {
     type: BlockKind.get_amount_block,
     message0: 'Get Amount',
-    tooltip: 'Returns the amount of the current transaction.',
+    tooltip: 'Returns the amount of the current transaction.\n-\nTMutez()',
     output: ['Expression', 'Mutez'],
     colour: 1,
 };

@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const GetBalanceBlock = {
     type: BlockKind.get_balance_block,
     message0: 'Get Balance',
-    tooltip: 'Returns the current amount of mutez of the executing contract.',
+    tooltip: 'Returns the current amount of mutez of the executing contract.\n-\nTMutez()',
     output: ['Expression', 'Mutez'],
     colour: 1,
 };

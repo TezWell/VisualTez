@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const BlockLevel = {
     type: BlockKind.get_level_block,
     message0: 'Get Level',
-    tooltip: 'Returns the level of the head block.',
+    tooltip: 'Returns the level of the head block.\n-\nTNat()',
     output: ['Expression', 'Nat'],
     colour: 1,
 };

@@ -18,7 +18,7 @@ const GetVotingPowerBlock = {
             check: 'Key_hash',
         },
     ],
-    tooltip: 'Returns the voting power of a given contract.',
+    tooltip: 'Returns the voting power of a given contract.\n-\nTNat()',
     output: ['Expression', 'Nat'],
     colour: 1,
 };

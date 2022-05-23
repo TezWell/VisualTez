@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const GetTimestampBlock = {
     type: BlockKind.get_timestamp_block,
     message0: 'Get Block Timestamp',
-    tooltip: 'Returns block timestamp.',
+    tooltip: 'Returns block timestamp.\n-\nTTimestamp()',
     output: ['Expression', 'Timestamp'],
     colour: 1,
 };

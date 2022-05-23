@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const Block = {
     type: BlockKind.get_current_contract_address_block,
     message0: 'Get contract address',
-    tooltip: 'Returns the address of the current contract.',
+    tooltip: 'Returns the address of the current contract.\n-\nTAddress()',
     output: ['Expression', 'Address'],
     colour: 1,
 };

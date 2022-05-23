@@ -8,7 +8,7 @@ import BlockKind from '../../enums/BlockKind';
 const GetChainIdBlock = {
     type: BlockKind.get_chain_id_block,
     message0: 'Get Chain_id',
-    tooltip: 'Returns chain identifier.',
+    tooltip: 'Returns chain identifier.\n-\nTChainID()',
     output: ['Expression', 'Chain_id'],
     colour: 1,
 };

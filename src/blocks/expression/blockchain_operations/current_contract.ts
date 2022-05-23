@@ -17,7 +17,7 @@ const GetCurrentContractBlock = {
             check: 'String',
         },
     ],
-    tooltip: 'Returns the current contract.',
+    tooltip: 'Returns the current contract.\n-\nTContract(...)',
     output: ['Expression', 'Contract'],
     colour: 1,
 };
