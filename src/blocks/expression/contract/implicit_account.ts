@@ -12,6 +12,10 @@ const ImplicitAccountBlock = {
     message0: 'Get contract from Key Hash %1',
     args0: [{ type: 'input_value', name: 'KEY_HASH', check: ['Literal', 'Expression'] }],
     colour: 200,
+    tooltip: `
+        Convert a public key has to a contract value.\n-\n
+        TKeyHash() => TContract(TUnit())
+    `,
     inputsInline: true,
     output: ['Expression'],
 };

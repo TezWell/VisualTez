@@ -21,6 +21,10 @@ const GetContractBlock = {
     ],
     message1: 'with type argument %1',
     args1: [{ type: 'input_value', name: 'ARGUMENT_TYPE', check: ['Literal', 'Expression'] }],
+    tooltip: `
+        Build a contract value from its address and entrypoint.\n-\n
+        (TAddress(), input_type) => TContract(input_type)
+    `,
     colour: 200,
     inputsInline: true,
     output: ['Expression'],

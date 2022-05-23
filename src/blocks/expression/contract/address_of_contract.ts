@@ -12,6 +12,10 @@ const AddressOfContractBlock = {
     message0: 'Address of contract %1',
     args0: [{ type: 'input_value', name: 'CONTRACT', check: ['Literal', 'Expression'] }],
     colour: 200,
+    tooltip: `
+        Convert a contract value to an address.\n-\n
+        TContract(...) => TAddress())
+    `,
     inputsInline: true,
     output: ['Expression'],
 };
