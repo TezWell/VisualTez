@@ -15,6 +15,8 @@ const AndBlock = {
         { type: 'input_value', name: 'RIGHT', check: ['Literal', 'Expression'] },
     ],
     colour: 200,
+    tooltip:
+        "Boolean and bitwise 'AND'.\n-\n(TBool(), TBool()) => TBool()\n(TNat(), TNat()) => TNat()\n(TInt(), TNat()) => TNat()\n",
     inputsInline: true,
     output: ['Expression'],
 };

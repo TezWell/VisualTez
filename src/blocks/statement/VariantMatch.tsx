@@ -19,6 +19,7 @@ const MatchVariantBlock = {
         { type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] },
         { type: 'input_statement', name: 'CASES', check: ['MatchCase'] },
     ],
+    tooltip: 'A switch case for variant values of type TOption() or TOr().',
     colour: 20,
     inputsInline: true,
 };

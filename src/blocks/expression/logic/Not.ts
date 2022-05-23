@@ -16,6 +16,7 @@ const NotBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip: 'Boolean negation and bitwise complement.\n-\nTBool() => TBool()\nTNat() => TInt()\nTInt() => TInt()',
     colour: 200,
     output: ['Expression'],
 };

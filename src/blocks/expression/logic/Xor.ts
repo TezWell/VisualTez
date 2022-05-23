@@ -15,6 +15,7 @@ const XorBlock = {
         { type: 'input_value', name: 'RIGHT', check: ['Literal', 'Expression'] },
     ],
     colour: 200,
+    tooltip: "Boolean and bitwise exclusive 'OR'.\n-\n(TBool(), TBool()) => TBool()\n(TNat(), TNat()) => TNat()",
     inputsInline: true,
     output: ['Expression'],
 };

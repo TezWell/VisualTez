@@ -33,6 +33,7 @@ const IfBlock = {
             check: 'Statement',
         },
     ],
+    tooltip: 'Conditional branching (if then .. else ...).',
     colour: 20,
 };
 

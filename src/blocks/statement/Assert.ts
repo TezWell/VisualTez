@@ -19,6 +19,7 @@ const AssertBlock = {
         },
         { type: 'input_value', name: 'error_message', check: ['Literal', 'Expression'] },
     ],
+    tooltip: `Assert that a given condition is True, otherwise fail.`,
     colour: 20,
     inputsInline: true,
 };

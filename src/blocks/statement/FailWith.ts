@@ -18,6 +18,7 @@ const FailWithBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip: 'Explicitly terminate the execution of the contract with a given error.',
     colour: 20,
 };
 

@@ -40,6 +40,7 @@ const CompareBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip: 'Comparision and equality operations.\n-\n... => TBool()',
     inputsInline: true,
     output: ['Expression'],
     colour: 200,
