@@ -11,6 +11,8 @@ const IsSomeBlock = {
     type: BlockKind.is_some,
     message0: 'Is %1 of variant Some?',
     args0: [{ type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] }],
+    tooltip:
+        'Inspects an optional value. It returns True if the value is of variant Some, and False otherwise.\n-\nTBool()',
     colour: 200,
     output: ['Expression'],
 };
