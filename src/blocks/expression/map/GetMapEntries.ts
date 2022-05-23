@@ -13,6 +13,8 @@ const GetMapEntriesBlock = {
     args0: [{ type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] }],
     colour: 200,
     inputsInline: true,
+    tooltip:
+        'Extracts a list with all map entries.\n-\nTMap(key_type, value_type) => TList(TRecord({ key: key_type, value: value_type }))',
     output: ['Expression'],
 };
 

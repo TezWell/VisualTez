@@ -13,6 +13,7 @@ const GetMapKeysBlock = {
     args0: [{ type: 'input_value', name: 'MAP', check: ['Literal', 'Expression'] }],
     colour: 200,
     inputsInline: true,
+    tooltip: 'Extracts a list with all map keys.\n-\nTMap(key_type, value_type) => TList(key_type)',
     output: ['Expression'],
 };
 

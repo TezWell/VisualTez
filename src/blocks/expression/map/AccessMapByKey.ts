@@ -14,6 +14,7 @@ const AccessMapByKeyBlock = {
         { type: 'input_value', name: 'KEY', check: ['Literal', 'Expression'] },
     ],
     colour: 200,
+    tooltip: 'Access the value of a map by its key.',
     inputsInline: true,
     output: ['Expression'],
 };

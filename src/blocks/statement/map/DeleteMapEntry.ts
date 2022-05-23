@@ -19,6 +19,7 @@ const DeleteMapEntryBlock = {
         { type: 'input_value', name: 'MAP', check: ['Literal', 'Expression'] },
     ],
     colour: 20,
+    tooltip: 'Delete map entry by its key.',
     inputsInline: true,
 };
 

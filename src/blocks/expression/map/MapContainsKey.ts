@@ -17,6 +17,7 @@ const MapContainsKeyBlock = {
         { type: 'input_value', name: 'KEY', check: ['Literal', 'Expression'] },
     ],
     colour: 200,
+    tooltip: 'Verifies if a map contains a given key.\n-\n... => TBool()',
     inputsInline: true,
     output: ['Expression'],
 };
