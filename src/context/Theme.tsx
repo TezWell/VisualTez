@@ -45,7 +45,7 @@ const saveTheme = (theme: ThemeKind): void => {
 };
 
 const Provider: React.FC<{ children?: React.ReactNode }> = (props) => {
-    const [theme, setTheme] = React.useState<ThemeKind>(fetchTheme());
+    const [theme, setTheme] = React.useState<ThemeKind>(() => fetchTheme());
 
     React.useEffect(() => {
         if (theme === ThemeKind.Dark) {

@@ -65,7 +65,7 @@ const Sections: React.FC<SectionsProps> = ({ split = 'vertical', children, class
     const startClientX = React.useRef(0);
     const startClientY = React.useRef(0);
     const selectedDivider: React.MutableRefObject<number | null> = React.useRef<number>(null);
-    const [sizes, setSizes] = React.useState(sizesOfSections(children));
+    const [sizes, setSizes] = React.useState(() => sizesOfSections(children));
     const [sections, setSections] = React.useState<Record<number, HTMLElement>>({});
 
     const onMove = React.useCallback(

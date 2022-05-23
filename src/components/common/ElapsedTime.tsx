@@ -8,7 +8,7 @@ interface Props {
 
 const ElapsedTime: React.FC<Props> = ({ timestamp }) => {
     const isMounted = React.useRef(false);
-    const [elapsedTime, setElapsedTime] = React.useState(getElapsedTime(timestamp));
+    const [elapsedTime, setElapsedTime] = React.useState(() => getElapsedTime(timestamp));
 
     React.useEffect(() => {
         isMounted.current = true;

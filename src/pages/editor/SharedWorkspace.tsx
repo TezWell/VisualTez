@@ -14,7 +14,7 @@ interface SharedWorkspaceProps {}
 
 const SharedWorkspace: React.FC<SharedWorkspaceProps> = () => {
     const workspaceRef = React.useRef<WorkspaceSvg>();
-    const [name, setName] = React.useState(`Workspace_${generateRandomString()}`);
+    const [name, setName] = React.useState(() => `Workspace_${generateRandomString()}`);
     const { state, dispatch } = useEditor();
 
     const updateName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
