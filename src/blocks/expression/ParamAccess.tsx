@@ -18,6 +18,7 @@ const ParamAccessBlock = {
         { type: 'input_value', name: 'RECORD', check: ['Literal', 'Expression'] },
     ],
     colour: 200,
+    tooltip: `Access the property of a record.`,
     inputsInline: true,
     output: ['Expression'],
 };

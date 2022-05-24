@@ -18,7 +18,7 @@ const IsVariantBlock = {
             check: 'String',
         },
     ],
-    tooltip: 'Checks if a value matches a given variant.',
+    tooltip: 'Checks if a value matches a given variant.\n-\nTVariant(...) -> string -> TBool()',
     colour: 200,
     inputsInline: true,
     output: ['Expression'],

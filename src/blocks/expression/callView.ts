@@ -24,6 +24,7 @@ const CallViewBlock = {
     args2: [{ type: 'input_value', name: 'OUT_TYPE', check: ['Type'] }],
     colour: 200,
     outputShape: 3,
+    tooltip: 'Calls an on-chain view.',
     output: ['Expression'],
 };
 

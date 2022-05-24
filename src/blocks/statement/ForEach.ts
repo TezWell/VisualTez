@@ -34,6 +34,7 @@ Blockly.Blocks[BlockKind.for_each_block] = {
 
         this.appendStatementInput('DO').setCheck(['Statement']).appendField('Do');
 
+        this.setTooltip(`Iterate on each element of a list.`);
         this.setColour(180);
         this.setInputsInline(true);
         this.setPreviousStatement(true, ['Statement']);

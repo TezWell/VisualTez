@@ -22,6 +22,7 @@ const VariableSetterBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip: 'Assign a new value to a variable.',
     colour: 20,
     inputsInline: true,
 };

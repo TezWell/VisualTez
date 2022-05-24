@@ -22,6 +22,7 @@ const TransferBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip: 'Transfer a given amount to a given address.',
     colour: 220,
 };
 
@@ -64,6 +65,7 @@ const CallContractBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip: 'Calls a contract a given amount to a given address.',
     colour: 220,
 };
 

@@ -17,6 +17,7 @@ const DelegateBlock = {
             check: ['Literal', 'Expression'],
         },
     ],
+    tooltip: 'Delegates/undelegates staking power to a baker.',
     colour: 220,
 };
 

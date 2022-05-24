@@ -34,6 +34,7 @@ Blockly.Blocks[BlockKind.variable_declaration_block] = {
 
         this.appendValueInput('VALUE').setCheck(['Expression', 'Literal']).appendField('with value');
 
+        this.setTooltip(`Declares a local variable.`);
         this.setColour(20);
         this.setInputsInline(true);
         this.setPreviousStatement(true, ['Statement']);

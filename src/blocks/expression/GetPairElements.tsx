@@ -11,6 +11,7 @@ const FirstPairElementBlock = {
     message0: 'First element of pair %1',
     args0: [{ type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] }],
     colour: 200,
+    tooltip: `Extracts the first element of a binary tuple.\n-\nTPair(TInt(), TNat()) -> TInt()`,
     inputsInline: true,
     output: ['Expression'],
 };
@@ -34,6 +35,7 @@ const SecondPairElementBlock = {
     message0: 'Second element of pair %1',
     args0: [{ type: 'input_value', name: 'FROM', check: ['Literal', 'Expression'] }],
     colour: 200,
+    tooltip: `Extracts the second element of a binary tuple.\n-\nTPair(TInt(), TNat()) -> TNat()`,
     inputsInline: true,
     output: ['Expression'],
 };

@@ -15,6 +15,7 @@ const CallLambdaBlock = {
     args1: [{ type: 'input_value', name: 'ARGUMENT', check: ['Literal', 'Expression'] }],
     colour: 200,
     outputShape: 3,
+    tooltip: 'Call a lambda value.',
     output: ['Expression'],
 };
 
