@@ -12,6 +12,7 @@ const GetElementsFromSetBlock = {
     message0: 'Get elements from Set %1',
     args0: [{ type: 'input_value', name: 'SET', check: ['Literal', 'Expression'] }],
     colour: 200,
+    tooltip: 'Get a list with all the elements of a set.\n-\nTSet(element_type) => TList(element_type)',
     output: ['Expression'],
 };
 

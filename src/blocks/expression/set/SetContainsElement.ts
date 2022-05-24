@@ -17,6 +17,7 @@ const SetContainsElementBlock = {
         { type: 'input_value', name: 'ELEMENT', check: ['Literal', 'Expression'] },
     ],
     colour: 200,
+    tooltip: 'Verifies if a set contains a given element.\n-\n... => TBool()',
     inputsInline: true,
     output: ['Expression'],
 };
