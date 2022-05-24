@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-import type { VisualTezWorkspace } from './workspace';
+import type { VisualTezWorkspace } from './overrides/workspace';
 
 export class FieldVariableSetter extends (Blockly.FieldVariable as any) {
     workspace: VisualTezWorkspace | null = null;

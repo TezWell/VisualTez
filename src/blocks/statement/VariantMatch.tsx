@@ -10,7 +10,7 @@ import { extractVariableName } from '../utils/variables';
 import { IStatement } from '@tezwell/smartts-sdk/typings/statement';
 import { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import { findVarName } from '../utils/namespace';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 
 const MatchVariantBlock = {
     type: BlockKind.match_variant,

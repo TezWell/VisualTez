@@ -10,7 +10,7 @@ import Michelson from '../generators/Michelson';
 import { extractVariableName } from '../utils/variables';
 import { buildBlockErrorString } from '../utils/errorHandling';
 import { validateTimestamp } from '../values/Timestamp';
-import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
+import { FieldVariableGetter } from 'src/components/blockly/FieldVariableGetter';
 import settings from 'src/settings.json';
 import { Unit } from '@tezwell/michelson-sdk/literal';
 

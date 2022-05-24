@@ -15,7 +15,7 @@ import SmartML from '../generators/SmartML';
 import { extractVariableName } from '../utils/variables';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
-import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
+import { FieldVariableGetter } from 'src/components/blockly/FieldVariableGetter';
 
 /** @deprecated */
 Blockly.Blocks[BlockKind.contract_storage_block] = {

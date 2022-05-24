@@ -4,7 +4,7 @@ import { OnChainView, TUnknown } from '@tezwell/smartts-sdk';
 import type { Block } from 'src/typings/blockly';
 
 import SmartML from 'src/blocks/generators/SmartML';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 import BlockKind from '../enums/BlockKind';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';

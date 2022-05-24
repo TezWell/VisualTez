@@ -21,8 +21,8 @@ export class CompilationSelection extends (Blockly.FieldDropdown as any) {
     /**
      * @override
      */
-    doClassValidation_(opt_newValue: any) {
-        return /** @type {string} */ opt_newValue;
+    doClassValidation_(newValue: string) {
+        return newValue;
     }
 
     getOptions() {

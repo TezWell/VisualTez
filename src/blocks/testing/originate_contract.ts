@@ -10,8 +10,8 @@ import Michelson from '../generators/Michelson';
 import Context from '../core/context';
 import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
-import { CompilationSelection } from 'src/components/blockly/overrides/compilation_selection';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
+import { CompilationSelection } from 'src/components/blockly/CompilationSelection';
 
 Blockly.Blocks[BlockKind.test__originate_contract_action] = {
     renameVar: function (oldName: string) {

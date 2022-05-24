@@ -8,7 +8,7 @@ import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
 import { extractVariableName } from '../utils/variables';
 import Michelson from '../generators/Michelson';
-import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
+import { FieldVariableGetter } from 'src/components/blockly/FieldVariableGetter';
 
 Blockly.Blocks[BlockKind.test__assert_contract_storage_action] = {
     init: function () {

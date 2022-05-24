@@ -7,7 +7,7 @@ import Michelson from '../generators/Michelson';
 import { Address } from '@tezwell/michelson-sdk/literal';
 import { PLACEHOLDER } from './placeholder';
 import { extractVariableName } from '../utils/variables';
-import { FieldVariableGetter } from 'src/components/blockly/overrides/field_variable_getter';
+import { FieldVariableGetter } from 'src/components/blockly/FieldVariableGetter';
 import settings from 'src/settings.json';
 
 Blockly.Blocks[BlockKind.test__address_of_account] = {

@@ -11,7 +11,7 @@ import { buildBlockErrorString } from '../utils/errorHandling';
 import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
 import Logger from 'src/utils/logger';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 
 Blockly.Blocks[BlockKind.test__originate_contract_from_code_action] = {
     renameVar: function (oldName: string) {

@@ -8,7 +8,7 @@ import BlockKind from '../enums/BlockKind';
 import { extractVariableName } from '../utils/variables';
 import { buildErrorInfo } from '../utils/errorHandling';
 import { findVarName } from '../utils/namespace';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 import { VariableKind } from '../core/context';
 
 Blockly.Blocks[BlockKind.variable_declaration_block] = {

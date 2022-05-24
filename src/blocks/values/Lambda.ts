@@ -16,7 +16,7 @@ import Context, { ScopeKind, VariableKind } from '../core/context';
 import { extractVariableName } from '../utils/variables';
 import { buildErrorInfo } from '../utils/errorHandling';
 import { MichelsonJSON } from '@tezwell/michelson-sdk/typings';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 
 Blockly.Blocks[BlockKind.lambda_literal] = {
     init: function () {

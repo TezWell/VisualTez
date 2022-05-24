@@ -8,7 +8,7 @@ import BlockKind from '../enums/BlockKind';
 import Context, { ScopeKind, VariableKind } from '../core/context';
 import { buildErrorInfo } from '../utils/errorHandling';
 import { extractVariableName } from '../utils/variables';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 
 Blockly.Blocks[BlockKind.entry_point_block] = {
     init: function () {

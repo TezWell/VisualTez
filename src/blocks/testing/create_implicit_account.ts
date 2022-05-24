@@ -8,7 +8,7 @@ import BlockKind from '../enums/BlockKind';
 import Testing from '../generators/Testing';
 import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
-import { FieldVariableSetter } from 'src/components/blockly/overrides/field_variable_setter';
+import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 
 Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
     renameVar: function (oldName: string) {
