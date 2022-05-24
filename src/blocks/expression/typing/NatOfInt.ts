@@ -14,6 +14,7 @@ const NatOfIntBlock = {
         { type: 'input_value', name: 'ERROR_MESSAGE', check: ['Literal', 'Expression'] },
     ],
     colour: 200,
+    tooltip: 'Convert a value of type TInt() to TNat(). It will fail if the value is negative\n-\nTInt() => TNat()',
     inputsInline: true,
     output: ['Expression'],
 };

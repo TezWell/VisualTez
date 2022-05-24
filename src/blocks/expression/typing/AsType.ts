@@ -14,6 +14,7 @@ const AsTypeBlock = {
         { type: 'input_value', name: 'TYPE', check: ['Type'] },
     ],
     colour: 200,
+    tooltip: 'Explicitly set the type of a value.',
     inputsInline: true,
     output: ['Expression'],
 };

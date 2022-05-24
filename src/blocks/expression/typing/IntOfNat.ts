@@ -12,6 +12,7 @@ const IntOfNatBlock = {
     message0: 'Cast nat to int %1',
     args0: [{ type: 'input_value', name: 'VALUE', check: ['Literal', 'Expression'] }],
     colour: 200,
+    tooltip: 'Convert a value of type TNat() to TInt().\n-\nTNat() => TInt()',
     inputsInline: true,
     output: ['Expression'],
 };
