@@ -1,4 +1,4 @@
-# Testing
+# Testing blocks
 
 The testing feature allows users to test their smart contracts in a real Tezos environment against a given protocol.<br/>
 It provides various actions that enable the complete testability of smart contracts.

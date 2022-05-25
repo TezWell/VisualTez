@@ -16,6 +16,18 @@ const sidebars = {
     // By default, Docusaurus generates a sidebar from the docs folder structure
     sidebar: [
         {
+            type: 'doc',
+            id: 'introduction',
+        },
+        {
+            type: 'doc',
+            id: 'toplevel',
+        },
+        {
+            type: 'doc',
+            id: 'testing',
+        },
+        {
             type: 'category',
             collapsed: false,
             collapsible: false,
@@ -26,11 +38,6 @@ const sidebars = {
                     dirName: 'guides',
                 },
             ],
-        },
-        {
-            type: 'doc',
-            label: 'Testing',
-            id: 'testing',
         },
     ],
 };
