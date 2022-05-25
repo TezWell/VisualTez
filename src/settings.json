@@ -46,6 +46,16 @@
                 "path": "/templates/contract/counter.xml"
             }
         ],
+        "tests": [
+            {
+                "name": "FA2",
+                "path": "/templates/test/fa2.xml"
+            },
+            {
+                "name": "Counter",
+                "path": "/templates/test/counter.xml"
+            }
+        ],
         "values": [
             {
                 "name": "FA2 - Transfer Parameter",
