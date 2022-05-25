@@ -524,7 +524,60 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                         </Category>
 
-                        <Category name="Typed Operations" categorystyle="expr_stmt_category">
+                        <Category name="Types" categorystyle="type_category">
+                            <Category name="Singleton Types" categorystyle="type_category">
+                                <CategoryIcon>
+                                    <TagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <NatType />
+                                <IntType />
+                                <MutezType />
+                                <TimestampType />
+                                <UnitType />
+                                <BooleanType />
+                                <StringType />
+                                <AddressType />
+                                <BytesType />
+                                <ChainIdType />
+                                <KeyType />
+                                <KeyHashType />
+                                <SignatureType />
+                                <Bls12_381_FrType />
+                                <Bls12_381_G1Type />
+                                <Bls12_381_G2Type />
+                                <OperationType />
+                                <NeverType />
+                            </Category>
+
+                            <Category name="Container Types" categorystyle="type_category">
+                                <CategoryIcon>
+                                    <TagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <ListType />
+                                <SetType />
+                                <OptionType />
+                                <MapType />
+                                <BigMapType />
+                                <PairType />
+                                <OrType />
+                                <LambdaType />
+                                <ContractType />
+                                <TicketType />
+                                <SaplingStateType />
+                                <SaplingTransactionType />
+                            </Category>
+
+                            <Category name="Artificial Types" categorystyle="type_category">
+                                <CategoryIcon>
+                                    <TagIcon className="block h-6 w-6 mr-2" />
+                                </CategoryIcon>
+                                <RecordType />
+                                <VariantType />
+                                <RecordVariantTypeEntry />
+                            </Category>
+                        </Category>
+
+                        <Category name="Operations by Type" categorystyle="expr_stmt_category">
                             <Category name="Address" categorystyle="expr_stmt_category">
                                 <AddressIsKT1 />
                             </Category>
@@ -619,59 +672,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <Category name="Variant" categorystyle="expr_stmt_category">
                                 <IsVariantExpression />
                                 <OpenVariantExpression />
-                            </Category>
-                        </Category>
-
-                        <Category name="Types" categorystyle="type_category">
-                            <Category name="Singleton Types" categorystyle="type_category">
-                                <CategoryIcon>
-                                    <TagIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
-                                <NatType />
-                                <IntType />
-                                <MutezType />
-                                <TimestampType />
-                                <UnitType />
-                                <BooleanType />
-                                <StringType />
-                                <AddressType />
-                                <BytesType />
-                                <ChainIdType />
-                                <KeyType />
-                                <KeyHashType />
-                                <SignatureType />
-                                <Bls12_381_FrType />
-                                <Bls12_381_G1Type />
-                                <Bls12_381_G2Type />
-                                <OperationType />
-                                <NeverType />
-                            </Category>
-
-                            <Category name="Container Types" categorystyle="type_category">
-                                <CategoryIcon>
-                                    <TagIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
-                                <ListType />
-                                <SetType />
-                                <OptionType />
-                                <MapType />
-                                <BigMapType />
-                                <PairType />
-                                <OrType />
-                                <LambdaType />
-                                <ContractType />
-                                <TicketType />
-                                <SaplingStateType />
-                                <SaplingTransactionType />
-                            </Category>
-
-                            <Category name="Artificial Types" categorystyle="type_category">
-                                <CategoryIcon>
-                                    <TagIcon className="block h-6 w-6 mr-2" />
-                                </CategoryIcon>
-                                <RecordType />
-                                <VariantType />
-                                <RecordVariantTypeEntry />
                             </Category>
                         </Category>
 
