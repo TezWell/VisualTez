@@ -28,7 +28,7 @@ Container types can comprise multiple inner values of one or more data types.
 
 <img
     src={require('@site/static/media/img/types_container_blocks.png').default}
-    alt="Singleton types"
+    alt="Container types"
 />
 
 ## Artificial types
@@ -37,5 +37,5 @@ Artificial types do not exist natively. They are aggregations of native types th
 
 <img
     src={require('@site/static/media/img/types_artificial_blocks.png').default}
-    alt="Singleton types"
+    alt="Artificial types"
 />
