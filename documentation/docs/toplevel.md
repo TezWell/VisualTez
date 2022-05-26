@@ -38,7 +38,7 @@ Entry points are similar to public methods of a class in Java. In this case, ent
 
 ## Value compilation
 
-The `value compilation` blocks compile [Value Blocks](#value_blocks) to their Michelson reprensentations.
+The `value compilation` blocks compile [Value Blocks](#values) to their Michelson reprensentations.
 
 <center>
     <img
@@ -49,7 +49,7 @@ The `value compilation` blocks compile [Value Blocks](#value_blocks) to their Mi
 
 ## Type compilation
 
-The `type compilation` blocks compile [Type Blocks](#type_blocks) to their Michelson reprensentations.
+The `type compilation` blocks compile [Type Blocks](/types) to their Michelson reprensentations.
 
 <center>
     <img
