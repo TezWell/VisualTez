@@ -5,6 +5,20 @@ import type { Workspace } from 'src/typings/blockly';
 import BlockKind from 'src/blocks/enums/BlockKind';
 
 /**
+ * @description Override "flyoutCategory" method
+ *
+ * Construct the elements (blocks and button) required by the flyout for the
+ * variable category.
+ * @param {!Workspace} workspace The workspace containing variables.
+ * @return {!Array<!Element>} Array of XML elements.
+ * @alias Blockly.Variables.flyoutCategory
+ */
+const flyoutCategory = function (workspace: Workspace) {
+    return flyoutCategoryBlocks(workspace);
+};
+Blockly.Variables.flyoutCategory = flyoutCategory;
+
+/**
  * Override "flyoutCategoryBlocks" method
  *
  * Construct the blocks required by the flyout for the variable category.
