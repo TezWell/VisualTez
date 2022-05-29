@@ -1,4 +1,34 @@
 # Releases
+
+## v1.0.0
+|   |   |
+|---|---|
+| Date | 2022-05-27 |
+| Commit  | [1f6523f](https://github.com/TezWell/VisualTez/commit/1f6523f6c88e6334548b6f79cda8e93da78b9fc0) |
+
+### Change Log
+
+- Adds contract examples (FA1.2, Counter);
+- Adds testing examples (FA2, Counter);
+- Add tooltips to the majority of the blocks;
+- Improvements to the editor toolbox structure;
+- Replaces default values with shadows on on-view blocks;
+- Adds shadow blocks on crypto expressions;
+- Documentation improvements.
+
+
+#### Breaking changes
+
+- Fixes the 'mint' entrypoint in `FA2` contract template.
+
+#### Bug fixes
+
+- Fixes position of testing results modal;
+- Increases the timeout when calling the test API;
+- Fixes the deletion rollback (Ctrl + z) on testing blocks;
+- Removes unexpected function calls when using 'useState';
+- Keep selected variables when duplicating blocks;
+
 ## v0.7.1
 |   |   |
 |---|---|
