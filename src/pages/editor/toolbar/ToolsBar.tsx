@@ -7,6 +7,7 @@ import useEditor from 'src/context/hooks/useEditor';
 import { DrawerKind, EditorActionKind } from 'src/context/Editor';
 
 import pkg from 'src/../package.json';
+import { Link } from 'react-router-dom';
 
 interface ToolsBarProps {
     compile: () => void;
@@ -84,7 +85,8 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     <BookOpenIcon className="block" />
                     <p>Docs</p>
                 </a>
-                <div className="border mt-5 mb-2 w-20" />v{pkg.version}
+                <div className="border mt-5 mb-2 w-20" />
+                <Link to="/releases">v{pkg.version}</Link>
             </div>
         </div>
     );
