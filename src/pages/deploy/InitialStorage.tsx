@@ -142,7 +142,6 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
 
                                 <LeftLiteral />
                                 <RightLiteral />
-                                <VariantLiteral />
                             </ToolboxSearch>
 
                             <Category name="Basic" categorystyle="literal_category">
@@ -192,7 +191,6 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                             <Category name="Variants" categorystyle="literal_category">
                                 <LeftLiteral />
                                 <RightLiteral />
-                                <VariantLiteral />
                             </Category>
                         </BlocklyEditor>
                     )}
