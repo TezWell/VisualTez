@@ -15,8 +15,6 @@ Value blocks represent Michelson literals. These include `lambdas`, `records`, `
 
 ## Basic values
 
-A singleton type is a simple kind of data type that comprises only one value.
-
 <img
     src={require('@site/static/media/img/values_singleton_blocks.png').default}
     alt="Basic values"
