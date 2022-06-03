@@ -21,17 +21,19 @@ const FileDropZone: React.FC<FileDropZoneProps> = ({
     placeholder = 'Drop file here...',
     accept = '.*',
 }) => {
+    const onDrop = React.useCallback(
+        (acceptedFiles: File[]) => {
+            if (acceptedFiles.length > 0) {
+                onComplete(acceptedFiles[0]);
+            }
+        },
+        [onComplete],
+    );
     const { getRootProps, getInputProps } = useDropzone({
-        accept: accept,
+        accept: { 'text/*': [accept] },
         noDrag: false,
         multiple: false,
-        getFilesFromEvent: async (event: any) => {
-            const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            if (files.length > 0) {
-                onComplete(files[0]);
-            }
-            return [];
-        },
+        onDrop,
     });
 
     const handleClose = () => {
