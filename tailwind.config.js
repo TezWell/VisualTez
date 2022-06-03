@@ -4,8 +4,6 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'editor-dark': '#1e1e1e',
-                'editor-light': '#F4F0FD',
                 online: '#16A34A',
                 offline: '#DC2626',
             },
