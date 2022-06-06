@@ -74,6 +74,18 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
             parameter: argument as any,
         };
 
+        if (!recipient) {
+            throw new Error(`You must select a contract to be called. ${buildBlockErrorString(block)}`);
+        }
+
+        if (!sender) {
+            throw new Error(`You must select a sender. ${buildBlockErrorString(block)}`);
+        }
+
+        if (!entrypoint.match(/[a-zA-Z0-9_]{1,32}/g)) {
+            throw new Error(`The entrypoint name is invalid. ${buildBlockErrorString(block)}`);
+        }
+
         if (block.getFieldValue('EXPECT_FAIL') === 'TRUE') {
             action.expect_failwith = Michelson.toMichelson(block, 'EXPECTED_ERROR', Unit()) as any;
         }
