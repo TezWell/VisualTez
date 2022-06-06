@@ -12,6 +12,7 @@ import { extractVariableName } from '../utils/variables';
 import { findVarName } from '../utils/namespace';
 import { FieldVariableSetter } from 'src/components/blockly/FieldVariableSetter';
 import { CompilationSelection } from 'src/components/blockly/CompilationSelection';
+import { buildBlockErrorString } from '../utils/errorHandling';
 
 Blockly.Blocks[BlockKind.test__originate_contract_action] = {
     renameVar: function (oldName: string) {
@@ -51,6 +52,10 @@ Testing.addBlock(BlockKind.test__originate_contract_action, {
         const contract: string = block.getFieldValue('CONTRACT');
         const balance = String(block.getInputTargetBlock('BALANCE')?.getFieldValue('value'));
         const storage = Michelson.toMichelson(block, 'STORAGE');
+
+        if (!contract) {
+            throw new Error(`You must select a contract compilation. ${buildBlockErrorString(block)}`);
+        }
 
         return buildAction(ActionKind.OriginateContract, {
             name,
