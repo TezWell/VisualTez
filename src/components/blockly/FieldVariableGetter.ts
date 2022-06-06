@@ -52,7 +52,9 @@ export class FieldVariableGetter extends (Blockly.FieldVariable as any) {
             );
         }
 
-        this.setValue(id);
+        if (id && id !== 'undefined' && id !== 'null') {
+            this.setValue(id);
+        }
     }
 
     /**
