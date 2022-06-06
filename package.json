@@ -1,6 +1,6 @@
 {
   "name": "@tezwell/visual-tez",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A visual programming tool for writing smart contracts in the Tezos blockchain",
   "private": true,
   "author": {
