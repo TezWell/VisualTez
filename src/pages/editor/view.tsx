@@ -589,18 +589,22 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <AddressIsKT1 />
                             </Category>
 
-                            <Category name="Big Map" categorystyle="expr_stmt_category">
+                            <Category name="Map / Big Map" categorystyle="expr_stmt_category">
                                 <GetMapValueExpression />
                                 <MapConstainsKeyExpression />
-
                                 <DeleteMapEntryStatement />
+
+                                <Label text="-- Map (only) --" web-class="defaultLabel" />
+
+                                <SizeOf />
+                                <GetMapEntriesExpression />
+                                <GetMapKeysExpression />
+                                <GetMapValuesExpression />
                             </Category>
 
-                            <Category name="Bool" categorystyle="expr_stmt_category">
-                                <OrExpression />
-                                <AndExpression />
-                                <XorExpression />
-                                <NotExpression />
+                            <Category name="Int / Nat" categorystyle="expr_stmt_category">
+                                <ABSExpression />
+                                <NegateExpression />
                             </Category>
 
                             <Category name="Bytes" categorystyle="expr_stmt_category">
@@ -615,34 +619,24 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <AddressOfContractExpression />
                             </Category>
 
-                            <Category name="Int" categorystyle="expr_stmt_category">
-                                <IntOfNatExpression />
-                                <NatOfIntExpression />
-                                <ABSExpression />
-                            </Category>
+                            <Category name="List / Set" categorystyle="expr_stmt_category">
+                                <Label text="-- Common --" web-class="defaultLabel" />
 
-                            <Category name="List" categorystyle="expr_stmt_category">
                                 <SizeOf />
+
+                                <Label text="-- List --" web-class="defaultLabel" />
+
                                 <Concat />
                                 <PrependToListExpression />
                                 <AddToListStatement />
-                            </Category>
 
-                            <Category name="Map" categorystyle="expr_stmt_category">
-                                <SizeOf />
-                                <GetMapEntriesExpression />
-                                <GetMapKeysExpression />
-                                <GetMapValuesExpression />
-                                <GetMapValueExpression />
-                                <MapConstainsKeyExpression />
+                                <Label text="-- Set --" web-class="defaultLabel" />
 
-                                <DeleteMapEntryStatement />
-                            </Category>
+                                <GetElementsFromSetExpression />
+                                <SetContainsElementExpression />
 
-                            <Category name="Nat" categorystyle="expr_stmt_category">
-                                <IntOfNatExpression />
-                                <NatOfIntExpression />
-                                <NegateExpression />
+                                <AddElementToSetStatement />
+                                <RemoveElementFromSetStatement />
                             </Category>
 
                             <Category name="Option" categorystyle="expr_stmt_category">
@@ -665,15 +659,6 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <Concat />
                                 <StringStartsWith />
                                 <StringEndsWith />
-                            </Category>
-
-                            <Category name="Set" categorystyle="expr_stmt_category">
-                                <SizeOf />
-                                <GetElementsFromSetExpression />
-                                <SetContainsElementExpression />
-
-                                <AddElementToSetStatement />
-                                <RemoveElementFromSetStatement />
                             </Category>
 
                             <Category name="Variant" categorystyle="expr_stmt_category">
@@ -783,6 +768,15 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <EdivExpression />
                             <ShiftLeftExpression />
                             <ShiftRightExpression />
+                        </Category>
+
+                        <Category name="Casting (Int / Nat)" categorystyle="expr_stmt_category">
+                            <CategoryIcon>
+                                <SwitchHorizontalIcon className="block h-6 w-6 mr-2" />
+                            </CategoryIcon>
+
+                            <IntOfNatExpression />
+                            <NatOfIntExpression />
                         </Category>
 
                         <Category name="Lambda" categorystyle="literal_category">
