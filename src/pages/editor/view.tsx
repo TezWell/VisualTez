@@ -242,6 +242,13 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                 ) {
                     const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspaceRef.current as Workspace));
                     dispatch({
+                        type: EditorActionKind.UPDATE_DRAWER,
+                    });
+                    dispatch({
+                        type: EditorActionKind.UPDATE_COMPILATIONS,
+                        payload: [],
+                    });
+                    dispatch({
                         type: EditorActionKind.UPDATE_WORKSPACE,
                         payload: {
                             id: workspace.id,
