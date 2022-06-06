@@ -91,11 +91,12 @@ class ToolboxSearch extends (Blockly.ToolboxCategory as BlocklyToolboxCategory) 
     /** @override */
     getContents() {
         const query = this.input?.value || '';
+        console.error(query, this);
         const filter = (block: { tags: string }) => {
             const tags = block.tags?.split(',') || [];
             return tags.some((tag) => tag.toLowerCase().startsWith(query.toLowerCase()));
         };
-        return this.flyoutItems_.filter(filter);
+        return (this as any).toolboxItemDef_?.contents?.filter(filter) || [];
     }
 }
 
