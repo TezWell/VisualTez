@@ -28,26 +28,23 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
             .appendField('on contract')
             .appendField(contractVariable, 'CONTRACT');
 
-        this.appendDummyInput();
-        this.appendValueInput('LEVEL').setCheck(['Nat']).appendField('Block Level');
-        this.appendValueInput('TIMESTAMP').setCheck(['Timestamp']).appendField('Block Timestamp');
-        this.appendDummyInput();
-
-        this.appendDummyInput().appendField('Sender').appendField(senderVariable, 'SENDER');
-        this.appendDummyInput();
+        this.appendDummyInput().appendField('with sender').appendField(senderVariable, 'SENDER');
         this.appendValueInput('AMOUNT').setCheck(['Mutez']).appendField('Amount');
         this.appendValueInput('ARGUMENT').setCheck(['Literal']).appendField('Argument');
-        this.appendDummyInput();
 
-        this.appendDummyInput()
+        this.appendValueInput('LEVEL').setCheck(['Nat']).appendField('Mock block Level');
+        this.appendValueInput('TIMESTAMP').setCheck(['Timestamp']).appendField('Mock block Timestamp');
+
+        this.appendDummyInput('FAILWITH_INPUT')
             .appendField('Expecting transaction to fail?')
-            .appendField(new Blockly.FieldCheckbox(false, this.validate.bind(this)), 'EXPECT_FAIL');
+            .appendField(new Blockly.FieldCheckbox(false, this.showFailWithFields.bind(this)), 'EXPECT_FAIL');
 
         this.setColour(300);
+        this.setInputsInline(false);
         this.setPreviousStatement(true, ['TestAction']);
         this.setNextStatement(true, ['TestAction']);
     },
-    validate: function (newValue: string) {
+    showFailWithFields: function (newValue: string) {
         if (newValue == 'TRUE') {
             this.appendValueInput('EXPECTED_ERROR').setCheck(['Literal']).appendField('with error');
         } else if (this.getInput('EXPECTED_ERROR')) {
@@ -62,8 +59,8 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
         const recipient: string = extractVariableName(block, 'CONTRACT');
         const sender: string = extractVariableName(block, 'SENDER');
         const entrypoint: string = block.getFieldValue('ENTRYPOINT');
-        const amount = String(block.getInputTargetBlock('AMOUNT')?.getFieldValue('value'));
-        const level = Number(block.getInputTargetBlock('LEVEL')?.getFieldValue('nat_value'));
+        const amount = String(block.getInputTargetBlock('AMOUNT')?.getFieldValue('value') || 0);
+        const level = Number(block.getInputTargetBlock('LEVEL')?.getFieldValue('nat_value') || 1);
         const argument = Michelson.toMichelson(block, 'ARGUMENT');
 
         const action: ICallContractPayload = {

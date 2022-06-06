@@ -38,21 +38,21 @@ export const TestingAction_OriginateContractFromCode = () => (
 
 export const TestingAction_CallContract = () => (
     <Block type={BlockKind.test__call_contract_action} tags={['test', 'testing']}>
-        <Value name="LEVEL">
-            <Shadow type={BlockKind.nat_literal}>
-                <Field name="nat_value">1</Field>
-            </Shadow>
+        <Value name="AMOUNT">
+            <Shadow type={BlockKind.mutez_literal} />
+        </Value>
+        <Value name="ARGUMENT">
+            <Shadow type={BlockKind.unit_literal} />
         </Value>
         <Value name="TIMESTAMP">
             <Shadow type={BlockKind.timestamp_literal}>
                 <Field name="value">1970-01-01T00:00:00Z</Field>
             </Shadow>
         </Value>
-        <Value name="AMOUNT">
-            <Shadow type={BlockKind.mutez_literal} />
-        </Value>
-        <Value name="ARGUMENT">
-            <Shadow type={BlockKind.unit_literal} />
+        <Value name="LEVEL">
+            <Shadow type={BlockKind.nat_literal}>
+                <Field name="nat_value">1</Field>
+            </Shadow>
         </Value>
     </Block>
 );
