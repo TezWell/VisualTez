@@ -28,12 +28,12 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
             .appendField('on contract')
             .appendField(contractVariable, 'CONTRACT');
 
-        this.appendDummyInput().appendField('with sender').appendField(senderVariable, 'SENDER');
+        this.appendDummyInput().appendField('Sender').appendField(senderVariable, 'SENDER');
         this.appendValueInput('AMOUNT').setCheck(['Mutez']).appendField('Amount');
         this.appendValueInput('ARGUMENT').setCheck(['Literal']).appendField('Argument');
 
-        this.appendValueInput('LEVEL').setCheck(['Nat']).appendField('Mock block Level');
-        this.appendValueInput('TIMESTAMP').setCheck(['Timestamp']).appendField('Mock block Timestamp');
+        this.appendValueInput('LEVEL').setCheck(['Nat']).appendField('Mock block level');
+        this.appendValueInput('TIMESTAMP').setCheck(['Timestamp']).appendField('Mock block timestamp');
 
         this.appendDummyInput('FAILWITH_INPUT')
             .appendField('Expecting transaction to fail?')
