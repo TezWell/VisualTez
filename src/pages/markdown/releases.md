@@ -1,5 +1,28 @@
 # Releases
 
+## v1.0.3
+|   |   |
+|---|---|
+| Date | 2022-06-08 |
+| Commit  | [58ec537](https://github.com/TezWell/VisualTez/commit/58ec5373bf8efd55d43ab62fc371d21d2a79ef95) |
+
+### Change Log
+
+- Restructure toolbox sections;
+- Notify the user if the contract compilation is not selected when originating a contract;
+- Validates (recipient, sender, and entry point) inputs when calling a contract in a test suite;
+- Reduces the size of 'call contract' blocks in test suites;
+- Removes variant block from initial storage toolbox in deploy page;
+
+#### Breaking changes
+
+#### Bug fixes
+
+- Fixes breaking change that disabled the search feature in the editor toolbox;
+- Clear previous compilations on workspace changes;
+- Fixes type input on 'get contract' expression block;
+- Removes 'null' and 'undefined' labels when loading the 'variable getter' from XML;
+
 ## v1.0.0
 |   |   |
 |---|---|
