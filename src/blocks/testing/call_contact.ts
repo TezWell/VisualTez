@@ -32,8 +32,12 @@ Blockly.Blocks[BlockKind.test__call_contract_action] = {
         this.appendValueInput('AMOUNT').setCheck(['Mutez']).appendField('Amount');
         this.appendValueInput('ARGUMENT').setCheck(['Literal']).appendField('Argument');
 
-        this.appendValueInput('LEVEL').setCheck(['Nat']).appendField('Mock block level');
-        this.appendValueInput('TIMESTAMP').setCheck(['Timestamp']).appendField('Mock block timestamp');
+        // IMPORTANT: Keep this for backwards compatibility
+        this.appendValueInput('LEVEL').setCheck(['Nat']).appendField('Mock block level').setVisible(false);
+        this.appendValueInput('TIMESTAMP')
+            .setCheck(['Timestamp'])
+            .appendField('Mock block timestamp')
+            .setVisible(false);
 
         this.appendDummyInput('FAILWITH_INPUT')
             .appendField('Expecting transaction to fail?')
@@ -60,7 +64,6 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
         const sender: string = extractVariableName(block, 'SENDER');
         const entrypoint: string = block.getFieldValue('ENTRYPOINT');
         const amount = String(block.getInputTargetBlock('AMOUNT')?.getFieldValue('value') || 0);
-        const level = Number(block.getInputTargetBlock('LEVEL')?.getFieldValue('nat_value') || 1);
         const argument = Michelson.toMichelson(block, 'ARGUMENT');
 
         const action: ICallContractPayload = {
@@ -86,16 +89,6 @@ Testing.addBlock(BlockKind.test__call_contract_action, {
         if (block.getFieldValue('EXPECT_FAIL') === 'TRUE') {
             action.expect_failwith = Michelson.toMichelson(block, 'EXPECTED_ERROR', Unit()) as any;
         }
-
-        const timestampBlock = block.getInputTargetBlock('TIMESTAMP');
-        if (timestampBlock) {
-            action.timestamp = validateTimestamp(timestampBlock);
-        }
-
-        if (level < 1 || level > 99999999) {
-            throw new Error(`The block level must be between 1 and 99999999. ${buildBlockErrorString(block)}`);
-        }
-        action.level = level;
 
         return buildAction(ActionKind.CallContract, action);
     },

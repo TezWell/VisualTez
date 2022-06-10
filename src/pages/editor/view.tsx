@@ -190,6 +190,8 @@ import {
     TestingAction_ModifyChainID,
     TestingAction_PrintPackedData,
     TestingAction_OriginateContractFromCode,
+    TestingAction_ModifyBlockLevel,
+    TestingAction_ModifyBlockTimestamp,
 } from 'src/components/blockly/blocks/Testing';
 import { StringEndsWith, StringStartsWith } from 'src/components/blockly/blocks/expressions/string';
 import { AddressIsKT1 } from 'src/components/blockly/blocks/expressions/address';
@@ -824,6 +826,8 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <Label text="Context Modifiers" web-class="defaultLabel" />
 
+                            <TestingAction_ModifyBlockLevel />
+                            <TestingAction_ModifyBlockTimestamp />
                             <TestingAction_ModifyChainID />
 
                             <Label text="Assertions" web-class="defaultLabel" />

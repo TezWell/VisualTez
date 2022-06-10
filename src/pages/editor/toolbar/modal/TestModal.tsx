@@ -50,8 +50,33 @@ const getActionLabel = (action: IAction): string | React.ReactElement => {
             return 'Assert Account Balance';
         case ActionKind.AssertContractStorage:
             return 'Assert Contract Storage';
+        case ActionKind.ModifyBlockLevel:
+            return (
+                <span>
+                    Modify next block level to{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">
+                        {action.payload.level}
+                    </span>
+                </span>
+            );
+        case ActionKind.ModifyBlockTimestamp:
+            return (
+                <span>
+                    Modify next block timestamp to{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">
+                        {action.payload.timestamp}
+                    </span>
+                </span>
+            );
         case ActionKind.ModifyChainID:
-            return 'Modify Chain Identifier';
+            return (
+                <span>
+                    Modify chain identifier to{' '}
+                    <span className="text-amber-800 font-bold border border-amber-800 px-1">
+                        {action.payload.chain_id}
+                    </span>
+                </span>
+            );
         case ActionKind.PackData:
             return 'Pack Data';
     }
@@ -162,6 +187,28 @@ const ResultDetails = ({ result }: { result: IActionResult }) => {
                                 language="json"
                                 text={JSON.stringify(result.result['storage'], null, 4)}
                                 showLineNumbers
+                            />
+                        </div>
+                    );
+                case ActionKind.ModifyBlockLevel:
+                    return (
+                        <div>
+                            <p className="my-2 font-bold">Next block level</p>
+                            <CodeBlock
+                                language="json"
+                                text={JSON.stringify(result.result['level'], null, 4)}
+                                showLineNumbers={false}
+                            />
+                        </div>
+                    );
+                case ActionKind.ModifyBlockTimestamp:
+                    return (
+                        <div>
+                            <p className="my-2 font-bold">Next block timestamp</p>
+                            <CodeBlock
+                                language="json"
+                                text={JSON.stringify(result.result['timestamp'], null, 4)}
+                                showLineNumbers={false}
                             />
                         </div>
                     );

@@ -44,11 +44,19 @@ export const TestingAction_CallContract = () => (
         <Value name="ARGUMENT">
             <Shadow type={BlockKind.unit_literal} />
         </Value>
-        <Value name="TIMESTAMP">
-            <Shadow type={BlockKind.timestamp_literal}>
-                <Field name="value">1970-01-01T00:00:00Z</Field>
-            </Shadow>
+    </Block>
+);
+
+export const TestingAction_ModifyChainID = () => (
+    <Block type={BlockKind.test__modify_chain_id_action} tags={['test', 'testing']}>
+        <Value name="CHAIN_ID">
+            <Shadow type={BlockKind.chain_id_literal} />
         </Value>
+    </Block>
+);
+
+export const TestingAction_ModifyBlockLevel = () => (
+    <Block type={BlockKind.test__modify_block_level} tags={['test', 'testing']}>
         <Value name="LEVEL">
             <Shadow type={BlockKind.nat_literal}>
                 <Field name="nat_value">1</Field>
@@ -57,10 +65,12 @@ export const TestingAction_CallContract = () => (
     </Block>
 );
 
-export const TestingAction_ModifyChainID = () => (
-    <Block type={BlockKind.test__modify_chain_id_action} tags={['test', 'testing']}>
-        <Value name="CHAIN_ID">
-            <Shadow type={BlockKind.chain_id_literal} />
+export const TestingAction_ModifyBlockTimestamp = () => (
+    <Block type={BlockKind.test__modify_block_timestamp} tags={['test', 'testing']}>
+        <Value name="TIMESTAMP">
+            <Shadow type={BlockKind.timestamp_literal}>
+                <Field name="value">1970-01-01T00:00:00Z</Field>
+            </Shadow>
         </Value>
     </Block>
 );
