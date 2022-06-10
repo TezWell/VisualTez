@@ -14,7 +14,7 @@ Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
     renameVar: function (oldName: string) {
         if (!this.oldName) {
             const current = this.getFieldValue('NAME');
-            this.oldName = oldName !== 'wallet_1' ? oldName : current;
+            this.oldName = oldName !== 'account_1' ? oldName : current;
         } else {
             this.oldName = oldName;
         }
@@ -22,9 +22,9 @@ Blockly.Blocks[BlockKind.test__create_implicit_account_action] = {
     },
     init: function () {
         const variableType = 'implicit_account';
-        const initName = findVarName('wallet', this.workspace);
+        const initName = findVarName('account', this.workspace);
         const variableField = new FieldVariableSetter(initName, this.renameVar, [variableType], variableType);
-        this.appendDummyInput().appendField('Create wallet').appendField(variableField, 'NAME');
+        this.appendDummyInput().appendField('Create account').appendField(variableField, 'NAME');
         this.appendValueInput('BALANCE').setCheck(['Mutez']).appendField('with balance');
         this.setColour(300);
         this.setInputsInline(true);
