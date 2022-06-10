@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon, BookOpenIcon } from '@heroicons/react/outline';
+import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon, BookOpenIcon, BeakerIcon } from '@heroicons/react/outline';
 import { TemplateIcon } from '@heroicons/react/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
@@ -15,7 +15,7 @@ interface ToolsBarProps {
 }
 
 const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
-    const { state, dispatch } = useEditor();
+    const { state, workspace, dispatch } = useEditor();
 
     const onMenuSelection = (drawer?: DrawerKind) => {
         dispatch({
@@ -25,7 +25,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
     };
 
     React.useEffect(() => {
-        if (state.drawer === DrawerKind.Compilation) {
+        if ([DrawerKind.Compilation, DrawerKind.Tests].includes(state.drawer!)) {
             compile();
         }
         setTimeout(resizeWorkspace, 100);
@@ -40,6 +40,15 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                 >
                     <PlayIcon className="block" />
                     <p>Compile</p>
+                </button>
+                <div className="border mt-5 mb-5 w-20" />
+                <button
+                    disabled={!(workspace.xml || '').includes('<block type="test"')}
+                    onClick={() => onMenuSelection(DrawerKind.Tests)}
+                    className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold disabled:opacity-75 disabled:text-current"
+                >
+                    <BeakerIcon className="block" />
+                    <p>Tests</p>
                 </button>
                 <div className="border mt-5 mb-5 w-20" />
             </div>

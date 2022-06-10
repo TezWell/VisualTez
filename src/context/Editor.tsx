@@ -11,6 +11,7 @@ import { generateRandomString } from 'src/utils/rand';
 
 export enum DrawerKind {
     Compilation = 'compilation',
+    Tests = 'tests',
     Settings = 'settings',
     Share = 'share',
     Storage = 'storage',

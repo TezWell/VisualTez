@@ -8,6 +8,7 @@ import SharingDrawer from './SharingDrawer';
 import StorageDrawer from './StorageDrawer';
 import SettingsDrawer from './SettingsDrawer';
 import TemplatesDrawer from './TemplatesDrawer';
+import TestsDrawer from './TestsDrawer';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DrawerProps {}
@@ -25,6 +26,8 @@ const Drawer: React.FC<DrawerProps> = () => {
         switch (state.drawer) {
             case DrawerKind.Compilation:
                 return <CompilationDrawer />;
+            case DrawerKind.Tests:
+                return <TestsDrawer />;
             case DrawerKind.Share:
                 return <SharingDrawer />;
             case DrawerKind.Storage:
