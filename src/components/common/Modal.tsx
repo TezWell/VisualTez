@@ -14,7 +14,7 @@ export interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children, height }) => {
     return (
         <Transition.Root show={open} as={React.Fragment}>
-            <Dialog as="div" className="fixed z-100 inset-0 overflow-y-auto" onClose={onClose}>
+            <Dialog as="div" className="fixed z-99999 inset-0 overflow-y-auto" onClose={onClose}>
                 <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center block">
                     <Transition.Child
                         as={React.Fragment}

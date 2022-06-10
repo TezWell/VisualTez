@@ -276,7 +276,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                 />
             </div>
             <div className="m-1" />
-            <Disclosure>
+            <Disclosure defaultOpen={result.status === ActionResultStatus.Failure}>
                 {({ open }) => (
                     <div
                         className={buildClassName([
@@ -299,7 +299,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                                 className={buildClassName([
                                     {
                                         classes: 'transform rotate-180',
-                                        append: open,
+                                        append: !open,
                                     },
                                     {
                                         classes: 'block w-5 h-5',
@@ -309,7 +309,7 @@ const ActionResult: React.FC<ActionResultProps> = ({ result, connect }) => {
                         </Disclosure.Button>
                         <Disclosure.Panel className="text-sm w-full max-w-[600px]">
                             <div className="m-2 p-2 border border-black w-full">
-                                <Disclosure>
+                                <Disclosure defaultOpen={result.status === ActionResultStatus.Failure}>
                                     {({ open }) => (
                                         <div>
                                             <Disclosure.Button className="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left focus:outline-none bg-black/[.1]">
