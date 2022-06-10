@@ -38,7 +38,7 @@ Entry points are similar to public methods of a class in Java. In this case, ent
 
 ## Value compilation
 
-The `value compilation` blocks compile [Value Blocks](/values) to their Michelson reprensentations.
+The `value compilation` blocks compile [Value Blocks](/values) to their Michelson representations. Useful to build the argument value of an entry point, prepare values to be packed, etc.
 
 <center>
     <img
@@ -49,7 +49,7 @@ The `value compilation` blocks compile [Value Blocks](/values) to their Michelso
 
 ## Type compilation
 
-The `type compilation` blocks compile [Type Blocks](/types) to their Michelson reprensentations.
+The `type compilation` blocks compile [Type Blocks](/types) to their Michelson representations. It can be used to build the type associated with a given value to be packed, etc.
 
 <center>
     <img
