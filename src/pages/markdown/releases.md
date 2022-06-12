@@ -1,5 +1,27 @@
 # Releases
 
+## v1.2.0
+|   |   |
+|---|---|
+| Date | 2022-06-12 |
+| Commit  | [b3ecd55](https://github.com/TezWell/VisualTez/commit/b3ecd55c4cf21ac3be837b832fa78a1f5bcb1472) |
+
+### Change Log
+
+- Adds test actions for modifying the block (timestamp and level);
+- Open failed action results by default;
+- Split compilation outputs from test outputs;
+- Rename the `create wallet` label to `create account` in test suites;
+- Adds block expression for computing the median value of a list of integers;
+- Adds support for `tickets`;
+- Adds the information about the storage type on the deployment page;
+
+#### Breaking changes
+
+#### Bug fixes
+
+- Fixes the format of test results;
+
 ## v1.0.3
 |   |   |
 |---|---|
