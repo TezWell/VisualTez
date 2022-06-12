@@ -37,7 +37,10 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children, 
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="inline-block bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all align-middle w-[80%]">
+                        <div
+                            style={{ height: 'calc(100vh - 100px)' }}
+                            className="inline-block bg-white dark:bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all align-middle w-[80%]"
+                        >
                             <div className="flex flex-col bg-white dark:bg-black h-full">
                                 {title ? (
                                     <div className="p-3 bg-gray-400 bg-opacity-20">
@@ -53,11 +56,7 @@ const Modal: React.FC<ModalProps> = ({ open, title, onClose, actions, children, 
                                     className={buildClassName([
                                         {
                                             classes:
-                                                'relative border-t border-b border-yellow-400 dark:border-yellow-500 bg-white dark:bg-gray-400 dark:bg-opacity-20',
-                                        },
-                                        {
-                                            classes: `h-${height}`,
-                                            append: !!height,
+                                                'flex-1 relative border-t border-b border-yellow-400 dark:border-yellow-500 bg-white dark:bg-gray-400 dark:bg-opacity-20 overflow-y-auto',
                                         },
                                     ])}
                                 >

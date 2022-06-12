@@ -69,7 +69,7 @@ const SharedWorkspace: React.FC<SharedWorkspaceProps> = () => {
                 </Button>,
             ]}
         >
-            <div className="flex flex-col h-96">
+            <div className="flex flex-col h-full">
                 <div className="p-2">
                     <input
                         type="text"
