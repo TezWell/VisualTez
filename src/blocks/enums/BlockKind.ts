@@ -145,6 +145,7 @@ export enum BlockKind {
     median_expression = 'median_expression',
     create_ticket_expression = 'create_ticket_expression',
     read_ticket_expression = 'read_ticket_expression',
+    join_ticket_expression = 'join_ticket_expression',
 
     // Statements
     return_statement_block = 'return_statement_block',

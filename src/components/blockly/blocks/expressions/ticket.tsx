@@ -12,4 +12,7 @@ export const CreateTicket = () => (
         </Value>
     </Block>
 );
+
 export const ReadTicket = () => <Block type={BlockKind.read_ticket_expression} tags={['expression', 'ticket']} />;
+
+export const JoinTicket = () => <Block type={BlockKind.join_ticket_expression} tags={['expression', 'ticket']} />;
