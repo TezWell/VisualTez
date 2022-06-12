@@ -22,3 +22,4 @@ import './contract';
 import './variant';
 import './string';
 import './address';
+import './ticket';
