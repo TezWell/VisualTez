@@ -144,6 +144,7 @@ export enum BlockKind {
     address_is_kt1 = 'address_is_kt1',
     median_expression = 'median_expression',
     create_ticket_expression = 'create_ticket_expression',
+    read_ticket_expression = 'read_ticket_expression',
 
     // Statements
     return_statement_block = 'return_statement_block',

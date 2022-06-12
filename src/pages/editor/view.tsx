@@ -176,6 +176,7 @@ import {
     SetContainsElementExpression,
     MedianExpression,
     CreateTicket,
+    ReadTicket,
 } from 'src/components/blockly/blocks/expressions';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
@@ -451,6 +452,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <StringEndsWith />
                             <AddressIsKT1 />
 
+                            <MedianExpression />
+                            <CreateTicket />
+                            <ReadTicket />
+
                             {/* Statements */}
                             <AssertStatement />
                             <IfStatement />
@@ -667,6 +672,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                             <Category name="Ticket" categorystyle="expr_stmt_category">
                                 <CreateTicket />
+                                <ReadTicket />
                             </Category>
 
                             <Category name="Variant" categorystyle="expr_stmt_category">
