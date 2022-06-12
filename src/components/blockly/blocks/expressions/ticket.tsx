@@ -16,3 +16,14 @@ export const CreateTicket = () => (
 export const ReadTicket = () => <Block type={BlockKind.read_ticket_expression} tags={['expression', 'ticket']} />;
 
 export const JoinTicket = () => <Block type={BlockKind.join_ticket_expression} tags={['expression', 'ticket']} />;
+
+export const SplitTicket = () => (
+    <Block type={BlockKind.split_ticket_expression} tags={['expression', 'ticket']}>
+        <Value name="QUANTITY1">
+            <Shadow type={BlockKind.nat_literal} />
+        </Value>
+        <Value name="QUANTITY2">
+            <Shadow type={BlockKind.nat_literal} />
+        </Value>
+    </Block>
+);

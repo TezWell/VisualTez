@@ -178,6 +178,7 @@ import {
     CreateTicket,
     ReadTicket,
     JoinTicket,
+    SplitTicket,
 } from 'src/components/blockly/blocks/expressions';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
@@ -457,6 +458,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <CreateTicket />
                             <ReadTicket />
                             <JoinTicket />
+                            <SplitTicket />
 
                             {/* Statements */}
                             <AssertStatement />
@@ -676,6 +678,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <CreateTicket />
                                 <ReadTicket />
                                 <JoinTicket />
+                                <SplitTicket />
                             </Category>
 
                             <Category name="Variant" categorystyle="expr_stmt_category">
