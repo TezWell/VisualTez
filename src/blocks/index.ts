@@ -32,6 +32,7 @@ export interface ContractCompilation {
         name: string;
         storage: IValue;
         storageXML: string;
+        storageTypeXML: string;
         codeJSON: string;
         codeMicheline: string;
         smartpy: string;
@@ -134,9 +135,11 @@ export const compileBlock = (block: Block): Compilation | null => {
             // Reset context
             Context.resetContract();
             const storageBlock = block.getInputTargetBlock('initial_storage');
+            const storageTypeBlock = block.getInputTargetBlock('TYPE');
 
             // The xml will be used in the deployment page
             const storageXML = storageBlock ? Blockly.Xml.domToText(Blockly.Xml.blockToDom(storageBlock)) : '';
+            const storageTypeXML = storageBlock ? Blockly.Xml.domToText(Blockly.Xml.blockToDom(storageTypeBlock)) : '';
 
             // Translate contract block to SmartML
             const code = extractContract(block);
@@ -151,6 +154,7 @@ export const compileBlock = (block: Block): Compilation | null => {
                     name,
                     storage: storageBlock ? Michelson.translateValue(storageBlock) : Unit(),
                     storageXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageXML}</xml>`,
+                    storageTypeXML: `<xml xmlns="http://www.w3.org/1999/xhtml">${storageTypeXML}</xml>`,
                     codeJSON: JSON.stringify(compilation.json, null, 4),
                     codeMicheline: compilation.micheline,
                     smartpy: compilation.smartpy,

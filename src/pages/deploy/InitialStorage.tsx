@@ -39,15 +39,22 @@ import {
     StringLiteral,
     TimestampLiteral,
     UnitLiteral,
-    VariantLiteral,
 } from 'src/components/blockly/blocks/literals';
 import { Category, ToolboxSearch } from 'src/components/blockly';
+import Button from 'src/components/common/Button';
+import StorageTypeModal from './StorageTypeModal';
 
 interface InitialStorageProps {
     workspaceRef: React.MutableRefObject<WorkspaceSvg | undefined>;
 }
 const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
     const { state, dispatch } = useDeployment();
+
+    const showStorageType = React.useCallback(() => {
+        dispatch({
+            type: DeploymentActionKind.SHOW_STORAGE_TYPE,
+        });
+    }, [dispatch]);
 
     const onChange = React.useCallback(
         (event: any) => {
@@ -75,10 +82,16 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
 
     return (
         <div className="w-full h-[600px] shadow-lg rounded-md p-2 shadow-xl border-2 border-black dark:border-amber-400 dark:bg-[#1e1e1e]">
-            <div className="border-b border-black dark:border-white h-[24px] ">
-                <label className="block text-sm font-medium">Initial Storage</label>
+            <div className="flex items-center justify-between border-b border-black dark:border-white h-[48px]">
+                <label className="block text-sm font-medium mr-2">Initial Storage</label>
+                <Button
+                    onClick={showStorageType}
+                    className="p-1 items-center justify-center bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500"
+                >
+                    Show Type
+                </Button>
             </div>
-            <div className="relative w-full" style={{ height: 'calc(100% - 24px)' }}>
+            <div className="relative w-full" style={{ height: 'calc(100% - 48px)' }}>
                 <ConditionalRender props={{ storageXML: state.storageXML }}>
                     {({ storageXML }) => (
                         <BlocklyEditor
@@ -196,6 +209,7 @@ const InitialStorage: React.FC<InitialStorageProps> = ({ workspaceRef }) => {
                     )}
                 </ConditionalRender>
             </div>
+            <StorageTypeModal />
         </div>
     );
 };

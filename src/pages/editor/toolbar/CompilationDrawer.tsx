@@ -398,6 +398,7 @@ const CompilationDrawer: React.FC<CompilationDrawerProps> = () => {
                 type: DeploymentActionKind.UPDATE_STATE,
                 payload: {
                     storageXML: compilation.result.storageXML,
+                    storageTypeXML: compilation.result.storageTypeXML,
                     code: compilation.result.codeJSON,
                 },
             });

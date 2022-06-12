@@ -6,6 +6,7 @@ import { SelectivePartial } from 'src/typings/utils';
 
 interface IDeploymentPersistentState {
     storageXML: string;
+    storageTypeXML: string;
     code: string;
 }
 
@@ -18,8 +19,10 @@ interface IDeployParameters {
 }
 
 interface IDeploymentState {
+    showStorageType: boolean;
     code: string;
     storageXML: string;
+    storageTypeXML: string;
     storage: string;
     deploying: boolean;
     error: string;
@@ -32,6 +35,12 @@ interface IDeploymentState {
 }
 
 type DeploymentReducerAction =
+    | {
+          type: DeploymentActionKind.SHOW_STORAGE_TYPE;
+      }
+    | {
+          type: DeploymentActionKind.HIDE_STORAGE_TYPE;
+      }
     | {
           type: DeploymentActionKind.UPDATE_PARAMETERS;
           payload: Partial<IDeployParameters>;
@@ -62,6 +71,8 @@ export enum DeploymentActionKind {
     UPDATE_STATE = 'DEPLOY__UPDATE_STATE__ACTION',
     UPDATE_RESULT = 'DEPLOY__UPDATE_RESULT__ACTION',
     UPDATE_CONFIRMATIONS = 'DEPLOY__UPDATE_CONFIRMATIONS__ACTION',
+    SHOW_STORAGE_TYPE = 'DEPLOY__SHOW_STORAGE_TYPE__ACTION',
+    HIDE_STORAGE_TYPE = 'DEPLOY__HIDE_STORAGE_TYPE__ACTION',
 }
 
 export enum Field {
@@ -74,8 +85,10 @@ export enum Field {
 
 const contextStub: IDeploymentContext = {
     state: {
+        showStorageType: false,
         code: '',
         storageXML: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+        storageTypeXML: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
         storage: '',
         deploying: false,
         error: '',
@@ -134,6 +147,16 @@ const persistState = (state: Partial<IDeploymentPersistentState>): void => {
  */
 const reducer = (state: IDeploymentState, action: DeploymentReducerAction): IDeploymentState => {
     switch (action.type) {
+        case DeploymentActionKind.SHOW_STORAGE_TYPE:
+            return {
+                ...state,
+                showStorageType: true,
+            };
+        case DeploymentActionKind.HIDE_STORAGE_TYPE:
+            return {
+                ...state,
+                showStorageType: false,
+            };
         case DeploymentActionKind.UPDATE_PARAMETERS:
             return {
                 ...state,
@@ -179,8 +202,9 @@ const Provider: React.FC<{ children?: React.ReactNode }> = (props) => {
         persistState({
             code: state.code,
             storageXML: state.storageXML,
+            storageTypeXML: state.storageTypeXML,
         });
-    }, [state.code, state.storageXML]);
+    }, [state.code, state.storageXML, state.storageTypeXML]);
 
     return (
         <Context.Provider
