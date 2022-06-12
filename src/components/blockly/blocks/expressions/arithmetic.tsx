@@ -29,17 +29,31 @@ export const NegateExpression = () => (
 );
 
 export const ModExpression = () => (
-    <Block type={BlockKind.mod_expression} tags={['expression', 'arithmetic', 'remainder', 'division', 'mod']} />
+    <Block
+        type={BlockKind.mod_expression}
+        tags={['expression', 'math', 'arithmetic', 'remainder', 'division', 'mod']}
+    />
 );
 
 export const EdivExpression = () => (
-    <Block type={BlockKind.ediv_expression} tags={['expression', 'arithmetic', 'divide', 'division', 'euclidean']} />
+    <Block
+        type={BlockKind.ediv_expression}
+        tags={['expression', 'math', 'arithmetic', 'divide', 'division', 'euclidean']}
+    />
 );
 
 export const ShiftLeftExpression = () => (
-    <Block type={BlockKind.shift_left_expression} tags={['expression', 'arithmetic', 'shift']} />
+    <Block type={BlockKind.shift_left_expression} tags={['expression', 'math', 'arithmetic', 'shift']} />
 );
 
 export const ShiftRightExpression = () => (
-    <Block type={BlockKind.shift_right_expression} tags={['expression', 'arithmetic', 'shift']} />
+    <Block type={BlockKind.shift_right_expression} tags={['expression', 'math', 'arithmetic', 'shift']} />
+);
+
+export const MedianExpression = () => (
+    <Block type={BlockKind.median_expression} tags={['expression', 'math', 'median']}>
+        <Value name="LIST">
+            <Shadow type={BlockKind.list_literal} />
+        </Value>
+    </Block>
 );

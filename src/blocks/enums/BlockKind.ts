@@ -142,6 +142,7 @@ export enum BlockKind {
     string_starts_with = 'string_starts_with',
     string_ends_with = 'string_ends_with',
     address_is_kt1 = 'address_is_kt1',
+    median_expression = 'median_expression',
 
     // Statements
     return_statement_block = 'return_statement_block',

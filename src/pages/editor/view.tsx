@@ -174,6 +174,7 @@ import {
     ShiftRightExpression,
     ShiftLeftExpression,
     SetContainsElementExpression,
+    MedianExpression,
 } from 'src/components/blockly/blocks/expressions';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
@@ -758,7 +759,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <HashKey />
                         </Category>
 
-                        <Category name="Arithmetic" categorystyle="logic_category">
+                        <Category name="Arithmetic / Math" categorystyle="logic_category">
                             <CategoryIcon>
                                 <CalculatorIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
@@ -770,6 +771,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <EdivExpression />
                             <ShiftLeftExpression />
                             <ShiftRightExpression />
+                            <MedianExpression />
                         </Category>
 
                         <Category name="Casting (Int / Nat)" categorystyle="expr_stmt_category">

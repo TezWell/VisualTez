@@ -5,3 +5,4 @@ import './mod';
 import './ediv';
 import './shift_left';
 import './shift_right';
+import './median';
