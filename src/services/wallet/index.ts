@@ -23,8 +23,7 @@ const getNetwork = (network: NetworkKind): NetworkType => {
     switch (network) {
         case NetworkKind.Mainnet:
             return NetworkType.MAINNET;
-        case NetworkKind.Ithacanet:
-            return NetworkType.ITHACANET;
+        case NetworkKind.Ghostnet:
         case NetworkKind.Jakartanet:
         default:
             return NetworkType.CUSTOM;

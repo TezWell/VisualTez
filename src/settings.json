@@ -2,7 +2,7 @@
     "storage_prefix": "@VisualTez",
     "networks": [
         "mainnet",
-        "ithacanet",
+        "ghostnet",
         "jakartanet"
     ],
     "protocols": [
@@ -13,10 +13,6 @@
         {
             "name": "Jakarta",
             "id": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
-        },
-        {
-            "name": "Ithaca",
-            "id": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A"
         }
     ],
     "node_monitor": {
