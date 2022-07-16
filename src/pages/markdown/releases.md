@@ -1,5 +1,20 @@
 # Releases
 
+
+## 1.2.1
+|   |   |
+|---|---|
+| Date | 2022-07-16 |
+| Commit  | [c9be0ca](https://github.com/TezWell/VisualTez/commit/c9be0ca4133d5b27e75219c62e50b292c07560ce) |
+
+### Change Log
+
+- Adds expressions for adding and substracting seconds, minutes and hours from timestamps;
+- Removes jakartanet node;
+
+#### Breaking changes
+#### Bug fixes
+
 ## v1.2.0
 |   |   |
 |---|---|
