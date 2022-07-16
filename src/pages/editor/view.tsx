@@ -179,6 +179,9 @@ import {
     ReadTicket,
     JoinTicket,
     SplitTicket,
+    AddSeconds,
+    AddHours,
+    AddMinutes,
 } from 'src/components/blockly/blocks/expressions';
 import Logger from 'src/utils/logger';
 import { validateBlockLocation } from 'src/blocks/utils/workspace';
@@ -460,6 +463,10 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             <JoinTicket />
                             <SplitTicket />
 
+                            <AddSeconds />
+                            <AddMinutes />
+                            <AddHours />
+
                             {/* Statements */}
                             <AssertStatement />
                             <IfStatement />
@@ -624,6 +631,12 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                                 <SizeOf />
                                 <Concat />
                                 <Slice />
+                            </Category>
+
+                            <Category name="Timestamp" categorystyle="expr_stmt_category">
+                                <AddSeconds />
+                                <AddMinutes />
+                                <AddHours />
                             </Category>
 
                             <Category name="Contract" categorystyle="expr_stmt_category">

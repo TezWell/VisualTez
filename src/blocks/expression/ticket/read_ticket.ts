@@ -5,6 +5,7 @@ import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
 import { ReadTicket } from '@tezwell/smartts-sdk';
+import { buildErrorInfo } from 'src/blocks/utils/errorHandling';
 
 Blockly.Blocks[BlockKind.read_ticket_expression] = {
     init: function () {
@@ -25,6 +26,6 @@ Blockly.Blocks[BlockKind.read_ticket_expression] = {
 SmartML.addBlock(BlockKind.read_ticket_expression, {
     toValue: (block: Block) => {
         const ticket: IExpression<any> = SmartML.toValue(block, 'TICKET');
-        return ReadTicket(ticket);
+        return ReadTicket(ticket, buildErrorInfo(block));
     },
 });

@@ -5,6 +5,7 @@ import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
 import { JoinTicket } from '@tezwell/smartts-sdk';
+import { buildErrorInfo } from 'src/blocks/utils/errorHandling';
 
 Blockly.Blocks[BlockKind.join_ticket_expression] = {
     init: function () {
@@ -27,6 +28,6 @@ SmartML.addBlock(BlockKind.join_ticket_expression, {
     toValue: (block: Block) => {
         const ticket1: IExpression<any> = SmartML.toValue(block, 'TICKET1');
         const ticket2: IExpression<any> = SmartML.toValue(block, 'TICKET2');
-        return JoinTicket(ticket1, ticket2);
+        return JoinTicket(ticket1, ticket2, buildErrorInfo(block));
     },
 });
