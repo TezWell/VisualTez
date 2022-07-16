@@ -23,3 +23,4 @@ import './variant';
 import './string';
 import './address';
 import './ticket';
+import './timestamp';

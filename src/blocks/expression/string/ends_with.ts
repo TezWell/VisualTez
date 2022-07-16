@@ -1,10 +1,11 @@
 import Blockly from 'blockly';
-import type { Block } from 'src/typings/blockly';
 import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import { StringHelpers } from '@tezwell/smartts-sdk/lib';
 
+import type { Block } from 'src/typings/blockly';
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
+import { buildErrorInfo } from 'src/blocks/utils/errorHandling';
 
 Blockly.Blocks[BlockKind.string_ends_with] = {
     init: function () {
@@ -26,6 +27,6 @@ SmartML.addBlock(BlockKind.string_ends_with, {
     toValue: (block: Block) => {
         const text: IExpression<any> = SmartML.toValue(block, 'TEXT');
         const postfix: IExpression<any> = SmartML.toValue(block, 'POSTFIX');
-        return StringHelpers.EndsWith(text, postfix);
+        return StringHelpers.EndsWith(text, postfix, buildErrorInfo(block));
     },
 });

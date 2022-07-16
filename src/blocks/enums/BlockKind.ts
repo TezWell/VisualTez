@@ -147,6 +147,7 @@ export enum BlockKind {
     read_ticket_expression = 'read_ticket_expression',
     join_ticket_expression = 'join_ticket_expression',
     split_ticket_expression = 'split_ticket_expression',
+    add_time = 'add_time',
 
     // Statements
     return_statement_block = 'return_statement_block',

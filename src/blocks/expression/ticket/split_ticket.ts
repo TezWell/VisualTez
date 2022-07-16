@@ -5,6 +5,7 @@ import type { IExpression } from '@tezwell/smartts-sdk/typings/expression';
 import BlockKind from '../../enums/BlockKind';
 import SmartML from '../../generators/SmartML';
 import { SplitTicket } from '@tezwell/smartts-sdk';
+import { buildErrorInfo } from 'src/blocks/utils/errorHandling';
 
 Blockly.Blocks[BlockKind.split_ticket_expression] = {
     init: function () {
@@ -29,6 +30,6 @@ SmartML.addBlock(BlockKind.split_ticket_expression, {
         const ticket: IExpression<any> = SmartML.toValue(block, 'TICKET');
         const quantity1: IExpression<any> = SmartML.toValue(block, 'QUANTITY1');
         const quantity2: IExpression<any> = SmartML.toValue(block, 'QUANTITY2');
-        return SplitTicket(ticket, quantity1, quantity2);
+        return SplitTicket(ticket, quantity1, quantity2, buildErrorInfo(block));
     },
 });
