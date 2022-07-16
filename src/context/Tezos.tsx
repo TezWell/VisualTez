@@ -7,13 +7,13 @@ import Logger from 'src/utils/logger';
 export enum NetworkKind {
     Mainnet = 'mainnet',
     Ghostnet = 'ghostnet',
-    Jakartanet = 'jakartanet',
+    Kathmandu = 'kathmandu',
 }
 
 export const DEFAULT_RPC = {
-    [NetworkKind.Mainnet]: 'https://mainnet.visualtez.com',
+    [NetworkKind.Mainnet]: 'https://mainnet-tezos.giganode.io',
     [NetworkKind.Ghostnet]: 'https://ghostnet.visualtez.com',
-    [NetworkKind.Jakartanet]: 'https://jakartanet.visualtez.com',
+    [NetworkKind.Kathmandu]: 'https://rpc.kathmandunet.teztnets.xyz',
 };
 
 export const NETWORK_OF_RPC: Record<string, NetworkKind> = Object.values(NetworkKind).reduce(

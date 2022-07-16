@@ -1,9 +1,7 @@
 {
     "storage_prefix": "@VisualTez",
     "networks": [
-        "mainnet",
-        "ghostnet",
-        "jakartanet"
+        "ghostnet"
     ],
     "protocols": [
         {
