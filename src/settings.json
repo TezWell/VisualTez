@@ -1,8 +1,6 @@
 {
     "storage_prefix": "@VisualTez",
-    "networks": [
-        "ghostnet"
-    ],
+    "networks": [],
     "protocols": [
         {
             "name": "Alpha",

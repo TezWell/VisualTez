@@ -11,8 +11,8 @@ export enum NetworkKind {
 }
 
 export const DEFAULT_RPC = {
-    [NetworkKind.Mainnet]: 'https://mainnet-tezos.giganode.io',
-    [NetworkKind.Ghostnet]: 'https://ghostnet.visualtez.com',
+    [NetworkKind.Mainnet]: 'https://mainnet.api.tez.ie',
+    [NetworkKind.Ghostnet]: 'https://rpc.ghostnet.teztnets.xyz',
     [NetworkKind.Kathmandu]: 'https://rpc.kathmandunet.teztnets.xyz',
 };
 

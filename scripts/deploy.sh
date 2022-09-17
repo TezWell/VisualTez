@@ -15,4 +15,4 @@ cp -r documentation/build deployment/www/docs
 cd deployment
 
 # Deploy
-gcloud app deploy --project visualtez
+gcloud --account=tezwell@visualtez.iam.gserviceaccount.com app deploy --project visualtez
