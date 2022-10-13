@@ -38,6 +38,12 @@ const Footer = () => (
                                     <p className="ml-2">Github</p>
                                 </a>
                             </li>
+                            <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                                <Link to="/nodes" className="flex no-underline hover:text-yellow-500">
+                                    <GlobeIcon />
+                                    <p className="ml-2">Public Nodes</p>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="flex-1 mb-6 md:mb-0">
