@@ -1,6 +1,8 @@
 {
     "storage_prefix": "@VisualTez",
-    "networks": [],
+    "networks": [
+        "limanet"
+    ],
     "protocols": [
         {
             "name": "Alpha",
