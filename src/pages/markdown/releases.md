@@ -1,6 +1,21 @@
 # Releases
 
 
+## 1.3.0
+|   |   |
+|---|---|
+| Date | 2022-10-22 |
+| Commit  | [9b8ec06](https://github.com/TezWell/VisualTez/commit/9b8ec067b0514c17a156a0c6256d651a90b9966f) |
+
+### Change Log
+
+- Add new test networks;
+- Update dependencies;
+- Update how `gas_limit` is estimated. (Breaking change added in Kathmandu protocol.)
+
+#### Breaking changes
+#### Bug fixes
+
 ## 1.2.1
 |   |   |
 |---|---|
