@@ -76,6 +76,7 @@
     "testMatch": [
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
+    "transformIgnorePatterns": ["node_modules/(?!axios)"],
     "moduleNameMapper": {
       "react-markdown": "<rootDir>/node_modules/react-markdown/react-markdown.min.js",
       "@tezwell/michelson-sdk/converter": "@tezwell/michelson-sdk/converter/index.cjs",
