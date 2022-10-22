@@ -80,7 +80,7 @@ const estimateOperation = async (
     for (const c of response.contents) {
         switch (c.kind) {
             case 'origination':
-                gas += parseInt(c['metadata']['operation_result']['consumed_gas'] || '0');
+                gas += Math.ceil(parseInt(c['metadata']['operation_result']['consumed_milligas'] || '0') / 1000);
                 storageCost += 300;
                 storageCost += parseInt(c['metadata']['operation_result']['paid_storage_size_diff'] || '0');
 
@@ -91,7 +91,7 @@ const estimateOperation = async (
 
                 for (const internalOperation of internalOperations) {
                     const result = internalOperation['result'];
-                    gas += parseInt(result['consumed_gas'] || '0');
+                    gas += Math.ceil(parseInt(result['consumed_milligas'] || '0') / 1000);
                     if (internalOperation.kind === 'origination') {
                         storageCost += 257;
                     }

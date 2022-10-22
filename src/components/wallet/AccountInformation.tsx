@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExclamationIcon } from '@heroicons/react/outline';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 import useTezos from 'src/context/hooks/useTezos';
 import Avatar from 'src/components/common/Avatar';
@@ -20,7 +20,7 @@ const AccountInformation = () => {
         return (
             <div className="flex flex-col justify-center items-center p-5 rounded shadow-xl border-2 border-red-400">
                 <div className="flex items-center justify-center p-2 rounded-full bg-red-100">
-                    <ExclamationIcon className="block h-8 w-8 text-red-600" aria-hidden="true" />
+                    <ExclamationCircleIcon className="block h-8 w-8 text-red-600" aria-hidden="true" />
                 </div>
                 <div className="text-center mt-5">
                     <p className="text-sm text-red-600 dark:text-red-300">{walletStatus.error}</p>

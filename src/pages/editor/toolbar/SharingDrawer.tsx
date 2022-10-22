@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckIcon } from '@heroicons/react/outline';
+import { CheckIcon } from '@heroicons/react/24/outline';
 
 import Button from 'src/components/common/Button';
 import { copyToClipboard } from 'src/utils/clipboard';

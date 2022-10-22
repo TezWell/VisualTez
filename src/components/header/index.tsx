@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { MenuIcon, PuzzleIcon } from '@heroicons/react/outline';
+import { Bars3Icon, PuzzlePieceIcon } from '@heroicons/react/24/outline';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                 <div className="flex justify-center items-center lg:hidden pr-4">
                     <Menu as="div" className="relative h-10">
                         <Menu.Button>
-                            <MenuIcon className="block h-full w-10" />
+                            <Bars3Icon className="block h-full w-10" />
                         </Menu.Button>
                         <Transition
                             as={React.Fragment}
@@ -43,7 +43,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                                         className="inline-flex w-full rounded font-bold no-underline p-2 bg-gray-200 dark:bg-gray-800"
                                         to="/editor"
                                     >
-                                        <PuzzleIcon className="block h-6 w-6 mr-1" />
+                                        <PuzzlePieceIcon className="block h-6 w-6 mr-1" />
                                         <span>Editor</span>
                                     </NavLink>
                                 </Menu.Item>
@@ -65,7 +65,7 @@ const Navigation: React.FC<NavigationProps> = () => {
                                 className="inline-flex bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 font-bold text-white dark:text-black border-b-4 rounded px-3 py-2"
                                 to="/editor"
                             >
-                                <PuzzleIcon className="block h-6 w-6 mr-1" />
+                                <PuzzlePieceIcon className="block h-6 w-6 mr-1" />
                                 Editor
                             </RouterButton>
                         </li>

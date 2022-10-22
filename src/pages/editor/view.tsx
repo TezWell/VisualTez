@@ -1,6 +1,6 @@
 import React from 'react';
 import Blockly from 'blockly';
-import { PuzzleIcon, ReceiptRefundIcon, RefreshIcon, ScaleIcon } from '@heroicons/react/solid';
+import { PuzzlePieceIcon, ReceiptRefundIcon, ArrowPathIcon, ScaleIcon } from '@heroicons/react/24/solid';
 import {
     FingerPrintIcon,
     BeakerIcon,
@@ -8,9 +8,9 @@ import {
     TagIcon,
     VariableIcon,
     EyeIcon,
-    SwitchHorizontalIcon,
+    ArrowsRightLeftIcon,
     CalculatorIcon,
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 
 import type { Workspace, WorkspaceSvg } from 'src/typings/blockly';
 
@@ -487,7 +487,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                         <Category name="Main Blocks" categorystyle="class_category">
                             <CategoryIcon>
-                                <PuzzleIcon className="block h-6 w-6 mr-2" />
+                                <PuzzlePieceIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
                             <Contract />
                             <Entrypoint />
@@ -729,7 +729,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                         </Category>
                         <Category name="Loops" categorystyle="loop_statements_category">
                             <CategoryIcon>
-                                <RefreshIcon className="block h-6 w-6 mr-2" />
+                                <ArrowPathIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
                             <ForStatement />
                             <ForEachStatement />
@@ -800,7 +800,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
 
                         <Category name="Casting (Int / Nat)" categorystyle="expr_stmt_category">
                             <CategoryIcon>
-                                <SwitchHorizontalIcon className="block h-6 w-6 mr-2" />
+                                <ArrowsRightLeftIcon className="block h-6 w-6 mr-2" />
                             </CategoryIcon>
 
                             <IntOfNatExpression />
@@ -832,7 +832,7 @@ const EditorView: React.FC<EditorViewProps> = ({ workspaceRef, compile, onError 
                             </Category>
                             <Category name="Serialization" categorystyle="advanced_category">
                                 <CategoryIcon>
-                                    <SwitchHorizontalIcon className="block h-6 w-6 mr-2" />
+                                    <ArrowsRightLeftIcon className="block h-6 w-6 mr-2" />
                                 </CategoryIcon>
                                 <PackExpression />
                                 <UnpackExpression />

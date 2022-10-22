@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Switch, Tab } from '@headlessui/react';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
 
 import { ContractCompilation, filterCompilationKind, Target, TypeCompilation, ValueCompilation } from 'src/blocks';
 import CodeBlock from 'src/components/CodeBlock';

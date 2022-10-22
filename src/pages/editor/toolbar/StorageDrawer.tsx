@@ -2,13 +2,13 @@ import React from 'react';
 import { Disclosure } from '@headlessui/react';
 import {
     TrashIcon,
-    PencilAltIcon,
-    DocumentAddIcon,
+    PencilSquareIcon,
+    DocumentPlusIcon,
     ChevronDownIcon,
-    ExternalLinkIcon,
-    DownloadIcon,
-    UploadIcon,
-} from '@heroicons/react/outline';
+    ArrowTopRightOnSquareIcon,
+    ArrowDownTrayIcon,
+    ArrowUpTrayIcon,
+} from '@heroicons/react/24/outline';
 
 import Button from 'src/components/common/Button';
 import useEditor from 'src/context/hooks/useEditor';
@@ -305,7 +305,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                             onClick={() => selectWorkspace(w.id)}
                                             className="flex justify-between items-center w-full bg-amber-500 hover:bg-amber-400 border-amber-700 hover:border-amber-500 p-1 px-5"
                                         >
-                                            <ExternalLinkIcon className="block" width={16} height={16} />
+                                            <ArrowTopRightOnSquareIcon className="block" width={16} height={16} />
                                             <span className="text-sm">Select Worksplace</span>
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
@@ -313,7 +313,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                             onClick={downloadWorkspace}
                                             className="flex justify-between items-center w-full bg-indigo-500 hover:bg-indigo-400 border-indigo-700 hover:border-indigo-500 p-1 px-5"
                                         >
-                                            <DownloadIcon className="block" width={16} height={16} />
+                                            <ArrowDownTrayIcon className="block" width={16} height={16} />
                                             <span className="text-sm">Export Workplace (.xml)</span>
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
@@ -321,7 +321,7 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                                             onClick={() => setUpdateWorkspaceModal(w)}
                                             className="flex justify-between items-center w-full bg-green-500 hover:bg-green-400 border-green-700 hover:border-green-500 p-1 px-5"
                                         >
-                                            <PencilAltIcon className="block" width={16} height={16} />
+                                            <PencilSquareIcon className="block" width={16} height={16} />
                                             <span className="text-sm">Rename</span>
                                         </Button>
                                         <div className="border border-black dark:border-white m-1" />
@@ -345,14 +345,14 @@ const StorageDrawer: React.FC<StorageDrawerProps> = () => {
                     onClick={() => setOpenImportModal(true)}
                     className="flex justify-between items-center w-full bg-indigo-500 hover:bg-indigo-400 border-indigo-700 hover:border-indigo-500 p-2"
                 >
-                    <UploadIcon className="block" width={32} height={32} />
+                    <ArrowUpTrayIcon className="block" width={32} height={32} />
                     Import Workplace (.xml)
                 </Button>
                 <Button
                     onClick={() => setCreateWorkspaceModal(true)}
                     className="flex justify-between items-center w-full bg-yellow-500 hover:bg-yellow-400 border-yellow-700 hover:border-yellow-500 p-2 mt-2"
                 >
-                    <DocumentAddIcon className="block" width={32} height={32} />
+                    <DocumentPlusIcon className="block" width={32} height={32} />
                     New Workplace
                 </Button>
             </div>

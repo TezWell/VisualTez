@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { CogIcon, PlayIcon, ShareIcon, ArchiveIcon, BookOpenIcon, BeakerIcon } from '@heroicons/react/outline';
-import { TemplateIcon } from '@heroicons/react/solid';
+import { CogIcon, PlayIcon, ShareIcon, ArchiveBoxIcon, BookOpenIcon, BeakerIcon } from '@heroicons/react/24/outline';
+import { RectangleGroupIcon } from '@heroicons/react/24/solid';
 
 import useEditor from 'src/context/hooks/useEditor';
 import { DrawerKind, EditorActionKind } from 'src/context/Editor';
@@ -58,7 +58,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     onClick={() => onMenuSelection(DrawerKind.Templates)}
                     className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
                 >
-                    <TemplateIcon className="block" />
+                    <RectangleGroupIcon className="block" />
                     <p>Templates</p>
                 </button>
                 <div className="border mt-5 mb-5 w-20" />
@@ -74,7 +74,7 @@ const ToolsBar: React.FC<ToolsBarProps> = ({ compile, resizeWorkspace }) => {
                     onClick={() => onMenuSelection(DrawerKind.Storage)}
                     className="w-14 h-14 flex flex-col items-center justify-center hover:text-yellow-400 active:text-yellow-500 font-bold"
                 >
-                    <ArchiveIcon className="block" />
+                    <ArchiveBoxIcon className="block" />
                     <p>Storage</p>
                 </button>
                 <div className="border mt-5 mb-5 w-20" />

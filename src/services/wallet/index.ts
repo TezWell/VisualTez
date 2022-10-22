@@ -58,7 +58,7 @@ export const connect = async (
 
     if (!tryRecover || !activeAccount) {
         // Reset config, we want users to always be able to select a wallet provider.
-        await wallet.disconnect();
+        await wallet.client.clearActiveAccount();
         // Request permissions
         await wallet.requestPermissions({
             scopes: [PermissionScope.OPERATION_REQUEST],

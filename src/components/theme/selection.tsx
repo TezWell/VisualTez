@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from '@headlessui/react';
-import { SunIcon, MoonIcon } from '@heroicons/react/solid';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
 
 import useTheme from 'src/context/hooks/useTheme';
 import { ThemeKind } from 'src/context/Theme';

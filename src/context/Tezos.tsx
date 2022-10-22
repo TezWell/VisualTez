@@ -7,14 +7,14 @@ import Logger from 'src/utils/logger';
 export enum NetworkKind {
     Mainnet = 'mainnet',
     Ghostnet = 'ghostnet',
-    Gathmandunet = 'kathmandunet',
+    Kathmandunet = 'kathmandunet',
     Limanet = 'limanet',
 }
 
 export const DEFAULT_RPC = {
     [NetworkKind.Mainnet]: 'https://mainnet.api.tez.ie',
     [NetworkKind.Ghostnet]: 'https://rpc.ghostnet.teztnets.xyz',
-    [NetworkKind.Gathmandunet]: 'https://rpc.kathmandunet.teztnets.xyz',
+    [NetworkKind.Kathmandunet]: 'https://rpc.kathmandunet.teztnets.xyz',
     [NetworkKind.Limanet]: 'https://limanet.visualtez.com',
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Disclosure } from '@headlessui/react';
-import { CheckIcon, ChevronUpIcon, XIcon } from '@heroicons/react/solid';
+import { CheckIcon, ChevronUpIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { ActionKind, ActionResultStatus, IAction, IActionResult } from '@tezwell/tezos-testing-sdk/action';
 
 import settings from 'src/settings.json';
@@ -85,7 +85,7 @@ const getActionLabel = (action: IAction): string | React.ReactElement => {
 const ActionStatus = ({ status }: { status: ActionResultStatus }) =>
     status === ActionResultStatus.Failure ? (
         <div className="flex items-center justify-center h-10 w-10 p-1 rounded-full bg-red-200">
-            <XIcon className="block h-full text-red-600" aria-hidden="true" />
+            <XCircleIcon className="block h-full text-red-600" aria-hidden="true" />
         </div>
     ) : (
         <div className="flex items-center justify-center h-10 w-10 p-1 rounded-full bg-green-200">
