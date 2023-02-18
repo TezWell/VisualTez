@@ -7,15 +7,13 @@ import Logger from 'src/utils/logger';
 export enum NetworkKind {
     Mainnet = 'mainnet',
     Ghostnet = 'ghostnet',
-    Kathmandunet = 'kathmandunet',
-    Limanet = 'limanet',
+    Mumbainet = 'mumbainet',
 }
 
 export const DEFAULT_RPC = {
     [NetworkKind.Mainnet]: 'https://mainnet.api.tez.ie',
     [NetworkKind.Ghostnet]: 'https://rpc.ghostnet.teztnets.xyz',
-    [NetworkKind.Kathmandunet]: 'https://rpc.kathmandunet.teztnets.xyz',
-    [NetworkKind.Limanet]: 'https://limanet.visualtez.com',
+    [NetworkKind.Mumbainet]: 'https://mumbainet.visualtez.com',
 };
 
 export const NETWORK_OF_RPC: Record<string, NetworkKind> = Object.values(NetworkKind).reduce(
